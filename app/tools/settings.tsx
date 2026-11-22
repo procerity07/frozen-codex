@@ -1,0 +1,129 @@
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, Switch, Text, View } from 'react-native';
+import { Stack } from 'expo-router';
+import Constants from 'expo-constants';
+import { Database, Download, RefreshCw, Upload } from 'lucide-react-native';
+import { palette, space, type } from '@/theme';
+import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
+import { selectPersisted, useAppStore } from '@/store/useAppStore';
+import { dbStats, getMeta } from '@/db/repo';
+import { checkForUpdates, DEFAULT_MANIFEST_URL, type SyncResult } from '@/db/ota';
+import { exportProfile, importProfile } from '@/services/backup';
+import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
+import { SEED_VERSION } from '@/data/seed';
+
+const LEADS = [5, 10, 15, 30, 60];
+
+export default function SettingsScreen() {
+  const s = useAppStore();
+  const [stats, setStats] = useState<{ heroes: number; events: number; sophia: number; codes: number } | null>(null);
+  const [otaVersion, setOtaVersion] = useState<string | null>(null);
+  const [syncedAt, setSyncedAt] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<SyncResult | null>(null);
+  const [resetAlarm, setResetAlarm] = useState(!!s.alarms['daily-reset']);
+
+  const loadStats = () => {
+    dbStats().then(setStats).catch(() => undefined);
+    getMeta('ota_version').then(setOtaVersion).catch(() => undefined);
+    getMeta('ota_synced_at').then(setSyncedAt).catch(() => undefined);
+  };
+  useEffect(loadStats, []);
+
+  const sync = async (force: boolean) => {
+    setBusy(true);
+    const r = await checkForUpdates(s.manifestUrl.trim() || DEFAULT_MANIFEST_URL, force);
+    setResult(r);
+    setBusy(false);
+    loadStats();
+  };
+
+  return (
+    <Screen>
+      <Stack.Screen options={{ title: 'Settings' }} />
+      <SectionHeader title="Realm profile" />
+      <Card>
+        <Row>
+          <Field label="Realm #" value={s.realm.number} onChangeText={(v) => s.setRealm({ number: v })} keyboardType="numeric" placeholder="412" />
+          <NumberField label="Realm age (weeks)" value={s.realm.ageWeeks} onChange={(n) => s.setRealm({ ageWeeks: n })} />
+        </Row>
+        <Row style={{ marginTop: space.sm }}>
+          <Field label="Server" value={s.realm.server} onChangeText={(v) => s.setRealm({ server: v })} />
+          <Field label="Lord name" value={s.realm.lordName} onChangeText={(v) => s.setRealm({ lordName: v })} autoCapitalize="none" />
+        </Row>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Bag Hoard calculator shows.</Text>
+      </Card>
+
+      <SectionHeader title="Alarms" />
+      <Text style={type.caption}>Lead time before event start</Text>
+      <ChipRow>{LEADS.map((m) => <Chip key={m} label={`${m} min`} active={s.alarmLeadMinutes === m} onPress={() => s.setAlarmLead(m)} />)}</ChipRow>
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={type.body}>Daily reset reminder</Text>
+            <Text style={type.caption}>{s.alarmLeadMinutes} min before 00:00 UTC</Text>
+          </View>
+          <Switch
+            value={resetAlarm}
+            trackColor={{ true: palette.cyan, false: palette.border }}
+            thumbColor={palette.text}
+            onValueChange={async (on) => {
+              if (on && !(await ensurePermission())) return;
+              await scheduleDailyReset(on, s.alarmLeadMinutes);
+              s.setAlarm('daily-reset', on);
+              setResetAlarm(on);
+            }}
+          />
+        </Row>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Event alarms already set keep their old lead time until toggled again.</Text>
+      </Card>
+
+      <SectionHeader title="Backup" subtitle="Profile, castles, checklists, calculators" />
+      <Card>
+        <Row>
+          <View style={{ flex: 1 }}><Button icon={Upload} variant="secondary" label="Export JSON" onPress={() => { exportProfile(selectPersisted(useAppStore.getState())).catch((e: unknown) => Alert.alert('Export failed', String(e))); }} /></View>
+          <View style={{ flex: 1 }}><Button icon={Download} variant="secondary" label="Import JSON" onPress={() => {
+            importProfile().then((data) => {
+              if (!data) return;
+              Alert.alert('Replace local data?', 'Your current profile will be overwritten.', [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'Import', style: 'destructive', onPress: () => s.importState(data) },
+              ]);
+            }).catch((e: unknown) => Alert.alert('Import failed', e instanceof Error ? e.message : String(e)));
+          }} /></View>
+        </Row>
+      </Card>
+
+      <SectionHeader title="Database updates" icon={Database} subtitle="Merge new heroes, events, codes and Sophia answers without a new APK" />
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <Stat label="Bundled seed" value={`v${SEED_VERSION}`} />
+          <Stat label="Data pack" value={otaVersion ? `v${otaVersion}` : 'none'} align="right" color={otaVersion ? palette.cyan : palette.textMuted} />
+        </Row>
+        {stats ? (
+          <Text style={[type.numberSmall, { marginTop: space.sm }]}>{stats.heroes} heroes · {stats.events} events · {stats.sophia} answers · {stats.codes} codes</Text>
+        ) : null}
+        {syncedAt ? <Text style={[type.caption, { marginTop: 2 }]}>Last sync {syncedAt.slice(0, 16).replace('T', ' ')} UTC</Text> : null}
+        <View style={{ marginTop: space.md }}>
+          <Field label="Manifest URL" value={s.manifestUrl} onChangeText={s.setManifestUrl} placeholder={DEFAULT_MANIFEST_URL} autoCapitalize="none" autoCorrect={false} keyboardType="url" />
+        </View>
+        <Row style={{ marginTop: space.md }}>
+          <View style={{ flex: 1 }}><Button icon={RefreshCw} label="Check for updates" disabled={busy} onPress={() => { sync(false).catch(() => undefined); }} /></View>
+          <Button variant="secondary" label="Force" disabled={busy} onPress={() => { sync(true).catch(() => undefined); }} />
+        </Row>
+        {busy ? <ActivityIndicator color={palette.cyan} style={{ marginTop: space.md }} /> : null}
+        {result ? (
+          <View style={{ marginTop: space.md, gap: 4 }}>
+            <Badge label={result.status === 'updated' ? 'Updated' : result.status === 'up-to-date' ? 'Up to date' : 'Failed'} color={result.status === 'error' ? palette.danger : palette.success} />
+            <Text style={type.bodySecondary}>{result.message}</Text>
+            {result.status === 'updated' ? <Text style={type.numberSmall}>+{result.counts.heroes} heroes · +{result.counts.events} events · +{result.counts.giftCodes} codes · +{result.counts.sophia} answers</Text> : null}
+          </View>
+        ) : null}
+      </Card>
+
+      <Text style={[type.caption, { textAlign: 'center', marginTop: space.xl }]}>
+        Frozen Codex {Constants.expoConfig?.version ?? ''} · Unofficial fan companion, not affiliated with 37GAMES.
+      </Text>
+    </Screen>
+  );
+}

@@ -1,0 +1,165 @@
+import type { CycleWeek, EventCategory, GameEvent, Weekday, Confidence } from '@/types/game';
+
+type E = Omit<GameEvent, 'id' | 'confidence' | 'startUtc' | 'durationHours' | 'featuredHeroes' | 'currencies' | 'tips' | 'rewards'> & {
+  startUtc?: string; durationHours?: number; featuredHeroes?: string[]; currencies?: string[]; tips?: string[]; rewards?: string[]; confidence?: Confidence;
+};
+
+const id = (s: string) => s.toLowerCase().replace(/[’']/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const ev = (e: E): GameEvent => ({
+  startUtc: '00:00', durationHours: 24 * Math.max(1, e.days.length), featuredHeroes: [], currencies: [], tips: [], rewards: [], confidence: 'community',
+  ...e, id: id(e.name),
+});
+
+const WEEK: Weekday[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const C = (c: EventCategory) => c;
+const W = (w: CycleWeek) => w;
+
+export const events: GameEvent[] = [
+  // ---------------- A. Core 7-day alternating cycles ----------------
+  ev({
+    name: 'Ace Lord', category: C('Core Cycle'), cadence: 'Bi-weekly (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: WEEK,
+    summary: 'Seven daily themes; personal points unlock 6 reward phases ending in a Radiant Hero Choice Card.',
+    rules: ['Day 1 Hero Upgrade', 'Day 2 Build & Research', 'Day 3 Stamina/AP & Gathering', 'Day 4 Training Speedup', 'Day 5 Draconic Stone & Refinement Crest', 'Day 6 Obtain Essences', 'Day 7 Build / Research / Training Speedup'],
+    rewards: ['Phase 6 (600,000 pts): Radiant Hero Choice Card I/II/III by realm age', 'Card pool: Boyd (>0d), Monica (>4w), Kaios, Aerposia (>22w)'],
+    tips: ['Hoard shards, scrolls, essences and speedups between cycles and dump on the matching day.', 'Day 7 accepts all speedup types — leftover speedups go here.'],
+    featuredHeroes: ['boyd', 'monica', 'kaios', 'aerposia'],
+  }),
+  ev({
+    name: 'Alliance Duel', category: C('Core Cycle'), cadence: 'Bi-weekly (parallel to Ace Lord Week)', cycleWeek: W('Ace Lord'), days: WEEK,
+    summary: 'Alliance-vs-alliance daily themes running on different days from Ace Lord in the same week.',
+    rules: ['Day 1 Rune & Holystone', 'Day 2 Dragon & Totem', 'Day 3 Draconic & Glory', 'Day 4 Hero Growth', 'Day 5 Dragon Crystal & Curio', 'Day 6–7 Duel Moment (kill troops)', 'Ascending/salvaging runes gives 0 pts on Day 1 — only obtaining essences/spinels/crystals/scrolls scores.'],
+    rewards: ['Oskir shards', 'Alliance Duel chests'], featuredHeroes: ['oskir'],
+    tips: ['Day 4 Hero Growth overlaps nothing in Ace Lord — use leftover Bond Gifts.', 'Duel Moment: coordinate kills on Sat/Sun with Conquest of Lords.'],
+  }),
+  ev({
+    name: 'Arms Race', category: C('Core Cycle'), cadence: 'Bi-weekly (Arms Race Week)', cycleWeek: W('Arms Race'), days: WEEK,
+    summary: 'Daily-themed personal race in the opposite week to Ace Lord. Final phase grants an Ace Hero Choice Card.',
+    rules: ['Day 1 Hero Upgrade', 'Day 2 Development + Rune & Holystone', 'Day 3 Enhance Gear + Forbidden Treasures Arms Race', 'Day 4 Dragon Points & Totem', 'Day 5 Draconic Stone & Glory', 'Day 6–7 Consume Diamond'],
+    rewards: ['Ace Hero Choice Card I/II/III by realm age', 'Card pool: Apan, Norris, Patty, Angelita (>22w)'],
+    featuredHeroes: ['apan', 'norris', 'patty', 'angelita'],
+    tips: ['Days 6–7 are diamond spending only — buy what you need in the Diamond Shop now, not earlier.'],
+  }),
+  ...[
+    ['Hero Upgrade (Event)', 'Points for hero EXP, enhancement and star-ups.'],
+    ['Development (Event)', 'Points for construction and research power gain.'],
+    ['Enhance Gear (Event)', 'Points for Gear Essence spent on enhancement.'],
+    ['Rune & Holystone (Event)', 'Points for obtaining rune/holystone essences, spinels and crystals.'],
+    ['Dragon Points & Totem (Event)', 'Points for Dragon EXP and Totem materials.'],
+    ['Draconic Stone & Glory (Event)', 'Points for Draconic Stone EXP and Marks of Glory.'],
+    ['Curio (Event)', 'Points for Curio Spinels and Curio Crystals spent.'],
+    ['Consume Diamond (Event)', 'Points per diamond spent.'],
+    ['Dragon Crystal', 'Points for Dragon Crystal acquisition and use.'],
+    ['Royal Treasure', 'Sub-event chest track tied to cycle participation.'],
+  ].map(([name, summary]) => ev({
+    name: name!, category: C('Core Cycle'), cadence: 'Inside Arms Race / Ace Lord cycles', cycleWeek: W('Both'), days: [], summary: summary!,
+    rules: ['Runs as a sub-tracker during the matching day of the parent cycle.'], tips: ['Use the Bag Hoard calculator to time your dump with the parent day.'],
+  })),
+
+  // ---------------- B. Weekly & bi-weekly standard ----------------
+  ev({
+    name: 'Royal Arms Race', category: C('Weekly'), cadence: 'Weekly Thu–Sat, 9 windows', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'],
+    summary: 'Three themed 8-hour windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC).',
+    rules: ['Window themes rotate: Building, Gear/Totem/Rune/Holystone materials, Hero Upgrade, Training, Stamina/AP, Draconic Stone, Research, Curio, Diamond Spend, Dragon Pts.', 'Each window ranks independently.'],
+    rewards: ['Lylia shards'], featuredHeroes: ['lylia'],
+    tips: ['Double-dip: a Thursday window that matches the Ace Lord day theme scores in both events.'],
+  }),
+  ev({ name: 'Ancient Prologue Arms Race', category: C('Weekly'), cadence: 'Bi-weekly Thu (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Thu'], summary: 'Single-day race for Dragon EXP and Dragon Stones.', rules: ['Dragon EXP items and Dragon Stone usage score.'], rewards: ['Dragon EXP', 'Dragon Stones'] }),
+  ev({ name: 'Forbidden Treasures Arms Race', category: C('Weekly'), cadence: 'Bi-weekly Wed (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Wed'], summary: 'Gear enhancement race paired with Arms Race Day 3.', rules: ['Gear Essence spent scores; overlaps Arms Race Day 3.'], rewards: ['Gear Essence', 'Gear Energy Spinels'] }),
+  ev({ name: 'Army Expansion', category: C('Weekly'), cadence: 'Weekly Thursday', cycleWeek: W('Both'), days: ['Thu'], summary: 'Troop training milestones.', rules: ['Points per troop trained, scaled by tier.'], rewards: ['Dragon EXP', 'Training speedups'], tips: ['Pre-queue a long training batch Wednesday night and finish it Thursday with speedups.'] }),
+  ev({
+    name: 'Elemental Seal I / II / III', category: C('Weekly'), cadence: 'Weekly Thu–Sat', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'],
+    summary: 'Boss challenge requiring specific elements and minimum star levels.',
+    rules: ['Deploy the required element(s) at or above the stated star level.', 'Boss uses skills from Round 11+ and is immune to stun and silence.', 'Only your highest single run counts for Top 50 rank.'],
+    rewards: ['Gear Essence', 'Dragon points'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
+  }),
+  ev({
+    name: 'Lich Attack', category: C('Weekly'), cadence: 'Weekly Sunday', cycleWeek: W('Both'), days: ['Sun'],
+    summary: 'Attack the Lich King with 10x march speed and zero soldier losses (Citadel Lv. 6+).',
+    rules: ['Citadel Lv. 6+.', 'No troop losses — attack as often as attempts allow.', 'Top 50 damage ranking.'],
+    rewards: ['Deluxe / Regal Recruit Tickets', 'EXP Potions', 'Lord EXP'],
+  }),
+  ev({ name: 'Personal Activity', category: C('Weekly'), cadence: 'Bi-weekly Monday', cycleWeek: W('Both'), days: ['Mon'], summary: 'Personal activity point track.', rules: ['Daily quests and stamina use score.'], rewards: ['Rodriguez shards'], featuredHeroes: ['rodriguez'] }),
+  ev({ name: 'Gather Resources', category: C('Weekly'), cadence: 'Bi-weekly Tuesday (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Tue'], summary: 'Gathering race.', rules: ['Resources gathered from the map score.'], rewards: ['Resource chests', 'Speedups'], tips: ['Lead gather marches with Gina.'] }),
+  ev({ name: 'Diamond Redeem Shop', category: C('Weekly'), cadence: 'Every 4th weekend (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Sat', 'Sun'], rotationWeek: 4, summary: 'Spend diamonds / vouchers on Curio Scroll Chests and rare materials.', rules: ['Limited stock per item.'], rewards: ['Curio Scroll Chests', 'Rare materials'], currencies: ['Diamonds', 'Redeem Vouchers'] }),
+
+  // ---------------- C. Alliance ----------------
+  ev({ name: 'Alliance Showdown', category: C('Alliance'), cadence: 'Every 4th week (Arms Race Week)', cycleWeek: W('Arms Race'), days: WEEK, rotationWeek: 2, summary: 'Shared alliance quest list across Novice, Adept, Master and Legend leagues.', rules: ['20+ members, Citadel Lv. 15+.', 'Quests are shared — claim the ones you can complete.'], rewards: ['League chests'] }),
+  ev({
+    name: 'Undead Scourge', category: C('Alliance'), cadence: 'Bi-weekly (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: [],
+    summary: 'R4/R5/Diplomat starts a 20-wave undead defence with 5-minute prep.',
+    rules: ['5-minute prep after trigger.', '20 waves; zero resource loss.', 'Arcane Barrier does NOT block undead attacks.', 'Failing twice stops attacks on your castle — reinforce allies for points.', 'Alliance Fortress Boss defence at the end.'],
+    rewards: ['Alliance Coins', 'Speedups'],
+  }),
+  ev({
+    name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA', cycleWeek: W('Both'), days: ['Sat'], startUtc: '12:00', durationHours: 2,
+    summary: 'AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.',
+    rules: ['Occupy a structure for 3 minutes to control it.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
+  }),
+  ev({
+    name: 'Strike Out', category: C('Alliance'), cadence: 'Every weekend Sat–Sun', cycleWeek: W('Both'), days: ['Sat', 'Sun'],
+    summary: 'Whole-alliance milestone track up to 6.5M+ points.',
+    rules: ['Stamina = 600 pts each.', 'Monster Dens Lv. 1–45 = 4,500–18,000 pts.', 'Event / item-summoned monsters score.'],
+    rewards: ['Edith shards', 'Kujo Mamoru shards', 'Essences', 'Barriers'], featuredHeroes: ['edith', 'kujo-mamoru'],
+  }),
+  ev({
+    name: 'Fort Contest', category: C('Alliance'), cadence: 'Every Saturday', cycleWeek: W('Both'), days: ['Sat'], durationHours: 2,
+    summary: 'Register 1 Fort + 1 Fortress, vote 3 of 5 time slots, then fight a 2-hour battle phase.',
+    rules: ['20+ members; Citadel Lv. 10+.', '30-minute continuous hold or longest total occupation wins.'], rewards: ['Fort buffs', 'Alliance Coins'],
+  }),
+  ev({
+    name: 'Infernal Gate', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Tue', 'Fri'],
+    summary: 'Rally the Infernal Emissary Lv. 1–25 (20k to 120M HP).', rules: ['71-hour personal participation cooldown.'], rewards: ['Regal / Deluxe Recruit Tickets', 'Alliance Coins'],
+  }),
+  ev({ name: 'Alliance Trial', category: C('Alliance'), cadence: 'Weekly Mon–Wed', cycleWeek: W('Both'), days: ['Mon', 'Tue', 'Wed'], summary: 'Cooperative alliance trial stages.', rules: ['Each member contributes attempts.'], rewards: ['Alliance chests'] }),
+  ev({ name: 'Alliance Party', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Wed', 'Sun'], summary: 'Social points event.', rules: ['Join the party for points and shared rewards.'], rewards: ['Party chests'] }),
+  ev({ name: 'Alliance Defense', category: C('Alliance'), cadence: 'Bi-weekly (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Thu'], summary: 'Defend alliance territory against waves.', rules: ['Reinforce weaker members.'], rewards: ['Alliance Coins'] }),
+  ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Fri', 'Sat', 'Sun'], rotationWeek: 3, summary: 'Alliance expedition on a shadow map.', rules: ['Clear nodes as an alliance.'], rewards: ['Ogremire shards'], featuredHeroes: ['ogremire'] }),
+  ev({ name: 'Dragon Arena / Clash', category: C('Alliance'), cadence: 'Periodic', cycleWeek: W('Both'), days: ['Sat'], summary: 'Alliance node deployment and bracket PvP.', rules: ['Deploy dragons to nodes; brackets resolve automatically.'], rewards: ['Dragon EXP', 'Dragon Crystals'] }),
+
+  // ---------------- D. Cross-realm war ----------------
+  ev({
+    name: 'Conquest of Lords', category: C('Cross-Realm War'), cadence: 'Bi-weekly Saturday (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Sat'], startUtc: '10:00', durationHours: 24,
+    summary: 'Cross-realm war for the Hall of Might and 4 Spires.',
+    rules: ['8-hour consecutive hold of the Hall of Might auto-wins; otherwise longest occupation.', 'Spire cannons fire every 10 minutes for 1% garrison loss.', 'Enchanted Woodland boundary grants protection.', '30% of structure garrison losses become permanent deaths.', '12,000 personal score target.', 'Trophy Grades and a 9-Realm League.'],
+    rewards: ['Trophy Grade chests', 'League rewards'],
+  }),
+  ev({
+    name: 'Realm Expedition', category: C('Cross-Realm War'), cadence: 'Bi-weekly Saturday (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Sat'], startUtc: '10:00', durationHours: 24,
+    summary: 'Teleport into enemy realms to pillage and kill.',
+    rules: ['Realm Hospital protects wounded.', '8,000 Diamond Mine gathering cap per Lord.', 'Foreign kill points: T1 = 0, T2 = 1 … T11 = 80, T12 = 100.'],
+    rewards: ['Realm ranking chests', 'Diamonds'],
+  }),
+  ev({
+    name: 'Scorching Front', category: C('Cross-Realm War'), cadence: 'Weekly Sunday / Monday', cycleWeek: W('Both'), days: ['Sun'], startUtc: '12:00', durationHours: 1,
+    summary: 'Single-session volcano battle for Fire Crystals.',
+    rules: ['1 Fire Crystal = 1 point.', '3 free teleports, then scaling diamond cost.', 'Goblin Rocket and Shield map pickups; central supply chests.', 'Realm Hospital fully heals for free after the event.'],
+    rewards: ['Ranking chests'],
+  }),
+
+  // ---------------- E. Mini-games ----------------
+  ev({ name: "Sophia's Test", category: C('Mini-Game'), cadence: '3x weekly (Mon, Thu, Sat)', cycleWeek: W('Both'), days: ['Mon', 'Thu', 'Sat'], summary: '15 trivia questions, 30 seconds each.', rules: ['Alliance help button available.'], rewards: ['Diamonds', 'Speedups'], tips: ['Use the 30-second lookup tool in this app.'] }),
+  ev({ name: 'Lucky Flip', category: C('Mini-Game'), cadence: 'Bi-weekly Wed–Fri (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Wed', 'Thu', 'Fri'], summary: 'Flip cards for prizes; each flip adds +0.02% Lucky Pt.', rules: ['Lucky Coins do NOT expire.'], rewards: ['Basilong', 'Edmund', 'Aurora', 'Lucky Grand Prize Chest'], featuredHeroes: ['basilong', 'edmund', 'aurora'], currencies: ['Lucky Coins'] }),
+  ev({ name: 'Lucky Spin', category: C('Mini-Game'), cadence: 'Bi-weekly (newer realms)', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'], summary: 'Roulette for hero shards.', rules: ['Available on newer realms.'], rewards: ['Freya', 'Eric'], featuredHeroes: ['freya', 'eric'] }),
+  ev({ name: "Glory's Gift Roulette", category: C('Mini-Game'), cadence: 'Bi-weekly Wed–Fri (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Wed', 'Thu', 'Fri'], summary: 'Roulette with Lucky Star Coins.', rules: ['Lucky Star Coins do NOT expire.'], rewards: ['Kanye', 'Selantia', 'Dimina'], featuredHeroes: ['kanye', 'selantia', 'dimina'], currencies: ['Lucky Star Coins'] }),
+  ev({ name: 'Tundra Ruins', category: C('Mini-Game'), cadence: 'Every 4th weekend (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Sat', 'Sun'], rotationWeek: 2, summary: 'Dig through ruins with Ice Picks.', rules: ['Ice Picks do NOT expire.'], rewards: ['Rare materials'], currencies: ['Ice Picks'] }),
+  ev({ name: 'Feast of Destiny', category: C('Mini-Game'), cadence: 'Every 4th week Mon–Wed (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], rotationWeek: 1, summary: 'Divination draws; alternates with Wonder House.', rules: ['Divination Crystals EXPIRE.'], rewards: ['Echo', 'Carvell'], featuredHeroes: ['echo', 'carvell'], currencies: ['Divination Crystals'] }),
+  ev({ name: 'Wonder House', category: C('Mini-Game'), cadence: 'Every 4th week Mon–Wed (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], rotationWeek: 3, summary: 'Divination draws; alternates with Feast of Destiny.', rules: ['Divination Crystals EXPIRE.'], rewards: ['Echo', 'Carvell'], featuredHeroes: ['echo', 'carvell'], currencies: ['Divination Crystals'] }),
+  ev({ name: 'Pyramid Event', category: C('Mini-Game'), cadence: 'Random (paired with AP Event)', cycleWeek: W('Random'), days: [], summary: 'Explore the pyramid with themed tools.', rules: ['Ancient Amulet, Frost Candlestick and Lava Lantern do NOT expire.'], rewards: ['Carvell'], featuredHeroes: ['carvell'], currencies: ['Ancient Amulet', 'Frost Candlestick', 'Lava Lantern'] }),
+  ev({ name: 'Arcane Puzzle', category: C('Mini-Game'), cadence: 'Random / bi-weekly Mondays', cycleWeek: W('Ace Lord'), days: ['Mon'], summary: 'Puzzle board alongside Timeless Recruitment.', rules: ['Refresh, Remove and Return tools do NOT expire.'], rewards: ['Timeless Scrolls', 'Materials'], currencies: ['Arcane Puzzle tools'] }),
+  ev({ name: "Dwarf's Treasury", category: C('Mini-Game'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Treasure mini-game.', rules: ['Event-limited tools.'], rewards: ['Materials'] }),
+  ev({ name: 'Potion Hut', category: C('Mini-Game'), cadence: 'Random (with Ashen Lands)', cycleWeek: W('Random'), days: [], summary: 'Potion brewing mini-game.', rules: ['Paired with Ashen Lands Limited Recruitment.'], rewards: ['Ashen Lands Scrolls'] }),
+  ev({ name: 'Tower of Gemini', category: C('Mini-Game'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Purchase / progression tower.', rules: ['Climb floors for escalating rewards.'], rewards: ['Hero shards', 'Materials'] }),
+
+  // ---------------- F. Recruitment, AP/Stamina & seasonal ----------------
+  ev({ name: 'Astrology', category: C('Recruitment & Seasonal'), cadence: 'Random / periodic', cycleWeek: W('Random'), days: [], summary: 'Primary source for Anastasia, Maxim, Tala, Valerius and Carvell.', rules: ['Summon Scrolls do NOT expire; sub-items salvage into Summon Scrolls.'], rewards: ['Anastasia', 'Maxim', 'Tala', 'Valerius', 'Carvell'], featuredHeroes: ['anastasia', 'maxim', 'tala', 'valerius', 'carvell'], currencies: ['Astrology Summon Scrolls'] }),
+  ev({ name: 'Timeless Heroes Limited Recruitment', category: C('Recruitment & Seasonal'), cadence: 'Bi-weekly Mondays', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], summary: 'Wide 5-Star pool.', rules: ['Timeless Scrolls do NOT expire.'], rewards: ['Fiona', 'Neptune', 'Kaira', 'Sea Goddess', 'Wu Kong', 'Leona', 'Carvell', 'Edith', 'Tania', 'Freya', 'Eric', 'Eris', 'Rodriguez', 'Kujo Mamoru'], featuredHeroes: ['fiona', 'tania', 'eris', 'wu-kong'], currencies: ['Timeless Scrolls'] }),
+  ev({ name: 'Ashen Lands Limited Recruitment', category: C('Recruitment & Seasonal'), cadence: 'Random (with Potion Hut)', cycleWeek: W('Random'), days: [], summary: 'Limited banner.', rules: ['Unused scrolls salvage into Timeless Heroes Recruitment Scrolls.'], rewards: ['Limited heroes'], currencies: ['Ashen Lands Scrolls'] }),
+  ev({ name: 'Recruit Trial / Monthly Trial', category: C('Recruitment & Seasonal'), cadence: 'Monthly (Mesdi Portal)', cycleWeek: W('Random'), days: [], summary: 'Monthly recruitment trial.', rules: ['Trial Recruit Tickets do NOT expire.'], rewards: ['Guan Yu', 'Eris', 'Freya', 'Rodriguez', 'Azure Dragon Blade Scroll'], featuredHeroes: ['guan-yu', 'eris'], currencies: ['Trial Recruit Tickets'] }),
+  ev({ name: 'AP Event — Visiting Bosses', category: C('Recruitment & Seasonal'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Ode to Abundance, Visit the Blood\'s Oath, Puss in Boots\' Visit, Visit Swiftclaw.', rules: ['20 AP per attack = 2 visiting items + 1 chest + 0–1 key.', 'Visiting items EXPIRE.'], rewards: ['Kaios', 'Leona', 'Carvell'], featuredHeroes: ['kaios', 'leona', 'carvell'], currencies: ['AP Visiting items'] }),
+  ev({ name: 'Stamina Event', category: C('Recruitment & Seasonal'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Stamina spend drops event items.', rules: ['Visiting drops EXPIRE.'], rewards: ['Neptune', 'Kaira', 'Sea Goddess', 'Wu Kong'], featuredHeroes: ['neptune', 'kaira', 'sea-goddess', 'wu-kong'], currencies: ['Stamina Event drops'] }),
+  ev({ name: 'Stamina Summon Event', category: C('Recruitment & Seasonal'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Summon with stamina-earned scrolls.', rules: ['Summon Scroll / Shadow Hourglass do NOT expire.'], rewards: ['Hero shards'], currencies: ['Stamina Summon Hourglasses'] }),
+  ev({ name: 'Seasonal Combination Events', category: C('Recruitment & Seasonal'), cadence: 'Seasonal', cycleWeek: W('Random'), days: [], summary: 'Holiday combination event bundles.', rules: ['Combine seasonal tokens for rewards.'], rewards: ['Seasonal skins', 'Materials'] }),
+  ev({ name: 'Battle Pass', category: C('Recruitment & Seasonal'), cadence: 'Monthly season', cycleWeek: W('Both'), days: WEEK, summary: 'Free / Laureate / Legendary Medals tracks.', rules: ['Complete daily and weekly pass quests.'], rewards: ['Medal track rewards'] }),
+  ev({ name: 'Top Up Rewards', category: C('Recruitment & Seasonal'), cadence: 'Weekly', cycleWeek: W('Both'), days: WEEK, summary: 'Weekly purchase milestones.', rules: ['Spending thresholds unlock chests.'], rewards: ['Spender chests'] }),
+  ev({ name: 'Auction Frenzy', category: C('Recruitment & Seasonal'), cadence: 'Rare', cycleWeek: W('Random'), days: [], summary: 'Realm-wide auction.', rules: ['Highest bids win limited items.'], rewards: ['Rare items'] }),
+];

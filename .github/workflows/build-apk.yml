@@ -1,0 +1,80 @@
+name: Build Frozen Codex Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    name: Verify & Build Release APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      EXPO_NO_TELEMETRY: '1'
+
+    steps:
+      - name: Free runner disk space for NDK & New Architecture C++ build
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/ghc /opt/ghc /usr/local/share/boost
+          df -h
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Set up JDK 17 and JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            21
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK licenses
+        run: |
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript & SQLite seed verification
+        run: npm run verify
+
+      - name: Generate native Android project (Expo Prebuild)
+        run: |
+          npx expo prebuild --platform android --clean --no-install
+          sed -i 's/^org\.gradle\.jvmargs=.*/org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8/' android/gradle.properties
+          sed -i 's/^reactNativeArchitectures=.*/reactNativeArchitectures=arm64-v8a,armeabi-v7a/' android/gradle.properties
+          echo "org.gradle.java.installations.fromEnv=JAVA_HOME_17_X64,JAVA_HOME_21_X64" >> android/gradle.properties
+
+      - name: Set up Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Assemble signed Android Release APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Stage APK artifact
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk Frozen-Codex-v1.0.0.apk
+          ls -lh Frozen-Codex-v1.0.0.apk
+
+      - name: Upload Frozen Codex APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Frozen-Codex-v1.0.0-APK
+          path: Frozen-Codex-v1.0.0.apk
+          if-no-files-found: error
+          retention-days: 90
