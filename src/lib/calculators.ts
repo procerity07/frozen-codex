@@ -88,6 +88,8 @@ export interface CitadelPlan {
   deficit: Record<ResourceKey, number>;
   baseSeconds: number;
   netSeconds: number;
+  /** Levels in the range whose build time is unknown (excluded from the time totals). */
+  unknownTimeLevels: number[];
 }
 
 export function planCitadel(all: CitadelLevel[], from: number, to: number, owned: Partial<Record<ResourceKey, number>>, b: BuildBonuses): CitadelPlan {
@@ -96,9 +98,10 @@ export function planCitadel(all: CitadelLevel[], from: number, to: number, owned
   const totals = Object.fromEntries(RESOURCE_KEYS.map((k) => [k, 0])) as Record<ResourceKey, number>;
   for (const l of levels) for (const k of RESOURCE_KEYS) totals[k] += Math.round((l.cost[k] ?? 0) * costMult);
   const deficit = Object.fromEntries(RESOURCE_KEYS.map((k) => [k, Math.max(0, totals[k] - (owned[k] ?? 0))])) as Record<ResourceKey, number>;
-  const baseSeconds = levels.reduce((s, l) => s + l.baseSeconds, 0);
+  const baseSeconds = levels.reduce((s, l) => s + (l.baseSeconds ?? 0), 0);
+  const unknownTimeLevels = levels.filter((l) => l.baseSeconds === null).map((l) => l.level);
   const speed = 1 + (b.civilSpeedPct + b.builderGearPct + b.vipPct + b.institutePct) / 100;
-  return { levels, totals, deficit, baseSeconds, netSeconds: baseSeconds / speed };
+  return { levels, totals, deficit, baseSeconds, netSeconds: baseSeconds / speed, unknownTimeLevels };
 }
 
 /** Recursively expands the prerequisite tree for a Citadel level (one hop per building, using Citadel rows). */
