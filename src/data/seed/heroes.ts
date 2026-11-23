@@ -88,8 +88,8 @@ export const heroes: Hero[] = [
   }),
   // ------------------------------ 5-Star ------------------------------
   hero({
-    name: 'Tania', title: 'Storm Archer', element: 'Light', rarity: 5, unit: 'Archer', role: 'Archer DPS',
-    march: [['Volley Command', 'Archer ATK up; bonus damage vs Cavalry.'], ['Thunder Mark', 'Marked enemies take more Archer damage.']],
+    name: 'Tania', title: 'Storm Archer', element: 'Light', rarity: 5, unit: 'Cavalry', role: 'Cavalry DPS',
+    march: [['Volley Command', 'Cavalry ATK up; bonus damage vs Infantry.'], ['Thunder Mark', 'Marked enemies take more Cavalry damage.']],
     m3: { name: 'Stormcall Arrows', desc: 'Light damage to random enemies 6 times.', charge: 'Fast', pattern: 'Random x6', effects: ['Multi-hit'] },
     tiers: ['A', 'S', 'S', 'C'], sources: ['Timeless Recruitment'],
     notes: 'Multi-hit pattern is excellent vs bosses with damage-instance caps.',
