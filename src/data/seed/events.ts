@@ -77,8 +77,8 @@ const baseEvents: GameEvent[] = [
   ev({
     name: 'Elemental Seal I / II / III', category: C('Weekly'), cadence: 'Weekly Thu–Sat', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'],
     summary: 'Boss challenge requiring specific elements and minimum star levels.',
-    rules: ['Deploy the required element(s) at or above the stated star level.', 'Boss uses skills from Round 11+ and is immune to stun and silence.', 'Only your highest single run counts for Top 50 rank.', 'Elemental Seal I phase 1 is 125 points.'],
-    rewards: ['Gear Essence', 'Dragon points'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
+    rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Elemental Seal I runs Thursday and II runs Friday (00:00–24:00 UTC); III follows on Saturday (not visible in that week view).', 'Deploy the required element(s) at or above the stated star level.', 'Boss uses skills from Round 11+ and is immune to stun and silence.', 'Only your highest single run counts for Top 50 rank.', 'Elemental Seal I phase 1 is 125 points.'],
+    rewards: ['Diamond chest', '5,000-point item', 'Dragon tokens', '1★ crystal (red for I, green for II)', 'Gear Essence', 'Dragon points'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
   }),
   ev({
     name: 'Lich Attack', category: C('Weekly'), cadence: 'Weekly Sunday', cycleWeek: W('Both'), days: ['Sun'],
@@ -93,10 +93,10 @@ const baseEvents: GameEvent[] = [
   // ---------------- C. Alliance ----------------
   ev({ name: 'Alliance Showdown', category: C('Alliance'), cadence: 'Every 4th week (Arms Race Week)', cycleWeek: W('Arms Race'), days: WEEK, rotationWeek: 2, summary: 'Shared alliance quest list across Novice, Adept, Master and Legend leagues.', rules: ['20+ members, Citadel Lv. 15+.', 'Quests are shared — claim the ones you can complete.'], rewards: ['League chests'] }),
   ev({
-    name: 'Undead Scourge', category: C('Alliance'), cadence: 'Bi-weekly (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: [],
+    name: 'Undead Scourge', category: C('Alliance'), cadence: 'Bi-weekly, Tuesday and Thursday (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Tue', 'Thu'], durationHours: 23 + 50 / 60,
     summary: 'The alliance Leader or a Diplomat starts a 20-wave undead defence with 5-minute prep.',
-    rules: ['Started by the alliance Leader or a Diplomat; 5-minute prep.', '20 waves; no resources are lost and most wounded units are healed afterwards.', 'Arcane Barrier does NOT block undead attacks.', 'Failing twice stops attacks on your castle — reinforce allies for points.', 'The event ends once every ally has failed twice.', 'Alliance Fortress Boss defence at the end.'],
-    rewards: ['Alliance Coins', 'Speedups'],
+    rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Open Tuesday and Thursday, 00:00–23:50 UTC.', 'Started by the alliance Leader or a Diplomat; 5-minute prep.', '20 waves; no resources are lost and most wounded units are healed afterwards.', 'Arcane Barrier does NOT block undead attacks.', 'Failing twice stops attacks on your castle — reinforce allies for points.', 'The event ends once every ally has failed twice.', 'Alliance Fortress Boss defence at the end.'],
+    rewards: ['Diamonds', '60m Speedups', 'Dragon tokens', '1★ red, green and blue crystals', 'Alliance Coins'],
   }),
   ev({
     name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA, from Wednesday', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'],
@@ -121,7 +121,7 @@ const baseEvents: GameEvent[] = [
   ev({ name: 'Resource Supply', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
   ev({ name: 'Holystone Upgrades', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
   ev({ name: 'Alliance Trial', category: C('Alliance'), cadence: 'Weekly Mon–Wed', cycleWeek: W('Both'), days: ['Mon', 'Tue', 'Wed'], summary: 'Cooperative alliance trial stages.', rules: ['Each member contributes attempts.'], rewards: ['Alliance chests'] }),
-  ev({ name: 'Alliance Party', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Wed', 'Sun'], summary: 'Social points event.', rules: ['Join the party for points and shared rewards.'], rewards: ['Party chests'] }),
+  ev({ name: 'Alliance Party', category: C('Alliance'), cadence: 'Twice weekly, Tuesday and Friday', cycleWeek: W('Both'), days: ['Tue', 'Fri'], summary: 'Alliance social event, open all day (00:00–24:00 UTC).', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Runs Tuesday and Friday, 00:00–24:00 UTC.', 'Join the party for points and shared rewards.'], rewards: ['Diamond chest', 'Upgrade item', 'Gold orb', '150K Wood', '150K Food'] }),
   ev({ name: 'Alliance Defense', category: C('Alliance'), cadence: 'Bi-weekly (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Thu'], summary: 'Defend alliance territory against waves.', rules: ['Reinforce weaker members.'], rewards: ['Alliance Coins'] }),
   ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], rotationWeek: 3, summary: 'Alliance expedition on a shadow map. Sign-up opens the Sunday before and closes Monday 24:00 UTC.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Sign-up phase: Sunday to Monday 24:00 UTC.', 'Runs through at least Friday; the end day was not visible.', 'Clear nodes as an alliance.'], rewards: ['Ogremire shards'], featuredHeroes: ['ogremire'] }),
   ev({ name: 'Dragon Arena / Clash', category: C('Alliance'), cadence: 'Periodic', cycleWeek: W('Both'), days: ['Sat'], summary: 'Alliance node deployment and bracket PvP.', rules: ['Deploy dragons to nodes; brackets resolve automatically.'], rewards: ['Dragon EXP', 'Dragon Crystals'] }),
@@ -179,6 +179,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 3; // 3 = in-game Event Schedule, week of 23 Nov 2026
+export const EVENT_DATA_REVISION = 4; // 4 = in-game event pop-ups (Alliance Party, Undead Scourge, Elemental Seal)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));

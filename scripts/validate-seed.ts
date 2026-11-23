@@ -225,6 +225,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(on(23, 'scorching-front') && on(23, 'wonder-house') && on(23, 'shadow-expedition') && on(23, 'alliance-trial') && on(23, 'sophias-test'), 'Monday 23 Nov matches in-game');
   ok(on(25, 'oblivion-war') && on(26, 'royal-arms-race') && !on(24, 'timeless-heroes-limited-recruitment'), 'mid-week events match in-game');
   ok(on(23, 'resource-supply') && on(29, 'holystone-upgrades'), 'new week-long events present');
+  ok(on(24, 'alliance-party') && on(27, 'alliance-party') && !on(25, 'alliance-party'), 'Alliance Party Tue and Fri');
+  ok(on(24, 'undead-scourge') && on(26, 'undead-scourge') && !on(25, 'undead-scourge'), 'Undead Scourge Tue and Thu');
+  ok(on(26, 'elemental-seal-i-ii-iii') && on(27, 'elemental-seal-i-ii-iii') && on(26, 'sophias-test'), 'Elemental Seal and Sophia Thursday');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });
