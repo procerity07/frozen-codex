@@ -121,6 +121,21 @@ jobs:
           APP_VERSION: ${{ steps.version.outputs.version }}
           PREVIOUS_TAG: ${{ steps.version.outputs.previous }}
         run: |
+          # Another build may have published this version while this one was running.
+          if gh release view "v${APP_VERSION}" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            LATEST=$(gh api "repos/${{ github.repository }}/releases/latest" -q .tag_name)
+            STATUS=$(gh api "repos/${{ github.repository }}/compare/${LATEST}...${{ github.sha }}" -q .status)
+            if [ "$STATUS" != "ahead" ]; then
+              echo "::notice::${LATEST} was already published from newer or equal code; nothing to publish."
+              exit 0
+            fi
+            PREVIOUS_TAG="$LATEST"
+            IFS=. read -r MA MI PA <<< "${LATEST#v}"
+            NEW="${MA}.${MI}.$((PA + 1))"
+            mv "Frozen-Codex-v${APP_VERSION}.apk" "Frozen-Codex-v${NEW}.apk"
+            echo "::notice::v${APP_VERSION} already exists; publishing as v${NEW} (the APK inside still reports v${APP_VERSION})."
+            APP_VERSION="$NEW"
+          fi
           python3 scripts/release-notes.py "$PREVIOUS_TAG" "$APP_VERSION" "${{ github.sha }}" > release-notes.txt
           cat release-notes.txt
           gh release create "v${APP_VERSION}" "Frozen-Codex-v${APP_VERSION}.apk" \

@@ -83,8 +83,17 @@ export const lowStarHeroes: Hero[] = [
     civil: [civil('Iron Gather Speed'), civil('Hunt March Speed'), civil('Hunt ATK Bonus')] }),
   lowStar({ name: 'Capos', element: 'Fire', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
     m3: { name: 'Override', description: 'Deals 235% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
-  lowStar({ name: 'Tooka', element: 'Fire', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza', 'Epic Hero Covenant', 'Royal Shop'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'],
-    notes: ['Wiki lists Troop ATK scaling of about 3.2% to 16%, unlocking at level 131; tier mapping not verified.', 'Separate "Infernal Tooka" variant on the Civil page is not included.'] }),
+  {
+    ...lowStar({ name: 'Tooka', element: 'Fire', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza', 'Epic Hero Covenant', 'Royal Shop'], march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
+      m3: { name: 'Warlord of Hellfire', description: 'Deals 149% damage to all enemies (Rage Regen: Slow). Dread Howl: enemies ATK −28% for 5 rounds. Retaliation: ATK +15% and Crit +8%. Commander-in-chief (unlocks Lv. 71): all allies ATK +34% for 5 rounds. Values as shown in-game at +2.', charge: 'Slow', pattern: 'All enemies', effects: ['ATK down', 'ATK up', 'Crit'] },
+      notes: ['In-game (2026-11-23, Tooka at +2): 4★ Fire Infantry confirmed; troop skill 150% of troop ATK; Troop HP/DEF/ATK 6.4/9.6/12.8/16% (+2 to +5), Troop ATK unlocks at Lv. 131; four hero skills.', 'Separate "Infernal Tooka" variant on the Civil page is not included.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).' },
+      { name: 'Troop HP', description: '4★: +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when he joins troop battle (in-game).' },
+      { name: 'Troop DEF', description: '4★: +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when he joins troop battle (in-game).' },
+      { name: 'Troop ATK', description: '4★: +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   // ------------------------------ Ice ------------------------------
   lowStar({ name: 'Sophia', element: 'Ice', rarity: 2, unit: 'Cavalry', sources: ['Hero Plaza'], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Output')] }),
   lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
