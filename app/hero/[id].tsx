@@ -100,7 +100,7 @@ export default function HeroDetail() {
             <Card key={sk.name} style={{ marginBottom: space.sm }} accent={palette.gold}>
               <Row style={{ justifyContent: 'space-between' }}>
                 <Text style={[type.heading, { flex: 1 }]}>{sk.name}</Text>
-                {sk.value ? <Text style={[type.number, { color: palette.gold }]}>+{sk.value}%</Text> : null}
+                {sk.value ? <Text style={[type.number, { color: palette.gold }]}>{sk.value < 0 ? '' : '+'}{sk.value}%</Text> : null}
               </Row>
               <Text style={[type.bodySecondary, { marginTop: 4 }]}>{sk.description}</Text>
               <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{sk.requirement}</Text>

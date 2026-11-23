@@ -375,12 +375,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Aurora', title: 'Northern Light', element: 'Dark', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Polar Glow', 'Archer ATK up; ally mana gain up.']],
+    march: [['Troop skill', 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).']],
     civil: [
-      { name: 'Gather March Speed', description: 'Increases gathering march speed. Value not verified.', requirement: 'Unlock level not verified' },
-      { name: 'Heal Stone Cost', description: 'Reduces the stone cost of healing. Value not verified.', requirement: 'Unlock level not verified' },
+      { name: 'Gather March Speed', description: 'In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Heal Stone Cost', description: 'In-game. 5★: −8% at +2 up to −32% at +8; 6★: −25% at +5 up to −36% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, -8, -12, -16, -20, -25, -30, -32], '6': [null, null, null, null, null, -25, -32, -35, -36] } },
+      { name: 'Rally Size', description: 'In-game. 5★: +80,000 at +2 up to +375,000 at +8; 6★: +250,000 at +5 up to +500,000 at +8.', requirement: 'Unlocks at level 131 (in-game)', unit: 'flat',
+        tiers: { '5': [null, null, 80000, 120000, 160000, 200000, 250000, 300000, 375000], '6': [null, null, null, null, null, 250000, 320000, 330000, 500000] } },
     ],
-    m3: { name: 'Aurora Veil', desc: 'Ice damage to random enemies and grants ally mana.', charge: 'Fast', pattern: 'Random x5', effects: ['Mana up'] },
+    m3: { name: 'Call of Death', desc: 'Marks the target for 4 rounds; when the mark expires it deals true damage (ignores DEF) equal to 99% of the target\'s remaining HP. She cannot gain Rage for 4 rounds (cannot be dispelled). Rage Regen: Slow. Petrifying Gaze: target Rage Regen −50%. Darkness Domain: Dark allies +10% Rage Regen at battle start (cannot be dispelled). Serpent Lineage (unlocks Lv. 71): immune to Poison and Burn. Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at +2.', charge: 'Slow', pattern: 'Single target', effects: ['True damage', 'Rage down', 'Rage up', 'Poison/Burn immunity', 'Parry'] },
     sources: ['Lucky Flip'],
     notes: 'Lucky Flip pool.',
   }),
@@ -462,8 +466,9 @@ const baseHeroes: Hero[] = [
  * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills;
  * revision 9 = in-game Wu Kong skills (owned-hero troop passives); revision 10 = in-game Isabella skills;
  * revision 11 = in-game Sirona skills; revision 12 = in-game Christina skills;
- * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills.
+ * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills;
+ * revision 15 = in-game Aurora skills.
  */
-export const HERO_DATA_REVISION = 14;
+export const HERO_DATA_REVISION = 15;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

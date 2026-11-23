@@ -257,7 +257,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "sources", "civilSkills", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Civil", "https://puzzles-chaos.fandom.com/wiki/Aurora"],
-    notes: ["Wiki: Dark Civil from Lucky Flip (app previously: Ice Archer). Civil skills from the wiki: Gather March Speed, Heal Stone Cost (values not verified).", "5★ confirmed from an in-game hero list (2026-11-23)."],
+    notes: ["Wiki: Dark Civil from Lucky Flip (app previously: Ice Archer). Civil skills from the wiki: Gather March Speed, Heal Stone Cost (values not verified).", "In-game (2026-11-23, Aurora at +2): Dark Civil confirmed; troop skill 150% of troop ATK; Gather March Speed, Heal Stone Cost and Rally Size (Lv. 131) tables for 5★ and 6★; hero skills Call of Death, Petrifying Gaze, Darkness Domain, Serpent Lineage (Lv. 71), Unbending (6★). The unsourced Polar Glow / Aurora Veil skills were replaced.", "5★ confirmed from an in-game hero list (2026-11-23)."],
   },
   "selantia": {
     checkedOn: '2026-11-23',

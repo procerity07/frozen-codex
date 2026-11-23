@@ -94,7 +94,8 @@ function Codex() {
   );
 }
 
-const BONUS_UNIT = (b: CivilBonus) => (b.value === null ? '' : b.unit === '%' ? `+${b.value}%` : b.unit === 'min' ? `${b.value} min` : `+${fmtFull(b.value)}`);
+const signed = (n: number, text: string) => (n < 0 ? `-${text.replace('-', '')}` : `+${text}`);
+const BONUS_UNIT = (b: CivilBonus) => (b.value === null ? '' : b.unit === '%' ? `${signed(b.value, String(b.value))}%` : b.unit === 'min' ? `${b.value} min` : signed(b.value, fmtFull(b.value)));
 
 function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
   const roster = useAppStore((s) => s.roster);
