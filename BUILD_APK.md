@@ -47,3 +47,5 @@ Host `data-pack/manifest.json` on GitHub Pages or a raw GitHub URL, set that URL
 ## Versions and releases (GitHub Actions)
 
 Every push to `main` builds the APK and publishes a GitHub release automatically. The version is the latest release's version plus one patch step (v1.0.3 → v1.0.4 → v1.0.5 …). The workflow writes that version into `app.json` during the build (it is not committed), so the app's Settings screen and Android's update check both see the new number. To jump to a new minor or major version, publish a release tagged e.g. `v1.1.0` by hand; the next build becomes `v1.1.1`.
+
+Release notes are written automatically: every commit since the previous release becomes a section (its title as the heading, its description as the details). Write commit messages as you'd want players to read them.

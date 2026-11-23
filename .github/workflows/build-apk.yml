@@ -29,6 +29,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Full history and tags, so release notes can list every change since the last release.
+          fetch-depth: 0
 
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
@@ -73,6 +76,7 @@ jobs:
           next="$major.$minor.$((patch + 1))"
           code=$((major * 10000 + minor * 100 + patch + 1))
           echo "version=$next" >> "$GITHUB_OUTPUT"
+          echo "previous=$latest" >> "$GITHUB_OUTPUT"
           echo "code=$code" >> "$GITHUB_OUTPUT"
           echo "Latest release: ${latest:-none} -> building v$next (versionCode $code)"
 
@@ -114,9 +118,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           APP_VERSION: ${{ steps.version.outputs.version }}
+          PREVIOUS_TAG: ${{ steps.version.outputs.previous }}
         run: |
-          git log -1 --pretty=%B > release-notes.txt
-          printf '\n\nBuilt from %s.\n' "${{ github.sha }}" >> release-notes.txt
+          python3 scripts/release-notes.py "$PREVIOUS_TAG" "$APP_VERSION" "${{ github.sha }}" > release-notes.txt
+          cat release-notes.txt
           gh release create "v${APP_VERSION}" "Frozen-Codex-v${APP_VERSION}.apk" \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}" \
