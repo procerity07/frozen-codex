@@ -411,13 +411,14 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Gina', title: 'Harvest Keeper', element: 'Dark', rarity: 4, unit: 'Civil', role: 'Gathering',
-    march: [['Forager', 'Gathering speed up when leading a gather march.']],
+    march: [['Skill', 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).']],
     civil: [
-      { name: 'Research Speed', description: '+3% at Hero0 rising to +15% at Hero5.', requirement: 'Unlock level not verified', stat: 'researchSpeed', unit: '%',
-        tiers: { '4': [3, null, null, null, null, 15] } },
-      { name: 'EXP Potion Output', description: 'Increases EXP Potion output. Value not verified.', requirement: 'Unlock level not verified' },
-      { name: 'Troop Capacity', description: '+2,000 at the lowest tier rising to +10,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
-        tiers: { '4': [2000, null, null, null, null, 10000] } },
+      { name: 'Research Speed', description: 'In-game: +6% at +2, +9% at +3, +12% at +4, +15% at +5 (4★).', requirement: 'Unlock level not verified', stat: 'researchSpeed', unit: '%',
+        tiers: { '4': [null, null, 6, 9, 12, 15] } },
+      { name: 'EXP Potion Output', description: 'In-game: +40% at +2, +60% at +3, +80% at +4, +100% at +5 (4★).', requirement: 'Unlock level not verified', unit: '%',
+        tiers: { '4': [null, null, 40, 60, 80, 100] } },
+      { name: 'Troop Capacity', description: 'In-game: +4,000 at +2, +6,000 at +3, +8,000 at +4, +10,000 at +5 (4★).', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
+        tiers: { '4': [null, null, 4000, 6000, 8000, 10000] } },
     ],
     m3: { name: 'Seed Burst', desc: 'Small Nature damage to random enemies.', charge: 'Fast', pattern: 'Random x3', effects: [] },
     sources: ['Epic Hero Covenant', 'Trial Turret Shop'],
@@ -429,8 +430,9 @@ const baseHeroes: Hero[] = [
  * Revision of the bundled hero data. Bump it whenever bundled hero facts are corrected, so the
  * corrections replace older online-pack rows (which carry a lower or missing revision) on re-seed.
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
- * revision 3 = in-game Saya table, five added heroes, in-game element confirmations.
+ * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
+ * revision 4 = in-game Gina skill tables and element.
  */
-export const HERO_DATA_REVISION = 3;
+export const HERO_DATA_REVISION = 4;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

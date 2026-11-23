@@ -293,6 +293,6 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "civilSkills", "sources"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Gina", "https://puzzles-chaos.fandom.com/wiki/Civil"],
-    notes: ["Wiki: 4-star Dark Civil (app previously: Nature).", "Sources corrected: Epic Hero Covenant, Trial Turret Shop (app previously: Hero Recruitment).", "Civil skills from the wiki: Research Speed (+3% at Hero0 to +15% at Hero5), EXP Potion Output, Troop Capacity (+2,000 to +10,000, unlocks at level 131).", "Previous note about gather marches removed: it relied on an unsourced march skill."],
+    notes: ["Wiki: 4-star Dark Civil (app previously: Nature).", "Sources corrected: Epic Hero Covenant, Trial Turret Shop (app previously: Hero Recruitment).", "Element Dark confirmed in-game (skull icon on the hero page, 2026-11-23).", "Civil skill tables from in-game (4★, +2 to +5): Research Speed 6/9/12/15%, EXP Potion Output 40/60/80/100%, Troop Capacity 4,000/6,000/8,000/10,000. The in-game table starts at +2; the wiki's +3% / +2,000 starting values were replaced.", "Troop skill from in-game: deals 200% of troop ATK at +3.", "In-game max level at 4★: 210."],
   },
 };
