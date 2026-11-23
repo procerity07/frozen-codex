@@ -24,47 +24,84 @@ export const buildings: BuildingInfo[] = [
   { id: 'sanctuary', name: 'Sanctuary', purpose: 'Holy Light free revival of dead troops.', maxLevel: 40, unlockCitadel: 12 },
 ];
 
-/** Rotating second prerequisite for each Citadel level (Wall at L-1 is always required). */
-const rotation = ['institute', 'archer-camp', 'medical-tent', 'infantry-camp', 'embassy', 'cavalry-camp', 'weapon-forge', 'lookout', 'warehouse', 'war-hall', 'vehicle-workshop', 'mesdi-portal', 'posthouse', 'furnace', 'quarry', 'lumberyard'];
-const nameOf = (id: string) => buildings.find((b) => b.id === id)?.name ?? id;
-
 const unlockNotes: Record<number, string[]> = {
   6: ['Lich Attack', 'Weapon Forge'], 10: ['Fort Contest', 'War Hall'], 12: ['Sanctuary'], 15: ['Glory Levels', 'Alliance Showdown'],
   16: ['Totem Set I'], 20: ['Curios', 'Rune Set V'], 25: ['Holystone Set I', 'Ancient Tomes'], 28: ['Institute Formations'], 30: ['Astronomy Tomes', 'T11 troops'],
   31: ['Totem Set V', 'Holystone Set IV'], 33: ['Glory Codex'], 35: ['T12 troops'], 37: ['Gold Statues'], 40: ['Max Citadel'],
 };
 
-function cost(level: number) {
-  // Modelled growth curve (community estimate) — overwrite with verified values via the OTA pack.
-  const base = Math.round(1200 * Math.pow(1.42, level - 1) / 100) * 100;
-  return {
-    food: base,
-    wood: base,
-    stone: level >= 5 ? Math.round(base * 0.6 / 100) * 100 : 0,
-    iron: level >= 10 ? Math.round(base * 0.3 / 100) * 100 : 0,
-    ancientTome: level >= 25 ? 20 * (level - 24) : undefined,
-    astronomyTome: level >= 30 ? 15 * (level - 29) : undefined,
-    gloryCodex: level >= 33 ? 5 * (level - 32) : undefined,
-    goldStatue: level >= 37 ? 2 * (level - 36) : undefined,
-  };
+/**
+ * CITADEL (HQ) LEVELS — edit any value here.
+ * Source: player-supplied community table (Citadel 1–40).
+ *  - requires: buildings needed before upgrading, as ['Building', level]
+ *  - time: build time as dhms(days, hours, minutes, seconds); null = unknown
+ *  - food / wood / stone / iron: resource cost (_ is just a thousands separator)
+ *  - ancientTome / astronomyTome / gloryCodex / goldStatue: optional, add e.g. ancientTome: 20 to a row
+ * Level 9 wood was printed as "163.00" in the source and is entered as 163_000.
+ */
+interface CitadelRow {
+  requires: [string, number][];
+  time: number | null;
+  food: number; wood: number; stone: number; iron: number;
+  ancientTome?: number; astronomyTome?: number; gloryCodex?: number; goldStatue?: number;
 }
 
-export const citadelLevels: CitadelLevel[] = Array.from({ length: 40 }, (_, i) => {
-  const level = i + 1;
-  const requires = level === 1 ? [] : [
-    { building: 'Wall', level: level - 1 },
-    { building: nameOf(rotation[(level - 2) % rotation.length]!), level: level - 1 },
-    ...(level >= 20 ? [{ building: nameOf(rotation[(level + 5) % rotation.length]!), level: level - 1 }] : []),
-  ];
-  return {
-    level,
-    requires,
-    cost: cost(level),
-    baseSeconds: Math.round(30 * Math.pow(1.48, level - 1)),
-    unlocks: unlockNotes[level] ?? [],
-    confidence: 'estimate',
-  };
-});
+const dhms = (d: number, h: number, m: number, s: number) => ((d * 24 + h) * 60 + m) * 60 + s;
+
+const citadelTable: Record<number, CitadelRow> = {
+  1: { requires: [], time: 0, food: 2_080, wood: 2_080, stone: 0, iron: 0 },
+  2: { requires: [], time: null, food: 2_920, wood: 2_920, stone: 0, iron: 0 },
+  3: { requires: [], time: null, food: 4_370, wood: 4_370, stone: 0, iron: 0 },
+  4: { requires: [['Wall', 3], ['Embassy', 1]], time: null, food: 6_990, wood: 6_990, stone: 0, iron: 0 },
+  5: { requires: [['Wall', 4], ['Farm', 4], ['Residence', 4]], time: dhms(0, 1, 16, 39), food: 11_900, wood: 11_900, stone: 0, iron: 0 },
+  6: { requires: [['Wall', 5], ['Warehouse', 5], ['Infantry Camp', 5]], time: dhms(0, 6, 2, 30), food: 21_400, wood: 21_400, stone: 0, iron: 0 },
+  7: { requires: [['Wall', 6], ['Cavalry Camp', 6], ['Archery Camp', 6]], time: dhms(0, 9, 24, 38), food: 40_700, wood: 40_700, stone: 0, iron: 0 },
+  8: { requires: [['Wall', 7], ['Institute', 7]], time: dhms(0, 13, 41, 57), food: 81_300, wood: 81_300, stone: 0, iron: 0 },
+  9: { requires: [['Wall', 8], ['Weapon Forge', 8]], time: dhms(0, 17, 25, 14), food: 163_000, wood: 163_000, stone: 0, iron: 0 },
+  10: { requires: [['Wall', 9], ['Warehouse', 9]], time: dhms(0, 21, 30, 47), food: 326_000, wood: 326_000, stone: 0, iron: 0 },
+  11: { requires: [['Wall', 10], ['Medical Tent', 10]], time: null, food: 627_000, wood: 627_000, stone: 6_600, iron: 0 },
+  12: { requires: [['Wall', 11], ['Vehicle Workshop', 11]], time: dhms(1, 8, 31, 30), food: 1_140_000, wood: 1_140_000, stone: 25_400, iron: 0 },
+  13: { requires: [['Wall', 12], ['Lookout', 12]], time: dhms(1, 15, 56, 49), food: 1_920_000, wood: 1_920_000, stone: 67_800, iron: 0 },
+  14: { requires: [['Wall', 13], ['Archer Camp', 13]], time: dhms(2, 0, 57, 45), food: 3_020_000, wood: 3_020_000, stone: 150_800, iron: 0 },
+  15: { requires: [['Wall', 14], ['Posthouse', 14]], time: dhms(2, 12, 44, 47), food: 4_380_000, wood: 4_380_000, stone: 292_000, iron: 0 },
+  16: { requires: [['Wall', 15], ['Furnace', 15]], time: dhms(3, 3, 15, 55), food: 6_020_000, wood: 5_850_000, stone: 502_000, iron: 0 },
+  17: { requires: [['Wall', 16], ['Quarry', 16]], time: dhms(3, 21, 27, 27), food: 7_780_000, wood: 6_770_000, stone: 790_000, iron: 28_200 },
+  18: { requires: [['Wall', 17], ['Infantry Camp', 17]], time: dhms(4, 19, 41, 38), food: 10_100_000, wood: 7_610_000, stone: 1_218_000, iron: 76_500 },
+  19: { requires: [['Wall', 18], ['Embassy', 18]], time: dhms(5, 23, 10, 54), food: 13_000_000, wood: 8_220_000, stone: 1_850_000, iron: 154_500 },
+  20: { requires: [['Wall', 19], ['Cavalry Camp', 19]], time: dhms(7, 2, 2, 36), food: 16_700_000, wood: 8_330_000, stone: 2_780_000, iron: 277_500 },
+  21: { requires: [['Wall', 20], ['Lumberyard', 20]], time: dhms(8, 9, 44, 15), food: 21_400_000, wood: 7_490_000, stone: 4_120_000, iron: 468_500 },
+  22: { requires: [['Wall', 21], ['War Hall', 21]], time: dhms(10, 2, 41, 12), food: 27_300_000, wood: 5_060_000, stone: 6_080_000, iron: 760_000 },
+  23: { requires: [['Wall', 22], ['Infantry Camp', 22]], time: dhms(12, 3, 56, 38), food: 36_200_000, wood: 6_830_000, stone: 7_520_000, iron: 1_195_000 },
+  24: { requires: [['Wall', 23], ['Cavalry Camp', 23]], time: dhms(14, 14, 55, 28), food: 48_000_000, wood: 9_220_000, stone: 9_220_000, iron: 1_845_000 },
+  25: { requires: [['Wall', 24], ['Institute', 24]], time: dhms(17, 13, 49, 13), food: 63_500_000, wood: 12_500_000, stone: 11_200_000, iron: 2_800_000 },
+  26: { requires: [['Wall', 25], ['Embassy', 25]], time: dhms(21, 7, 22, 30), food: 84_000_000, wood: 16_800_000, stone: 13_440_000, iron: 4_200_000 },
+  27: { requires: [['Wall', 26], ['Warehouse', 26]], time: dhms(25, 18, 56, 30), food: 114_000_000, wood: 22_700_000, stone: 15_880_000, iron: 6_250_000 },
+  28: { requires: [['Wall', 27], ['Infantry Camp', 27]], time: dhms(30, 21, 39, 12), food: 154_000_000, wood: 30_700_000, stone: 18_380_000, iron: 9_200_000 },
+  29: { requires: [['Wall', 28], ['Vehicle Depot', 28]], time: dhms(37, 1, 30, 20), food: 207_000_000, wood: 41_400_000, stone: 24_800_000, iron: 12_400_000 },
+  30: { requires: [['Wall', 29], ['Shooter Camp', 29]], time: dhms(46, 17, 7, 28), food: 279_000_000, wood: 55_800_000, stone: 33_600_000, iron: 16_750_000 },
+  31: { requires: [['Wall', 30], ['Infantry Camp', 30], ['Research Center', 30]], time: null, food: 377_000_000, wood: 75_300_000, stone: 45_200_000, iron: 22_600_000 },
+  32: { requires: [['Wall', 31], ['Cavalry Camp', 31]], time: null, food: 377_000_000, wood: 94_800_000, stone: 45_200_000, iron: 22_600_000 },
+  33: { requires: [['Wall', 32], ['Archery Camp', 32]], time: null, food: 377_000_000, wood: 114_300_000, stone: 45_200_000, iron: 22_600_000 },
+  34: { requires: [['Wall', 33], ['Vehicle Workshop', 33]], time: null, food: 377_000_000, wood: 133_800_000, stone: 45_200_000, iron: 22_600_000 },
+  35: { requires: [['Wall', 34], ['Wishing Pool', 34], ['Posthouse', 34]], time: null, food: 377_000_000, wood: 153_300_000, stone: 45_200_000, iron: 22_600_000 },
+  36: { requires: [['Institute', 35]], time: null, food: 395_850_000, wood: 160_965_000, stone: 47_460_000, iron: 23_730_000 },
+  37: { requires: [['Wall', 36], ['War Hall', 36], ['Institute', 36], ['Vehicle Workshop', 36]], time: null, food: 415_642_500, wood: 169_013_250, stone: 49_833_000, iron: 24_916_500 },
+  38: { requires: [['Wall', 37], ['War Hall', 37], ['Institute', 37], ['Infantry Camp', 37]], time: null, food: 436_424_625, wood: 177_463_912, stone: 52_324_650, iron: 26_162_325 },
+  39: { requires: [['Wall', 38], ['War Hall', 38], ['Institute', 38], ['Archery Camp', 38]], time: null, food: 458_245_856, wood: 186_337_107, stone: 54_940_882, iron: 27_470_441 },
+  40: { requires: [['Wall', 39], ['War Hall', 39], ['Institute', 39], ['Cavalry Camp', 39]], time: null, food: 481_158_148, wood: 195_653_962, stone: 57_687_926, iron: 28_843_963 },
+};
+
+export const citadelLevels: CitadelLevel[] = Object.entries(citadelTable).map(([lv, r]) => ({
+  level: Number(lv),
+  requires: r.requires.map(([building, level]) => ({ building, level })),
+  cost: {
+    food: r.food, wood: r.wood, stone: r.stone, iron: r.iron,
+    ancientTome: r.ancientTome, astronomyTome: r.astronomyTome, gloryCodex: r.gloryCodex, goldStatue: r.goldStatue,
+  },
+  baseSeconds: r.time,
+  unlocks: unlockNotes[Number(lv)] ?? [],
+  confidence: 'community',
+}));
 
 export const gearSlots: GearSlot[] = [
   { slot: 'Weapon', attack: 'Cavalry', defense: 'Infantry' },
