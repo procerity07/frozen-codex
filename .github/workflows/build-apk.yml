@@ -97,7 +97,14 @@ jobs:
 
       - name: Assemble signed Android Release APK
         working-directory: android
-        run: ./gradlew assembleRelease --no-daemon --stacktrace
+        # Retry up to twice: plugin/dependency downloads occasionally fail for a moment.
+        run: |
+          for attempt in 1 2 3; do
+            ./gradlew assembleRelease --no-daemon --stacktrace && exit 0
+            echo "::warning::Gradle build attempt $attempt failed; retrying in 30s"
+            sleep 30
+          done
+          exit 1
 
       - name: Stage APK artifact
         env:
