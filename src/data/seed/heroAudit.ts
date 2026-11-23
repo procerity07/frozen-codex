@@ -71,7 +71,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "sources"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Cavalry"],
-    notes: ["Wiki: 5-star Nature Cavalry from Ace Lord (app previously: Fire)."],
+    notes: ["Wiki: 5-star Nature Cavalry from Ace Lord (app previously: Fire).", "In-game (2026-11-23, Boyd at +4): Nature and Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK use the standard 5★/6★ table; hero skills Claw of Void (530%, Rage Regen Medium), Strength Absorption, Self-healing Instinct, Cold Blood, Target Weakness (6★). The unsourced fire-themed skills (Burning Hooves, Flame Charge) were replaced. His title 'Ember Captain' is not verified."],
   },
   "monica": {
     checkedOn: '2026-11-23',

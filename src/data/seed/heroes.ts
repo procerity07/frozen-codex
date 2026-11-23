@@ -23,6 +23,11 @@ interface HeroInput {
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+/** Standard 5★ military-skill table seen in-game (Tania, Boyd): same values for HP, DEF and ATK. */
+const STANDARD_5STAR_MILITARY = '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game).';
+const militaryTrio = (troop: string): [string, string][] =>
+  ['HP', 'DEF', 'ATK'].map((stat) => [`${troop} ${stat}`, STANDARD_5STAR_MILITARY] as [string, string]);
+
 function hero(i: HeroInput): Hero {
   const marchSkills: HeroSkill[] = i.march.map(([name, description]) => ({ name, description }));
   return {
@@ -94,9 +99,7 @@ const baseHeroes: Hero[] = [
     name: 'Tania', title: 'Storm Archer', element: 'Ice', rarity: 5, unit: 'Cavalry', role: 'Cavalry Support',
     march: [
       ['Troop skill', 'Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game).'],
-      ['Cavalry HP', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
-      ['Cavalry DEF', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
-      ['Cavalry ATK', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
+      ...militaryTrio('Cavalry'),
     ],
     m3: { name: 'Allegro of Life', desc: 'Restores 44% HP to all allies (Rage Regen: Medium). Watershield: all allies DEF +63% for 5 rounds (unlocks Lv. 11). Moisture: dispels all debuffs on allies (unlocks Lv. 31). Elegy: chance to Stun the enemy for 2 rounds when she dies. Iron Will (unlocks at 6★): Crit Res. +30%, a chance to take normal damage from a critical hit. Values as shown in-game at +5.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'DEF up', 'Dispel', 'Stun', 'Crit Res.'] },
     sources: ['Timeless Recruitment'], bonds: ['Octet Wanderers'],
@@ -132,8 +135,11 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Boyd', title: 'Ember Captain', element: 'Nature', rarity: 5, unit: 'Cavalry', role: 'Cavalry DPS',
-    march: [['Burning Hooves', 'Cavalry ATK up; bonus vs Infantry.']],
-    m3: { name: 'Flame Charge', desc: 'Fire damage to a row and lowers enemy DEF.', charge: 'Medium', pattern: 'Row', effects: ['DEF down'] },
+    march: [
+      ['Troop skill', 'Deals damage equal to 300% of troop ATK to the enemy (at +4, in-game).'],
+      ...militaryTrio('Cavalry'),
+    ],
+    m3: { name: 'Claw of Void', desc: 'Deals 530% damage to the target; if the enemy falls, gains Crit Rate +30% for 5 rounds (Rage Regen: Medium). Strength Absorption: transfers buffs on the target to random allies. Self-healing Instinct: at battle start, restores 5% HP to Nature allies each round for 6 rounds. Cold Blood: deals 40% more damage to Fire heroes (cannot be dispelled). Target Weakness (unlocks at 6★): Break +30%, a chance to ignore parry. Values as shown in-game at +4.', charge: 'Medium', pattern: 'Single target', effects: ['Crit Rate up', 'Buff transfer', 'Heal over time', 'Bonus vs Fire', 'Break'] },
     sources: ['Ace Lord'],
     notes: 'Radiant Hero Choice Card option from realm day 1.',
   }),
@@ -437,8 +443,8 @@ const baseHeroes: Hero[] = [
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
  * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables;
- * revision 6 = in-game Tania troop skills and hero skills.
+ * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills.
  */
-export const HERO_DATA_REVISION = 6;
+export const HERO_DATA_REVISION = 7;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
