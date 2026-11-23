@@ -92,6 +92,11 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(cas30.dead === 30 && cas30.medicalTent === 70, 'CoL 30% permadeath');
   const plan = planCitadel(seed.citadelLevels, 10, 12, { food: 1e12 }, { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 100, costReductionPct: 0 });
   ok(plan.levels.length === 2 && plan.deficit.food === 0 && plan.deficit.wood > 0 && Math.abs(plan.netSeconds - plan.baseSeconds / 2) < 1e-6, 'citadel plan');
+  ok(plan.unknownTimeLevels.join() === '11' && plan.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'unknown build time excluded from totals');
+  const c12 = seed.citadelLevels.find((l) => l.level === 12)!;
+  ok(c12.cost.food === 1_140_000 && c12.cost.stone === 25_400 && c12.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'citadel 12 values');
+  ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_843_963, 'citadel 40 iron');
+  ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 100, 'bond exp L1');
   ok(bondGiftPlan(seed.bondGifts, { 5: 1, 1: 100 }, 5050).shortfall === 0, 'bond gift plan');
   ok(curioCost(seed.curioStarCosts, 0, 2).spinel === 30, 'curio cost');
