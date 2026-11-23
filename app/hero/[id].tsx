@@ -10,6 +10,7 @@ import { elementColors, palette, rarityColors, rarityLabels, space, tint, type }
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified } from '@/lib/heroData';
 import { MyHeroCard } from '@/components/domain/MyHeroCard';
+import { HeroPortrait } from '@/components/domain/HeroPortrait';
 
 const ROLE_COLORS: Record<CombatRole, string> = { Damage: palette.danger, Support: palette.cyan, Healer: palette.success };
 
@@ -54,9 +55,7 @@ export default function HeroDetail() {
       <Stack.Screen options={{ title: hero.name }} />
       <Card style={{ marginTop: space.sm, borderColor: tint(rc, 0.5) }}>
         <Row gap={space.md}>
-          <View style={{ width: 64, height: 64, borderRadius: 14, borderWidth: 2, borderColor: rc, backgroundColor: tint(rc, 0.12), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 30, fontWeight: '800', color: rc }}>{hero.name.slice(0, 1)}</Text>
-          </View>
+          <HeroPortrait hero={hero} size={72} />
           <View style={{ flex: 1, gap: 4 }}>
             <Text style={type.title}>{hero.name}</Text>
             {hero.title ? <Text style={type.bodySecondary}>{hero.title}</Text> : null}

@@ -7,6 +7,7 @@ import { bundledEventsToSeed, bundledHeroesToSeed, mergePackEvents, mergePackHer
 import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
 import { reKillPointsByTier } from '../src/lib/calculators';
 import { compareVersions, isNewer, notesToBlocks, parseRelease } from '../src/lib/appUpdate';
+import { chunk, parsePortraitResponse, portraitQueryUrl } from '../src/lib/portraits';
 import { bondCapForEnhancement, civilBonuses, clampEntry, makeRosterFile, maxStars, newEntry, parseRosterFile, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked } from '../src/lib/roster';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -267,6 +268,17 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   assert.throws(() => parseRosterFile({ hello: 1 }, seed.heroes));
   ok(['sodoma', 'setemos', 'tutanhet', 'sirona', 'isabella'].every((id) => seed.heroes.some((h) => h.id === id)) && byId('isabella').rarity === 6, 'five added heroes present');
   ok(JSON.stringify(byId('saya').civilSkills.find((c) => c.name === 'Troop Capacity')!.tiers!['6']) === JSON.stringify([null, null, null, null, null, 12500, 16000, 20000, 30000]), 'Saya 6★ troop capacity from in-game table');
+
+  // Hero portraits (real wiki API response)
+  const wiki = JSON.parse(readFileSync(join(__dirname, 'fixtures', 'wiki-portraits.json'), 'utf8'));
+  const pb = [{ id: 'tania', name: 'Tania' }, { id: 'snowball-and-ivy', name: 'Snowball & Ivy' }, { id: 'ysera', name: 'Ysera' }, { id: 'kujo-mamoru', name: 'Kujo Mamoru' }];
+  const pm = parsePortraitResponse(wiki, pb);
+  ok(!!pm.tania && !!pm['kujo-mamoru'] && pm.ysera === undefined, 'portraits found; hero without wiki image falls back');
+  ok(Object.values(pm).every((u) => u.startsWith('https://static.wikia.nocookie.net/puzzles-chaos/')), 'portrait links stay on the wiki image host');
+  const evil = JSON.parse(JSON.stringify(wiki));
+  for (const pg of Object.values(evil.query.pages) as { thumbnail?: { source: string } }[]) if (pg.thumbnail) pg.thumbnail.source = 'https://evil.example/x.jpg';
+  ok(Object.keys(parsePortraitResponse(evil, pb)).length === 0 && Object.keys(parsePortraitResponse(null, pb)).length === 0, 'foreign or broken responses rejected');
+  ok(chunk(seed.heroes, 50).length === 2 && portraitQueryUrl(['Snowball & Ivy']).includes('Snowball%20%26%20Ivy'), 'portrait requests batched and encoded');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });

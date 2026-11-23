@@ -27,6 +27,8 @@ export interface AppState {
   dismissedUpdate: string;
   /** My Heroes: owned heroes by id. Entries are re-validated against game rules wherever they are read. */
   roster: Record<string, RosterEntry>;
+  /** Load hero portraits from the community wiki (off = letter badges, no image downloads). */
+  showPortraits: boolean;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -50,6 +52,7 @@ export interface AppState {
   setRosterEntry: (heroId: string, entry: RosterEntry) => void;
   removeFromRoster: (heroId: string) => void;
   mergeRoster: (entries: Record<string, RosterEntry>) => void;
+  setShowPortraits: (on: boolean) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -73,6 +76,7 @@ export const defaultState: PersistedState = {
   savedCalcs: {},
   dismissedUpdate: '',
   roster: {},
+  showPortraits: true,
 };
 
 export const useAppStore = create<AppState>()(
@@ -115,6 +119,7 @@ export const useAppStore = create<AppState>()(
       dismissUpdate: (dismissedUpdate) => set({ dismissedUpdate }),
       setRosterEntry: (heroId, entry) => set({ roster: { ...get().roster, [heroId]: entry } }),
       mergeRoster: (entries) => set({ roster: { ...get().roster, ...entries } }),
+      setShowPortraits: (showPortraits) => set({ showPortraits }),
       removeFromRoster: (heroId) => {
         const next = { ...get().roster };
         delete next[heroId];

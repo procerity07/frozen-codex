@@ -65,6 +65,17 @@ export default function SettingsScreen() {
         {appCheck?.status === 'error' ? <Text style={[type.caption, { marginTop: space.sm, color: palette.danger }]}>{appCheck.message}</Text> : null}
       </Card>
 
+      <SectionHeader title="Hero portraits" />
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={type.body}>Show hero portraits</Text>
+            <Text style={type.caption}>Loaded from the Puzzles & Chaos community wiki and kept on your phone. Off = letter badges, no image downloads.</Text>
+          </View>
+          <Switch value={s.showPortraits} onValueChange={s.setShowPortraits} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
+        </Row>
+      </Card>
+
       <SectionHeader title="Realm profile" />
       <Card>
         <Row>
