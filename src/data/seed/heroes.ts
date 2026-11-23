@@ -234,10 +234,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Carvell', title: 'Arcane Engineer', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Siege Matrix', 'Archer ATK up vs structures; reduces enemy wall DEF.']],
-    m3: { name: 'Overclock', desc: 'Dark damage to a column and lowers enemy mana.', charge: 'Medium', pattern: 'Column', effects: ['Mana drain'] },
+    march: [['Troop skill', 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).']],
+    civil: [
+      { name: 'Research Speed', description: 'In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'researchSpeed', unit: '%', tiers: { '5': [6, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Training Speed', description: 'In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'trainSpeed', unit: '%', tiers: { '5': [6, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Troop Capacity', description: 'In-game. 5★: +4,000 at Hero0, then +8,000 at +2 up to +41,250 at +8; 6★: +25,000 at +5 up to +55,000 at +8.', requirement: 'Unlocks at level 131 (in-game)', stat: 'troopCap', unit: 'flat',
+        tiers: { '5': [4000, null, 8000, 12000, 16000, 20000, 25000, 30000, 41250], '6': [null, null, null, null, null, 25000, 32000, 37500, 55000] } },
+    ],
+    m3: { name: 'Holy Verdict', desc: 'Deals 300% damage to the target and adjacent enemies (Rage Regen: Fast). Holy Verdict (enhancement): target DEF −44% for 4 rounds. Wallop: target Heal Rate −50% for 4 rounds. Sacred Asylum (unlocks Lv. 71): DEF +48% to him and adjacent allies for 5 rounds. Target Weakness (unlocks at 6★): Break +30%. Values as shown in-game at Hero0.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['DEF down', 'Heal down', 'DEF up', 'Break'] },
     sources: ['Astrology', 'Feast of Destiny / Wonder House', 'Pyramid Event', 'AP Event', 'Timeless Recruitment'], bonds: ['Sanguine Serenade'],
-    notes: 'Appears in many event pools — never spend premium currency on him directly.',
+    notes: 'Research and training speed work just by owning him; appears in many event pools.',
   }),
   hero({
     name: 'Wu Kong', title: 'Monkey King', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
@@ -498,8 +504,9 @@ const baseHeroes: Hero[] = [
  * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills;
  * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills;
  * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills;
- * revision 23 = in-game Lylia skills; revision 24 = in-game Tooka skills.
+ * revision 23 = in-game Lylia skills; revision 24 = in-game Tooka skills;
+ * revision 25 = in-game Carvell skills.
  */
-export const HERO_DATA_REVISION = 24;
+export const HERO_DATA_REVISION = 25;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

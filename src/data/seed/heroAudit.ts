@@ -137,7 +137,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Carvell", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Light Civil, several event sources (app previously: Dark Archer). Bond corrected: Sanguine Serenade.", "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."],
+    notes: ["In-game (2026-11-23, Carvell at Hero0): Light Civil confirmed; troop skill 100% of troop ATK; Research Speed, Training Speed and Troop Capacity (Lv. 131) tables for 5★ and 6★; hero skills Holy Verdict, Wallop, Sacred Asylum (Lv. 71), Target Weakness (6★). The unsourced Siege Matrix / Overclock skills were replaced.", "Wiki: 5-star Light Civil, several event sources (app previously: Dark Archer). Bond corrected: Sanguine Serenade.", "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."],
   },
   "wu-kong": {
     checkedOn: '2026-11-23',
