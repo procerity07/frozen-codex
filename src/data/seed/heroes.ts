@@ -157,10 +157,15 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Kaios', title: 'Tidebinder', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Undertow', 'Archer ATK up; slows enemy march speed in the field.']],
-    m3: { name: 'Riptide', desc: 'Ice damage to a 3x3 area and freezes for 1 turn.', charge: 'Medium', pattern: '3x3', effects: ['Freeze'] },
+    march: [['Troop skill', 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).']],
+    civil: [
+      { name: 'Infantry HP (Passive)', description: 'In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [12, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+      { name: 'Cavalry HP (Passive)', description: 'In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [12, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+      { name: 'Archer HP (Passive)', description: 'In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.', requirement: 'Unlocks at level 131 (in-game)', unit: '%', tiers: { '5': [12, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+    ],
+    m3: { name: 'Temporal Rift', desc: 'Deals 330% damage to the target (Rage Regen: Medium). Time Cage: Silences the target for 3 rounds. Back to the Past: converts 75% of the damage dealt into his own HP. Cycle of Rebirth (unlocks Lv. 71): at battle start gains the ability to revive with 50% HP after death. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at Hero0.', charge: 'Medium', pattern: 'Single target', effects: ['Silence', 'Lifesteal', 'Revive', 'Crit'] },
     sources: ['Ace Lord', 'AP Event'],
-    notes: 'AP Visiting events also feature his shards.',
+    notes: 'His Infantry, Cavalry and Archer HP bonuses work just by owning him. AP Visiting events also feature his shards.',
   }),
   hero({
     name: 'Aerposia', title: 'Sky Sovereign', element: 'Dark', rarity: 5, unit: 'Cavalry', role: 'Cavalry DPS',
@@ -505,8 +510,8 @@ const baseHeroes: Hero[] = [
  * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills;
  * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills;
  * revision 23 = in-game Lylia skills; revision 24 = in-game Tooka skills;
- * revision 25 = in-game Carvell skills.
+ * revision 25 = in-game Carvell skills; revision 26 = in-game Kaios skills.
  */
-export const HERO_DATA_REVISION = 25;
+export const HERO_DATA_REVISION = 26;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
