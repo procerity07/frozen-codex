@@ -92,8 +92,13 @@ const baseHeroes: Hero[] = [
   // ------------------------------ 5-Star ------------------------------
   hero({
     name: 'Tania', title: 'Storm Archer', element: 'Ice', rarity: 5, unit: 'Cavalry', role: 'Cavalry Support',
-    march: [['Volley Command', 'Cavalry ATK up; bonus damage vs Infantry.'], ['Thunder Mark', 'Marked enemies take more damage.']],
-    m3: { name: 'Allegro of Life', desc: 'Restores 44% HP to all allies. Also: Watershield (all allies DEF +63% for 5 rounds, unlocks Lv. 11) and Moisture (dispels all debuffs on allies, unlocks Lv. 31). Skill level for these values is not stated.', pattern: 'All allies', effects: ['Heal', 'DEF up', 'Dispel'] },
+    march: [
+      ['Troop skill', 'Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game).'],
+      ['Cavalry HP', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
+      ['Cavalry DEF', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
+      ['Cavalry ATK', '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when she joins troop battle.'],
+    ],
+    m3: { name: 'Allegro of Life', desc: 'Restores 44% HP to all allies (Rage Regen: Medium). Watershield: all allies DEF +63% for 5 rounds (unlocks Lv. 11). Moisture: dispels all debuffs on allies (unlocks Lv. 31). Elegy: chance to Stun the enemy for 2 rounds when she dies. Iron Will (unlocks at 6★): Crit Res. +30%, a chance to take normal damage from a critical hit. Values as shown in-game at +5.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'DEF up', 'Dispel', 'Stun', 'Crit Res.'] },
     sources: ['Timeless Recruitment'], bonds: ['Octet Wanderers'],
     notes: 'Unit type corrected to Cavalry from in-game data.',
   }),
@@ -431,8 +436,9 @@ const baseHeroes: Hero[] = [
  * corrections replace older online-pack rows (which carry a lower or missing revision) on re-seed.
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
- * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables.
+ * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables;
+ * revision 6 = in-game Tania troop skills and hero skills.
  */
-export const HERO_DATA_REVISION = 5;
+export const HERO_DATA_REVISION = 6;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
