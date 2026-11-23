@@ -361,8 +361,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Leona', title: 'Pride Huntress', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Hunt', 'Cavalry ATK up; extra damage to wounded enemies.']],
-    m3: { name: 'Pounce', desc: 'Fire damage to the lowest-HP enemy, executes below 20%.', charge: 'Fast', pattern: 'Single target', effects: ['Execute'] },
+    march: [['Troop skill', 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).']],
+    civil: [
+      { name: 'Safe Resources', description: 'In-game. 5★: +1.2% at Hero0, then 2.4/3.6/4.8/6/7.5/9/15% from +2 to +8; 6★: 7.5/9.6/11.2/20% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [1.2, null, 2.4, 3.6, 4.8, 6, 7.5, 9, 15], '6': [null, null, null, null, null, 7.5, 9.6, 11.2, 20] } },
+      { name: 'Reinforcement March Speed', description: 'In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [6, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +8% at Hero0, then 16/24/32/40/50/65/80% from +2 to +8; 6★: 50/70/85/150% from +5 to +8.', requirement: 'Unlocks at level 131 (in-game)', unit: '%',
+        tiers: { '5': [8, null, 16, 24, 32, 40, 50, 65, 80], '6': [null, null, null, null, null, 50, 70, 85, 150] } },
+    ],
+    m3: { name: 'Justice from Heaven', desc: 'Deals 240% damage to the target and adjacent enemies (Rage Regen: Fast). Sacred Deterrence: a chance to deplete 10% Rage of the target and adjacent enemies for 4 rounds. Dazzling Holy Light: a chance to Stun the target for 2 rounds. Final Blessing (unlocks Lv. 71): allies +20% Damage Bonus for 4 rounds. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at Hero0.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['Rage down', 'Stun', 'Damage Bonus', 'Crit'] },
     sources: ['AP Event', 'Timeless Recruitment'],
     notes: 'AP Visiting items expire.',
   }),
@@ -480,8 +488,9 @@ const baseHeroes: Hero[] = [
  * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills;
  * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills;
  * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills;
- * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills.
+ * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills;
+ * revision 21 = in-game Leona skills.
  */
-export const HERO_DATA_REVISION = 20;
+export const HERO_DATA_REVISION = 21;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

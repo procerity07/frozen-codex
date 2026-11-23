@@ -239,7 +239,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Leona"],
-    notes: ["Wiki: 5-star Light Civil (app previously: Fire Cavalry).", "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."],
+    notes: ["Wiki: 5-star Light Civil (app previously: Fire Cavalry).", "In-game (2026-11-23, Leona at Hero0): Light Civil confirmed; troop skill 100% of troop ATK; Safe Resources, Reinforcement March Speed and Troop ATK (Passive, Lv. 131) tables for 5★ and 6★ (the +1 column is not shown in-game); hero skills Justice from Heaven, Sacred Deterrence, Dazzling Holy Light, Final Blessing (Lv. 71), Combat Mastery (6★). The unsourced Hunt / Pounce skills were replaced.", "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."],
   },
   "basilong": {
     checkedOn: '2026-11-23',
