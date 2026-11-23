@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "publishedAt": "2026-11-22T23:01:42.751Z",
+  "version": 3,
+  "publishedAt": "2026-11-23T00:00:00.000Z",
   "packs": {
     "heroes": [
       {
@@ -8,9 +8,9 @@
         "name": "Khaos",
         "title": "Sovereign of the Rift",
         "element": "Dark",
-        "rarity": 6,
-        "unitType": "Cavalry",
-        "role": "Rally lead / burst",
+        "rarity": 5,
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Rift Charge",
@@ -32,30 +32,41 @@
             "High single-cast damage"
           ]
         },
-        "tiers": {
-          "pve": "SS",
-          "pvp": "SS",
-          "boss": "S",
-          "economy": "B"
-        },
         "sources": [
-          "Oblivion War Shop",
-          "Royal Arms Race"
+          "Combination Event"
         ],
-        "bondGroups": [
-          "Rhapsody of Genesis"
-        ],
+        "bondGroups": [],
         "exclusiveCurio": "Riftbreaker Lance",
-        "notes": "Top-end rally captain for Cavalry mains. Prioritise if you already field Dark hitters.",
-        "confidence": "estimate"
+        "notes": "Civil hero: skills apply by owning the hero. Listed as obtainable only through the Combination Event.",
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Khaos"
+          ],
+          "notes": [
+            "Wiki lists Khaos as a 5-star Dark Civil hero available only through the Combination Event (app previously: 6-star Cavalry; Oblivion War Shop / Royal Arms Race).",
+            "One third-party tier list associates Khaos with Nature; the wiki hero page and Heroes table both say Dark, so Dark is kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "anastasia",
         "name": "Anastasia",
         "title": "Frost Empress",
-        "element": "Ice",
-        "rarity": 6,
-        "unitType": "Infantry",
+        "element": "Fire",
+        "rarity": 5,
+        "unitType": "All-round",
         "role": "Garrison anchor",
         "marchSkills": [
           {
@@ -69,39 +80,51 @@
         ],
         "civilSkills": [],
         "match3Skill": {
-          "name": "Glacial Coronation",
-          "description": "Ice damage to all enemies, freezes the front row and shields allies.",
-          "charge": "Medium",
-          "pattern": "All enemies + ally shield",
+          "name": "Joyous",
+          "description": "Heals all members each round. Second hero skill, Inspiring: restores Rage. Full skill text and values not verified.",
+          "pattern": "All allies",
           "effects": [
-            "Freeze",
-            "Shield"
+            "Heal",
+            "Rage restore"
           ]
-        },
-        "tiers": {
-          "pve": "S",
-          "pvp": "SS",
-          "boss": "A",
-          "economy": "B"
         },
         "sources": [
           "Astrology"
         ],
-        "bondGroups": [
-          "Rhapsody of Genesis"
-        ],
+        "bondGroups": [],
         "exclusiveCurio": "Rimecrown Sceptre",
-        "notes": "The best Astrology pull for Infantry defence. Summon Scrolls do not expire, so save across events.",
-        "confidence": "community"
+        "notes": "Astrology hero. Astrology Summon Scrolls do not expire, so they can be saved across events.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources",
+            "match3Skill"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/All-round",
+            "https://puzzles-chaos.fandom.com/wiki/Anastasia"
+          ],
+          "notes": [
+            "Wiki: 5-star Fire All-round, obtained via Astrology (app previously: 6-star Ice Infantry). Three sources agree on Fire.",
+            "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "maxim",
         "name": "Maxim",
         "title": "Iron Vanguard",
-        "element": "Fire",
-        "rarity": 6,
-        "unitType": "Infantry",
-        "role": "Frontline bruiser",
+        "element": "Light",
+        "rarity": 5,
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Ironclad Advance",
@@ -122,29 +145,39 @@
             "DEF up"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "B"
-        },
         "sources": [
           "Astrology"
         ],
-        "bondGroups": [
-          "Octet Wanderers"
-        ],
-        "notes": "Pairs with Anastasia for an Infantry wall that survives Archer-heavy rallies.",
-        "confidence": "community"
+        "bondGroups": [],
+        "notes": "Civil hero: skills apply by owning the hero.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Maxim"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil (app previously: 6-star Fire Infantry). Acquisition source not confirmed.",
+            "Unconfirmed acquisition sources: Astrology."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "guan-yu",
         "name": "Guan Yu",
         "title": "Saint of War",
         "element": "Nature",
-        "rarity": 6,
-        "unitType": "Cavalry",
-        "role": "Open-field duelist",
+        "rarity": 5,
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Green Dragon Crescent",
@@ -165,26 +198,41 @@
             "Stun"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "SS",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Recruit Trial"
         ],
         "bondGroups": [],
         "exclusiveCurio": "Azure Dragon Blade",
         "notes": "Recruit Trial probability pool also contains the Azure Dragon Blade Scroll (his exclusive curio).",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources",
+            "exclusiveCurio"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Guan_Yu",
+            "https://puzzles-chaos.fandom.com/wiki/Curio"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Civil, Recruit Trial (app previously: 6-star Cavalry).",
+            "Exclusive curio Azure Dragon Blade confirmed; its attributes were corrected (troop DEF/HP/ATK, not Cavalry ATK)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "saya",
         "name": "Saya",
         "title": "Hearth Steward",
-        "element": "Light",
-        "rarity": 6,
+        "element": "Fire",
+        "rarity": 5,
         "unitType": "Civil",
         "role": "Economy core",
         "marchSkills": [
@@ -195,18 +243,21 @@
         ],
         "civilSkills": [
           {
-            "name": "Hearthguard Muster",
-            "description": "Increases troop capacity of the castle.",
-            "requirement": "Owned, Enhancement +1",
-            "stat": "troopCap",
-            "value": 5
+            "name": "Troop Capacity",
+            "description": "Flat troop capacity. 5-star: +2,000 at Hero0 rising to +22,500 at Hero8. 6-star: +12,500 at Hero5 rising to +30,000 at Hero8.",
+            "requirement": "Unlocks at level 131 (as listed on the wiki)",
+            "stat": "troopCap"
           },
           {
-            "name": "Swift Masonry",
-            "description": "Increases construction speed.",
-            "requirement": "Owned, Enhancement +3",
-            "stat": "buildSpeed",
-            "value": 8
+            "name": "Construction Speed",
+            "description": "6-star: +37.5% at Hero5 rising to +100% at Hero8. 5-star values not verified.",
+            "requirement": "Unlocks at level 31",
+            "stat": "buildSpeed"
+          },
+          {
+            "name": "Free Speedup Time",
+            "description": "5-star: 6 minutes at Hero0 rising to 60 minutes at Hero8; 6-star values are higher.",
+            "requirement": "Unlock level not verified"
           }
         ],
         "match3Skill": {
@@ -219,24 +270,51 @@
             "Cleanse"
           ]
         },
-        "tiers": {
-          "pve": "B",
-          "pvp": "C",
-          "boss": "B",
-          "economy": "SS"
-        },
         "sources": [
+          "First Top-up",
           "Ace Lord Radiant Card"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Rhapsody of Genesis"
+        ],
+        "exclusiveCurio": "Wings of Icarus",
         "notes": "Own-only skills: you never need to march her. Highest account-wide value per shard in the game.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups",
+            "exclusiveCurio",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Saya",
+            "https://puzzles-chaos.fandom.com/wiki/Troop_Capacity",
+            "https://puzzles-chaos.fandom.com/wiki/Curio",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond",
+            "https://fatwalletrefugee.com/puzzles-and-chaos-wiki/puzzles-and-chaos-economic-heroes/",
+            "https://www.packsify.com/blogs/puzzles-chaos-frozen-castle-beginners-guide"
+          ],
+          "notes": [
+            "Wiki: 5-star Fire Civil, with 6-star rows after star-up (app previously: 6-star Light).",
+            "Civil skills replaced with the wiki values; base vs max levels are shown as Hero0 to Hero8. The 5-star Construction Speed row was missing from the source.",
+            "Two guides say Saya comes from the first top-up; the wiki acquisition field was not visible. Ace Lord Radiant Card (previous app value) not confirmed.",
+            "Exclusive curio Wings of Icarus confirmed. Bond: Rhapsody of Genesis.",
+            "Unconfirmed acquisition sources: Ace Lord Radiant Card."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "tania",
         "name": "Tania",
         "title": "Storm Archer",
-        "element": "Light",
+        "element": "Ice",
         "rarity": 5,
         "unitType": "Cavalry",
         "role": "Cavalry Support",
@@ -252,34 +330,57 @@
         ],
         "civilSkills": [],
         "match3Skill": {
-          "name": "Stormcall Arrows",
-          "description": "Light damage to random enemies 6 times.",
-          "charge": "Fast",
-          "pattern": "Random x6",
+          "name": "Allegro of Life",
+          "description": "Restores 44% HP to all allies. Also: Watershield (all allies DEF +63% for 5 rounds, unlocks Lv. 11) and Moisture (dispels all debuffs on allies, unlocks Lv. 31). Skill level for these values is not stated.",
+          "pattern": "All allies",
           "effects": [
-            "Multi-hit"
+            "Heal",
+            "DEF up",
+            "Dispel"
           ]
-        },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "S",
-          "economy": "C"
         },
         "sources": [
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
-        "notes": "Multi-hit pattern is excellent vs bosses with damage-instance caps.",
-        "confidence": "community"
+        "bondGroups": [
+          "Octet Wanderers"
+        ],
+        "notes": "Unit type corrected to Cavalry from in-game data.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups",
+            "match3Skill"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Tania",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Unit type Cavalry is your in-game correction and is confirmed by the wiki Cavalry and Heroes pages.",
+            "Element corrected Light -> Ice (wiki Heroes table and Tania page).",
+            "Match-3 skills from the wiki: Allegro of Life (restores 44% HP to all allies), Watershield (all allies DEF +63% for 5 rounds, unlocks Lv. 11), Moisture (dispels all debuffs on allies, Lv. 31). The skill level for the 44%/63% values is not stated.",
+            "Role text 'Cavalry Support' and the Thunder Mark wording come from your hosted data pack and are kept; they were not independently verified.",
+            "Bond corrected: Octet Wanderers.",
+            "Unconfirmed acquisition sources: Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "dimina",
         "name": "Dimina",
         "title": "Starlit Oracle",
-        "element": "Light",
+        "element": "Nature",
         "rarity": 5,
-        "unitType": "Archer",
+        "unitType": "Cavalry",
         "role": "Support caster",
         "marchSkills": [
           {
@@ -297,18 +398,30 @@
             "Mana gain up"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Glory's Gift Roulette"
         ],
         "bondGroups": [],
         "notes": "Lucky Star Coins do not expire — bank them for her banner.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Cavalry, Glory's Gift Roulette (app previously: Light Archer)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "kanye",
@@ -316,8 +429,8 @@
         "title": "Beat of War",
         "element": "Fire",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "unitType": "Archer",
+        "role": "Archer DPS",
         "marchSkills": [
           {
             "name": "Drumline Charge",
@@ -334,26 +447,38 @@
             "Burn"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
           "Glory's Gift Roulette"
         ],
         "bondGroups": [],
         "notes": "Strong burn damage in Elemental Seal when Fire is a required element.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer"
+          ],
+          "notes": [
+            "Wiki: Fire Archer (app previously: Cavalry). Star rating not stated in the extracts.",
+            "Unconfirmed acquisition sources: Glory's Gift Roulette.",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "norris",
         "name": "Norris",
         "title": "Bulwark Marshal",
-        "element": "Ice",
+        "element": "Fire",
         "rarity": 5,
-        "unitType": "Infantry",
+        "unitType": "Archer",
         "role": "Tank",
         "marchSkills": [
           {
@@ -372,26 +497,42 @@
             "Shield"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Arms Race Ace Card"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Sanguine Serenade"
+        ],
         "notes": "Arms Race Ace Hero Choice Card pick for early realms (> 4 weeks).",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: Fire Archer (app previously: Ice Infantry). Star rating not stated. Bond corrected: Sanguine Serenade.",
+            "Unconfirmed acquisition sources: Arms Race Ace Card.",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "edith",
         "name": "Edith",
         "title": "Iron Matron",
-        "element": "Nature",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "Infantry",
+        "unitType": "Archer",
         "role": "Sustain tank",
         "marchSkills": [
           {
@@ -410,25 +551,41 @@
             "DEF up"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Strike Out",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Sanguine Serenade"
+        ],
         "notes": "Strike Out milestone shards make her the easiest 5-Star tank to max for F2P.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Archer (app previously: Nature Infantry). Bond corrected: Sanguine Serenade.",
+            "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "boyd",
         "name": "Boyd",
         "title": "Ember Captain",
-        "element": "Fire",
+        "element": "Nature",
         "rarity": 5,
         "unitType": "Cavalry",
         "role": "Cavalry DPS",
@@ -448,27 +605,39 @@
             "DEF down"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
-          "Ace Lord Radiant Card"
+          "Ace Lord"
         ],
         "bondGroups": [],
         "notes": "Radiant Hero Choice Card option from realm day 1.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Cavalry from Ace Lord (app previously: Fire)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "monica",
         "name": "Monica",
         "title": "Silver Lancer",
-        "element": "Light",
+        "element": "Dark",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry bruiser",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Radiant Lance",
@@ -485,27 +654,39 @@
             "DEF ignore"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Ace Lord Radiant Card"
         ],
         "bondGroups": [],
         "notes": "Radiant Card option once realm age exceeds 4 weeks.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Monica"
+          ],
+          "notes": [
+            "Wiki: 5-star Dark Civil (app previously: Light Cavalry).",
+            "Unconfirmed acquisition sources: Ace Lord Radiant Card."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "kaios",
         "name": "Kaios",
         "title": "Tidebinder",
-        "element": "Ice",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer control",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Undertow",
@@ -522,28 +703,43 @@
             "Freeze"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
-          "Ace Lord Radiant Card",
+          "Ace Lord",
           "AP Event"
         ],
         "bondGroups": [],
         "notes": "AP Visiting events also feature his shards.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Kaios",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Archer"
+          ],
+          "notes": [
+            "Wiki: Light Civil; Ace Lord (servers open more than 12 weeks) and AP Event (app previously: Ice Archer).",
+            "Wiki lists Kaios under \"other heroes with Cavalry/Archer skills\" — his skills affect troop types other than his unit type.",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "aerposia",
         "name": "Aerposia",
         "title": "Sky Sovereign",
-        "element": "Light",
+        "element": "Dark",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Cavalry",
+        "role": "Cavalry DPS",
         "marchSkills": [
           {
             "name": "Skyfall",
@@ -560,27 +756,39 @@
             "AoE"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
-          "Ace Lord Radiant Card"
+          "Ace Lord"
         ],
         "bondGroups": [],
-        "notes": "Radiant Card option after realm age > 22 weeks. Best Archer rally hitter of the card pool.",
-        "confidence": "community"
+        "notes": "Radiant Card option after realm age > 22 weeks.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry"
+          ],
+          "notes": [
+            "Wiki: 5-star Dark Cavalry from Ace Lord (app previously: Light Archer)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "valerius",
         "name": "Valerius",
         "title": "Crimson Warden",
-        "element": "Fire",
+        "element": "Nature",
         "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Infantry DPS",
+        "unitType": "All-round",
+        "role": "All-troop DPS",
         "marchSkills": [
           {
             "name": "Blood Oath",
@@ -597,20 +805,32 @@
             "Lifesteal"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Astrology"
         ],
-        "bondGroups": [
-          "Sanguine Serenade"
-        ],
+        "bondGroups": [],
         "notes": "Astrology rate-up hero.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/All-round",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature All-round; purchase or Astrology (app previously: Fire Infantry).",
+            "Not listed in Sanguine Serenade on the Hero Bond page; removed from that group."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "tala",
@@ -618,8 +838,8 @@
         "title": "Wildheart",
         "element": "Nature",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Hunter Instinct",
@@ -636,18 +856,29 @@
             "Poison"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
           "Astrology"
         ],
         "bondGroups": [],
         "notes": "Fast-charging poison makes her a reliable Elemental Seal Nature pick.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Civil, Astrology (app previously: Archer)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "eris",
@@ -673,25 +904,41 @@
             "Silence"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "S",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Recruit Trial",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Sanguine Serenade"
+        ],
         "notes": "Silence is wasted on Elemental Seal bosses (immune), but dominant in Arena.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Dark Cavalry (matches app). Bond corrected: Sanguine Serenade. Sources partly ambiguous in the extract (shared sentence with Eric).",
+            "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "kujo-mamoru",
         "name": "Kujo Mamoru",
         "title": "Shrine Guardian",
-        "element": "Light",
+        "element": "Nature",
         "rarity": 5,
         "unitType": "Infantry",
         "role": "Tank",
@@ -712,28 +959,44 @@
             "Reflect"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Strike Out",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Rhapsody of Genesis"
+        ],
         "notes": "Strike Out milestone shards — easy F2P Infantry defender.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Infantry (app previously: Light). Bond corrected: Rhapsody of Genesis.",
+            "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "rodriguez",
         "name": "Rodriguez",
         "title": "Desert Gunner",
-        "element": "Fire",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Infantry",
+        "role": "Infantry DPS",
         "marchSkills": [
           {
             "name": "Powder Keg",
@@ -750,29 +1013,48 @@
             "AoE"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
+          "Hero Plaza",
+          "Mythic Hero Covenant",
           "Personal Activity",
           "Recruit Trial",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
-        "notes": "Bi-weekly Personal Activity shards make him a free long-term Archer.",
-        "confidence": "community"
+        "bondGroups": [
+          "Rhapsody of Genesis"
+        ],
+        "notes": "Bi-weekly Personal Activity shards make him a free long-term Infantry hero.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Infantry; Hero Plaza, Mythic Hero Covenant and other sources (app previously: Fire Archer).",
+            "Previous app sources (Personal Activity, Recruit Trial, Timeless Recruitment) kept but not confirmed. Bond corrected: Rhapsody of Genesis.",
+            "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "freya",
         "name": "Freya",
         "title": "Valkyrie",
-        "element": "Ice",
+        "element": "Nature",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "unitType": "Archer",
+        "role": "Archer DPS",
         "marchSkills": [
           {
             "name": "Valhalla Ride",
@@ -789,29 +1071,45 @@
             "ATK up"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Lucky Spin",
           "Recruit Trial",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Rhapsody of Genesis"
+        ],
         "notes": "Lucky Spin banner on newer realms.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Archer; several sources incl. Lucky Spin (app previously: Ice Cavalry). Bond corrected: Rhapsody of Genesis.",
+            "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "fiona",
         "name": "Fiona",
         "title": "Grove Keeper",
-        "element": "Nature",
+        "element": "Fire",
         "rarity": 5,
-        "unitType": "All-round",
-        "role": "Healer",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Verdant Aura",
@@ -828,27 +1126,44 @@
             "Heal"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "B",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Octet Wanderers"
+        ],
         "notes": "Best Campaign and boss sustain in the Timeless pool.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Fiona",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Fire Civil (app previously: Nature All-round). Bond corrected: Octet Wanderers.",
+            "Wiki shows a Legion Attribute of Troop DEF +12% / Troop HP +12% (level not stated); not added as a skill.",
+            "Unconfirmed acquisition sources: Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "carvell",
         "name": "Carvell",
         "title": "Arcane Engineer",
-        "element": "Dark",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Debuffer",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Siege Matrix",
@@ -865,12 +1180,6 @@
             "Mana drain"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Astrology",
           "Feast of Destiny / Wonder House",
@@ -878,18 +1187,40 @@
           "AP Event",
           "Timeless Recruitment"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Sanguine Serenade"
+        ],
         "notes": "Appears in many event pools — never spend premium currency on him directly.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Carvell",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil, several event sources (app previously: Dark Archer). Bond corrected: Sanguine Serenade.",
+            "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "wu-kong",
         "name": "Wu Kong",
         "title": "Monkey King",
-        "element": "Fire",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Infantry DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Seventy-Two Forms",
@@ -906,28 +1237,41 @@
             "Multi-hit"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
-          "Stamina Event",
-          "Timeless Recruitment"
+          "Timeless Recruitment",
+          "Mythic Hero Choice Card III",
+          "Stamina Event"
         ],
         "bondGroups": [],
         "notes": "Stamina Event drops expire — spend them before the event ends.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Wu_Kong"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil; Timeless Heroes Limited Recruitment, Mythic Hero Choice Card III, Stamina Event (app previously: Fire Infantry). Stamina Event appears on the Heroes table but not on the hero page."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "oichi",
         "name": "Oichi",
         "title": "Blossom Blade",
-        "element": "Nature",
-        "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "element": "Fire",
+        "rarity": 6,
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Sakura Charge",
@@ -944,25 +1288,37 @@
             "Anti-heal"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
-          "Hero Plaza"
+          "Battle Pass Event"
         ],
         "bondGroups": [],
         "notes": "Anti-heal is valuable in Arena against Fiona/Edith teams.",
-        "confidence": "estimate"
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil"
+          ],
+          "notes": [
+            "Wiki: 6-star Fire Civil, Battle Pass Event (app previously: 5-star Nature Cavalry from Hero Plaza)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "sirius",
         "name": "Sirius",
         "title": "Dog Star",
-        "element": "Light",
-        "rarity": 5,
+        "element": "Fire",
+        "rarity": 6,
         "unitType": "Archer",
         "role": "Archer DPS",
         "marchSkills": [
@@ -981,26 +1337,38 @@
             "Crit"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
-          "Hero Plaza"
+          "Battle Pass Event"
         ],
         "bondGroups": [],
         "notes": "Single-target nuker for bosses.",
-        "confidence": "estimate"
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer"
+          ],
+          "notes": [
+            "Wiki: 6-star Fire Archer, Battle Pass Event (app previously: 5-star Light, Hero Plaza)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "vynora",
         "name": "Vynora",
         "title": "Venom Queen",
-        "element": "Dark",
-        "rarity": 5,
-        "unitType": "Archer",
+        "element": "Ice",
+        "rarity": 6,
+        "unitType": "All-round",
         "role": "DoT",
         "marchSkills": [
           {
@@ -1018,27 +1386,40 @@
             "Poison"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
-          "Hero Plaza"
+          "Battle Pass Event"
         ],
         "bondGroups": [],
         "notes": "Poison stacks ignore boss stun/silence immunity.",
-        "confidence": "estimate"
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/All-round",
+            "https://puzzles-chaos.fandom.com/wiki/Vynora"
+          ],
+          "notes": [
+            "Wiki: 6-star Ice All-round, Battle Pass Event (app previously: 5-star Dark Archer, Hero Plaza)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "snowball-and-ivy",
         "name": "Snowball & Ivy",
         "title": "Frost Twins",
         "element": "Ice",
-        "rarity": 5,
-        "unitType": "All-round",
-        "role": "Support",
+        "rarity": 6,
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Twin Bond",
@@ -1055,27 +1436,38 @@
             "Freeze"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "B",
-          "boss": "A",
-          "economy": "B"
-        },
         "sources": [
           "Battle Pass"
         ],
         "bondGroups": [],
         "notes": "Seasonal duo; decent Ice filler.",
-        "confidence": "estimate"
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 6-star Ice Civil (app previously: 5-star All-round).",
+            "Unconfirmed acquisition sources: Battle Pass."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "leora",
         "name": "Leora",
         "title": "Lionheart",
         "element": "Light",
-        "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Infantry DPS",
+        "rarity": 6,
+        "unitType": "Cavalry",
+        "role": "Cavalry DPS",
         "marchSkills": [
           {
             "name": "Pride",
@@ -1092,27 +1484,39 @@
             "ATK up"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Hero Plaza"
         ],
         "bondGroups": [],
-        "notes": "Solid Light Infantry for Elemental Seal requirements.",
-        "confidence": "estimate"
+        "notes": "Light Cavalry option for Elemental Seal requirements.",
+        "confidence": "estimate",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry"
+          ],
+          "notes": [
+            "Wiki: 6-star Light Cavalry (app previously: 5-star Infantry).",
+            "Unconfirmed acquisition sources: Hero Plaza."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "apan",
         "name": "Apan",
         "title": "Wind Rider",
-        "element": "Nature",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "unitType": "Infantry",
+        "role": "Infantry DPS",
         "marchSkills": [
           {
             "name": "Gale Charge",
@@ -1129,27 +1533,43 @@
             "Mana down"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Arms Race Ace Card"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Octet Wanderers"
+        ],
         "notes": "Arms Race Ace Card option from realm day 1.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Infantry (app previously: Nature Cavalry). Bond corrected: Octet Wanderers.",
+            "Unconfirmed acquisition sources: Arms Race Ace Card."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "patty",
         "name": "Patty",
         "title": "Sweet Saboteur",
-        "element": "Fire",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Sugar Rush",
@@ -1166,18 +1586,30 @@
             "Stun"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Arms Race Ace Card"
         ],
         "bondGroups": [],
         "notes": "Arms Race Ace Card option once realm age exceeds 12 weeks.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Patty"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil (app previously: Fire Archer).",
+            "Unconfirmed acquisition sources: Arms Race Ace Card."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "angelita",
@@ -1185,7 +1617,7 @@
         "title": "Seraph of Mercy",
         "element": "Light",
         "rarity": 5,
-        "unitType": "All-round",
+        "unitType": "Archer",
         "role": "Healer",
         "marchSkills": [
           {
@@ -1204,27 +1636,40 @@
             "Revive"
           ]
         },
-        "tiers": {
-          "pve": "S",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Arms Race Ace Card"
         ],
         "bondGroups": [],
         "notes": "Arms Race Ace Card option after realm age > 22 weeks — best pick of the late pool.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Angelita"
+          ],
+          "notes": [
+            "Wiki: Light Archer (app previously: All-round). Star rating not stated; she is also listed as having Cavalry skills.",
+            "Unconfirmed acquisition sources: Arms Race Ace Card.",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "lylia",
         "name": "Lylia",
         "title": "Moonblade",
-        "element": "Dark",
+        "element": "Fire",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Lunar Edge",
@@ -1241,27 +1686,39 @@
             "Multi-hit"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Royal Arms Race"
         ],
         "bondGroups": [],
         "notes": "Royal Arms Race ranking reward shards.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Lylia"
+          ],
+          "notes": [
+            "Wiki: Fire Civil, Royal Arms Race (app previously: Dark Cavalry).",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "oskir",
         "name": "Oskir",
         "title": "Runesmith",
-        "element": "Ice",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Tank",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Runic Armor",
@@ -1279,27 +1736,39 @@
             "ATK down"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Alliance Duel"
         ],
         "bondGroups": [],
         "notes": "Alliance Duel reward shards.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Oskir"
+          ],
+          "notes": [
+            "Wiki: Light Civil, Alliance Duel (app previously: Ice Infantry). Listed as having Cavalry and Archer skills.",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "echo",
         "name": "Echo",
         "title": "Whisper of the Void",
-        "element": "Dark",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Resonance",
@@ -1316,28 +1785,40 @@
             "Delayed hit"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Feast of Destiny / Wonder House",
           "Oblivion War Shop"
         ],
         "bondGroups": [],
         "notes": "Divination Crystals expire — spend all of them before Feast of Destiny / Wonder House ends.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Echo"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Civil (app previously: Dark Archer). Not in Sanguine Serenade on the Hero Bond page; removed from that group.",
+            "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "ogremire",
         "name": "Ogremire",
         "title": "Swamp Tyrant",
-        "element": "Nature",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Tank",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Bog Hide",
@@ -1354,18 +1835,30 @@
             "Mana slow"
           ]
         },
-        "tiers": {
-          "pve": "B",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Shadow Expedition"
         ],
         "bondGroups": [],
         "notes": "Shadow Expedition reward shards.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Ogremire"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Civil (app previously: Nature Infantry).",
+            "Unconfirmed acquisition sources: Shadow Expedition."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "neptune",
@@ -1373,8 +1866,8 @@
         "title": "Lord of Tides",
         "element": "Ice",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "AoE",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Tidal Force",
@@ -1391,28 +1884,39 @@
             "AoE"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Stamina Event",
           "Timeless Recruitment"
         ],
         "bondGroups": [],
         "notes": "Stamina Event drops expire.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Civil (app previously: Archer).",
+            "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "kaira",
         "name": "Kaira",
         "title": "Coral Priestess",
-        "element": "Ice",
+        "element": "Nature",
         "rarity": 5,
-        "unitType": "All-round",
-        "role": "Healer",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Coral Ward",
@@ -1430,28 +1934,39 @@
             "Cleanse"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "B",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Stamina Event",
           "Timeless Recruitment"
         ],
         "bondGroups": [],
         "notes": "Cleanse is useful vs Fire burn bosses.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Civil (app previously: Ice All-round).",
+            "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "sea-goddess",
         "name": "Sea Goddess",
         "title": "Mother of Waves",
-        "element": "Ice",
+        "element": "Nature",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Control",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Abyssal Pressure",
@@ -1468,28 +1983,39 @@
             "Freeze"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Stamina Event",
           "Timeless Recruitment"
         ],
         "bondGroups": [],
         "notes": "Freeze is ignored by Elemental Seal bosses from Round 11+.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 5-star Nature Civil (app previously: Ice Archer).",
+            "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "leona",
         "name": "Leona",
         "title": "Pride Huntress",
-        "element": "Fire",
+        "element": "Light",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Hunt",
@@ -1506,28 +2032,40 @@
             "Execute"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "S",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "AP Event",
           "Timeless Recruitment"
         ],
         "bondGroups": [],
         "notes": "AP Visiting items expire.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Leona"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil (app previously: Fire Cavalry).",
+            "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "basilong",
         "name": "Basilong",
         "title": "Dragonkin",
-        "element": "Fire",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "Infantry",
-        "role": "Infantry DPS",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Scale Armor",
@@ -1544,18 +2082,29 @@
             "Burn"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Lucky Flip"
         ],
         "bondGroups": [],
         "notes": "Lucky Coins do not expire — save them across Lucky Flip runs.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Civil (app previously: Fire Infantry).",
+            "Unconfirmed acquisition sources: Lucky Flip."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "edmund",
@@ -1563,15 +2112,26 @@
         "title": "Gilded Knight",
         "element": "Light",
         "rarity": 5,
-        "unitType": "Cavalry",
-        "role": "Cavalry bruiser",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Gilded Charge",
             "description": "Cavalry HP and ATK up."
           }
         ],
-        "civilSkills": [],
+        "civilSkills": [
+          {
+            "name": "Food Output",
+            "description": "Increases food output. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Medical Tent Speed",
+            "description": "Increases Medical Tent speed. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
         "match3Skill": {
           "name": "Gleam",
           "description": "Light damage to a row and blinds (accuracy down).",
@@ -1581,34 +2141,63 @@
             "Blind"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "B",
-          "economy": "C"
-        },
         "sources": [
           "Lucky Flip"
         ],
-        "bondGroups": [],
+        "bondGroups": [
+          "Rhapsody of Genesis"
+        ],
         "notes": "Lucky Flip pool.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "bondGroups",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Edmund",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
+          ],
+          "notes": [
+            "Wiki: 5-star Light Civil (app previously: Cavalry). Civil skills from the wiki: Food Output, Medical Tent Speed (values not verified). Bond corrected: Rhapsody of Genesis.",
+            "Unconfirmed acquisition sources: Lucky Flip."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "aurora",
         "name": "Aurora",
         "title": "Northern Light",
-        "element": "Ice",
+        "element": "Dark",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Support",
+        "unitType": "Civil",
+        "role": "Civil — passive skills",
         "marchSkills": [
           {
             "name": "Polar Glow",
             "description": "Archer ATK up; ally mana gain up."
           }
         ],
-        "civilSkills": [],
+        "civilSkills": [
+          {
+            "name": "Gather March Speed",
+            "description": "Increases gathering march speed. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Heal Stone Cost",
+            "description": "Reduces the stone cost of healing. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
         "match3Skill": {
           "name": "Aurora Veil",
           "description": "Ice damage to random enemies and grants ally mana.",
@@ -1618,26 +2207,40 @@
             "Mana up"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Lucky Flip"
         ],
         "bondGroups": [],
         "notes": "Lucky Flip pool.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "sources",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Aurora"
+          ],
+          "notes": [
+            "Wiki: Dark Civil from Lucky Flip (app previously: Ice Archer). Civil skills from the wiki: Gather March Speed, Heal Stone Cost (values not verified).",
+            "Star rating not stated in the sources checked; existing value kept."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "selantia",
         "name": "Selantia",
         "title": "Moon Priestess",
-        "element": "Dark",
+        "element": "Ice",
         "rarity": 5,
-        "unitType": "All-round",
+        "unitType": "Infantry",
         "role": "Support",
         "marchSkills": [
           {
@@ -1655,24 +2258,37 @@
             "DEF down"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "A",
-          "economy": "C"
-        },
         "sources": [
           "Glory's Gift Roulette"
         ],
         "bondGroups": [],
         "notes": "Glory's Gift Roulette pool.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Selantia"
+          ],
+          "notes": [
+            "Wiki: 5-star Ice Infantry (app previously: Dark All-round).",
+            "Unconfirmed acquisition sources: Glory's Gift Roulette."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "eric",
         "name": "Eric",
         "title": "Sword Saint",
-        "element": "Nature",
+        "element": "Dark",
         "rarity": 5,
         "unitType": "Infantry",
         "role": "Infantry DPS",
@@ -1692,36 +2308,59 @@
             "Multi-hit"
           ]
         },
-        "tiers": {
-          "pve": "A",
-          "pvp": "A",
-          "boss": "S",
-          "economy": "C"
-        },
         "sources": [
           "Lucky Spin",
           "Timeless Recruitment"
         ],
         "bondGroups": [],
         "notes": "Lucky Spin pool on newer realms.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry"
+          ],
+          "notes": [
+            "Wiki: 5-star Dark Infantry (app previously: Nature).",
+            "Unconfirmed acquisition sources: Lucky Spin, Timeless Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "william",
         "name": "William",
         "title": "Master Builder",
-        "element": "Nature",
-        "rarity": 4,
+        "element": "Dark",
+        "rarity": 2,
         "unitType": "Civil",
         "role": "Construction",
         "marchSkills": [],
         "civilSkills": [
           {
-            "name": "Blueprint Efficiency",
-            "description": "Reduces construction resource cost.",
-            "requirement": "Owned, Enhancement +1",
-            "stat": "buildCost",
-            "value": 5
+            "name": "Iron Output",
+            "description": "Increases iron output. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "resourceOutput"
+          },
+          {
+            "name": "Construction Food Cost",
+            "description": "Reduces the food cost of construction. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "buildCost"
+          },
+          {
+            "name": "Construction Wood Cost",
+            "description": "Reduces the wood cost of construction. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "buildCost"
           }
         ],
         "match3Skill": {
@@ -1731,35 +2370,60 @@
           "pattern": "Row",
           "effects": []
         },
-        "tiers": {
-          "pve": "C",
-          "pvp": "C",
-          "boss": "C",
-          "economy": "S"
-        },
         "sources": [
+          "Hero Plaza",
           "Starter / Campaign"
         ],
         "bondGroups": [],
         "notes": "Own-only construction cost reduction. Enhance before big Citadel pushes.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil"
+          ],
+          "notes": [
+            "Wiki: 2-star Dark Civil, Hero Plaza (app previously: 4-star Nature). Civil skills from the wiki: Iron Output, Construction Cost Reduction (values not verified).",
+            "Civil skills corrected to the wiki Civil table: Iron Output, Construction Food Cost, Construction Wood Cost (values not verified).",
+            "Unconfirmed acquisition sources: Starter / Campaign."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "chloe",
         "name": "Chloe",
         "title": "Quartermaster",
-        "element": "Light",
-        "rarity": 4,
+        "element": "Dark",
+        "rarity": 3,
         "unitType": "Civil",
         "role": "Construction",
         "marchSkills": [],
         "civilSkills": [
           {
-            "name": "Tight Ledger",
-            "description": "Reduces construction resource cost.",
-            "requirement": "Owned, Enhancement +1",
-            "stat": "buildCost",
-            "value": 5
+            "name": "Free Speedup Time",
+            "description": "Adds free speedup time. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Construction Stone Cost",
+            "description": "Reduces the stone cost of construction. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "buildCost"
+          },
+          {
+            "name": "Construction Iron Cost",
+            "description": "Reduces the iron cost of construction. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "buildCost"
           }
         ],
         "match3Skill": {
@@ -1771,35 +2435,62 @@
             "Heal"
           ]
         },
-        "tiers": {
-          "pve": "C",
-          "pvp": "C",
-          "boss": "C",
-          "economy": "S"
-        },
         "sources": [
+          "Hero Plaza",
+          "Superb Hero Covenant",
           "Hero Recruitment"
         ],
         "bondGroups": [],
         "notes": "Stacks with William — both cost reductions are additive.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Chloe"
+          ],
+          "notes": [
+            "Wiki: 3-star Dark Civil; Hero Plaza, Superb Hero Covenant (app previously: 4-star Light). Civil skills from the wiki: Construction Stone Cost Reduction, Construction Iron Cost Reduction (values not verified).",
+            "Civil skills corrected to the wiki Civil table: Free Speedup Time, Construction Stone Cost, Construction Iron Cost (values not verified).",
+            "Unconfirmed acquisition sources: Hero Recruitment."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "elsa",
         "name": "Elsa",
         "title": "Frost Architect",
-        "element": "Ice",
+        "element": "Dark",
         "rarity": 4,
         "unitType": "Civil",
         "role": "Construction speed",
         "marchSkills": [],
         "civilSkills": [
           {
-            "name": "Ice Scaffold",
-            "description": "Increases construction speed.",
-            "requirement": "Owned, Enhancement +1",
-            "stat": "buildSpeed",
-            "value": 6
+            "name": "Construction Speed",
+            "description": "Increases construction speed. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "buildSpeed"
+          },
+          {
+            "name": "Iron Output",
+            "description": "Increases iron output. Value not verified.",
+            "requirement": "Unlock level not verified",
+            "stat": "resourceOutput"
+          },
+          {
+            "name": "Rally Size",
+            "description": "+20,000 at the lowest tier rising to +100,000 at the highest.",
+            "requirement": "Unlocks at level 131 (as listed on the wiki)"
           }
         ],
         "match3Skill": {
@@ -1809,24 +2500,41 @@
           "pattern": "Column",
           "effects": []
         },
-        "tiers": {
-          "pve": "C",
-          "pvp": "C",
-          "boss": "C",
-          "economy": "A"
-        },
         "sources": [
-          "Hero Recruitment"
+          "Hero Plaza",
+          "Epic Hero Covenant"
         ],
         "bondGroups": [],
         "notes": "Own-only build speed — counts toward the Citadel net-time calculator.",
-        "confidence": "community"
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "civilSkills",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Elsa",
+            "https://puzzles-chaos.fandom.com/wiki/Civil"
+          ],
+          "notes": [
+            "Wiki: 4-star Dark Civil (app previously: Ice).",
+            "Sources corrected: Hero Plaza, Epic Hero Covenant (app previously: Hero Recruitment).",
+            "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."
+          ]
+        },
+        "revision": 1
       },
       {
         "id": "gina",
         "name": "Gina",
         "title": "Harvest Keeper",
-        "element": "Nature",
+        "element": "Dark",
         "rarity": 4,
         "unitType": "Civil",
         "role": "Gathering",
@@ -1838,11 +2546,21 @@
         ],
         "civilSkills": [
           {
-            "name": "Bountiful Fields",
-            "description": "Increases resource building output.",
-            "requirement": "Owned, Enhancement +1",
-            "stat": "resourceOutput",
-            "value": 5
+            "name": "Research Speed",
+            "description": "+3% at Hero0 rising to +15% at Hero5.",
+            "requirement": "Unlock level not verified",
+            "stat": "researchSpeed"
+          },
+          {
+            "name": "EXP Potion Output",
+            "description": "Increases EXP Potion output. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Troop Capacity",
+            "description": "+2,000 at the lowest tier rising to +10,000 at the highest.",
+            "requirement": "Unlocks at level 131 (as listed on the wiki)",
+            "stat": "troopCap"
           }
         ],
         "match3Skill": {
@@ -1852,18 +2570,1390 @@
           "pattern": "Random x3",
           "effects": []
         },
-        "tiers": {
-          "pve": "C",
-          "pvp": "C",
-          "boss": "C",
-          "economy": "A"
-        },
         "sources": [
-          "Hero Recruitment"
+          "Epic Hero Covenant",
+          "Trial Turret Shop"
         ],
         "bondGroups": [],
-        "notes": "Send her on Gather Resources days for the march bonus.",
-        "confidence": "community"
+        "notes": "Civil hero: skills apply by owning the hero.",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "element",
+            "unitType",
+            "rarity",
+            "civilSkills",
+            "sources"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Gina",
+            "https://puzzles-chaos.fandom.com/wiki/Civil"
+          ],
+          "notes": [
+            "Wiki: 4-star Dark Civil (app previously: Nature).",
+            "Sources corrected: Epic Hero Covenant, Trial Turret Shop (app previously: Hero Recruitment).",
+            "Civil skills from the wiki: Research Speed (+3% at Hero0 to +15% at Hero5), EXP Potion Output, Troop Capacity (+2,000 to +10,000, unlocks at level 131).",
+            "Previous note about gather marches removed: it relied on an unsourced march skill."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "baron",
+        "name": "Baron",
+        "title": "",
+        "element": "Fire",
+        "rarity": 2,
+        "unitType": "Archer",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Archer DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Wood Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Baron"
+          ],
+          "notes": [
+            "Added from the wiki: 2-star Fire Archer."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "lucia",
+        "name": "Lucia",
+        "title": "",
+        "element": "Fire",
+        "rarity": 3,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Training Capacity",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Research Stone Cost",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Research Iron Cost",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza",
+          "Superb Hero Covenant",
+          "Monsters",
+          "Monster Dens"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Lucia"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Fire Civil.",
+            "Sold for 50 points in the Hero Plaza point shop."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "tulios",
+        "name": "Tulios",
+        "title": "",
+        "element": "Fire",
+        "rarity": 3,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Iron Gather Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Hunt March Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Hunt ATK Bonus",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Tulios"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Fire Civil."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "capos",
+        "name": "Capos",
+        "title": "",
+        "element": "Fire",
+        "rarity": 4,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "match3Skill": {
+          "name": "Override",
+          "description": "Deals 235% damage to the target and adjacent enemies. Skill level for this value not stated.",
+          "pattern": "Target + adjacent",
+          "effects": [
+            "Damage"
+          ]
+        },
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "match3Skill"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Capos"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Fire Cavalry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "tooka",
+        "name": "Tooka",
+        "title": "",
+        "element": "Fire",
+        "rarity": 4,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Troop HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Troop DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Troop ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant",
+          "Royal Shop"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Tooka"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Fire Infantry.",
+            "Wiki lists Troop ATK scaling of about 3.2% to 16%, unlocking at level 131; tier mapping not verified.",
+            "Separate \"Infernal Tooka\" variant on the Civil page is not included."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "sophia",
+        "name": "Sophia",
+        "title": "",
+        "element": "Ice",
+        "rarity": 2,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Stone Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Sophia"
+          ],
+          "notes": [
+            "Added from the wiki: 2-star Ice Cavalry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "ada",
+        "name": "Ada",
+        "title": "",
+        "element": "Ice",
+        "rarity": 3,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Ada"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Ice Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "axel",
+        "name": "Axel",
+        "title": "",
+        "element": "Ice",
+        "rarity": 3,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Food Gather Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Axel"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Ice Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "andre",
+        "name": "Andre",
+        "title": "",
+        "element": "Ice",
+        "rarity": 4,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Food Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Andre"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Ice Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "odell",
+        "name": "Odell",
+        "title": "",
+        "element": "Ice",
+        "rarity": 4,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Lord EXP Bonus",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Medical Tent Healing Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Troop Capacity",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Epic Hero Covenant",
+          "Monsters",
+          "Monster Dens"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Odell"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Ice Civil.",
+            "Monsters Lv. 10+ and Monster dens Lv. 8–9 per the wiki."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "viola",
+        "name": "Viola",
+        "title": "",
+        "element": "Ice",
+        "rarity": 4,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Troop HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Troop DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Troop ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Viola"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Ice Infantry.",
+            "Element inferred from the wiki Heroes table layout; not stated on a hero page."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "luke",
+        "name": "Luke",
+        "title": "",
+        "element": "Nature",
+        "rarity": 2,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Food Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Luke"
+          ],
+          "notes": [
+            "Added from the wiki: 2-star Nature Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "gerolin",
+        "name": "Gerolin",
+        "title": "",
+        "element": "Nature",
+        "rarity": 3,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Food Gather Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza",
+          "Superb Hero Covenant",
+          "Royal Shop",
+          "Arena Reward Chest"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Gerolin"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Nature Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "roger",
+        "name": "Roger",
+        "title": "",
+        "element": "Nature",
+        "rarity": 3,
+        "unitType": "Archer",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Archer DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Wood Gather Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Roger"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Nature Archer."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "cassandra",
+        "name": "Cassandra",
+        "title": "",
+        "element": "Nature",
+        "rarity": 4,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Gather March Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Hunt March Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Troop Capacity",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Mesdi Portal"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Cassandra"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Nature Civil.",
+            "Obtained from Mesdi Portal World II."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "dolly",
+        "name": "Dolly",
+        "title": "",
+        "element": "Nature",
+        "rarity": 4,
+        "unitType": "Archer",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Archer HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Dolly"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Nature Archer."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "wallace",
+        "name": "Wallace",
+        "title": "",
+        "element": "Nature",
+        "rarity": 4,
+        "unitType": "Infantry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Infantry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Infantry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Infantry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Wallace"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Nature Infantry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "schubert",
+        "name": "Schubert",
+        "title": "",
+        "element": "Nature",
+        "rarity": 4,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Training Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Stone Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Rally Size",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Combination Event"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Schubert"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Nature Civil."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "ysera",
+        "name": "Ysera",
+        "title": "",
+        "element": "Nature",
+        "rarity": 4,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Ysera"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Nature Cavalry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "penny",
+        "name": "Penny",
+        "title": "",
+        "element": "Light",
+        "rarity": 2,
+        "unitType": "Civil",
+        "role": "",
+        "marchSkills": [],
+        "civilSkills": [
+          {
+            "name": "Hunt March Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Research Food Cost",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          },
+          {
+            "name": "Research Wood Cost",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Civil",
+            "https://puzzles-chaos.fandom.com/wiki/Penny"
+          ],
+          "notes": [
+            "Added from the wiki: 2-star Light Civil."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "aemon",
+        "name": "Aemon",
+        "title": "",
+        "element": "Light",
+        "rarity": 3,
+        "unitType": "Archer",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Archer HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Superb Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Aemon"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Light Archer."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "hannah",
+        "name": "Hannah",
+        "title": "",
+        "element": "Light",
+        "rarity": 3,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "match3Skill": {
+          "name": "Valiant Throw",
+          "description": "Deals 208% damage to the target and adjacent enemies. Skill level for this value not stated.",
+          "pattern": "Target + adjacent",
+          "effects": [
+            "Damage"
+          ]
+        },
+        "sources": [
+          "Hero Plaza",
+          "Superb Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "match3Skill"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Hannah"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Light Cavalry."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "christina",
+        "name": "Christina",
+        "title": "",
+        "element": "Light",
+        "rarity": 4,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry HP",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Christina"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Light Cavalry.",
+            "The wiki Civil page also lists Christina among heroes with a Civil skill, but the Cavalry table shows three stat skills. Not resolved."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "hanzo",
+        "name": "Hanzo",
+        "title": "",
+        "element": "Light",
+        "rarity": 4,
+        "unitType": "Archer",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Archer DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Wood Output",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza",
+          "Epic Hero Covenant"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "element",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Archer",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Hanzo"
+          ],
+          "notes": [
+            "Added from the wiki: 4-star Light Archer."
+          ]
+        },
+        "revision": 1
+      },
+      {
+        "id": "claudia",
+        "name": "Claudia",
+        "title": "",
+        "element": "Dark",
+        "rarity": 3,
+        "unitType": "Cavalry",
+        "role": "",
+        "marchSkills": [
+          {
+            "name": "Cavalry DEF",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          },
+          {
+            "name": "Cavalry ATK",
+            "description": "Troop stat bonus listed on the wiki. Value not verified."
+          }
+        ],
+        "civilSkills": [
+          {
+            "name": "Stone Gather Speed",
+            "description": "Listed on the wiki. Value not verified.",
+            "requirement": "Unlock level not verified"
+          }
+        ],
+        "sources": [
+          "Hero Plaza"
+        ],
+        "bondGroups": [],
+        "notes": "",
+        "confidence": "community",
+        "audit": {
+          "checkedOn": "2026-11-23",
+          "verified": [
+            "name",
+            "rarity",
+            "unitType",
+            "sources",
+            "marchSkills",
+            "civilSkills"
+          ],
+          "sourceUrls": [
+            "https://puzzles-chaos.fandom.com/wiki/Heroes",
+            "https://puzzles-chaos.fandom.com/wiki/Cavalry",
+            "https://puzzles-chaos.fandom.com/wiki/Hero_Plaza",
+            "https://puzzles-chaos.fandom.com/wiki/Claudia"
+          ],
+          "notes": [
+            "Added from the wiki: 3-star Dark Cavalry.",
+            "Element inferred from the wiki Heroes table layout; not stated on a hero page.",
+            "Sold for 50 points in the Hero Plaza point shop."
+          ]
+        },
+        "revision": 1
       }
     ],
     "events": [
@@ -1882,7 +3972,9 @@
           "Day 7 accepts all speedup types — leftover speedups go here."
         ],
         "rewards": [
-          "Phase 6 (600,000 pts): Radiant Hero Choice Card I/II/III by realm age",
+          "Each day has 6 phases. Days 1–4: phase 1 = 15,000, phase 6 = 600,000 pts (2x Radiant Hero Choice Card).",
+          "Day 6 tops out at 800,000; Day 7 runs from 30,000 to 1,200,000.",
+          "Rank rewards need at least 100,000 personal points.",
           "Card pool: Boyd (>0d), Monica (>4w), Kaios, Aerposia (>22w)"
         ],
         "confidence": "community",
@@ -1901,15 +3993,17 @@
         ],
         "summary": "Seven daily themes; personal points unlock 6 reward phases ending in a Radiant Hero Choice Card.",
         "rules": [
-          "Day 1 Hero Upgrade",
-          "Day 2 Build & Research",
-          "Day 3 Stamina/AP & Gathering",
-          "Day 4 Training Speedup",
-          "Day 5 Draconic Stone & Refinement Crest",
-          "Day 6 Obtain Essences",
-          "Day 7 Build / Research / Training Speedup"
+          "Runs Monday 00:00 UTC to Sunday 00:00 UTC.",
+          "Day 1 Heroes Assemble (hero upgrade)",
+          "Day 2 Path to Development (build & research)",
+          "Day 3 Daily Activity (stamina/AP & gathering)",
+          "Day 4 Training Master (training speedup)",
+          "Day 5 Draconic Stone (draconic stone & refinement crest)",
+          "Day 6 Supreme Power (obtain essences)",
+          "Day 7 Path of Eternity (build / research / training speedup)"
         ],
-        "id": "ace-lord"
+        "id": "ace-lord",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -1923,8 +4017,9 @@
           "Duel Moment: coordinate kills on Sat/Sun with Conquest of Lords."
         ],
         "rewards": [
-          "Oskir shards",
-          "Alliance Duel chests"
+          "Oskir shards (Gold league rank 1: 15x Oskir Shard, 5x Mythic Hero Covenant)",
+          "Day 1 phases run from 50,000 to 800,000 points",
+          "Daily rank rewards by league: Iron, Bronze, Silver, Gold"
         ],
         "confidence": "community",
         "name": "Alliance Duel",
@@ -1950,7 +4045,8 @@
           "Day 6–7 Duel Moment (kill troops)",
           "Ascending/salvaging runes gives 0 pts on Day 1 — only obtaining essences/spinels/crystals/scrolls scores."
         ],
-        "id": "alliance-duel"
+        "id": "alliance-duel",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -1992,7 +4088,8 @@
           "Day 5 Draconic Stone & Glory",
           "Day 6–7 Consume Diamond"
         ],
-        "id": "arms-race"
+        "id": "arms-race",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2013,7 +4110,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "hero-upgrade-event"
+        "id": "hero-upgrade-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2034,7 +4132,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "development-event"
+        "id": "development-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2055,7 +4154,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "enhance-gear-event"
+        "id": "enhance-gear-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2076,7 +4176,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "rune-and-holystone-event"
+        "id": "rune-and-holystone-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2097,7 +4198,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "dragon-points-and-totem-event"
+        "id": "dragon-points-and-totem-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2118,7 +4220,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "draconic-stone-and-glory-event"
+        "id": "draconic-stone-and-glory-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2132,18 +4235,21 @@
         "confidence": "community",
         "name": "Curio (Event)",
         "category": "Core Cycle",
-        "cadence": "Inside Arms Race / Ace Lord cycles",
-        "cycleWeek": "Both",
-        "days": [],
+        "cadence": "Usually Tuesday in Ace Lord weeks",
+        "cycleWeek": "Ace Lord",
+        "days": [
+          "Tue"
+        ],
         "summary": "Points for Curio Spinels and Curio Crystals spent.",
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "curio-event"
+        "id": "curio-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
-        "durationHours": 24,
+        "durationHours": 48,
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
@@ -2153,14 +4259,18 @@
         "confidence": "community",
         "name": "Consume Diamond (Event)",
         "category": "Core Cycle",
-        "cadence": "Inside Arms Race / Ace Lord cycles",
-        "cycleWeek": "Both",
-        "days": [],
+        "cadence": "Usually Sat–Sun in Arms Race weeks",
+        "cycleWeek": "Arms Race",
+        "days": [
+          "Sat",
+          "Sun"
+        ],
         "summary": "Points per diamond spent.",
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "consume-diamond-event"
+        "id": "consume-diamond-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2181,7 +4291,8 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "dragon-crystal"
+        "id": "dragon-crystal",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2202,17 +4313,18 @@
         "rules": [
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
-        "id": "royal-treasure"
+        "id": "royal-treasure",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
-        "durationHours": 72,
+        "durationHours": 96,
         "featuredHeroes": [
           "lylia"
         ],
         "currencies": [],
         "tips": [
-          "Double-dip: a Thursday window that matches the Ace Lord day theme scores in both events."
+          "Double-dip: a window that matches the Ace Lord day theme scores in both events."
         ],
         "rewards": [
           "Lylia shards"
@@ -2220,19 +4332,24 @@
         "confidence": "community",
         "name": "Royal Arms Race",
         "category": "Weekly",
-        "cadence": "Weekly Thu–Sat, 9 windows",
+        "cadence": "Weekly Thu–Sun, 3 windows per day",
         "cycleWeek": "Both",
         "days": [
           "Thu",
           "Fri",
-          "Sat"
+          "Sat",
+          "Sun"
         ],
-        "summary": "Three themed 8-hour windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC).",
+        "summary": "Three themed windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC), Thursday to Sunday.",
         "rules": [
-          "Window themes rotate: Building, Gear/Totem/Rune/Holystone materials, Hero Upgrade, Training, Stamina/AP, Draconic Stone, Research, Curio, Diamond Spend, Dragon Pts.",
-          "Each window ranks independently."
+          "Each window draws a random theme from a fixed set for that time of day.",
+          "00:00–07:55: Curio, Gear & Totem, Hero Upgrade, Rune & Holystone, Train/Build/Research Speedup.",
+          "08:00–15:55: Curio, Draconic Stone, Obtain Treasure, Research, Stamina/AP, Troop Training Power.",
+          "16:00–23:55: Build & Build Speedup, Building/Research/Training Power, Curio, Diamond Consumption, Military & Civil Dragon Pts.",
+          "The wiki Royal Arms Race page says Thu–Sun; its Events grid shows Thursday only."
         ],
-        "id": "royal-arms-race"
+        "id": "royal-arms-race",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2256,7 +4373,8 @@
         "rules": [
           "Dragon EXP items and Dragon Stone usage score."
         ],
-        "id": "ancient-prologue-arms-race"
+        "id": "ancient-prologue-arms-race",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2280,7 +4398,8 @@
         "rules": [
           "Gear Essence spent scores; overlaps Arms Race Day 3."
         ],
-        "id": "forbidden-treasures-arms-race"
+        "id": "forbidden-treasures-arms-race",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2306,7 +4425,8 @@
         "rules": [
           "Points per troop trained, scaled by tier."
         ],
-        "id": "army-expansion"
+        "id": "army-expansion",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2334,9 +4454,11 @@
         "rules": [
           "Deploy the required element(s) at or above the stated star level.",
           "Boss uses skills from Round 11+ and is immune to stun and silence.",
-          "Only your highest single run counts for Top 50 rank."
+          "Only your highest single run counts for Top 50 rank.",
+          "Elemental Seal I phase 1 is 125 points."
         ],
-        "id": "elemental-seal-i-ii-iii"
+        "id": "elemental-seal-i-ii-iii",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2363,7 +4485,8 @@
           "No troop losses — attack as often as attempts allow.",
           "Top 50 damage ranking."
         ],
-        "id": "lich-attack"
+        "id": "lich-attack",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2388,7 +4511,8 @@
         "rules": [
           "Daily quests and stamina use score."
         ],
-        "id": "personal-activity"
+        "id": "personal-activity",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2414,7 +4538,8 @@
         "rules": [
           "Resources gathered from the map score."
         ],
-        "id": "gather-resources"
+        "id": "gather-resources",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2443,7 +4568,8 @@
         "rules": [
           "Limited stock per item."
         ],
-        "id": "diamond-redeem-shop"
+        "id": "diamond-redeem-shop",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2474,7 +4600,8 @@
           "20+ members, Citadel Lv. 15+.",
           "Quests are shared — claim the ones you can complete."
         ],
-        "id": "alliance-showdown"
+        "id": "alliance-showdown",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2492,15 +4619,17 @@
         "cadence": "Bi-weekly (Ace Lord Week)",
         "cycleWeek": "Ace Lord",
         "days": [],
-        "summary": "R4/R5/Diplomat starts a 20-wave undead defence with 5-minute prep.",
+        "summary": "The alliance Leader or a Diplomat starts a 20-wave undead defence with 5-minute prep.",
         "rules": [
-          "5-minute prep after trigger.",
-          "20 waves; zero resource loss.",
+          "Started by the alliance Leader or a Diplomat; 5-minute prep.",
+          "20 waves; no resources are lost and most wounded units are healed afterwards.",
           "Arcane Barrier does NOT block undead attacks.",
           "Failing twice stops attacks on your castle — reinforce allies for points.",
+          "The event ends once every ally has failed twice.",
           "Alliance Fortress Boss defence at the end."
         ],
-        "id": "undead-scourge"
+        "id": "undead-scourge",
+        "revision": 1
       },
       {
         "startUtc": "12:00",
@@ -2525,10 +4654,14 @@
         ],
         "summary": "AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.",
         "rules": [
-          "Occupy a structure for 3 minutes to control it.",
+          "Sign-up needs at least 10 members with Citadel Lv. 18+.",
+          "Occupy a structure for 3 minutes to control it; control earns Time Points.",
+          "Wounded go to the Battlefield Hospital and return when you leave the battlefield.",
+          "The alliance with more Time Points wins; both sides get rewards.",
           "Oblivion Pyramid spawns the Titan Colossus."
         ],
-        "id": "oblivion-war"
+        "id": "oblivion-war",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2554,13 +4687,15 @@
           "Sat",
           "Sun"
         ],
-        "summary": "Whole-alliance milestone track up to 6.5M+ points.",
+        "summary": "Whole-alliance milestone track; phase targets run from 600,000 to 15,000,000 points.",
         "rules": [
-          "Stamina = 600 pts each.",
-          "Monster Dens Lv. 1–45 = 4,500–18,000 pts.",
-          "Event / item-summoned monsters score."
+          "Points come from the whole alliance: consuming stamina, defeating monster dens and event-summoned monsters.",
+          "Stamina = 600 pts each (not verified).",
+          "Monster Dens Lv. 1–45 = 4,500–18,000 pts (not verified).",
+          "Personal ranking: top 100 members. Alliance ranking: top 50 in the local Battle Division."
         ],
-        "id": "strike-out"
+        "id": "strike-out",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2575,17 +4710,21 @@
         "confidence": "community",
         "name": "Fort Contest",
         "category": "Alliance",
-        "cadence": "Every Saturday",
+        "cadence": "Every other Saturday",
         "cycleWeek": "Both",
         "days": [
           "Sat"
         ],
         "summary": "Register 1 Fort + 1 Fortress, vote 3 of 5 time slots, then fight a 2-hour battle phase.",
         "rules": [
-          "20+ members; Citadel Lv. 10+.",
-          "30-minute continuous hold or longest total occupation wins."
+          "Alliances with 20+ members register; Citadel Lv. 10+ (not verified).",
+          "Each alliance votes 3 of 5 time slots; the most-chosen slot becomes the battle period.",
+          "Battle phase lasts 2 hours. Holding a Fort for 30 minutes takes control; otherwise the longest holder wins.",
+          "Fighting causes wounded soldiers. Members cannot leave the alliance during the contest.",
+          "Wiki Events page: every other Saturday (app previously: every Saturday). The week parity is not known, so the calendar still shows every Saturday."
         ],
-        "id": "fort-contest"
+        "id": "fort-contest",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2608,9 +4747,12 @@
         ],
         "summary": "Rally the Infernal Emissary Lv. 1–25 (20k to 120M HP).",
         "rules": [
-          "71-hour personal participation cooldown."
+          "71-hour personal participation cooldown.",
+          "Rewards depend on damage dealt.",
+          "Lords who leave the alliance after joining cannot rejoin the event."
         ],
-        "id": "infernal-gate"
+        "id": "infernal-gate",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2635,7 +4777,8 @@
         "rules": [
           "Each member contributes attempts."
         ],
-        "id": "alliance-trial"
+        "id": "alliance-trial",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2659,7 +4802,8 @@
         "rules": [
           "Join the party for points and shared rewards."
         ],
-        "id": "alliance-party"
+        "id": "alliance-party",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2682,7 +4826,8 @@
         "rules": [
           "Reinforce weaker members."
         ],
-        "id": "alliance-defense"
+        "id": "alliance-defense",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2710,7 +4855,8 @@
         "rules": [
           "Clear nodes as an alliance."
         ],
-        "id": "shadow-expedition"
+        "id": "shadow-expedition",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2734,7 +4880,8 @@
         "rules": [
           "Deploy dragons to nodes; brackets resolve automatically."
         ],
-        "id": "dragon-arena-clash"
+        "id": "dragon-arena-clash",
+        "revision": 1
       },
       {
         "startUtc": "10:00",
@@ -2761,9 +4908,12 @@
           "Enchanted Woodland boundary grants protection.",
           "30% of structure garrison losses become permanent deaths.",
           "12,000 personal score target.",
-          "Trophy Grades and a 9-Realm League."
+          "Trophy Grades and a 9-Realm League.",
+          "Realm points: 100 per Realm colonized; 25 if never colonized and colonizing no one; 0 if colonized.",
+          "Ties are broken by Realms colonized, then by which Realm was colonized less."
         ],
-        "id": "conquest-of-lords"
+        "id": "conquest-of-lords",
+        "revision": 1
       },
       {
         "startUtc": "10:00",
@@ -2787,9 +4937,11 @@
         "rules": [
           "Realm Hospital protects wounded.",
           "8,000 Diamond Mine gathering cap per Lord.",
-          "Foreign kill points: T1 = 0, T2 = 1 … T11 = 80, T12 = 100."
+          "Foreign kill points: T1 0 · T2 1 · T3 2 · T4 4 · T5 6 · T6 12 · T7 18 · T8 25 · T9 30 · T10 45 · T11 80 · T12 100.",
+          "Personal points also come from gathering in a foreign Realm."
         ],
-        "id": "realm-expedition"
+        "id": "realm-expedition",
+        "revision": 1
       },
       {
         "startUtc": "12:00",
@@ -2815,7 +4967,8 @@
           "Goblin Rocket and Shield map pickups; central supply chests.",
           "Realm Hospital fully heals for free after the event."
         ],
-        "id": "scorching-front"
+        "id": "scorching-front",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2826,8 +4979,10 @@
           "Use the 30-second lookup tool in this app."
         ],
         "rewards": [
-          "Diamonds",
-          "Speedups"
+          "Regal Recruit Tickets",
+          "Deluxe Recruit Tickets",
+          "1★ Gear Essence",
+          "1★ Rune Essence"
         ],
         "confidence": "community",
         "name": "Sophia's Test",
@@ -2841,9 +4996,12 @@
         ],
         "summary": "15 trivia questions, 30 seconds each.",
         "rules": [
+          "Rewards depend on accuracy and time used; extra rewards need a set number of correct answers.",
+          "Quitting mid-test counts the current question as wrong; you can resume from the next one.",
           "Alliance help button available."
         ],
-        "id": "sophias-test"
+        "id": "sophias-test",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2875,9 +5033,11 @@
         ],
         "summary": "Flip cards for prizes; each flip adds +0.02% Lucky Pt.",
         "rules": [
-          "Lucky Coins do NOT expire."
+          "Lucky Coins do NOT expire — saving 50 guarantees the Grand Prize.",
+          "Unclaimed rewards reset the next day."
         ],
-        "id": "lucky-flip"
+        "id": "lucky-flip",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2906,7 +5066,8 @@
         "rules": [
           "Available on newer realms."
         ],
-        "id": "lucky-spin"
+        "id": "lucky-spin",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2937,9 +5098,11 @@
         ],
         "summary": "Roulette with Lucky Star Coins.",
         "rules": [
-          "Lucky Star Coins do NOT expire."
+          "Lucky Star Coins do NOT expire.",
+          "Free spins reset every day."
         ],
-        "id": "glorys-gift-roulette"
+        "id": "glorys-gift-roulette",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2966,7 +5129,8 @@
         "rules": [
           "Ice Picks do NOT expire."
         ],
-        "id": "tundra-ruins"
+        "id": "tundra-ruins",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -2998,7 +5162,8 @@
         "rules": [
           "Divination Crystals EXPIRE."
         ],
-        "id": "feast-of-destiny"
+        "id": "feast-of-destiny",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3030,7 +5195,8 @@
         "rules": [
           "Divination Crystals EXPIRE."
         ],
-        "id": "wonder-house"
+        "id": "wonder-house",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3057,7 +5223,8 @@
         "rules": [
           "Ancient Amulet, Frost Candlestick and Lava Lantern do NOT expire."
         ],
-        "id": "pyramid-event"
+        "id": "pyramid-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3083,7 +5250,8 @@
         "rules": [
           "Refresh, Remove and Return tools do NOT expire."
         ],
-        "id": "arcane-puzzle"
+        "id": "arcane-puzzle",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3104,7 +5272,8 @@
         "rules": [
           "Event-limited tools."
         ],
-        "id": "dwarfs-treasury"
+        "id": "dwarfs-treasury",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3125,7 +5294,8 @@
         "rules": [
           "Paired with Ashen Lands Limited Recruitment."
         ],
-        "id": "potion-hut"
+        "id": "potion-hut",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3147,7 +5317,8 @@
         "rules": [
           "Climb floors for escalating rewards."
         ],
-        "id": "tower-of-gemini"
+        "id": "tower-of-gemini",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3180,7 +5351,8 @@
         "rules": [
           "Summon Scrolls do NOT expire; sub-items salvage into Summon Scrolls."
         ],
-        "id": "astrology"
+        "id": "astrology",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3225,7 +5397,8 @@
         "rules": [
           "Timeless Scrolls do NOT expire."
         ],
-        "id": "timeless-heroes-limited-recruitment"
+        "id": "timeless-heroes-limited-recruitment",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3248,7 +5421,8 @@
         "rules": [
           "Unused scrolls salvage into Timeless Heroes Recruitment Scrolls."
         ],
-        "id": "ashen-lands-limited-recruitment"
+        "id": "ashen-lands-limited-recruitment",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3278,7 +5452,8 @@
         "rules": [
           "Trial Recruit Tickets do NOT expire."
         ],
-        "id": "recruit-trial-monthly-trial"
+        "id": "recruit-trial-monthly-trial",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3308,7 +5483,8 @@
           "20 AP per attack = 2 visiting items + 1 chest + 0–1 key.",
           "Visiting items EXPIRE."
         ],
-        "id": "ap-event-visiting-bosses"
+        "id": "ap-event-visiting-bosses",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3339,7 +5515,8 @@
         "rules": [
           "Visiting drops EXPIRE."
         ],
-        "id": "stamina-event"
+        "id": "stamina-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3362,7 +5539,8 @@
         "rules": [
           "Summon Scroll / Shadow Hourglass do NOT expire."
         ],
-        "id": "stamina-summon-event"
+        "id": "stamina-summon-event",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3384,7 +5562,8 @@
         "rules": [
           "Combine seasonal tokens for rewards."
         ],
-        "id": "seasonal-combination-events"
+        "id": "seasonal-combination-events",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3413,7 +5592,8 @@
         "rules": [
           "Complete daily and weekly pass quests."
         ],
-        "id": "battle-pass"
+        "id": "battle-pass",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3442,7 +5622,8 @@
         "rules": [
           "Spending thresholds unlock chests."
         ],
-        "id": "top-up-rewards"
+        "id": "top-up-rewards",
+        "revision": 1
       },
       {
         "startUtc": "00:00",
@@ -3463,7 +5644,8 @@
         "rules": [
           "Highest bids win limited items."
         ],
-        "id": "auction-frenzy"
+        "id": "auction-frenzy",
+        "revision": 1
       }
     ],
     "giftCodes": [
@@ -4338,7 +6520,7 @@
         "id": "sq082",
         "category": "Alliance",
         "question": "Who can trigger Undead Scourge?",
-        "answer": "R4, R5 or Diplomat",
+        "answer": "The alliance Leader or a Diplomat",
         "keywords": [
           "undead"
         ]
@@ -4359,6 +6541,109 @@
         "answer": "00:00 UTC",
         "keywords": [
           "reset"
+        ]
+      },
+      {
+        "id": "sq085",
+        "category": "Events",
+        "question": "Which rank allows you to view the clear-stage lineups?",
+        "answer": "Personal Extreme Challenge",
+        "keywords": [
+          "rank",
+          "lineups",
+          "extreme",
+          "challenge"
+        ]
+      },
+      {
+        "id": "sq086",
+        "category": "Buildings",
+        "question": "At which level is Totem unlocked in Weapon Forge?",
+        "answer": "Lv. 16",
+        "keywords": [
+          "totem",
+          "weapon",
+          "forge"
+        ]
+      },
+      {
+        "id": "sq087",
+        "category": "Buildings",
+        "question": "At which Weapon Forge level do Runes unlock?",
+        "answer": "Lv. 8 (Troop Runes at Lv. 15)",
+        "keywords": [
+          "rune",
+          "weapon",
+          "forge"
+        ]
+      },
+      {
+        "id": "sq088",
+        "category": "Heroes",
+        "question": "What is the maximum Hero Bond level?",
+        "answer": "95",
+        "keywords": [
+          "bond",
+          "level",
+          "max"
+        ]
+      },
+      {
+        "id": "sq089",
+        "category": "Heroes",
+        "question": "How much EXP does a level V Bond Gift give?",
+        "answer": "10,000 (50,000 to a same-element hero)",
+        "keywords": [
+          "bond",
+          "gift",
+          "exp"
+        ]
+      },
+      {
+        "id": "sq090",
+        "category": "Events",
+        "question": "On which days does the Royal Arms Race run?",
+        "answer": "Thursday to Sunday",
+        "keywords": [
+          "royal",
+          "arms",
+          "race",
+          "days"
+        ]
+      },
+      {
+        "id": "sq091",
+        "category": "Events",
+        "question": "How long must you hold an Oblivion War stronghold to control it?",
+        "answer": "3 minutes",
+        "keywords": [
+          "oblivion",
+          "war",
+          "stronghold"
+        ]
+      },
+      {
+        "id": "sq092",
+        "category": "Events",
+        "question": "How many Lucky Coins guarantee the Lucky Flip Grand Prize?",
+        "answer": "50",
+        "keywords": [
+          "lucky",
+          "flip",
+          "coins",
+          "grand",
+          "prize"
+        ]
+      },
+      {
+        "id": "sq093",
+        "category": "Events",
+        "question": "How many points is a T10 foreign kill in Realm Expedition?",
+        "answer": "45",
+        "keywords": [
+          "realm",
+          "expedition",
+          "t10"
         ]
       }
     ]

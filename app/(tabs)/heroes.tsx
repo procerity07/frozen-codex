@@ -111,15 +111,15 @@ function Bonds() {
   const [from, setFrom] = useState(1);
   const [to, setTo] = useState(30);
   const [owned, setOwned] = useState<Record<number, number>>({});
-  const f = Math.min(Math.max(1, from), 90);
-  const t = Math.min(Math.max(f, to), 90);
+  const f = Math.min(Math.max(1, from), bondLevels.length);
+  const t = Math.min(Math.max(f, to), bondLevels.length);
   const need = bondExpBetween(bondLevels, f, t);
   const plan = bondGiftPlan(bondGifts, owned, need);
   const ownedExp = bondGifts.reduce((s, g) => s + (owned[g.tier] ?? 0) * g.exp, 0);
   const nameOf = (id: string) => seedHeroes.find((h) => h.id === id)?.name ?? id;
   return (
     <Screen>
-      <SectionHeader title="Bond EXP planner" subtitle="Stranger (Lv. 1) to Confidant (Lv. 80+)" />
+      <SectionHeader title="Bond EXP planner" subtitle="Lv. 1–95 · Lv. 1 and Lv. 95 EXP from the wiki, levels between estimated" />
       <Card>
         <Row>
           <NumberField label="Current level" value={from} onChange={setFrom} />
@@ -129,7 +129,7 @@ function Bonds() {
           <Stat label="EXP needed" value={fmtFull(need)} color={palette.cyan} />
           <Stat label="EXP in bag" value={fmtFull(ownedExp)} align="right" color={ownedExp >= need ? palette.success : palette.gold} />
         </Row>
-        <Text style={[type.caption, { marginTop: space.sm }]}>{bondLevels[f - 1]?.title} → {bondLevels[t - 1]?.title}</Text>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Lv. {f}{bondLevels[f - 1]?.title ? ` ${bondLevels[f - 1]!.title}` : ''} → Lv. {t}{bondLevels[t - 1]?.title ? ` ${bondLevels[t - 1]!.title}` : ''}</Text>
       </Card>
       <SectionHeader title="Bond gifts in bag" />
       <Card>
@@ -137,7 +137,7 @@ function Bonds() {
           <Row key={g.tier} style={{ marginBottom: space.sm }}>
             <View style={{ flex: 1 }}>
               <Text style={type.body}>T{g.tier} {g.name}</Text>
-              <Text style={type.caption}>{fmtFull(g.exp)} EXP each</Text>
+              <Text style={type.caption}>{fmtFull(g.exp)} EXP each{g.sameElementExp ? ` · ${fmtFull(g.sameElementExp)} to a same-element hero` : ''}</Text>
             </View>
             <NumberField value={owned[g.tier] ?? 0} onChange={(n) => setOwned({ ...owned, [g.tier]: n })} width={100} />
           </Row>
@@ -150,11 +150,14 @@ function Bonds() {
       <SectionHeader title="Bond groups" />
       {bondGroups.map((g) => (
         <Card key={g.id} style={{ marginBottom: space.sm }}>
-          <Text style={type.heading}>{g.name}</Text>
-          <Text style={[type.caption, { marginTop: 2 }]}>{g.members.map(nameOf).join(' · ')}</Text>
+          <Row style={{ justifyContent: 'space-between' }}>
+            <Text style={[type.heading, { flex: 1 }]}>{g.name}</Text>
+            {g.verified === false || g.bonusesVerified === false ? <Badge label={g.verified === false ? 'Not verified' : 'Bonuses not verified'} color={palette.textMuted} /> : null}
+          </Row>
+          <Text style={[type.caption, { marginTop: 2 }]}>{[...g.members.map(nameOf), ...(g.otherMembers ?? [])].join(' · ')}</Text>
           <View style={{ marginTop: space.sm, gap: 4 }}>
-            {g.bonuses.map((b) => (
-              <Row key={b.level}><Badge label={`Lv. ${b.level}`} color={palette.gold} /><Text style={type.bodySecondary}>{b.effect}</Text></Row>
+            {g.bonuses.map((b, i) => (
+              <Row key={i}>{b.level > 0 ? <Badge label={`Lv. ${b.level}`} color={palette.gold} /> : null}<Text style={[type.bodySecondary, { flex: 1 }]}>{b.effect}</Text></Row>
             ))}
           </View>
         </Card>
@@ -197,7 +200,10 @@ function Curios() {
         <Card key={k.id} style={{ marginBottom: space.sm }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{k.name}</Text>
-            {k.heroId ? <Badge label={seedHeroes.find((h) => h.id === k.heroId)?.name ?? k.heroId} color={palette.gold} /> : <Badge label="Universal" />}
+            <Row gap={6}>
+              {k.verified === false ? <Badge label="Not verified" color={palette.textMuted} /> : null}
+              {k.heroId ? <Badge label={seedHeroes.find((h) => h.id === k.heroId)?.name ?? k.heroId} color={palette.gold} /> : <Badge label="Universal" />}
+            </Row>
           </Row>
           <Text style={[type.bodySecondary, { marginTop: 4 }]}>Legion passive: {k.legionPassive}</Text>
           <Text style={type.bodySecondary}>Hero attribute: {k.heroAttribute}</Text>

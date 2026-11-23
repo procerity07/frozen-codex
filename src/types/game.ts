@@ -5,7 +5,6 @@ export type Rarity = 2 | 3 | 4 | 5 | 6;
 export type UnitType = 'Infantry' | 'Cavalry' | 'Archer' | 'All-round' | 'Civil';
 export type TroopFocus = 'Infantry' | 'Cavalry' | 'Archer' | 'All';
 export type TroopType = 'Infantry' | 'Cavalry' | 'Archer';
-export type Tier = 'SS' | 'S' | 'A' | 'B' | 'C';
 export type ChargeSpeed = 'Very Fast' | 'Fast' | 'Medium' | 'Slow';
 
 /**
@@ -38,7 +37,21 @@ export type AcquisitionSource =
   | 'Shadow Expedition'
   | 'Battle Pass'
   | 'Starter / Campaign'
-  | 'Hero Recruitment';
+  | 'Hero Recruitment'
+  | 'Combination Event'
+  | 'Battle Pass Event'
+  | 'Superb Hero Covenant'
+  | 'Epic Hero Covenant'
+  | 'Mythic Hero Covenant'
+  | 'Mythic Hero Choice Card III'
+  | 'Ace Lord'
+  | 'First Top-up'
+  | 'Royal Shop'
+  | 'Arena Reward Chest'
+  | 'Monsters'
+  | 'Monster Dens'
+  | 'Mesdi Portal'
+  | 'Trial Turret Shop';
 
 export interface HeroSkill {
   name: string;
@@ -54,16 +67,31 @@ export interface CivilSkill extends HeroSkill {
 }
 
 export interface Match3Skill extends HeroSkill {
-  charge: ChargeSpeed;
+  /** Optional: omitted when no source states the charge speed. */
+  charge?: ChargeSpeed;
   pattern: string;
   effects: string[];
 }
 
-export interface ModeTiers {
-  pve: Tier;
-  pvp: Tier;
-  boss: Tier;
-  economy: Tier;
+
+/** March combat role, classified only from verified march (troop) combat skills — never from match-3 skills. */
+export type CombatRole = 'Damage' | 'Support' | 'Healer';
+export const COMBAT_ROLES: readonly CombatRole[] = ['Damage', 'Support', 'Healer'];
+
+/** Hero fields that an audit can mark as checked against a source. */
+export type HeroAuditField =
+  | 'name' | 'title' | 'element' | 'rarity' | 'unitType' | 'combatRole' | 'marchSkills'
+  | 'civilSkills' | 'match3Skill' | 'sources' | 'bondGroups' | 'exclusiveCurio' | 'notes';
+
+export interface HeroAudit {
+  /** ISO date the hero was last audited. */
+  checkedOn: string;
+  /** Fields confirmed by at least one cited source. Every other populated field is unverified. */
+  verified: HeroAuditField[];
+  /** Source URLs supporting the verified fields. */
+  sourceUrls: string[];
+  /** Conflicts, caveats and corrections made, in plain language. */
+  notes: string[];
 }
 
 export interface Hero {
@@ -76,13 +104,22 @@ export interface Hero {
   role: string;
   marchSkills: HeroSkill[];
   civilSkills: CivilSkill[];
-  match3Skill: Match3Skill;
-  tiers: ModeTiers;
+  /** Optional: omitted when no source gives the hero's match-3 skill. */
+  match3Skill?: Match3Skill;
   sources: AcquisitionSource[];
   bondGroups: string[];
   exclusiveCurio?: string;
   notes: string;
   confidence: Confidence;
+  /** Optional — absent on records created before the combat-role audit. */
+  combatRole?: CombatRole;
+  /** Optional audit trail; absent on older records. */
+  audit?: HeroAudit;
+  /**
+   * Data revision of this record (absent = 0). An online pack row only replaces a stored row
+   * with an equal or higher revision, and bundled rows replace older online rows on re-seed.
+   */
+  revision?: number;
 }
 
 export interface BondGroup {
@@ -90,6 +127,12 @@ export interface BondGroup {
   name: string;
   members: string[];
   bonuses: { level: number; effect: string }[];
+  /** Members listed by the source who are not in this app's hero database. */
+  otherMembers?: string[];
+  /** false = membership could not be confirmed by any source. */
+  verified?: boolean;
+  /** false = bonus levels/effects could not be confirmed by any source. */
+  bonusesVerified?: boolean;
 }
 
 export interface BondLevel {
@@ -103,6 +146,8 @@ export interface BondGift {
   tier: 1 | 2 | 3 | 4 | 5;
   name: string;
   exp: number;
+  /** EXP when the gift goes to a hero of the matching element. */
+  sameElementExp?: number;
 }
 
 export interface CurioStarCost {
@@ -119,6 +164,8 @@ export interface Curio {
   legionPassive: string;
   heroAttribute: string;
   exclusivePassive?: string;
+  /** false = name, association and values could not be confirmed by any source. */
+  verified?: boolean;
 }
 
 /* ------------------------------- Events ------------------------------- */
@@ -154,6 +201,8 @@ export interface GameEvent {
   featuredHeroes: string[];
   currencies: string[];
   confidence: Confidence;
+  /** Data revision (absent = 0); same precedence rule as Hero.revision. */
+  revision?: number;
 }
 
 export interface DailyTheme {
@@ -171,7 +220,8 @@ export interface CycleEventDays {
 export interface RoyalArmsRaceSlot {
   slot: 1 | 2 | 3;
   utc: string;
-  windows: { day: 'Thu' | 'Fri' | 'Sat'; theme: string }[];
+  /** The slot's theme is drawn at random from this set each day (Thu–Sun). */
+  themes: string[];
 }
 
 export interface EventCurrency {
@@ -321,6 +371,8 @@ export interface GloryBuilding {
   building: string;
   stat: string;
   focus: TroopFocus;
+  /** false = the building/stat pairing was not confirmed by any source. */
+  verified?: boolean;
 }
 
 /* ------------------------------ Shops ------------------------------ */

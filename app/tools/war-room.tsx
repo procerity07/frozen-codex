@@ -110,7 +110,7 @@ function RePoints() {
         { key: 't', title: 'Tier', render: (r) => `T${r.t}` },
         { key: 'p', title: 'Points / kill', align: 'right', render: (r) => String(r.p) },
       ]} />
-      <Text style={[type.caption, { marginTop: space.sm }]}>T1, T2, T11 and T12 values are confirmed; T3–T10 are interpolated.</Text>
+      <Text style={[type.caption, { marginTop: space.sm }]}>Values from the community wiki Realm Expedition page.</Text>
     </>
   );
 }

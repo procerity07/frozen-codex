@@ -4,13 +4,13 @@ export const cycleDays: CycleEventDays[] = [
   {
     eventId: 'ace-lord',
     days: [
-      { day: 1, weekday: 'Mon', theme: 'Hero Upgrade', scoring: ['Omni Shards', 'Hero EXP', 'Bond Gifts', 'Timeless / Deluxe Scrolls'] },
-      { day: 2, weekday: 'Tue', theme: 'Build & Research', scoring: ['Construction power', 'Research power', 'Build/Research speedups'] },
-      { day: 3, weekday: 'Wed', theme: 'Stamina/AP & Gathering', scoring: ['Stamina spent', 'AP spent', 'Resources gathered'] },
-      { day: 4, weekday: 'Thu', theme: 'Training Speedup', scoring: ['Training speedups', 'Troops trained'] },
-      { day: 5, weekday: 'Fri', theme: 'Draconic Stone & Refinement Crest', scoring: ['Draconic Stone EXP', 'Refinement Crests'] },
-      { day: 6, weekday: 'Sat', theme: 'Obtain Essences', scoring: ['Gear/Rune/Totem/Holystone Essences', 'Spinels', 'Crystals'] },
-      { day: 7, weekday: 'Sun', theme: 'Build / Research / Training Speedup', scoring: ['All speedups'] },
+      { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Omni Shards', 'Hero EXP', 'Bond Gifts', 'Timeless / Deluxe Scrolls'] },
+      { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['Construction power', 'Research power', 'Build/Research speedups'] },
+      { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['Stamina spent', 'AP spent', 'Resources gathered'] },
+      { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups', 'Troops trained'] },
+      { day: 5, weekday: 'Fri', theme: 'Draconic Stone (Draconic Stone & Refinement Crest)', scoring: ['Draconic Stone EXP', 'Refinement Crests'] },
+      { day: 6, weekday: 'Sat', theme: 'Supreme Power (Obtain Essences)', scoring: ['Gear/Rune/Totem/Holystone Essences', 'Spinels', 'Crystals'] },
+      { day: 7, weekday: 'Sun', theme: 'Path of Eternity (Build / Research / Training Speedup)', scoring: ['All speedups'] },
     ],
   },
   {
@@ -39,19 +39,24 @@ export const cycleDays: CycleEventDays[] = [
   },
 ];
 
+/** Wiki (Royal Arms Race page): Thu–Sun, three slots per day; each slot draws a random theme from its set. */
 export const royalArmsRace: RoyalArmsRaceSlot[] = [
-  { slot: 1, utc: '00:00–07:55', windows: [{ day: 'Thu', theme: 'Building' }, { day: 'Fri', theme: 'Training' }, { day: 'Sat', theme: 'Research' }] },
-  { slot: 2, utc: '08:00–15:55', windows: [{ day: 'Thu', theme: 'Gear / Totem / Rune / Holystone materials' }, { day: 'Fri', theme: 'Stamina / AP' }, { day: 'Sat', theme: 'Curio' }] },
-  { slot: 3, utc: '16:00–23:55', windows: [{ day: 'Thu', theme: 'Hero Upgrade' }, { day: 'Fri', theme: 'Draconic Stone' }, { day: 'Sat', theme: 'Diamond Spend & Dragon Pts' }] },
+  { slot: 1, utc: '00:00–07:55', themes: ['Curio', 'Gear & Totem', 'Hero Upgrade', 'Rune & Holystone', 'Train, Build & Research Speedup'] },
+  { slot: 2, utc: '08:00–15:55', themes: ['Curio', 'Draconic Stone', 'Obtain Treasure', 'Research', 'Stamina/AP', 'Troop Training Power'] },
+  { slot: 3, utc: '16:00–23:55', themes: ['Build & Build Speedup', 'Building, Research & Training Power', 'Curio', 'Diamond Consumption', 'Military & Civil Dragon Pts'] },
 ];
 
+/**
+ * Ace Lord Day 1 phases. Wiki: phase 1 = 15,000 and phase 6 = 600,000 (2x Radiant Hero Choice Card) on Days 1–4;
+ * Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000. Phases 2–5 thresholds and rewards are not verified.
+ */
 export const aceLordPhases: PhaseReward[] = [
-  { phase: 1, points: 30000, reward: 'Speedup chest + 50 Diamonds' },
-  { phase: 2, points: 80000, reward: 'Essence chest + Hero EXP' },
-  { phase: 3, points: 160000, reward: 'Deluxe Recruit Tickets x2' },
-  { phase: 4, points: 280000, reward: 'Omni Shard chest' },
-  { phase: 5, points: 420000, reward: 'Refinement Crests + Draconic EXP' },
-  { phase: 6, points: 600000, reward: 'Radiant Hero Choice Card I/II/III' },
+  { phase: 1, points: 15000, reward: 'Phase 1 (rewards not verified)' },
+  { phase: 2, points: 80000, reward: 'Phase 2 (threshold and rewards not verified)' },
+  { phase: 3, points: 160000, reward: 'Phase 3 (threshold and rewards not verified)' },
+  { phase: 4, points: 280000, reward: 'Phase 4 (threshold and rewards not verified)' },
+  { phase: 5, points: 420000, reward: 'Phase 5 (threshold and rewards not verified)' },
+  { phase: 6, points: 600000, reward: '2x Radiant Hero Choice Card (Days 1–4; Day 6 top 800,000, Day 7 top 1,200,000)' },
 ];
 
 export const armsRacePhases: PhaseReward[] = [
@@ -126,7 +131,7 @@ export const bagDayLabels: Record<string, string> = {
 };
 
 export const eventCurrencies: EventCurrency[] = [
-  { id: 'lucky-coins', name: 'Lucky Coins', eventId: 'lucky-flip', expires: false, guidance: 'Save across runs; flip only when you can reach the Grand Prize.' },
+  { id: 'lucky-coins', name: 'Lucky Coins', eventId: 'lucky-flip', expires: false, guidance: 'Save across runs — 50 Lucky Coins guarantee the Grand Prize.' },
   { id: 'lucky-star-coins', name: 'Lucky Star Coins', eventId: 'glorys-gift-roulette', expires: false, guidance: 'Bank for the next roulette rotation.' },
   { id: 'ice-picks', name: 'Ice Picks', eventId: 'tundra-ruins', expires: false, guidance: 'Carry over to the next Tundra Ruins weekend.' },
   { id: 'astrology-scrolls', name: 'Astrology Summon Scrolls', eventId: 'astrology', expires: false, salvage: 'Sub-items salvage into Summon Scrolls', guidance: 'Save for Anastasia / Maxim banners.' },

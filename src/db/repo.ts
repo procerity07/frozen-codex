@@ -1,5 +1,6 @@
 import type { Element, GameEvent, GiftCode, Hero, Rarity, SophiaQuestion, UnitType } from '@/types/game';
 import { ftsQuery, fuzzyScore } from '@/lib/fuzzy';
+import { normalizeHero } from '@/lib/heroData';
 import { getDb } from './client';
 
 export interface HeroFilter {
@@ -21,7 +22,7 @@ export async function listHeroes(filter: HeroFilter = {}): Promise<Hero[]> {
   const match = filter.query ? ftsQuery(filter.query) : null;
   if (match) { where.push('id IN (SELECT id FROM heroes_fts WHERE heroes_fts MATCH ?)'); params.push(match); }
   const sql = `SELECT data FROM heroes ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY rarity DESC, name ASC`;
-  const rows = parse<Hero>(await db.getAllAsync<{ data: string }>(sql, params));
+  const rows = parse<Hero>(await db.getAllAsync<{ data: string }>(sql, params)).map(normalizeHero);
   if (rows.length || !filter.query) return rows;
   // Typo-tolerant fallback
   const all = await listHeroes({ ...filter, query: undefined });
@@ -35,7 +36,7 @@ export async function listHeroes(filter: HeroFilter = {}): Promise<Hero[]> {
 export async function getHero(id: string): Promise<Hero | null> {
   const db = await getDb();
   const row = await db.getFirstAsync<{ data: string }>('SELECT data FROM heroes WHERE id = ?', id);
-  return row ? (JSON.parse(row.data) as Hero) : null;
+  return row ? normalizeHero(JSON.parse(row.data) as Hero) : null;
 }
 
 export async function listEvents(query?: string): Promise<GameEvent[]> {

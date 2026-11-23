@@ -3,7 +3,12 @@ import assert from 'node:assert/strict';
 import type { SQLiteDatabase } from 'expo-sqlite';
 import * as seed from '../src/data/seed';
 import { migrations } from '../src/db/schema';
-import { seedDatabase, upsertHeroes } from '../src/db/seed';
+import { bundledEventsToSeed, bundledHeroesToSeed, mergePackEvents, mergePackHeroes, seedDatabase, upsertEvents, upsertHeroes } from '../src/db/seed';
+import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
+import { reKillPointsByTier } from '../src/lib/calculators';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { Hero } from '../src/types/game';
 import { ftsQuery, fuzzyScore } from '../src/lib/fuzzy';
 import { bagPoints, colExchange, phaseProgress, planCitadel, reKillPoints, simulateCasualties, bondExpBetween, bondGiftPlan, curioCost } from '../src/lib/calculators';
 import { cycleForDate, nextUtcOccurrence, rotationWeek, weekIndex, msUntilUtcMidnight } from '../src/lib/time';
@@ -35,7 +40,7 @@ for (const b of seed.bagItems) for (const k of Object.keys(b.points)) ok(k in se
 ok(seed.citadelLevels.length === 40, 'citadel must have 40 levels');
 ok(seed.gloryBuildings.length === 14, 'glory buildings must be 14');
 ok(seed.shops.length === 12, 'shops must be 12');
-ok(seed.bondLevels.length === 90 && seed.bondLevels[0]!.title === 'Stranger' && seed.bondLevels[80]!.title === 'Confidant', 'bond titles');
+ok(seed.bondLevels.length === 95 && seed.bondLevels[0]!.expToNext === 1000 && seed.bondLevels[94]!.expToNext === 330000 && seed.bondLevels[0]!.title === 'Stranger' && seed.bondLevels[79]!.title === 'Confidant', 'bond levels match wiki endpoints');
 for (const e of seed.events) ok(/^\d{2}:\d{2}$/.test(e.startUtc), `event ${e.id} bad startUtc`);
 const allSeedText = JSON.stringify(seed);
 ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain emoji');
@@ -97,9 +102,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(c12.cost.food === 1_140_000 && c12.cost.stone === 25_400 && c12.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'citadel 12 values');
   ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_843_963, 'citadel 40 iron');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
-  ok(bondExpBetween(seed.bondLevels, 1, 2) === 100, 'bond exp L1');
+  ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
   ok(bondGiftPlan(seed.bondGifts, { 5: 1, 1: 100 }, 5050).shortfall === 0, 'bond gift plan');
-  ok(curioCost(seed.curioStarCosts, 0, 2).spinel === 30, 'curio cost');
+  ok(curioCost(seed.curioStarCosts, 4, 6).spinel === 2500 && curioCost(seed.curioStarCosts, 4, 6).crystal === 100, 'curio cost');
 
   // ---------- Time & schedule ----------
   const mon = new Date(Date.UTC(2026, 10, 23, 12));
@@ -113,8 +118,103 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const sat = new Date(Date.UTC(2026, 10, 28, 11));
   ok(eventsOn(seed.events, sat, a).some((e) => e.id === 'conquest-of-lords'), 'CoL on Ace Lord Saturday');
   ok(!eventsOn(seed.events, sat, a).some((e) => e.id === 'realm-expedition'), 'no RE on Ace Lord Saturday');
-  ok(todayThemes(mon, a).map((t) => t.theme).join('|') === 'Hero Upgrade|Rune & Holystone', 'Monday themes');
+  ok(todayThemes(mon, a).map((t) => t.theme).join('|') === 'Heroes Assemble (Hero Upgrade)|Rune & Holystone', 'Monday themes');
   ok(doubleDipPlan().length === 7, 'double dip plan');
+
+
+  // ---------- Hero audit: combat role, older records, revision precedence ----------
+  const byId = (id: string) => seed.heroes.find((h) => h.id === id)!;
+  ok(seed.heroes.every((h) => h.audit && h.audit.sourceUrls.length > 0 && h.audit.sourceUrls.every((u) => u.startsWith('https://'))), 'every hero has an audit trail with https sources');
+  ok(seed.heroes.every((h) => h.revision === seed.HERO_DATA_REVISION), 'bundled heroes carry the data revision');
+  ok(seed.heroes.every((h) => !h.audit!.verified.includes('combatRole') || h.combatRole !== undefined), 'combatRole only marked verified when set');
+  ok(byId('tania').unitType === 'Cavalry', 'user correction preserved: Tania is Cavalry');
+  ok(byId('tania').role === 'Cavalry Support', 'user pack edit preserved: Tania role text');
+  ok(byId('anastasia').element === 'Fire' && byId('khaos').unitType === 'Civil' && byId('khaos').rarity === 5, 'audited corrections present');
+
+  const rdb = nodeDb();
+  for (const m of migrations) await rdb.execAsync(m);
+  await seedDatabase(rdb as unknown as SQLiteDatabase);
+  const readHero = (id: string) => normalizeHero(JSON.parse((rdb.raw.prepare('SELECT data FROM heroes WHERE id = ?').get(id) as { data: string }).data) as Hero);
+
+  // (a) A hero with verified role data survives save + load.
+  const withRole: Hero = { ...byId('edith'), combatRole: 'Support' };
+  await upsertHeroes(rdb as unknown as SQLiteDatabase, [withRole], 'seed');
+  ok(readHero('edith').combatRole === 'Support' && combatRoleLabel(readHero('edith')) === 'Support', 'combat role round-trips through SQLite');
+
+  // (b) An older record (hosted pack v2: no combatRole / audit / revision) loads and falls back safely.
+  // Frozen copy of the hosted v2 pack (before the audit), used as real "older online data".
+  const packPath = join(__dirname, 'fixtures', 'manifest-v2.json');
+  const oldPack = parseManifest(JSON.parse(readFileSync(packPath, 'utf8')));
+  const oldKhaos = oldPack.packs.heroes!.find((h) => h.id === 'khaos')!;
+  ok(oldKhaos.combatRole === undefined && oldKhaos.audit === undefined && oldKhaos.revision === undefined, 'hosted v2 pack hero has no new fields');
+  const odb = nodeDb();
+  for (const m of migrations) await odb.execAsync(m);
+  await upsertHeroes(odb as unknown as SQLiteDatabase, [oldKhaos], 'ota');
+  const loadedOld = normalizeHero(JSON.parse((odb.raw.prepare('SELECT data FROM heroes WHERE id = ?').get('khaos') as { data: string }).data) as Hero);
+  ok(loadedOld.name === 'Khaos' && combatRoleLabel(loadedOld) === 'Not verified', 'older record loads with "Not verified" fallback');
+
+  // (c) Invalid role values from a pack are dropped, not rendered.
+  const bad = parseManifest({ version: 9, packs: { heroes: [{ ...byId('eric'), combatRole: 'Tank', audit: { checkedOn: 1 } }] } });
+  ok(bad.packs.heroes![0]!.combatRole === undefined && bad.packs.heroes![0]!.audit === undefined, 'invalid combatRole/audit from pack dropped');
+
+  // (d) A stale online pack cannot overwrite corrected bundled heroes.
+  const merged = await mergePackHeroes(rdb as unknown as SQLiteDatabase, oldPack.packs.heroes!);
+  ok(merged.applied === 0 && merged.skipped.length === oldPack.packs.heroes!.length, `stale v2 pack skipped (${merged.skipped.length} heroes)`);
+  ok(readHero('khaos').unitType === 'Civil' && readHero('tania').element === 'Ice', 'corrections kept after stale pack');
+
+  // (e) Existing install that already synced the v2 pack: re-seed replaces those rows with corrected data.
+  const xdb = nodeDb();
+  for (const m of migrations) await xdb.execAsync(m);
+  await upsertHeroes(xdb as unknown as SQLiteDatabase, oldPack.packs.heroes!, 'ota');
+  xdb.raw.exec("INSERT INTO meta (key, value) VALUES ('seed_version', '3')");
+  ok((await bundledHeroesToSeed(xdb as unknown as SQLiteDatabase)).length === seed.heroes.length, 'all stale pack heroes superseded by bundled revision');
+  await seedDatabase(xdb as unknown as SQLiteDatabase);
+  const xk = JSON.parse((xdb.raw.prepare("SELECT data, source FROM heroes WHERE id = 'khaos'").get() as { data: string }).data) as Hero;
+  ok(xk.unitType === 'Civil' && xk.revision === 1, 'existing install receives corrected Khaos on re-seed');
+  ok((xdb.raw.prepare("SELECT COUNT(*) n FROM heroes_fts WHERE id = 'khaos'").get() as { n: number }).n === 1, 'FTS row replaced, not duplicated');
+
+  // (f) A future pack at the same or newer revision still applies.
+  const newer = await mergePackHeroes(rdb as unknown as SQLiteDatabase, [{ ...byId('eric'), revision: 2, notes: 'pack v4 note' }]);
+  ok(newer.applied === 1 && readHero('eric').notes === 'pack v4 note', 'newer-revision pack row applies');
+
+
+  // ---------- Round 2: tiers removed, 2–4★ roster, wiki corrections ----------
+  ok(seed.heroes.every((h) => !('tiers' in h)), 'no bundled hero carries tier ratings');
+  const tieredOld = oldPack.packs.heroes!.find((h) => h.id === 'tania')! as Hero & { tiers?: unknown };
+  ok(tieredOld.tiers === undefined, 'tiers stripped from older pack records on import');
+  ok(!('tiers' in normalizeHero({ ...byId('eric'), tiers: { pve: 'S' } } as Hero)), 'tiers stripped from stored records on load');
+  const LOW = ['baron', 'lucia', 'tulios', 'capos', 'tooka', 'sophia', 'ada', 'axel', 'andre', 'odell', 'viola', 'luke', 'gerolin', 'roger',
+    'cassandra', 'dolly', 'wallace', 'schubert', 'ysera', 'penny', 'aemon', 'hannah', 'christina', 'hanzo', 'claudia', 'william', 'chloe', 'elsa', 'gina'];
+  ok(LOW.every((id) => seed.heroes.some((h) => h.id === id && h.rarity <= 4)), 'all wiki 2–4★ heroes present');
+  ok(seed.heroes.filter((h) => h.rarity <= 4).length === LOW.length, `2–4★ count = ${LOW.length}`);
+  ok(seed.heroes.filter((h) => h.rarity <= 4).every((h) => h.audit && h.audit.sourceUrls.length >= 2 && h.combatRole === undefined), 'new heroes sourced; no invented roles');
+  ok(seed.heroes.every((h) => h.match3Skill === undefined || typeof h.match3Skill.name === 'string'), 'match-3 optional and well-formed');
+  ok(JSON.stringify(reKillPointsByTier) === JSON.stringify([0, 1, 2, 4, 6, 12, 18, 25, 30, 45, 80, 100]), 'RE kill points match wiki');
+  ok(seed.royalArmsRace.every((r) => r.themes.length >= 5) && seed.events.find((e) => e.id === 'royal-arms-race')!.days.join() === 'Thu,Fri,Sat,Sun', 'Royal Arms Race Thu–Sun with theme sets');
+  ok(seed.gloryBuildings.find((g) => g.building === 'Institute')!.stat === 'Infantry DEF' && seed.gloryBuildings.find((g) => g.building === 'Embassy')!.stat === 'Archer HP', 'Glory mapping matches wiki');
+  ok(seed.totemSets.map((t) => t.forgeLevel).join() === '16,20,22,30,31', 'Totem set unlock levels');
+  ok(seed.runeSets.length === 4, 'four rune types');
+  ok(seed.bondGifts.map((g) => g.exp).join() === '100,500,1000,5000,10000', 'bond gift EXP');
+  ok(seed.aceLordPhases[0]!.points === 15000 && seed.aceLordPhases[5]!.points === 600000, 'Ace Lord phase endpoints');
+  ok(seed.events.every((e) => e.revision === seed.EVENT_DATA_REVISION), 'bundled events carry revision');
+
+  // Stale v2 pack cannot overwrite corrected events; existing installs get corrected events on re-seed.
+  const stale = await mergePackEvents(rdb as unknown as SQLiteDatabase, oldPack.packs.events!);
+  ok(stale.applied === 0 && stale.skipped.length === oldPack.packs.events!.length, `stale v2 events skipped (${stale.skipped.length})`);
+  const edb = nodeDb();
+  for (const m of migrations) await edb.execAsync(m);
+  await upsertEvents(edb as unknown as SQLiteDatabase, oldPack.packs.events!, 'ota');
+  edb.raw.exec("INSERT INTO meta (key, value) VALUES ('seed_version', '3')");
+  ok((await bundledEventsToSeed(edb as unknown as SQLiteDatabase)).length === seed.events.length, 'stale pack events superseded on re-seed');
+  await seedDatabase(edb as unknown as SQLiteDatabase);
+  const rar = JSON.parse((edb.raw.prepare("SELECT data FROM events WHERE id = 'royal-arms-race'").get() as { data: string }).data);
+  ok(rar.days.join() === 'Thu,Fri,Sat,Sun', 'existing install receives corrected Royal Arms Race');
+
+  // The published pack must parse and agree with the bundled data revisions.
+  const livePack = parseManifest(JSON.parse(readFileSync(join(__dirname, '..', 'data-pack', 'manifest.json'), 'utf8')));
+  ok(livePack.version >= 3 && livePack.packs.heroes!.length === seed.heroes.length && livePack.packs.heroes!.every((h) => h.revision === seed.HERO_DATA_REVISION), 'published pack matches bundled heroes');
+  ok(seed.upgradeTable('gear')[39]!.essence === 210_000 && seed.upgradeTable('gear').length === 40, 'user gear table kept');
+  ok(seed.upgradeTable('holystone').length === 40 && seed.upgradeTable('holystone')[29]!.arcaneCore === 1, 'holystone curve unchanged');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });

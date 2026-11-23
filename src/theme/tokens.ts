@@ -58,14 +58,6 @@ export const troopColors = {
   All: '#38BDF8',
 } as const;
 
-export const tierColors = {
-  SS: '#F43F5E',
-  S: '#F59E0B',
-  A: '#A855F7',
-  B: '#3B82F6',
-  C: '#94A3B8',
-} as const;
-
 export const verdictColors = {
   'Must Buy': '#22C55E',
   Situational: '#F59E0B',

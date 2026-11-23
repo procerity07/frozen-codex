@@ -31,7 +31,7 @@ export default function HomeScreen() {
   const weekday = utcWeekday(now);
   const todayEvents = eventsOn(events, now, anchors).filter((e) => e.category !== 'Core Cycle');
   const slot = royalSlot(now);
-  const rar = ['Thu', 'Fri', 'Sat'].includes(weekday) ? royalArmsRace.find((r) => r.slot === slot)?.windows.find((w) => w.day === weekday) : undefined;
+  const rar = ['Thu', 'Fri', 'Sat', 'Sun'].includes(weekday) ? royalArmsRace.find((r) => r.slot === slot) : undefined;
 
   return (
     <Screen>
@@ -65,7 +65,7 @@ export default function HomeScreen() {
           {rar ? (
             <View style={[st.theme, { borderColor: palette.goldLine }]}>
               <Text style={[type.caption, { color: palette.gold }]}>Royal Arms Race · Slot {slot} · {royalArmsRace[slot - 1]!.utc} UTC</Text>
-              <Text style={type.heading}>{rar.theme}</Text>
+              <Text style={type.body}>One of: {rar.themes.join(' · ')}</Text>
             </View>
           ) : null}
         </View>

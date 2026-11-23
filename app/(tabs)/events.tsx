@@ -157,7 +157,7 @@ function Planner() {
           <Text style={[type.bodySecondary, { marginTop: space.sm }]}>{d.advice}</Text>
         </Card>
       ))}
-      <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sat · local ${localOffsetLabel(now)}`} />
+      <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sun · local ${localOffsetLabel(now)}`} />
       {royalArmsRace.map((s) => (
         <Card key={s.slot} style={{ marginBottom: space.sm, padding: space.md }}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -165,7 +165,7 @@ function Planner() {
             <Text style={type.number}>{s.utc} UTC</Text>
           </Row>
           <Text style={type.caption}>Local start: {utcToLocalLabel('Thu', s.utc.slice(0, 5), now)}</Text>
-          {s.windows.map((w) => <Text key={w.day} style={[type.bodySecondary, { marginTop: 2 }]}>{w.day}: {w.theme}</Text>)}
+          <Text style={[type.bodySecondary, { marginTop: 2 }]}>Random each day from: {s.themes.join(' · ')}</Text>
         </Card>
       ))}
     </Screen>

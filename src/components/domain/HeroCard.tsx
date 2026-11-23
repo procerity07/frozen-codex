@@ -1,12 +1,8 @@
 import { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Hero, TroopFocus } from '@/types/game';
-import { palette, radius, rarityColors, space, tierColors, tint, type } from '@/theme';
+import { palette, radius, rarityColors, space, tint, type } from '@/theme';
 import { ElementEmblem, RarityStars, TroopEmblem } from '@/components/ui';
-
-const MODES: { key: keyof Hero['tiers']; label: string }[] = [
-  { key: 'pve', label: 'PvE' }, { key: 'pvp', label: 'PvP' }, { key: 'boss', label: 'Boss' }, { key: 'economy', label: 'Eco' },
-];
 
 export function matchesFocus(h: Hero, focus: TroopFocus): boolean {
   if (focus === 'All') return false;
@@ -28,15 +24,7 @@ function HeroCardImpl({ hero, focus, onPress }: { hero: Hero; focus: TroopFocus;
           <TroopEmblem type={hero.unitType} size={16} />
         </View>
         <RarityStars rarity={hero.rarity} size={10} />
-        <Text style={type.caption} numberOfLines={1}>{hero.role} · {hero.unitType}</Text>
-      </View>
-      <View style={st.tiers}>
-        {MODES.map((m) => (
-          <View key={m.key} style={st.tierCell}>
-            <Text style={st.tierLabel}>{m.label}</Text>
-            <Text style={[st.tierValue, { color: tierColors[hero.tiers[m.key]] }]}>{hero.tiers[m.key]}</Text>
-          </View>
-        ))}
+        <Text style={type.caption} numberOfLines={1}>{hero.element} · {hero.unitType}</Text>
       </View>
     </Pressable>
   );
@@ -50,8 +38,4 @@ const st = StyleSheet.create({
   initial: { fontSize: 22, fontWeight: '800' },
   portraitEmblem: { position: 'absolute', right: -6, bottom: -6 },
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  tiers: { flexDirection: 'row', gap: 2, width: 104 },
-  tierCell: { flex: 1, alignItems: 'center' },
-  tierLabel: { fontSize: 9, fontWeight: '600', color: palette.textMuted },
-  tierValue: { fontSize: 13, fontWeight: '800', fontVariant: ['tabular-nums'] },
 });

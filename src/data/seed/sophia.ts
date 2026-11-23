@@ -88,9 +88,19 @@ const rows: Row[] = [
   ['Alliance', 'Minimum members for Alliance Showdown?', '20', 'showdown'],
   ['Alliance', 'Minimum Citadel level for Alliance Showdown?', '15', 'showdown'],
   ['Alliance', 'Which leagues exist in Alliance Showdown?', 'Novice, Adept, Master, Legend', 'showdown'],
-  ['Alliance', 'Who can trigger Undead Scourge?', 'R4, R5 or Diplomat', 'undead'],
+  ['Alliance', 'Who can trigger Undead Scourge?', 'The alliance Leader or a Diplomat', 'undead'],
   ['General', 'Who publishes Puzzles & Chaos?', '37GAMES', 'publisher'],
   ['General', 'At what UTC time does the daily reset happen?', '00:00 UTC', 'reset'],
+  // Added 2026-11-23 from the community wiki (Sophia's Test, Weapon Forge, Hero Bond, Events pages)
+  ['Events', 'Which rank allows you to view the clear-stage lineups?', 'Personal Extreme Challenge', 'rank lineups extreme challenge'],
+  ['Buildings', 'At which level is Totem unlocked in Weapon Forge?', 'Lv. 16', 'totem weapon forge'],
+  ['Buildings', 'At which Weapon Forge level do Runes unlock?', 'Lv. 8 (Troop Runes at Lv. 15)', 'rune weapon forge'],
+  ['Heroes', 'What is the maximum Hero Bond level?', '95', 'bond level max'],
+  ['Heroes', 'How much EXP does a level V Bond Gift give?', '10,000 (50,000 to a same-element hero)', 'bond gift exp'],
+  ['Events', 'On which days does the Royal Arms Race run?', 'Thursday to Sunday', 'royal arms race days'],
+  ['Events', 'How long must you hold an Oblivion War stronghold to control it?', '3 minutes', 'oblivion war stronghold'],
+  ['Events', 'How many Lucky Coins guarantee the Lucky Flip Grand Prize?', '50', 'lucky flip coins grand prize'],
+  ['Events', 'How many points is a T10 foreign kill in Realm Expedition?', '45', 'realm expedition t10'],
 ];
 
 export const sophiaQuestions: SophiaQuestion[] = rows.map(([category, question, answer, kw], i) => ({

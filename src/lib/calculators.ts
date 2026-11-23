@@ -28,8 +28,8 @@ export function phaseProgress(points: number, phases: PhaseReward[]): PhaseProgr
 
 /** Power per troop by tier (T1..T12). Community estimates. */
 export const troopPowerByTier = [2, 3, 5, 8, 12, 17, 23, 30, 38, 47, 57, 68] as const;
-/** Realm Expedition foreign kill points by tier (T1..T12). T1, T2, T11, T12 are confirmed; middle tiers interpolated. */
-export const reKillPointsByTier = [0, 1, 3, 6, 10, 16, 24, 34, 46, 62, 80, 100] as const;
+/** Realm Expedition foreign kill points by tier (T1..T12), from the community wiki Realm Expedition page. */
+export const reKillPointsByTier = [0, 1, 2, 4, 6, 12, 18, 25, 30, 45, 80, 100] as const;
 
 export const COL_POINTS_PER_M_LOST = 400;
 export const COL_POINTS_PER_M_KILLED = 100;

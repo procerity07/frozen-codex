@@ -45,7 +45,8 @@ export function doubleDipPlan(): DoubleDipRow[] {
   return days.map((weekday) => {
     const al = dayText('ace-lord', weekday);
     const ad = dayText('alliance-duel', weekday);
-    const royal = royalArmsRace.flatMap((s) => s.windows.filter((w) => w.day === weekday).map((w) => ({ utc: s.utc, theme: w.theme })));
+    const royalDay = ['Thu', 'Fri', 'Sat', 'Sun'].includes(weekday);
+    const royal = royalDay ? royalArmsRace.flatMap((s) => s.themes.map((theme) => ({ utc: s.utc, theme }))) : [];
     const alTags = tagsFor(al.full);
     const adTags = tagsFor(ad.full);
     const shared = [...alTags].filter((t) => adTags.has(t));
@@ -53,7 +54,7 @@ export function doubleDipPlan(): DoubleDipRow[] {
     let advice: string;
     if (shared.length) advice = `Double-dip: ${shared.join(', ')} items score in both Ace Lord and Alliance Duel today.`;
     else advice = `No overlap — spend ${al.theme} items for Ace Lord; hold ${ad.theme} items for the Duel.`;
-    if (royalShared.length) advice += ` Triple-dip window: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
+    if (royalShared.length) advice += ` Possible triple-dip if Royal Arms Race draws: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
     return { weekday, aceLord: al.theme, allianceDuel: ad.theme, royal, shared, advice };
   });
 }

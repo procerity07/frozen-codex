@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Calculator } from 'lucide-react-native';
 import type { TroopFocus, UpgradeCostRow } from '@/types/game';
 import {
-  buildings, citadelLevels, dragonExpItems, dragonLair, draconicStones, gearSlots, gearStages, gloryBuildings, holystoneSets, runeExtras, runeSets,
+  buildings, citadelLevels, dragonExpItems, dragonLair, draconicStones, gearSlots, gearStages, gloryBuildings, holystoneNotes, holystoneSets, runeExtras, runeSets,
   totemEnergyTiers, totemSets, upgradeTable,
 } from '@/data/seed';
 import { palette, space, troopColors, type } from '@/theme';
@@ -132,7 +132,7 @@ function RunesView({ focus }: { focus: TroopFocus }) {
   const rows = useMemo(() => upgradeTable('rune'), []);
   return (
     <>
-      <SectionHeader title="Rune sets" subtitle="6 sets × 4 runes = 24 runes" />
+      <SectionHeader title="Rune types" subtitle="4 types · up to 6 sets of 4 runes · Weapon Forge Lv. 8" />
       {runeSets.map((r) => (
         <Card key={r.name} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, r.focus) ? 1 : 0.5 }} accent={relevant(focus, r.focus) && focus !== 'All' ? troopColors[r.focus] : undefined}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -167,7 +167,7 @@ function TotemsView({ focus }: { focus: TroopFocus }) {
           { key: 'w', title: 'Wolf', render: (r) => r.wolf, color: () => (col === 'wolf' ? troopColors.Cavalry : undefined) },
         ]}
       />
-      <SectionHeader title="Energy Stone modification tiers" />
+      <SectionHeader title="Totem bonuses" />
       <Card>{totemEnergyTiers.map((t) => <Text key={t} style={[type.body, { marginBottom: 4 }]}>{t}</Text>)}</Card>
       <SectionHeader title="Totem upgrade cost" />
       <CostTable rows={rows} />
@@ -189,6 +189,7 @@ function HolystonesView() {
           { key: 't', title: 'Troop stat', render: (r) => r.troopStat },
         ]}
       />
+      <Card style={{ marginTop: space.sm }}>{holystoneNotes.map((n) => <Text key={n} style={[type.bodySecondary, { marginBottom: 4 }]}>{n}</Text>)}</Card>
       <SectionHeader title="Holystone upgrade cost" />
       <CostTable rows={rows} />
     </>
@@ -220,7 +221,7 @@ function DragonView({ focus }: { focus: TroopFocus }) {
         ))}
         <Stat label="Total Dragon EXP" value={fmtFull(total)} color={palette.cyan} />
       </Card>
-      <SectionHeader title="Dragon's Lair cost reduction" subtitle="Military and civil construction" />
+      <SectionHeader title="Dragon's Lair cost reduction" subtitle="Unlocks at Chapter 4 · per-level values not verified" />
       <Accordion title="Lair Lv. 1–40" subtitle="-0.5% to -20%">
         <Table rows={dragonLair} columns={[
           { key: 'l', title: 'Lair Lv', render: (r) => String(r.level) },
@@ -241,7 +242,11 @@ function GloryView({ focus }: { focus: TroopFocus }) {
         <Card key={g.building} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, g.focus) ? 1 : 0.5 }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{g.building}</Text>
-            <Row gap={4}><TroopEmblem type={g.focus} size={16} /><Text style={[type.body, { color: troopColors[g.focus] }]}>{g.stat}</Text></Row>
+            {g.verified === false ? (
+              <Badge label={g.stat} color={palette.textMuted} />
+            ) : (
+              <Row gap={4}><TroopEmblem type={g.focus} size={16} /><Text style={[type.body, { color: troopColors[g.focus] }]}>{g.stat}</Text></Row>
+            )}
           </Row>
         </Card>
       ))}

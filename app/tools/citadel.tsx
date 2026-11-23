@@ -43,7 +43,7 @@ export default function CitadelPlanner() {
         <Row><NumberField label="Civil hero speed" value={b.civilSpeedPct} onChange={(n) => setB('civilSpeedPct', n)} suffix="%" /><NumberField label="Builder gear" value={b.builderGearPct} onChange={(n) => setB('builderGearPct', n)} suffix="%" /></Row>
         <Row style={{ marginTop: space.sm }}><NumberField label="VIP" value={b.vipPct} onChange={(n) => setB('vipPct', n)} suffix="%" /><NumberField label="Institute" value={b.institutePct} onChange={(n) => setB('institutePct', n)} suffix="%" /></Row>
         <View style={{ marginTop: space.sm }}><NumberField label="Cost reduction (William, Chloe, Dragon's Lair)" value={b.costReductionPct} onChange={(n) => setB('costReductionPct', Math.min(n, 90))} suffix="%" /></View>
-        <Text style={[type.caption, { marginTop: space.sm }]}>Own-only civil passives: {civilBuild.map((x) => `${x.hero} ${x.stat === 'buildCost' ? 'cost' : 'speed'} ${x.value}%`).join(' · ')}</Text>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Own-only civil passives: {civilBuild.map((x) => `${x.hero} ${x.stat === 'buildCost' ? 'cost' : 'speed'} ${x.value !== undefined ? `${x.value}%` : '(value not verified)'}`).join(' · ')}</Text>
       </Card>
 
       <SectionHeader title="Resource deficit" subtitle={`Citadel ${from} → ${to}`} />

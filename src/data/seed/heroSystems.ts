@@ -1,76 +1,79 @@
 import type { BondGift, BondGroup, BondLevel, CurioStarCost, Curio } from '@/types/game';
 
-/** Bond titles change every 10 levels; EXP requirement grows with each band. */
-const bondTitles: { from: number; title: string; base: number; step: number; bonus: string }[] = [
-  { from: 1, title: 'Stranger', base: 100, step: 20, bonus: 'Hero HP +0.5% per level' },
-  { from: 11, title: 'Acquaintance', base: 400, step: 40, bonus: 'Hero ATK +0.5% per level' },
-  { from: 21, title: 'Companion', base: 900, step: 80, bonus: 'Hero DEF +0.5% per level' },
-  { from: 31, title: 'Friend', base: 1800, step: 120, bonus: 'Skill damage +0.3% per level' },
-  { from: 41, title: 'Trusted Friend', base: 3200, step: 200, bonus: 'Mana gain +0.2% per level' },
-  { from: 51, title: 'Ally', base: 5400, step: 300, bonus: 'Hero HP +0.8% per level' },
-  { from: 61, title: 'Sworn Ally', base: 8600, step: 400, bonus: 'Hero ATK +0.8% per level' },
-  { from: 71, title: 'Kindred', base: 13000, step: 600, bonus: 'Skill damage +0.5% per level' },
-  { from: 81, title: 'Confidant', base: 19000, step: 900, bonus: 'Legion stats +0.2% per level' },
-];
-
-export const bondLevels: BondLevel[] = Array.from({ length: 90 }, (_, i) => {
+/**
+ * Hero Bond levels 1–95 (community wiki Hero Bond page): Lv. 1 needs 1,000 EXP and Lv. 95 needs 330,000.
+ * Levels in between are ESTIMATED by geometric interpolation between those two published points.
+ * Each level also needs a minimum hero enhancement (e.g. Hero1 at Lv. 6, Hero6 at Lv. 56).
+ * Titles: Stranger (Lv. 1) and Confidant (Lv. 80+) as supplied in the project brief; per-level bonuses are not verified.
+ */
+const BOND_MAX = 95;
+const BOND_EXP_FIRST = 1000;
+const BOND_EXP_LAST = 330000;
+export const bondLevels: BondLevel[] = Array.from({ length: BOND_MAX }, (_, i) => {
   const level = i + 1;
-  const band = [...bondTitles].reverse().find((b) => level >= b.from) ?? bondTitles[0]!;
-  return { level, title: band.title, expToNext: band.base + band.step * (level - band.from), bonus: band.bonus };
+  const exp = Math.round((BOND_EXP_FIRST * Math.pow(BOND_EXP_LAST / BOND_EXP_FIRST, i / (BOND_MAX - 1))) / 100) * 100;
+  return { level, title: level >= 80 ? 'Confidant' : level === 1 ? 'Stranger' : '', expToNext: level === 1 ? BOND_EXP_FIRST : level === BOND_MAX ? BOND_EXP_LAST : exp, bonus: 'Not verified' };
 });
 
+/** Wiki Hero Bond page: EXP per gift level; same-element gifts give more. Gift names are not given. */
 export const bondGifts: BondGift[] = [
-  { tier: 1, name: 'Wildflower Posy', exp: 10 },
-  { tier: 2, name: 'Silver Locket', exp: 50 },
-  { tier: 3, name: 'Enchanted Music Box', exp: 200 },
-  { tier: 4, name: 'Starlit Tiara', exp: 1000 },
-  { tier: 5, name: 'Heart of the Citadel', exp: 5000 },
+  { tier: 1, name: 'Bond Gift I', exp: 100, sameElementExp: 200 },
+  { tier: 2, name: 'Bond Gift II', exp: 500, sameElementExp: 1000 },
+  { tier: 3, name: 'Bond Gift III', exp: 1000, sameElementExp: 2000 },
+  { tier: 4, name: 'Bond Gift IV', exp: 5000, sameElementExp: 25000 },
+  { tier: 5, name: 'Bond Gift V', exp: 10000, sameElementExp: 50000 },
 ];
 
+// Membership of the first three groups follows the community wiki Hero Bond page
+// (https://puzzles-chaos.fandom.com/wiki/Hero_Bond). Members not in this app's hero list are kept in otherMembers.
 export const bondGroups: BondGroup[] = [
   {
-    id: 'sanguine-serenade', name: 'Sanguine Serenade', members: ['valerius', 'eris', 'lylia', 'echo'],
-    bonuses: [{ level: 10, effect: 'Members ATK +3%' }, { level: 30, effect: 'Members crit damage +5%' }, { level: 60, effect: 'Dark & Fire damage +4%' }],
+    id: 'sanguine-serenade', name: 'Sanguine Serenade', members: ['norris', 'eris', 'carvell', 'edith'], otherMembers: ['Setemos'],
+    verified: true, bonusesVerified: false,
+    bonuses: [{ level: 0, effect: 'Favorability rewards boost Archer, Cavalry and Infantry stats (levels and values not verified)' }],
   },
   {
-    id: 'octet-wanderers', name: 'Octet Wanderers', members: ['maxim', 'boyd', 'kanye', 'rodriguez', 'wu-kong', 'leona', 'patty', 'basilong'],
-    bonuses: [{ level: 10, effect: 'Members HP +3%' }, { level: 30, effect: 'Members ATK +4%' }, { level: 60, effect: 'Fire damage +5%' }],
+    id: 'octet-wanderers', name: 'Octet Wanderers', members: ['fiona', 'tania', 'apan'], otherMembers: ['Sodoma', 'Sirona'],
+    verified: true, bonusesVerified: false,
+    bonuses: [{ level: 40, effect: 'Cavalry ATK (value not verified)' }, { level: 70, effect: 'Infantry DEF (value not verified)' }, { level: 99, effect: 'Archer HP (value not verified)' }],
   },
   {
-    id: 'rhapsody-of-genesis', name: 'Rhapsody of Genesis', members: ['khaos', 'anastasia', 'aerposia', 'angelita', 'saya'],
+    id: 'rhapsody-of-genesis', name: 'Rhapsody of Genesis', members: ['edmund', 'rodriguez', 'kujo-mamoru', 'freya', 'saya'],
+    verified: true, bonusesVerified: false,
     bonuses: [{ level: 10, effect: 'Members DEF +3%' }, { level: 30, effect: 'Members skill damage +4%' }, { level: 60, effect: 'Legion ATK/DEF/HP +1%' }],
   },
   {
-    id: 'tidal-court', name: 'Tidal Court', members: ['neptune', 'kaira', 'sea-goddess', 'kaios'],
+    id: 'tidal-court', name: 'Tidal Court', members: ['neptune', 'kaira', 'sea-goddess', 'kaios'], verified: false, bonusesVerified: false,
     bonuses: [{ level: 10, effect: 'Members mana gain +3%' }, { level: 30, effect: 'Ice damage +4%' }, { level: 60, effect: 'Freeze duration +1 turn (PvE)' }],
   },
   {
-    id: 'lucky-hearts', name: 'Lucky Hearts', members: ['basilong', 'edmund', 'aurora', 'freya', 'eric'],
+    id: 'lucky-hearts', name: 'Lucky Hearts', members: ['basilong', 'edmund', 'aurora', 'freya', 'eric'], verified: false, bonusesVerified: false,
     bonuses: [{ level: 10, effect: 'Members HP +3%' }, { level: 30, effect: 'Members ATK +3%' }, { level: 60, effect: 'Arena damage +3%' }],
   },
 ];
 
 /** Curio ascension: Weapon Forge Lv. 20 unlocks curios. */
+/**
+ * Curio ascension (wiki Curio page): 500 Spinel; then 2,000 Spinel + 100 Crystal; 5,000 + 200; 10,000 + 500.
+ * The wiki ties the first step to five stars; the exact star each later step reaches is inferred. Unlocks per step not verified.
+ */
 export const curioStarCosts: CurioStarCost[] = [
-  { star: 1, spinel: 10, crystal: 0, unlocks: 'Legion Passive I' },
-  { star: 2, spinel: 20, crystal: 0, unlocks: 'Hero Attribute +5%' },
-  { star: 3, spinel: 40, crystal: 5, unlocks: 'Legion Passive II' },
-  { star: 4, spinel: 60, crystal: 10, unlocks: 'Hero Attribute +10%' },
-  { star: 5, spinel: 90, crystal: 20, unlocks: 'Exclusive Hero Passive' },
-  { star: 6, spinel: 120, crystal: 35, unlocks: 'Legion Passive III' },
-  { star: 7, spinel: 160, crystal: 50, unlocks: 'Hero Attribute +15%' },
-  { star: 8, spinel: 200, crystal: 70, unlocks: 'Exclusive Passive enhanced' },
-  { star: 9, spinel: 250, crystal: 95, unlocks: 'Legion Passive IV' },
-  { star: 10, spinel: 320, crystal: 125, unlocks: 'Hero Attribute +20% (Max)' },
+  { star: 5, spinel: 500, crystal: 0, unlocks: 'Not verified' },
+  { star: 6, spinel: 2000, crystal: 100, unlocks: 'Not verified' },
+  { star: 7, spinel: 5000, crystal: 200, unlocks: 'Not verified' },
+  { star: 8, spinel: 10000, crystal: 500, unlocks: 'Not verified' },
 ];
 
 export const curios: Curio[] = [
-  { id: 'azure-dragon-blade', name: 'Azure Dragon Blade', heroId: 'guan-yu', legionPassive: 'Cavalry ATK +2% to +8%', heroAttribute: 'Guan Yu ATK +5% to +20%', exclusivePassive: 'Azure Dragon Sweep stun extends to 2 turns' },
-  { id: 'riftbreaker-lance', name: 'Riftbreaker Lance', heroId: 'khaos', legionPassive: 'Cavalry Lethality +2% to +8%', heroAttribute: 'Khaos ATK +5% to +20%', exclusivePassive: 'Abyssal Collapse ignores 20% DEF' },
-  { id: 'rimecrown-sceptre', name: 'Rimecrown Sceptre', heroId: 'anastasia', legionPassive: 'Infantry DEF +2% to +8%', heroAttribute: 'Anastasia HP +5% to +20%', exclusivePassive: 'Glacial Coronation shield +30%' },
-  { id: 'ember-codex', name: 'Ember Codex', legionPassive: 'Archer ATK +2% to +8%', heroAttribute: 'Fire heroes ATK +3% to +12%' },
-  { id: 'warden-horn', name: "Warden's Horn", legionPassive: 'Troop HP +1% to +5%', heroAttribute: 'All heroes HP +3% to +12%' },
-  { id: 'frost-compass', name: 'Frost Compass', legionPassive: 'March speed +2% to +8%', heroAttribute: 'Ice heroes mana gain +2% to +8%' },
+  // Verified association and attribute types (wiki Guan Yu and Curio pages); per-level values beyond those quoted are not verified.
+  { id: 'azure-dragon-blade', name: 'Azure Dragon Blade', heroId: 'guan-yu', verified: true, legionPassive: 'Troop DEF, Troop HP and Troop ATK — up to +100% each at Legendary', heroAttribute: 'Not verified', exclusivePassive: 'Extra Troop ATK, up to +150% at the top tier' },
+  { id: 'wings-of-icarus', name: 'Wings of Icarus', heroId: 'saya', verified: true, legionPassive: 'Troop DEF and Troop HP (values not verified)', heroAttribute: 'Not verified', exclusivePassive: 'Troop capacity — needs Saya at +4, and +6 for the second Legendary bonus' },
+  // Not found in any source checked.
+  { id: 'riftbreaker-lance', name: 'Riftbreaker Lance', heroId: 'khaos', verified: false, legionPassive: 'Cavalry Lethality +2% to +8%', heroAttribute: 'Khaos ATK +5% to +20%', exclusivePassive: 'Abyssal Collapse ignores 20% DEF' },
+  { id: 'rimecrown-sceptre', name: 'Rimecrown Sceptre', heroId: 'anastasia', verified: false, legionPassive: 'Infantry DEF +2% to +8%', heroAttribute: 'Anastasia HP +5% to +20%', exclusivePassive: 'Glacial Coronation shield +30%' },
+  { id: 'ember-codex', name: 'Ember Codex', verified: false, legionPassive: 'Archer ATK +2% to +8%', heroAttribute: 'Fire heroes ATK +3% to +12%' },
+  { id: 'warden-horn', name: "Warden's Horn", verified: false, legionPassive: 'Troop HP +1% to +5%', heroAttribute: 'All heroes HP +3% to +12%' },
+  { id: 'frost-compass', name: 'Frost Compass', verified: false, legionPassive: 'March speed +2% to +8%', heroAttribute: 'Ice heroes mana gain +2% to +8%' },
 ];
 
 export const elementWheel = {

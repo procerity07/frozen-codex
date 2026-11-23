@@ -4,23 +4,23 @@ import type {
 
 export const buildings: BuildingInfo[] = [
   { id: 'citadel', name: 'Citadel', purpose: 'Core building; caps every other building level.', maxLevel: 40, unlockCitadel: 1 },
-  { id: 'wall', name: 'Wall', purpose: 'City defence; required for every Citadel level.', maxLevel: 40, unlockCitadel: 1, gloryStat: 'Troop DEF' },
-  { id: 'lookout', name: 'Lookout', purpose: 'Scouting and incoming-march intel.', maxLevel: 40, unlockCitadel: 3, gloryStat: 'Troop HP' },
-  { id: 'warehouse', name: 'Warehouse', purpose: 'Protects resources from plunder.', maxLevel: 40, unlockCitadel: 2 },
+  { id: 'wall', name: 'Wall', purpose: 'City defence; required for every Citadel level.', maxLevel: 40, unlockCitadel: 1, gloryStat: 'Cavalry DEF' },
+  { id: 'lookout', name: 'Lookout', purpose: 'Scouting and incoming-march intel.', maxLevel: 40, unlockCitadel: 3 },
+  { id: 'warehouse', name: 'Warehouse', purpose: 'Protects resources from plunder.', maxLevel: 40, unlockCitadel: 2, gloryStat: 'Archer DEF' },
   { id: 'mesdi-portal', name: 'Mesdi Portal', purpose: 'Portal chapters (24) and Monthly Recruit Trial.', maxLevel: 40, unlockCitadel: 5 },
   { id: 'archer-camp', name: 'Archer Camp', purpose: 'Trains Archers.', maxLevel: 40, unlockCitadel: 1, gloryStat: 'Archer ATK' },
   { id: 'infantry-camp', name: 'Infantry Camp', purpose: 'Trains Infantry.', maxLevel: 40, unlockCitadel: 1, gloryStat: 'Infantry ATK' },
   { id: 'cavalry-camp', name: 'Cavalry Camp', purpose: 'Trains Cavalry.', maxLevel: 40, unlockCitadel: 1, gloryStat: 'Cavalry ATK' },
-  { id: 'vehicle-workshop', name: 'Vehicle Workshop', purpose: 'Siege vehicles.', maxLevel: 40, unlockCitadel: 8, gloryStat: 'Troop ATK' },
-  { id: 'medical-tent', name: 'Medical Tent', purpose: 'Holds wounded troops (T1 buffer).', maxLevel: 40, unlockCitadel: 2, gloryStat: 'Troop HP' },
-  { id: 'weapon-forge', name: 'Weapon Forge', purpose: 'Gear, Curios (Lv. 20), Totems (Lv. 16), Holystones (Lv. 25).', maxLevel: 40, unlockCitadel: 6, gloryStat: 'Troop Lethality' },
-  { id: 'posthouse', name: 'Posthouse', purpose: 'Resource transfer to allies.', maxLevel: 40, unlockCitadel: 7 },
+  { id: 'vehicle-workshop', name: 'Vehicle Workshop', purpose: 'Siege vehicles.', maxLevel: 40, unlockCitadel: 8 },
+  { id: 'medical-tent', name: 'Medical Tent', purpose: 'Holds wounded troops (T1 buffer).', maxLevel: 40, unlockCitadel: 2 },
+  { id: 'weapon-forge', name: 'Weapon Forge', purpose: 'Gear, Runes (Lv. 8; Troop Runes Lv. 15), Totems (Lv. 16), Curios (Lv. 20), Holystones (Lv. 25).', maxLevel: 40, unlockCitadel: 6, gloryStat: 'Cavalry HP' },
+  { id: 'posthouse', name: 'Posthouse', purpose: 'Resource transfer to allies.', maxLevel: 40, unlockCitadel: 7, gloryStat: 'Infantry HP' },
   { id: 'furnace', name: 'Furnace', purpose: 'Iron production.', maxLevel: 40, unlockCitadel: 4 },
   { id: 'quarry', name: 'Quarry', purpose: 'Stone production.', maxLevel: 40, unlockCitadel: 3 },
-  { id: 'embassy', name: 'Embassy', purpose: 'Alliance reinforcement capacity.', maxLevel: 40, unlockCitadel: 4, gloryStat: 'Infantry DEF' },
+  { id: 'embassy', name: 'Embassy', purpose: 'Alliance reinforcement capacity.', maxLevel: 40, unlockCitadel: 4, gloryStat: 'Archer HP' },
   { id: 'lumberyard', name: 'Lumberyard', purpose: 'Wood production.', maxLevel: 40, unlockCitadel: 1 },
-  { id: 'war-hall', name: 'War Hall', purpose: 'Rally capacity.', maxLevel: 40, unlockCitadel: 10, gloryStat: 'Cavalry DEF' },
-  { id: 'institute', name: 'Institute', purpose: 'Research; Formations at Lv. 28.', maxLevel: 40, unlockCitadel: 3, gloryStat: 'Archer DEF' },
+  { id: 'war-hall', name: 'War Hall', purpose: 'Rally capacity.', maxLevel: 40, unlockCitadel: 10 },
+  { id: 'institute', name: 'Institute', purpose: 'Research; Formations at Lv. 28.', maxLevel: 40, unlockCitadel: 3, gloryStat: 'Infantry DEF' },
   { id: 'sanctuary', name: 'Sanctuary', purpose: 'Holy Light free revival of dead troops.', maxLevel: 40, unlockCitadel: 12 },
 ];
 
@@ -228,7 +228,6 @@ const totemUpgradeCosts: UpgradeCostRow[] = [
   { level: 39, essence: 88_000, spinel: 0, crystal: 0, arcaneCore: 0 },
   { level: 40, essence: 92_000, spinel: 0, crystal: 0, arcaneCore: 0 },
 ];
-
 /**
  * Gear enhancement requirements.
  * Each row represents the essence cost to reach that level.
@@ -283,11 +282,12 @@ const gearUpgradeCosts: UpgradeCostRow[] = [
   { level: 39, essence: 200_000, spinel: 0, crystal: 0, arcaneCore: 0 },
   { level: 40, essence: 210_000, spinel: 0, crystal: 0, arcaneCore: 0 },
 ];
+
 /** Shared essence/spinel/crystal curve for Gear, Runes, Totems and Holystones (Lv. 1–40). */
 export function upgradeTable(kind: 'gear' | 'rune' | 'totem' | 'holystone'): UpgradeCostRow[] {
+  if (kind === 'gear') return gearUpgradeCosts;
   if (kind === 'rune') return runeUpgradeCosts;
   if (kind === 'totem') return totemUpgradeCosts;
-  if (kind === 'gear') return gearUpgradeCosts;
   const mult = { gear: 1, rune: 1.2, totem: 1.5, holystone: 2 }[kind];
   return Array.from({ length: 40 }, (_, i) => {
     const level = i + 1;
@@ -296,51 +296,66 @@ export function upgradeTable(kind: 'gear' | 'rune' | 'totem' | 'holystone'): Upg
       essence: Math.round(mult * (10 + level * level * 2.5)),
       spinel: level % 5 === 0 ? Math.round(mult * level * 1.5) : undefined,
       crystal: level % 10 === 0 ? Math.round(mult * level * 0.4) : undefined,
-      arcaneCore: kind !== 'gear' && level >= 30 && level % 5 === 0 ? Math.round((level - 25) / 5) : undefined,
+      // Gear returns its own table above, so this curve only serves runes, totems and holystones.
+      arcaneCore: level >= 30 && level % 5 === 0 ? Math.round((level - 25) / 5) : undefined,
     };
   });
 }
 
+// Runes, Totems and Holystones: community wiki Runes, Totems, Holystone and Weapon Forge pages (checked 2026-11-23).
+// Wiki: 4 rune types; you can have 6 sets and every set contains 4 runes.
 export const runeSets: RuneSet[] = [
-  { name: 'Strength', focus: 'Infantry', stats: ['Infantry ATK', 'Infantry DEF', 'Infantry HP', 'Infantry Lethality'] },
-  { name: 'Accuracy', focus: 'Archer', stats: ['Archer ATK', 'Archer DEF', 'Archer HP', 'Archer Lethality'] },
-  { name: 'Charge', focus: 'Cavalry', stats: ['Cavalry ATK', 'Cavalry DEF', 'Cavalry HP', 'Cavalry Lethality'] },
-  { name: 'Troop', focus: 'All', stats: ['Troop ATK', 'Troop DEF', 'Troop HP', 'Troop Lethality'] },
-  { name: 'Troop II', focus: 'All', stats: ['Troop ATK', 'Troop HP', 'March size', 'Rally capacity'] },
-  { name: 'Troop III', focus: 'All', stats: ['Troop DEF', 'Troop HP', 'Wounded reduction', 'Healing speed'] },
+  { name: 'Strength', focus: 'Infantry', stats: ['Infantry stat bonus (scales with enhancing level and ascension stars)'] },
+  { name: 'Accuracy', focus: 'Archer', stats: ['Archer stat bonus (scales with enhancing level and ascension stars)'] },
+  { name: 'Charge', focus: 'Cavalry', stats: ['Cavalry stat bonus (scales with enhancing level and ascension stars)'] },
+  { name: 'Troop', focus: 'All', stats: ['Troop ATK', 'Troop DEF', 'Troop HP', 'About one third of the single-type value at the same tier'] },
 ];
 
 export const runeExtras = [
-  { name: 'Magic Infusion', detail: 'Adds a bonus stat line; higher rune quality increases the infusion roll ceiling.' },
-  { name: 'Modification', detail: 'Rerolls a sub-stat. Probability of a same-troop-type roll is roughly 1 in 4 per attempt.' },
+  { name: 'Unlock', detail: 'Runes unlock at Weapon Forge Lv. 8; Troop Runes at Lv. 15.' },
+  { name: 'Scaling example', detail: 'Single-type stat: 0.4% at enhancing Lv. 1 (2 stars) up to 455% at Lv. 40 (max ascension); Troop runes reach 151.7%.' },
+  { name: 'Magic Infusion', detail: 'Adds a bonus stat line. Not verified.' },
+  { name: 'Modification', detail: 'Rerolls a sub-stat. Probabilities not verified.' },
 ];
 
 export const totemSets: TotemSet[] = [
-  { set: 'I', forgeLevel: 16, bear: 'Infantry HP', eagle: 'Archer ATK', wolf: 'Cavalry ATK' },
-  { set: 'II', forgeLevel: 20, bear: 'Infantry DEF', eagle: 'Archer HP', wolf: 'Cavalry HP' },
-  { set: 'III', forgeLevel: 24, bear: 'Infantry ATK', eagle: 'Archer DEF', wolf: 'Cavalry DEF' },
-  { set: 'IV', forgeLevel: 28, bear: 'Infantry Lethality', eagle: 'Archer Lethality', wolf: 'Cavalry Lethality' },
-  { set: 'V', forgeLevel: 31, bear: 'Infantry all stats', eagle: 'Archer all stats', wolf: 'Cavalry all stats' },
+  { set: 'I', forgeLevel: 16, bear: 'Infantry ATK / DEF / HP', eagle: 'Archer ATK / DEF / HP', wolf: 'Cavalry ATK / DEF / HP' },
+  { set: 'II', forgeLevel: 20, bear: 'Infantry ATK / DEF / HP', eagle: 'Archer ATK / DEF / HP', wolf: 'Cavalry ATK / DEF / HP' },
+  { set: 'III', forgeLevel: 22, bear: 'Infantry ATK / DEF / HP', eagle: 'Archer ATK / DEF / HP', wolf: 'Cavalry ATK / DEF / HP' },
+  { set: 'IV', forgeLevel: 30, bear: 'Infantry ATK / DEF / HP', eagle: 'Archer ATK / DEF / HP', wolf: 'Cavalry ATK / DEF / HP' },
+  { set: 'V', forgeLevel: 31, bear: 'Infantry ATK / DEF / HP', eagle: 'Archer ATK / DEF / HP', wolf: 'Cavalry ATK / DEF / HP' },
 ];
 
-export const totemEnergyTiers = ['Common Energy Stone (1 line)', 'Fine Energy Stone (2 lines)', 'Superior Energy Stone (3 lines)', 'Arcane Energy Stone (4 lines + lock)'];
+export const totemEnergyTiers = [
+  'Per-level bonus: +1% at level 1 rising to +100% at level 10 (power requirement 1,000 to 200,000).',
+  'Enhancement example: Lv. 16 at max stars = 57%; Lv. 35 at max stars = 347%.',
+  'Energy Stone modification tiers: not verified.',
+];
 
 export const holystoneSets: HolystoneSet[] = [
-  { set: 'I', forgeLevel: 25, unitStat: 'Unit ATK', troopStat: 'Troop HP' },
-  { set: 'II', forgeLevel: 27, unitStat: 'Unit DEF', troopStat: 'Troop ATK' },
-  { set: 'III', forgeLevel: 29, unitStat: 'Unit HP', troopStat: 'Troop DEF' },
-  { set: 'IV', forgeLevel: 31, unitStat: 'Unit Lethality', troopStat: 'Troop Lethality' },
+  { set: 'I', forgeLevel: 25, unitStat: 'Unit bonus up to +50%', troopStat: 'Troop bonus up to +150%' },
+  { set: 'II', forgeLevel: 27, unitStat: 'Unit bonus up to +50%', troopStat: 'Troop bonus up to +150%' },
+  { set: 'III', forgeLevel: 29, unitStat: 'Unit bonus up to +50%', troopStat: 'Troop bonus up to +150%' },
+  { set: 'IV', forgeLevel: 31, unitStat: 'Unit bonus up to +50%', troopStat: 'Troop bonus up to +150%' },
 ];
 
+/** Wiki Holystone page: Strength, Eternal and Life types; modification levels 1–10. */
+export const holystoneNotes = [
+  'Types: Strength, Eternal and Life, each boosting different troop and unit stats.',
+  'Troop bonus: +1.5% at modification level 1 up to +150% at level 10.',
+  'Unit bonus starts at level 3 and reaches +50% at levels 9–10.',
+];
+
+// Wiki Draconic Stone page: six types at Dragon Lv. 30, Nature at 40, Wild at 50. Effects per type are not verified.
 export const draconicStones: DraconicStone[] = [
-  { name: 'Fiery', dragonLevel: 30, effect: 'Cavalry ATK', focus: 'Cavalry' },
-  { name: 'Frigid / Frost', dragonLevel: 30, effect: 'Infantry DEF', focus: 'Infantry' },
-  { name: 'Hurricane', dragonLevel: 30, effect: 'Archer ATK', focus: 'Archer' },
-  { name: 'Lightning', dragonLevel: 30, effect: 'Troop Lethality', focus: 'All' },
-  { name: 'Meteor', dragonLevel: 30, effect: 'Siege damage', focus: 'All' },
-  { name: 'Water / Hydro', dragonLevel: 30, effect: 'Troop HP', focus: 'All' },
-  { name: 'Nature', dragonLevel: 40, effect: 'Wounded reduction & healing', focus: 'All' },
-  { name: 'Wild', dragonLevel: 50, effect: 'All troop ATK/DEF/HP', focus: 'All' },
+  { name: 'Fiery', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Frost', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Hurricane', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Lightning', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Meteor', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Hydro', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Nature', dragonLevel: 40, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Wild', dragonLevel: 50, effect: 'Effect not verified', focus: 'All' },
 ];
 
 export const dragonLair: DragonLairRow[] = Array.from({ length: 40 }, (_, i) => {
@@ -356,19 +371,20 @@ export const dragonExpItems = [
   { name: 'Dragon Shard', exp: 500 },
 ];
 
+// Wiki Glory Level + Infantry/Cavalry/Archer pages: unlocks at building Lv. 15, raised with Marks of Glory.
 export const gloryBuildings: GloryBuilding[] = [
-  { building: 'Citadel', stat: 'Troop ATK', focus: 'All' },
-  { building: 'Wall', stat: 'Troop DEF', focus: 'All' },
-  { building: 'Medical Tent', stat: 'Troop HP', focus: 'All' },
-  { building: 'Lookout', stat: 'Troop HP', focus: 'All' },
-  { building: 'Weapon Forge', stat: 'Troop Lethality', focus: 'All' },
-  { building: 'Vehicle Workshop', stat: 'Troop ATK', focus: 'All' },
-  { building: 'Archer Camp', stat: 'Archer ATK', focus: 'Archer' },
-  { building: 'Institute', stat: 'Archer DEF', focus: 'Archer' },
-  { building: 'Posthouse', stat: 'Archer HP', focus: 'Archer' },
-  { building: 'Cavalry Camp', stat: 'Cavalry ATK', focus: 'Cavalry' },
-  { building: 'War Hall', stat: 'Cavalry DEF', focus: 'Cavalry' },
-  { building: 'Warehouse', stat: 'Cavalry HP', focus: 'Cavalry' },
-  { building: 'Infantry Camp', stat: 'Infantry ATK', focus: 'Infantry' },
-  { building: 'Embassy', stat: 'Infantry DEF', focus: 'Infantry' },
+  { building: 'Infantry Camp', stat: 'Infantry ATK', focus: 'Infantry', verified: true },
+  { building: 'Institute', stat: 'Infantry DEF', focus: 'Infantry', verified: true },
+  { building: 'Posthouse', stat: 'Infantry HP', focus: 'Infantry', verified: true },
+  { building: 'Cavalry Camp', stat: 'Cavalry ATK', focus: 'Cavalry', verified: true },
+  { building: 'Wall', stat: 'Cavalry DEF', focus: 'Cavalry', verified: true },
+  { building: 'Weapon Forge', stat: 'Cavalry HP', focus: 'Cavalry', verified: true },
+  { building: 'Archer Camp', stat: 'Archer ATK', focus: 'Archer', verified: true },
+  { building: 'Warehouse', stat: 'Archer DEF', focus: 'Archer', verified: true },
+  { building: 'Embassy', stat: 'Archer HP', focus: 'Archer', verified: true },
+  { building: 'Citadel', stat: 'Glory table exists; stat not verified', focus: 'All', verified: false },
+  { building: 'Lookout', stat: 'Glory table exists; stat not verified', focus: 'All', verified: false },
+  { building: 'War Hall', stat: 'Glory table exists; stat not verified', focus: 'All', verified: false },
+  { building: 'Medical Tent', stat: 'Not verified', focus: 'All', verified: false },
+  { building: 'Vehicle Workshop', stat: 'Not verified', focus: 'All', verified: false },
 ];
