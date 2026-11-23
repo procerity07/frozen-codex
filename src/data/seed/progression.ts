@@ -165,15 +165,73 @@ const runeUpgradeCosts: UpgradeCostRow[] = [
   { level: 33, essence: 51000, spinel: 0, crystal: 0, arcaneCore: 0 },
   { level: 34, essence: 54000, spinel: 0, crystal: 0, arcaneCore: 0 },
   { level: 35, essence: 57000, spinel: 0, crystal: 0, arcaneCore: 0 },
-  { level: 36, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
-  { level: 37, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
-  { level: 38, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
-  { level: 39, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
-  { level: 40, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 36, essence: 60000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 37, essence: 63000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 38, essence: 66000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 39, essence: 69000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 40, essence: 72000, spinel: 0, crystal: 0, arcaneCore: 0 },
+];
+
+/**
+ * Totem enhancement requirements.
+ * Each row represents the cost to reach that level.
+ *
+ * Level 1: zero placeholder; no cost supplied.
+ * Level 13: 1,800 essence.
+ * Level 21: 16,000 essence.
+ * Levels 22–40: +4,000 essence per level.
+ *
+ * Separate ascension requirements are not included.
+ */
+const totemUpgradeCosts: UpgradeCostRow[] = [
+  { level: 1, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 2, essence: 100, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 3, essence: 100, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 4, essence: 400, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 5, essence: 200, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 6, essence: 250, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 7, essence: 400, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 8, essence: 500, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 9, essence: 700, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 10, essence: 850, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 11, essence: 1_100, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 12, essence: 1_400, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 13, essence: 1_800, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 14, essence: 2_400, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 15, essence: 3_300, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 16, essence: 4_450, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 17, essence: 6_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 18, essence: 8_050, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 19, essence: 10_450, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 20, essence: 15_250, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 21, essence: 16_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 22, essence: 20_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 23, essence: 24_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 24, essence: 28_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 25, essence: 32_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 26, essence: 36_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 27, essence: 40_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 28, essence: 44_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 29, essence: 48_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 30, essence: 52_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 31, essence: 56_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 32, essence: 60_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 33, essence: 64_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 34, essence: 68_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 35, essence: 72_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 36, essence: 76_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 37, essence: 80_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 38, essence: 84_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 39, essence: 88_000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 40, essence: 92_000, spinel: 0, crystal: 0, arcaneCore: 0 },
 ];
 /** Shared essence/spinel/crystal curve for Gear, Runes, Totems and Holystones (Lv. 1–40). */
 export function upgradeTable(kind: 'gear' | 'rune' | 'totem' | 'holystone'): UpgradeCostRow[] {
   if (kind === 'rune') return runeUpgradeCosts;
+  if (kind === 'totem') return totemUpgradeCosts;
   const mult = { gear: 1, rune: 1.2, totem: 1.5, holystone: 2 }[kind];
   return Array.from({ length: 40 }, (_, i) => {
     const level = i + 1;
