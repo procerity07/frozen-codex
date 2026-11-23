@@ -457,8 +457,8 @@ const baseHeroes: Hero[] = [
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
  * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables;
  * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills;
- * revision 9 = in-game Wu Kong skills (owned-hero troop passives).
+ * revision 9 = in-game Wu Kong skills (owned-hero troop passives); revision 10 = in-game Isabella skills.
  */
-export const HERO_DATA_REVISION = 9;
+export const HERO_DATA_REVISION = 10;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

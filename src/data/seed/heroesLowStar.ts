@@ -134,7 +134,20 @@ export const addedHighStarHeroes: Hero[] = [
   lowStar({ name: 'Sirona', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Timeless Recruitment', 'Recruit Trial', 'Trial Turret Shop'],
     civil: [civil('Troop Capacity', 'Listed on the wiki. Value not verified.', 'Unlocks at level 131')],
     bonds: ['Octet Wanderers'], pages: [`${W}Hero_Bond`, `${W}Troop_Capacity`] }),
-  lowStar({ name: 'Isabella', element: 'Nature', rarity: 6, unit: 'Civil', sources: [],
-    notes: ['The wiki lists no acquisition method.'] }),
+  {
+    ...lowStar({ name: 'Isabella', element: 'Nature', rarity: 6, unit: 'Civil', sources: [],
+      march: ['Troop skill'],
+      civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own her. 6★: +15% at +1, +21% at +2 up to +200% at +8; 7★: +80% at +5 up to +250% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '6': [null, 15, 21, 31, 41, 64, 82, 120, 200], '7': [null, null, null, null, null, 80, 102.5, 150, 250] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops while you own her. 6★: +15% at +1, +21% at +2 up to +200% at +8; 7★: +80% at +5 up to +250% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '6': [null, 15, 21, 31, 41, 64, 82, 120, 200], '7': [null, null, null, null, null, 80, 102.5, 150, 250] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own her. 6★: +15% at +1, +21% at +2 up to +200% at +8; 7★: +80% at +5 up to +250% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '6': [null, 15, 21, 31, 41, 64, 82, 120, 200], '7': [null, null, null, null, null, 80, 102.5, 150, 250] } },
+      ],
+      m3: { name: 'Blessing of Vitality', description: 'Restores 54% HP to all allies (Rage Regen: Medium). Blessing of Courage: all allies +100% ATK for 5 rounds. Blessing of Resolve: all allies +64% DEF for 5 rounds. Blessing of Faith: all allies +24% Rage recovery for 5 rounds. Blessing of Glory (unlocks at 7★): all allies +30% Crit for 5 rounds. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'ATK up', 'DEF up', 'Rage up', 'Crit'] },
+      notes: ['The wiki lists no acquisition method.', 'In-game (2026-11-23, Isabella at +1, S3 badge): 6★ Nature Civil confirmed; troop skill 120% of troop ATK at +1; Troop HP/DEF/ATK passives apply to all troops while owned (6★ and 7★ tables); five hero skills (Blessing of Vitality, Courage, Resolve, Faith, and Glory at 7★). She can be promoted to 7★; the 7★ rules are not in the app yet.'] }),
+    marchSkills: [{ name: 'Troop skill', description: 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).' }],
+  },
 ];
 
