@@ -111,8 +111,18 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Aemon', element: 'Light', rarity: 3, unit: 'Archer', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Archer HP', 'Archer DEF', 'Archer ATK'] }),
   lowStar({ name: 'Hannah', element: 'Light', rarity: 3, unit: 'Cavalry', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
     m3: { name: 'Valiant Throw', description: 'Deals 208% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
-  lowStar({ name: 'Christina', element: 'Light', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
-    notes: ['The wiki Civil page also lists Christina among heroes with a Civil skill, but the Cavalry table shows three stat skills. Not resolved.'] }),
+  {
+    ...lowStar({ name: 'Christina', element: 'Light', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Cavalry DEF', 'Cavalry ATK'],
+      civil: [{ name: 'Stone Output', description: 'In-game. 4★: +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%',
+        tiers: { '4': [null, null, 40, 60, 80, 100] } }],
+      m3: { name: 'Blazing Blade', description: 'Deals 429% damage to the target (Rage Regen: Slow). Righteous Rage: all allies DEF +51% for 5 rounds. Descendant of Warlord: DEF +15% and Heal Bonus +8%. Divine Suppression: all allies ATK +10% for 5 rounds. Values as shown in-game at +5.', charge: 'Slow', pattern: 'Single target', effects: ['DEF up', 'ATK up', 'Heal Bonus'] },
+      notes: ['In-game (2026-11-23, Christina at +5): 4★ Light Cavalry confirmed. Her skills are a 500% troop skill, Stone Output (civil, active while owned) and Cavalry DEF / ATK (military). This resolves the wiki conflict: she has one civil skill and two (not three) Cavalry stat skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game).' },
+      { name: 'Cavalry DEF', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Cavalry ATK', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+    ],
+  },
   lowStar({ name: 'Hanzo', element: 'Light', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Output')] }),
   // ------------------------------ Dark ------------------------------
   lowStar({ name: 'Claudia', element: 'Dark', rarity: 3, unit: 'Cavalry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Gather Speed')],
