@@ -131,7 +131,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Fiona", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Fire Civil (app previously: Nature All-round). Bond corrected: Octet Wanderers.", "Wiki shows a Legion Attribute of Troop DEF +12% / Troop HP +12% (level not stated); not added as a skill.", "Unconfirmed acquisition sources: Timeless Recruitment."],
+    notes: ["Wiki: 5-star Fire Civil (app previously: Nature All-round). Bond corrected: Octet Wanderers.", "In-game (2026-11-23, Fiona at +1): Fire Civil confirmed; troop skill 120% of troop ATK; Training Speed, Stamina Cost Down and Training Cost Down (Lv. 131) tables for 5★ and 6★; hero skills Inferno Breath (161% to all enemies, Rage Regen Slow), Draconic Flames, Drake Companion, Sunset Explosion (Lv. 71), Combat Mastery (locked). The unsourced Verdant Aura / Bloom healer skills were replaced.", "Wiki shows a Legion Attribute of Troop DEF +12% / Troop HP +12% (level not stated); not added as a skill.", "Unconfirmed acquisition sources: Timeless Recruitment."],
   },
   "carvell": {
     checkedOn: '2026-11-23',

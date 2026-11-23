@@ -219,10 +219,18 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Fiona', title: 'Grove Keeper', element: 'Fire', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Verdant Aura', 'All troop HP up slightly.']],
-    m3: { name: 'Bloom', desc: 'Heals all allies by a large amount.', charge: 'Fast', pattern: 'All allies', effects: ['Heal'] },
+    march: [['Troop skill', 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).']],
+    civil: [
+      { name: 'Training Speed', description: 'In-game. 5★: +7.5% at +1, then 10/15/20/25/31.25/37.5/75% from +2 to +8; 6★: 31.25/40/50/100% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'trainSpeed', unit: '%',
+        tiers: { '5': [null, 7.5, 10, 15, 20, 25, 31.25, 37.5, 75], '6': [null, null, null, null, null, 31.25, 40, 50, 100] } },
+      { name: 'Stamina Cost Down', description: 'In-game. 5★: −4.5% at +1, then −6/−9/−12/−15/−18.75/−22.5/−24% from +2 to +8; 6★: −18.75/−24/−26/−28% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, -4.5, -6, -9, -12, -15, -18.75, -22.5, -24], '6': [null, null, null, null, null, -18.75, -24, -26, -28] } },
+      { name: 'Training Cost Down', description: 'In-game. 5★: −4.5% at +1, then −6/−9/−12/−15/−18.75/−22.5/−24% from +2 to +8; 6★: −18.75/−24/−26/−28% from +5 to +8.', requirement: 'Unlocks at level 131 (in-game)', unit: '%',
+        tiers: { '5': [null, -4.5, -6, -9, -12, -15, -18.75, -22.5, -24], '6': [null, null, null, null, null, -18.75, -24, -26, -28] } },
+    ],
+    m3: { name: 'Inferno Breath', desc: 'Deals 161% damage to all enemies (Rage Regen: Slow). Draconic Flames: Poison damage to enemies for 6 rounds. Drake Companion: all allies ATK +34% for 6 rounds. Sunset Explosion (unlocks Lv. 71): self-detonates on death for 140% damage to all enemies. Combat Mastery: locked, value not captured. Values as shown in-game at +1.', charge: 'Slow', pattern: 'All enemies', effects: ['Poison', 'ATK up', 'Death explosion'] },
     sources: ['Timeless Recruitment'], bonds: ['Octet Wanderers'],
-    notes: 'Best Campaign and boss sustain in the Timeless pool.',
+    notes: 'Training speed and cost cuts work just by owning her. Shards also sold in the Sapphire Shop (350,000 each).',
   }),
   hero({
     name: 'Carvell', title: 'Arcane Engineer', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
@@ -471,8 +479,9 @@ const baseHeroes: Hero[] = [
  * revision 11 = in-game Sirona skills; revision 12 = in-game Christina skills;
  * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills;
  * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills;
- * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills.
+ * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills;
+ * revision 19 = in-game Fiona skills.
  */
-export const HERO_DATA_REVISION = 18;
+export const HERO_DATA_REVISION = 19;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
