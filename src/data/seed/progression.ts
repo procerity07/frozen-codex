@@ -121,8 +121,59 @@ export const gearStages: GearStage[] = [
   { name: 'Tech Set', material: 'Set pieces', description: 'Research speed set — swap in before long research.' },
 ];
 
+/**
+ * Rune upgrade requirements.
+ * All zeroes are placeholders — replace with verified costs.
+ * Keep the meaning of "level" consistent across every row.
+ */
+const runeUpgradeCosts: UpgradeCostRow[] = [
+  { level: 1, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 2, essence: 50, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 3, essence: 50, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 4, essence: 100, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 5, essence: 150, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 6, essence: 200, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 7, essence: 300, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 8, essence: 400, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 9, essence: 550, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 10, essence: 700, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 11, essence: 900, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 12, essence: 1150, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 13, essence: 1500, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 14, essence: 2000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 15, essence: 2750, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 16, essence: 3700, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 17, essence: 5000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 18, essence: 6700, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 19, essence: 8700, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 20, essence: 12700, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 21, essence: 14000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 22, essence: 17000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 23, essence: 20000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 24, essence: 24000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 25, essence: 27000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 26, essence: 30000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 27, essence: 33000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 28, essence: 36000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 29, essence: 39000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 30, essence: 42000, spinel: 0, crystal: 0, arcaneCore: 0 },
+
+  { level: 31, essence: 45000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 32, essence: 48000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 33, essence: 51000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 34, essence: 54000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 35, essence: 57000, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 36, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 37, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 38, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 39, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+  { level: 40, essence: 0, spinel: 0, crystal: 0, arcaneCore: 0 },
+];
 /** Shared essence/spinel/crystal curve for Gear, Runes, Totems and Holystones (Lv. 1–40). */
 export function upgradeTable(kind: 'gear' | 'rune' | 'totem' | 'holystone'): UpgradeCostRow[] {
+  if (kind === 'rune') return runeUpgradeCosts;
   const mult = { gear: 1, rune: 1.2, totem: 1.5, holystone: 2 }[kind];
   return Array.from({ length: 40 }, (_, i) => {
     const level = i + 1;
