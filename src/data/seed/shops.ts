@@ -14,6 +14,15 @@ const T: Verdict = 'Trap / Skip';
 /** Shops transcribed from in-game screenshots. Prices and limits are exact; verdicts are suggestions. */
 const verifiedShops: Shop[] = [
   {
+    id: 'black-market', name: 'Black Market', currency: 'Food, Wood, Stone, Iron or Diamonds', refresh: 'Every 3 hours (random items)', checkedOn: CHECKED,
+    items: [
+      L('Speedups for resources (e.g. 6× Speedup 8-hr for 5,760,000 Food)', 'Resources', 'Varies', M, M, 'Turns spare resources into speedups. The offer changes every refresh, so check often.'),
+      L('Research Speedups for resources (e.g. 4× 8-hr for 256,000 Stone)', 'Resources', 'Varies', M, M, 'Very good value; buy whenever you can afford it.'),
+      L('Resources for other resources (e.g. 320,000 Food for 38,400 Stone)', 'Resources', 'Varies', S, S, 'Only to swap a resource you have too much of for one you lack.'),
+      L('Diamond-priced items', 'Diamonds', 'Varies', T, S, 'Diamonds are better spent elsewhere for F2P.'),
+    ],
+  },
+  {
     id: 'alliance', name: 'Alliance Shop', currency: 'Alliance coins', refresh: 'Alliance Sale weekly; shop stock is shared by the alliance', checkedOn: CHECKED,
     items: [
       L('Weekly curio scroll (Alliance Sale)', '1,500,000 (-50%)', '1 per week', M, M, 'The sale curio changes every week (e.g. Chalice of Blood Scroll). Save coins for the one you need.'),
@@ -242,14 +251,6 @@ const unverifiedShops: Shop[] = [
       i('Curio Scroll Chest', '1,500', M, M, 'Rare curio source; buy during Arms Race Day 6–7 for double value.'),
       i('Rune Crystal', '2,000', S, M, 'Strong if runes are your bottleneck.'),
       i('Skin shard', '1,000', T, S, 'Cosmetic plus minor stat.'),
-    ],
-  },
-  {
-    id: 'black-market', name: 'Black Market', currency: 'Resources / Diamonds', refresh: 'Every 8 hours',
-    items: [
-      i('Hero shards (resource price)', 'Food/Wood', M, M, 'Always buy resource-priced shards.'),
-      i('Speedups (resource price)', 'Stone/Iron', M, M, 'Converts excess resources to speedups.'),
-      i('Diamond-priced items', 'Diamonds', T, S, 'Never worth diamonds for F2P.'),
     ],
   },
 ];
