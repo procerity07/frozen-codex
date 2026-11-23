@@ -11,6 +11,7 @@ import { useNow } from '@/store/useNow';
 import { cycleForDate, formatDuration, rotationWeek, royalSlot, utcWeekday } from '@/lib/time';
 import { eventsOn, todayThemes } from '@/lib/schedule';
 import { scheduleCooldown, ensurePermission } from '@/services/notifications';
+import { UpdateBanner } from '@/components/domain/UpdateBanner';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
   { label: "Sophia's Test", sub: '30-second lookup', icon: Brain, href: '/tools/sophia', color: palette.cyan },
@@ -35,6 +36,7 @@ export default function HomeScreen() {
 
   return (
     <Screen>
+      <UpdateBanner />
       <Card style={{ marginTop: space.xs }}>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>

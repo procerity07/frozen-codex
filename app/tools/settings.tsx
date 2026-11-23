@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Switch, Text, View } from 'react-native';
 import { Stack } from 'expo-router';
 import Constants from 'expo-constants';
-import { Database, Download, RefreshCw, Upload } from 'lucide-react-native';
+import { Database, Download, RefreshCw, Smartphone, Upload } from 'lucide-react-native';
 import { palette, space, type } from '@/theme';
 import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
@@ -11,6 +11,8 @@ import { checkForUpdates, DEFAULT_MANIFEST_URL, type SyncResult } from '@/db/ota
 import { exportProfile, importProfile } from '@/services/backup';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import { SEED_VERSION } from '@/data/seed';
+import { checkForAppUpdate, CURRENT_VERSION, type UpdateCheck } from '@/services/appUpdate';
+import { openDownload } from '@/components/domain/UpdateBanner';
 
 const LEADS = [5, 10, 15, 30, 60];
 
@@ -22,6 +24,8 @@ export default function SettingsScreen() {
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<SyncResult | null>(null);
   const [resetAlarm, setResetAlarm] = useState(!!s.alarms['daily-reset']);
+  const [appCheck, setAppCheck] = useState<UpdateCheck | null>(null);
+  const [appBusy, setAppBusy] = useState(false);
 
   const loadStats = () => {
     dbStats().then(setStats).catch(() => undefined);
@@ -41,6 +45,26 @@ export default function SettingsScreen() {
   return (
     <Screen>
       <Stack.Screen options={{ title: 'Settings' }} />
+      <SectionHeader title="App updates" icon={Smartphone} />
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <Stat label="Installed version" value={`v${CURRENT_VERSION}`} />
+          {appCheck?.status === 'update' ? <Badge label={`v${appCheck.release.version} available`} color={palette.gold} /> : null}
+          {appCheck?.status === 'current' ? <Badge label="Up to date" color={palette.success} /> : null}
+        </Row>
+        <View style={{ marginTop: space.md }}>
+          {appCheck?.status === 'update' ? (
+            <Button icon={Download} variant="gold" label={`Download v${appCheck.release.version}`} onPress={() => openDownload(appCheck.release)} />
+          ) : (
+            <Button icon={RefreshCw} variant="secondary" label="Check for app updates" disabled={appBusy} onPress={() => {
+              setAppBusy(true);
+              checkForAppUpdate(true).then(setAppCheck).finally(() => setAppBusy(false));
+            }} />
+          )}
+        </View>
+        {appCheck?.status === 'error' ? <Text style={[type.caption, { marginTop: space.sm, color: palette.danger }]}>{appCheck.message}</Text> : null}
+      </Card>
+
       <SectionHeader title="Realm profile" />
       <Card>
         <Row>

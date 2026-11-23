@@ -1,0 +1,15 @@
+{
+  "tag_name": "v1.0.5",
+  "name": "Frozen Codex v1.0.5",
+  "html_url": "https://github.com/procerity07/frozen-codex/releases/tag/v1.0.5",
+  "body": "## Frozen Codex v1.0.5\n\nChanges since v1.0.4:\n\n### Use in-game Ace Lord Day 1 values\nFrom in-game screenshots of Ace Lord (1/7) Heroes Assemble:\n- Phases: 15,000 / 30,000 / 60,000 / 120,000 / 300,000 / 600,000 with the\n  shown rewards (phase 6: 2x Hero Choice Card)\n- Bag Hoard Day 1 points: Timeless Scroll 20,000, Deluxe Ticket 10,000,\n  5/4/3-star Omni Hero Shard 30,000/10,000/3,000, 2-star Hero Shard 750,\n  Bond Gifts T1-T5 75/375/750/9,375/18,750; Choice/Realm cards give 0\n- Bag Hoard marks values confirmed in-game; other days stay estimates\n- Events revision 2 and SEED_VERSION 5 so installed apps pick it up\n\n### Automatic patch notes on every release\n- Each release now lists every change since the previous release\n- Each change shows its title and details; internal attribution lines are left out\n- Notes include install instructions and the build's commit\n\n### Event calendar matches the in-game schedule\nChecked against the in-game Event Schedule for the week of 23 Nov:\n- Scorching Front now runs Saturday to Monday\n- Shadow Expedition: sign-up from Sunday to Monday, then runs through the week\n- Oblivion War now starts on Wednesday\n- Timeless Heroes Recruitment now ends on Monday\n- New: Resource Supply and Holystone Upgrades (Monday to Sunday)\n\n### Alliance Party, Undead Scourge and Elemental Seal days fixed\nFrom the in-game Event Schedule:\n- Alliance Party is now Tuesday and Friday (was Wednesday and Sunday)\n- Undead Scourge is now on the calendar: Tuesday and Thursday, 00:00-23:50 UTC, in Ace Lord weeks\n- Elemental Seal: I on Thursday, II on Friday, III on Saturday\n- Rewards shown in-game added to these events\n\n---\nInstall: download the APK below and open it on your phone (it updates the existing app).\nBuilt from commit fad66fa.\n",
+  "published_at": "2026-11-23T21:07:18Z",
+  "draft": false,
+  "prerelease": false,
+  "assets": [
+    {
+      "name": "Frozen-Codex-v1.0.5.apk",
+      "browser_download_url": "https://github.com/procerity07/frozen-codex/releases/download/v1.0.5/Frozen-Codex-v1.0.5.apk"
+    }
+  ]
+}

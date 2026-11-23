@@ -22,6 +22,8 @@ export interface AppState {
   bagInventory: Record<string, number>;
   citadel: { from: number; to: number; owned: Partial<Record<ResourceKey, number>>; bonuses: BuildBonuses };
   savedCalcs: Record<string, Record<string, number>>;
+  /** App version whose update banner the user dismissed with "Later". */
+  dismissedUpdate: string;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -41,6 +43,7 @@ export interface AppState {
   setCitadel: (c: Partial<AppState['citadel']>) => void;
   saveCalc: (key: string, values: Record<string, number>) => void;
   importState: (data: Partial<PersistedState>) => void;
+  dismissUpdate: (version: string) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -62,6 +65,7 @@ export const defaultState: PersistedState = {
   bagInventory: {},
   citadel: { from: 15, to: 25, owned: {}, bonuses: { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 0 } },
   savedCalcs: {},
+  dismissedUpdate: '',
 };
 
 export const useAppStore = create<AppState>()(
@@ -101,6 +105,7 @@ export const useAppStore = create<AppState>()(
       setCitadel: (c) => set({ citadel: { ...get().citadel, ...c } }),
       saveCalc: (key, values) => set({ savedCalcs: { ...get().savedCalcs, [key]: values } }),
       importState: (data) => set({ ...defaultState, ...data }),
+      dismissUpdate: (dismissedUpdate) => set({ dismissedUpdate }),
     }),
     {
       name: 'frozen-codex-profile',

@@ -6,6 +6,7 @@ import { migrations } from '../src/db/schema';
 import { bundledEventsToSeed, bundledHeroesToSeed, mergePackEvents, mergePackHeroes, seedDatabase, upsertEvents, upsertHeroes } from '../src/db/seed';
 import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
 import { reKillPointsByTier } from '../src/lib/calculators';
+import { compareVersions, isNewer, notesToBlocks, parseRelease } from '../src/lib/appUpdate';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Hero } from '../src/types/game';
@@ -228,6 +229,17 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(on(24, 'alliance-party') && on(27, 'alliance-party') && !on(25, 'alliance-party'), 'Alliance Party Tue and Fri');
   ok(on(24, 'undead-scourge') && on(26, 'undead-scourge') && !on(25, 'undead-scourge'), 'Undead Scourge Tue and Thu');
   ok(on(26, 'elemental-seal-i-ii-iii') && on(27, 'elemental-seal-i-ii-iii') && on(26, 'sophias-test'), 'Elemental Seal and Sophia Thursday');
+
+  // ---------- App update check ----------
+  ok(isNewer('v1.0.10', '1.0.9') && isNewer('1.1.0', '1.0.99') && !isNewer('V1.0.3', '1.0.3') && compareVersions('1.0.4', 'v1.0.5') < 0, 'version comparison');
+  ok(!isNewer('garbage', '1.0.0') && isNewer('1.0.1', 'garbage'), 'unparseable versions sort lowest');
+  const relRaw = JSON.parse(readFileSync(join(__dirname, 'fixtures', 'release-latest.json'), 'utf8'));
+  const rel = parseRelease(relRaw, 'procerity07/frozen-codex');
+  ok(rel !== null && rel.apkUrl.endsWith('.apk') && rel.apkUrl.startsWith('https://github.com/procerity07/frozen-codex/'), 'real release parses with APK link');
+  ok(parseRelease({ ...relRaw, assets: [{ browser_download_url: 'https://evil.example/x.apk' }] }, 'procerity07/frozen-codex') === null, 'foreign download links rejected');
+  ok(parseRelease({ ...relRaw, draft: true }, 'procerity07/frozen-codex') === null, 'draft releases ignored');
+  const blocks = notesToBlocks(rel!.notes);
+  ok(blocks.some((b) => b.kind === 'heading') && blocks.some((b) => b.kind === 'bullet') && !blocks.some((b) => /^Install:|^Built from|^## /.test(b.text)), 'release notes render as headings and bullets');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });
