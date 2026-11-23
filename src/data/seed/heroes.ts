@@ -129,11 +129,14 @@ const baseHeroes: Hero[] = [
     notes: 'Arms Race Ace Hero Choice Card pick for early realms (> 4 weeks).',
   }),
   hero({
-    name: 'Edith', title: 'Iron Matron', element: 'Ice', rarity: 5, unit: 'Archer', role: 'Sustain tank',
-    march: [['Field Medic', 'Reduces wounded troops in defence; Infantry HP up.']],
-    m3: { name: 'Overgrowth', desc: 'Heals allies over 3 turns and raises DEF.', charge: 'Fast', pattern: 'All allies', effects: ['HoT', 'DEF up'] },
+    name: 'Edith', title: 'Iron Matron', element: 'Ice', rarity: 5, unit: 'Archer', role: 'AoE damage and debuffs',
+    march: [
+      ['Troop skill', 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).'],
+      ...militaryTrio('Archer').map(([n, d]) => [n, n === 'Archer ATK' ? `${d} Unlocks at Lv. 131.` : d] as [string, string]),
+    ],
+    m3: { name: 'Desperate Spike', desc: 'Deals 183% damage to all enemies (Rage Regen: Medium). Wraith Within: enemies DEF −44% for 4 rounds. Bleak Whispers: enemies ATK −34% for 4 rounds. Spiritual Shriek (unlocks Lv. 71): a chance to Stun enemies for 2 rounds. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at +2.', charge: 'Medium', pattern: 'All enemies', effects: ['DEF down', 'ATK down', 'Stun', 'Crit'] },
     sources: ['Strike Out', 'Timeless Recruitment'], bonds: ['Sanguine Serenade'],
-    notes: 'Strike Out milestone shards make her the easiest 5-Star tank to max for F2P.',
+    notes: 'Hits all enemies and lowers their DEF and ATK.',
   }),
   hero({
     name: 'Boyd', title: 'Ember Captain', element: 'Nature', rarity: 5, unit: 'Cavalry', role: 'Cavalry DPS',
@@ -459,8 +462,8 @@ const baseHeroes: Hero[] = [
  * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills;
  * revision 9 = in-game Wu Kong skills (owned-hero troop passives); revision 10 = in-game Isabella skills;
  * revision 11 = in-game Sirona skills; revision 12 = in-game Christina skills;
- * revision 13 = in-game Ysera skills.
+ * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills.
  */
-export const HERO_DATA_REVISION = 13;
+export const HERO_DATA_REVISION = 14;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

@@ -65,7 +65,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Archer", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Ice Archer (app previously: Nature Infantry). Bond corrected: Sanguine Serenade.", "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."],
+    notes: ["Wiki: 5-star Ice Archer (app previously: Nature Infantry). Bond corrected: Sanguine Serenade.", "In-game (2026-11-23, Edith at +2): Ice Archer confirmed; troop skill 150% of troop ATK; Archer HP/DEF/ATK use the standard 5★/6★ table (Archer ATK unlocks at Lv. 131); hero skills Desperate Spike (183% to all enemies, Rage Regen Medium), Wraith Within, Bleak Whispers, Spiritual Shriek (Lv. 71), Combat Mastery (6★). The unsourced healer/tank skills (Field Medic, Overgrowth) and the tank role were replaced.", "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."],
   },
   "boyd": {
     checkedOn: '2026-11-23',
