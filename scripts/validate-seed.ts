@@ -70,7 +70,10 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(heroSearch('troop capacity').some((r) => r.name === 'Saya'), 'civil skill search');
 
   const sophia = (q: string) => db.raw.prepare('SELECT s.answer FROM sophia_fts f JOIN sophia s ON s.id = f.id WHERE sophia_fts MATCH ? ORDER BY bm25(sophia_fts, 0, 4, 1, 2) LIMIT 3').all(ftsQuery(q)!) as { answer: string }[];
-  ok(sophia('hall of might hours')[0]?.answer === '8 consecutive hours', 'sophia hall of might');
+  ok(sophia('hall of might automatic win')[0]?.answer === '8 consecutive hours', 'sophia hall of might');
+  ok(sophia('hall of might scramble')[0]?.answer === '6 hours', 'sophia in-game scramble question');
+  ok(sophia('polar bear skin')[0]?.answer === 'Black', 'sophia in-game general question');
+  ok(sophia('deluxe recruit 5')[0]?.answer === '25%', 'sophia probabilities shown as percentages');
   ok(sophia('infernal cooldown')[0]?.answer === '71 hours', 'sophia infernal');
   ok(sophia('fire advantage')[0]?.answer === 'Nature', 'sophia fire');
   ok(ftsQuery('"; DROP TABLE x; --') !== null && sophia('"; DROP TABLE x; --').length === 0, 'fts injection safe');
