@@ -14,6 +14,30 @@ const T: Verdict = 'Trap / Skip';
 /** Shops transcribed from in-game screenshots. Prices and limits are exact; verdicts are suggestions. */
 const verifiedShops: Shop[] = [
   {
+    id: 'alliance', name: 'Alliance Shop', currency: 'Alliance coins', refresh: 'Alliance Sale weekly; shop stock is shared by the alliance', checkedOn: CHECKED,
+    items: [
+      L('Weekly curio scroll (Alliance Sale)', '1,500,000 (-50%)', '1 per week', M, M, 'The sale curio changes every week (e.g. Chalice of Blood Scroll). Save coins for the one you need.'),
+      L('Regal Recruit Ticket (Alliance Sale)', '30,000 (-50%)', '5 per week', M, M, 'Half price; easy weekly buy.'),
+      L('Speedup 30-min (Alliance Sale)', '12,500', '5 per week', S, S, '25,000 per hour. The 3-hr speedup is cheaper per hour.'),
+      L('Carriage Pass (Alliance Sale)', '10,000', '10 per week', S, S, 'Buy if you run out.'),
+      L('Global Teleport (Alliance Sale)', '500,000', '1 per week', S, S, 'Expensive; only when you need to move kingdoms or regions.'),
+      L('Recall Order (Alliance Sale)', '40,000', '5 per week', S, S, 'Useful in fights; keep one or two.'),
+      L('Lord Name Changer (Alliance Sale)', '32,000', '2 per week', T, T, 'Cosmetic.'),
+      L('Arcane Barrier (8-hr)', '80,000', 'Alliance stock', M, M, 'Shield for SvS and sleep; keep a few spare.'),
+      L('Troop ATK +10%', '16,000', 'Alliance stock', S, S, 'Use before a big fight or rally.'),
+      L('Troop DEF +10%', '16,000', 'Alliance stock', S, S, 'Use when you expect to be hit.'),
+      L('Gather Speed +50%', '40,000', 'Alliance stock', S, S, 'Good for F2P gathering days.'),
+      L('Speedup 3-hr', '50,000', 'Alliance stock', S, S, 'Best value per hour here (about 16,700 per hour).'),
+      L('Speedup 60-min', '20,000', 'Alliance stock', S, S, '20,000 per hour.'),
+      L('Speedup 5-min', '2,400', 'Alliance stock', T, T, 'Worst value per hour (28,800 per hour).'),
+      L('Farm Output Up (24-hr)', '9,600', 'Alliance stock', T, S, 'Only if food is short.'),
+      L('Lumberyard Output Up (24-hr)', '9,600', 'Alliance stock', T, S, 'Only if wood is short.'),
+      L('Quarry Output Up (24-hr)', '14,400', 'Alliance stock', T, S, 'Only if stone is short.'),
+      L('Furnace Output Up (24-hr)', '19,200', 'Alliance stock', S, S, 'Iron is the scarcest resource.'),
+      L('Well of Life Output Up (24-hr)', '14,400', 'Alliance stock', T, S, 'Only if you are short.'),
+    ],
+  },
+  {
     id: 'royal', name: 'Royal Shop', currency: 'Royal Shop coins', refresh: 'Weekly (some items)', checkedOn: CHECKED,
     items: [
       L('Epic Hero Covenant', '1,500', '2', M, M, 'Rarest item in the shop; only 2 per refresh.'),
@@ -185,16 +209,6 @@ const verifiedShops: Shop[] = [
 
 /** Shops not yet checked in-game. */
 const unverifiedShops: Shop[] = [
-  {
-    id: 'alliance', name: 'Alliance Shop', currency: 'Alliance Coins', refresh: 'Weekly',
-    items: [
-      i('Arcane Barrier (8h)', '3,000', M, M, 'Cheapest shield source; keep two for SvS.'),
-      i('Teleport (Advanced)', '6,000', M, S, 'Needed for Realm Expedition / Fort Contest moves.'),
-      i('Gear Essence chest', '2,500', M, M, 'Converts directly to Lord power.'),
-      i('1h Universal Speedup', '1,500', S, S, 'Fine value once essential items are bought.'),
-      i('Resource packs', '800', T, T, 'Farm castles and gathering cover this.'),
-    ],
-  },
   {
     id: 'diamond', name: 'Diamond Shop', currency: 'Diamonds', refresh: 'Daily',
     items: [
