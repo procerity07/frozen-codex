@@ -489,8 +489,8 @@ const baseHeroes: Hero[] = [
  * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills;
  * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills;
  * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills;
- * revision 21 = in-game Leona skills.
+ * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills.
  */
-export const HERO_DATA_REVISION = 21;
+export const HERO_DATA_REVISION = 22;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

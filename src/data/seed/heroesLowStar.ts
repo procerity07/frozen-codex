@@ -183,8 +183,18 @@ export const addedHighStarHeroes: Hero[] = [
       notes: ['In-game (2026-11-23, Setemos at +1): 5★ Dark Civil confirmed; troop skill 120% of troop ATK; Safe Resources, Hunt ATK Bonus and Troop DEF (Passive, Lv. 131) tables for 5★ and 6★; five hero skills. Hunt ATK Bonus applies while owned (the wiki said it unlocks at level 31).'] }),
     marchSkills: [{ name: 'Troop skill', description: 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).' }],
   },
-  lowStar({ name: 'Tutanhet', element: 'Fire', rarity: 5, unit: 'Archer', sources: ['Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial', 'Monsters', 'Monster Dens'], pages: [PLAZA],
-    notes: ['Also sold for 1,000 points in the Hero Plaza point shop; shards drop from Monster den supply chests.'] }),
+  {
+    ...lowStar({ name: 'Tutanhet', element: 'Fire', rarity: 5, unit: 'Archer', sources: ['Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial', 'Monsters', 'Monster Dens'], pages: [PLAZA],
+      march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
+      m3: { name: 'Arcane Flare', description: 'Deals 200% damage to 3 random enemies (Rage Regen: Medium). Petrifying Gaze: a chance to Paralyze the target for 3 rounds (Paralyzed enemies gain DEF +30% but cannot gain Rage). Elixir Poison: Poison damage to Paralyzed enemies for 3 rounds. Shield Corrosion (unlocks Lv. 71): reduces Paralyzed enemies\' DEF to 10%. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at Hero0.', charge: 'Medium', pattern: 'Random x3', effects: ['Paralyze', 'Poison', 'DEF down', 'Crit'] },
+      notes: ['Also sold for 1,000 points in the Hero Plaza point shop; shards drop from Monster den supply chests.', 'In-game (2026-11-23, Tutanhet at Hero0): 5★ Fire Archer confirmed; troop skill 100% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).' },
+      { name: 'Troop HP', description: '5★: +6.4% at Hero0, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when he joins troop battle (in-game).' },
+      { name: 'Troop DEF', description: '5★: +6.4% at Hero0, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when he joins troop battle (in-game).' },
+      { name: 'Troop ATK', description: '5★: +6.4% at Hero0, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Sirona', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Timeless Recruitment', 'Recruit Trial', 'Trial Turret Shop'],
       march: ['Troop skill'],
