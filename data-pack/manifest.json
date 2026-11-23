@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "publishedAt": "2026-11-22T23:01:42.751Z",
   "packs": {
     "heroes": [
@@ -238,16 +238,16 @@
         "title": "Storm Archer",
         "element": "Light",
         "rarity": 5,
-        "unitType": "Archer",
-        "role": "Archer DPS",
+        "unitType": "Cavalry",
+        "role": "Cavalry Support",
         "marchSkills": [
           {
             "name": "Volley Command",
-            "description": "Archer ATK up; bonus damage vs Cavalry."
+            "description": "Cavalry ATK up; bonus damage vs Infantry."
           },
           {
             "name": "Thunder Mark",
-            "description": "Marked enemies take more Archer damage."
+            "description": "Marked enemies take more damage."
           }
         ],
         "civilSkills": [],
