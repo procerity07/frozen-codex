@@ -467,14 +467,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Elsa', title: 'Frost Architect', element: 'Dark', rarity: 4, unit: 'Civil', role: 'Construction speed',
-    march: [],
+    march: [['Troop skill', 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).']],
     civil: [
-      { name: 'Construction Speed', description: 'Increases construction speed. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildSpeed' },
-      { name: 'Iron Output', description: 'Increases iron output. Value not verified.', requirement: 'Unlock level not verified', stat: 'resourceOutput' },
-      { name: 'Rally Size', description: '+20,000 at the lowest tier rising to +100,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)', unit: 'flat',
-        tiers: { '4': [20000, null, null, null, null, 100000] } },
+      { name: 'Construction Speed', description: 'In-game. 4★: +4.5% at +1, +6% at +2, +9% at +3, +12% at +4, +15% at +5.', requirement: 'Active while owned (in-game)', stat: 'buildSpeed', unit: '%',
+        tiers: { '4': [null, 4.5, 6, 9, 12, 15] } },
+      { name: 'Iron Output', description: 'In-game. 4★: +30% at +1, +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%',
+        tiers: { '4': [null, 30, 40, 60, 80, 100] } },
+      { name: 'Rally Size', description: 'In-game. 4★: +30,000 at +1, +40,000 at +2, +60,000 at +3, +80,000 at +4, +100,000 at +5 (+20,000 at Hero0 per the wiki).', requirement: 'Unlocks at level 131 (in-game)', unit: 'flat',
+        tiers: { '4': [20000, 30000, 40000, 60000, 80000, 100000] } },
     ],
-    m3: { name: 'Frost Pillar', desc: 'Ice damage to a column.', charge: 'Medium', pattern: 'Column', effects: [] },
+    m3: { name: 'Darktide', desc: 'Deals 149% damage to all enemies (Rage Regen: Medium). Soul Shackles: enemies ATK −28% for 5 rounds. Death\'s Anthem: ATK +15% and Rage Regen +8%. Ice Blade (unlocks Lv. 71): depletes 20% Rage of enemies. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All enemies', effects: ['ATK down', 'ATK up', 'Rage up', 'Rage down'] },
     sources: ['Hero Plaza', 'Epic Hero Covenant'],
     notes: 'Own-only build speed — counts toward the Citadel net-time calculator.',
   }),
@@ -511,8 +513,8 @@ const baseHeroes: Hero[] = [
  * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills;
  * revision 23 = in-game Lylia skills; revision 24 = in-game Tooka skills;
  * revision 25 = in-game Carvell skills; revision 26 = in-game Kaios skills;
- * revision 27 = in-game Dolly skills.
+ * revision 27 = in-game Dolly skills; revision 28 = in-game Elsa skills.
  */
-export const HERO_DATA_REVISION = 27;
+export const HERO_DATA_REVISION = 28;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

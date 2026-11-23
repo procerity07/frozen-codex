@@ -287,7 +287,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "civilSkills", "sources"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Elsa", "https://puzzles-chaos.fandom.com/wiki/Civil"],
-    notes: ["Wiki: 4-star Dark Civil (app previously: Ice).", "Sources corrected: Hero Plaza, Epic Hero Covenant (app previously: Hero Recruitment).", "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."],
+    notes: ["In-game (2026-11-23, Elsa at +1): Dark Civil confirmed; troop skill 120% of troop ATK; Construction Speed 4.5/6/9/12/15%, Iron Output 30/40/60/80/100%, Rally Size 30k/40k/60k/80k/100k (+1 to +5, Lv. 131); hero skills Darktide, Soul Shackles, Death's Anthem, Ice Blade (Lv. 71). The unsourced Frost Pillar skill was replaced.", "Wiki: 4-star Dark Civil (app previously: Ice).", "Sources corrected: Hero Plaza, Epic Hero Covenant (app previously: Hero Recruitment).", "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."],
   },
   "gina": {
     checkedOn: '2026-11-23',
