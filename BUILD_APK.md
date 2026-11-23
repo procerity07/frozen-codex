@@ -43,3 +43,7 @@ npm run export:seed -- 2   # writes data-pack/manifest.json with version 2
 ```
 
 Host `data-pack/manifest.json` on GitHub Pages or a raw GitHub URL, set that URL in **Guides › Settings › Database updates** (or `expo.extra.dataManifestUrl` in `app.json`), and tap **Check for updates**. Rows from the pack are merged into SQLite by id and are kept when a newer APK re-seeds the bundled data.
+
+## Versions and releases (GitHub Actions)
+
+Every push to `main` builds the APK and publishes a GitHub release automatically. The version is the latest release's version plus one patch step (v1.0.3 → v1.0.4 → v1.0.5 …). The workflow writes that version into `app.json` during the build (it is not committed), so the app's Settings screen and Android's update check both see the new number. To jump to a new minor or major version, publish a release tagged e.g. `v1.1.0` by hand; the next build becomes `v1.1.1`.

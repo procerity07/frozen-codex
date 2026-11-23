@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write
 
+# One build at a time, so two quick pushes can't claim the same version number.
+concurrency:
+  group: frozen-codex-release
+  cancel-in-progress: false
+
 jobs:
   build-apk:
     name: Verify & Build Release APK
@@ -54,6 +59,30 @@ jobs:
       - name: Run TypeScript & SQLite seed verification
         run: npm run verify
 
+      - name: Compute next version from the latest release
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest=$(gh api "repos/${{ github.repository }}/releases/latest" --jq .tag_name 2>/dev/null || true)
+          ver="${latest#[vV]}"
+          IFS=. read -r major minor patch <<< "$ver"
+          if ! [[ "$major" =~ ^[0-9]+$ && "$minor" =~ ^[0-9]+$ && "$patch" =~ ^[0-9]+$ ]]; then
+            major=1; minor=0; patch=0
+          fi
+          next="$major.$minor.$((patch + 1))"
+          code=$((major * 10000 + minor * 100 + patch + 1))
+          echo "version=$next" >> "$GITHUB_OUTPUT"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "Latest release: ${latest:-none} -> building v$next (versionCode $code)"
+
+      - name: Stamp version into app.json
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
+          APP_VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: |
+          node -e "const fs=require('fs');const a=JSON.parse(fs.readFileSync('app.json','utf8'));a.expo.version=process.env.APP_VERSION;a.expo.android.versionCode=Number(process.env.APP_VERSION_CODE);fs.writeFileSync('app.json',JSON.stringify(a,null,2)+'\n');console.log('app.json ->',a.expo.version,a.expo.android.versionCode)"
+
       - name: Generate native Android project (Expo Prebuild)
         run: |
           npx expo prebuild --platform android --clean --no-install
@@ -66,14 +95,31 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Stage APK artifact
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          cp android/app/build/outputs/apk/release/app-release.apk Frozen-Codex-v1.0.0.apk
-          ls -lh Frozen-Codex-v1.0.0.apk
+          cp android/app/build/outputs/apk/release/app-release.apk "Frozen-Codex-v${APP_VERSION}.apk"
+          ls -lh "Frozen-Codex-v${APP_VERSION}.apk"
 
       - name: Upload Frozen Codex APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Frozen-Codex-v1.0.0-APK
-          path: Frozen-Codex-v1.0.0.apk
+          name: Frozen-Codex-v${{ steps.version.outputs.version }}-APK
+          path: Frozen-Codex-v${{ steps.version.outputs.version }}.apk
           if-no-files-found: error
           retention-days: 90
+
+      - name: Publish GitHub release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APP_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git log -1 --pretty=%B > release-notes.txt
+          printf '\n\nBuilt from %s.\n' "${{ github.sha }}" >> release-notes.txt
+          gh release create "v${APP_VERSION}" "Frozen-Codex-v${APP_VERSION}.apk" \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "Frozen Codex v${APP_VERSION}" \
+            --notes-file release-notes.txt \
+            --latest
