@@ -2,6 +2,8 @@ import * as DocumentPicker from 'expo-document-picker';
 import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { defaultState, type PersistedState } from '@/store/useAppStore';
+import { heroes } from '@/data/seed';
+import { makeRosterFile, parseRosterFile, type RosterEntry } from '@/lib/roster';
 
 export interface BackupFile { app: 'frozen-codex'; schema: 1; exportedAt: string; profile: PersistedState }
 
@@ -34,4 +36,22 @@ export async function importProfile(): Promise<Partial<PersistedState> | null> {
   if (res.canceled || !res.assets[0]) return null;
   const text = await new File(res.assets[0].uri).text();
   return sanitizeProfile(JSON.parse(text));
+}
+
+export async function exportRoster(roster: Record<string, RosterEntry>): Promise<void> {
+  const file = new File(Paths.cache, `frozen-codex-roster-${new Date().toISOString().slice(0, 10)}.json`);
+  if (file.exists) file.delete();
+  file.create();
+  file.write(JSON.stringify(makeRosterFile(roster), null, 2));
+  if (await Sharing.isAvailableAsync()) {
+    await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Export hero roster' });
+  }
+}
+
+/** Picks a roster file (or full backup) and returns validated entries to merge. */
+export async function importRoster(): Promise<{ entries: Record<string, RosterEntry>; skipped: string[] } | null> {
+  const res = await DocumentPicker.getDocumentAsync({ type: ['application/json', 'text/plain', '*/*'], copyToCacheDirectory: true });
+  if (res.canceled || !res.assets[0]) return null;
+  const text = await new File(res.assets[0].uri).text();
+  return parseRosterFile(JSON.parse(text), heroes);
 }

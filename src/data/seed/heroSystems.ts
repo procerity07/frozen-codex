@@ -28,12 +28,12 @@ export const bondGifts: BondGift[] = [
 // (https://puzzles-chaos.fandom.com/wiki/Hero_Bond). Members not in this app's hero list are kept in otherMembers.
 export const bondGroups: BondGroup[] = [
   {
-    id: 'sanguine-serenade', name: 'Sanguine Serenade', members: ['norris', 'eris', 'carvell', 'edith'], otherMembers: ['Setemos'],
+    id: 'sanguine-serenade', name: 'Sanguine Serenade', members: ['norris', 'eris', 'carvell', 'edith', 'setemos'],
     verified: true, bonusesVerified: false,
     bonuses: [{ level: 0, effect: 'Favorability rewards boost Archer, Cavalry and Infantry stats (levels and values not verified)' }],
   },
   {
-    id: 'octet-wanderers', name: 'Octet Wanderers', members: ['fiona', 'tania', 'apan'], otherMembers: ['Sodoma', 'Sirona'],
+    id: 'octet-wanderers', name: 'Octet Wanderers', members: ['fiona', 'tania', 'apan', 'sodoma', 'sirona'],
     verified: true, bonusesVerified: false,
     bonuses: [{ level: 40, effect: 'Cavalry ATK (value not verified)' }, { level: 70, effect: 'Infantry DEF (value not verified)' }, { level: 99, effect: 'Archer HP (value not verified)' }],
   },

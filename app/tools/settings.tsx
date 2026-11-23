@@ -8,7 +8,7 @@ import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, Se
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
 import { dbStats, getMeta } from '@/db/repo';
 import { checkForUpdates, DEFAULT_MANIFEST_URL, type SyncResult } from '@/db/ota';
-import { exportProfile, importProfile } from '@/services/backup';
+import { exportProfile, exportRoster, importProfile, importRoster } from '@/services/backup';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import { SEED_VERSION } from '@/data/seed';
 import { checkForAppUpdate, CURRENT_VERSION, type UpdateCheck } from '@/services/appUpdate';
@@ -112,6 +112,23 @@ export default function SettingsScreen() {
               Alert.alert('Replace local data?', 'Your current profile will be overwritten.', [
                 { text: 'Cancel', style: 'cancel' },
                 { text: 'Import', style: 'destructive', onPress: () => s.importState(data) },
+              ]);
+            }).catch((e: unknown) => Alert.alert('Import failed', e instanceof Error ? e.message : String(e)));
+          }} /></View>
+        </Row>
+      </Card>
+      <Card style={{ marginTop: space.sm }}>
+        <Text style={type.body}>Hero roster</Text>
+        <Text style={type.caption}>{Object.keys(s.roster).length} heroes saved. Importing adds or updates heroes and keeps everything else.</Text>
+        <Row style={{ marginTop: space.md }}>
+          <View style={{ flex: 1 }}><Button icon={Upload} variant="secondary" label="Export roster" onPress={() => { exportRoster(s.roster).catch((e: unknown) => Alert.alert('Export failed', String(e))); }} /></View>
+          <View style={{ flex: 1 }}><Button icon={Download} variant="secondary" label="Import roster" onPress={() => {
+            importRoster().then((r) => {
+              if (!r) return;
+              const n = Object.keys(r.entries).length;
+              Alert.alert('Import roster?', `${n} hero${n === 1 ? '' : 'es'} will be added or updated.${r.skipped.length ? ` ${r.skipped.length} unknown entr${r.skipped.length === 1 ? 'y' : 'ies'} skipped.` : ''}`, [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'Import', onPress: () => s.mergeRoster(r.entries) },
               ]);
             }).catch((e: unknown) => Alert.alert('Import failed', e instanceof Error ? e.message : String(e)));
           }} /></View>

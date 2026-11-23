@@ -15,4 +15,5 @@ export { checklistTemplate, guides } from './guides';
 // 6: in-game Event Schedule corrections (events revision 3).
 // 7: in-game event pop-ups (Alliance Party, Undead Scourge, Elemental Seal).
 // 8: hero revision 2 (civil-skill value tables for My Heroes).
-export const SEED_VERSION = 8;
+// 9: hero revision 3 (in-game Saya table, five added heroes).
+export const SEED_VERSION = 9;

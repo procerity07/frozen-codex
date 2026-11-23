@@ -49,6 +49,7 @@ export interface AppState {
   dismissUpdate: (version: string) => void;
   setRosterEntry: (heroId: string, entry: RosterEntry) => void;
   removeFromRoster: (heroId: string) => void;
+  mergeRoster: (entries: Record<string, RosterEntry>) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -113,6 +114,7 @@ export const useAppStore = create<AppState>()(
       importState: (data) => set({ ...defaultState, ...data }),
       dismissUpdate: (dismissedUpdate) => set({ dismissedUpdate }),
       setRosterEntry: (heroId, entry) => set({ roster: { ...get().roster, [heroId]: entry } }),
+      mergeRoster: (entries) => set({ roster: { ...get().roster, ...entries } }),
       removeFromRoster: (heroId) => {
         const next = { ...get().roster };
         delete next[heroId];

@@ -81,9 +81,9 @@ export const heroAudit: Record<string, HeroAudit> = {
   },
   "kaios": {
     checkedOn: '2026-11-23',
-    verified: ["name", "element", "unitType", "sources"],
+    verified: ["name", "element", "unitType", "sources", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Kaios", "https://puzzles-chaos.fandom.com/wiki/Cavalry", "https://puzzles-chaos.fandom.com/wiki/Archer"],
-    notes: ["Wiki: Light Civil; Ace Lord (servers open more than 12 weeks) and AP Event (app previously: Ice Archer).", "Wiki lists Kaios under \"other heroes with Cavalry/Archer skills\" — his skills affect troop types other than his unit type.", "Star rating not stated in the sources checked; existing value kept."],
+    notes: ["Wiki: Light Civil; Ace Lord (servers open more than 12 weeks) and AP Event (app previously: Ice Archer).", "Wiki lists Kaios under \"other heroes with Cavalry/Archer skills\" — his skills affect troop types other than his unit type.", "5★ confirmed from an in-game hero list (2026-11-23)."],
   },
   "aerposia": {
     checkedOn: '2026-11-23',
@@ -195,9 +195,9 @@ export const heroAudit: Record<string, HeroAudit> = {
   },
   "lylia": {
     checkedOn: '2026-11-23',
-    verified: ["name", "element", "unitType", "sources"],
+    verified: ["name", "element", "unitType", "sources", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Lylia"],
-    notes: ["Wiki: Fire Civil, Royal Arms Race (app previously: Dark Cavalry).", "Star rating not stated in the sources checked; existing value kept."],
+    notes: ["Wiki: Fire Civil, Royal Arms Race (app previously: Dark Cavalry).", "5★ confirmed from an in-game hero list (2026-11-23)."],
   },
   "oskir": {
     checkedOn: '2026-11-23',
@@ -255,9 +255,9 @@ export const heroAudit: Record<string, HeroAudit> = {
   },
   "aurora": {
     checkedOn: '2026-11-23',
-    verified: ["name", "element", "unitType", "sources", "civilSkills"],
+    verified: ["name", "element", "unitType", "sources", "civilSkills", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Civil", "https://puzzles-chaos.fandom.com/wiki/Aurora"],
-    notes: ["Wiki: Dark Civil from Lucky Flip (app previously: Ice Archer). Civil skills from the wiki: Gather March Speed, Heal Stone Cost (values not verified).", "Star rating not stated in the sources checked; existing value kept."],
+    notes: ["Wiki: Dark Civil from Lucky Flip (app previously: Ice Archer). Civil skills from the wiki: Gather March Speed, Heal Stone Cost (values not verified).", "5★ confirmed from an in-game hero list (2026-11-23)."],
   },
   "selantia": {
     checkedOn: '2026-11-23',

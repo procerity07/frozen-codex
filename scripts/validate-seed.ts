@@ -7,7 +7,7 @@ import { bundledEventsToSeed, bundledHeroesToSeed, mergePackEvents, mergePackHer
 import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
 import { reKillPointsByTier } from '../src/lib/calculators';
 import { compareVersions, isNewer, notesToBlocks, parseRelease } from '../src/lib/appUpdate';
-import { bondCapForEnhancement, civilBonuses, clampEntry, maxStars, newEntry, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked } from '../src/lib/roster';
+import { bondCapForEnhancement, civilBonuses, clampEntry, makeRosterFile, maxStars, newEntry, parseRosterFile, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked } from '../src/lib/roster';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Hero } from '../src/types/game';
@@ -178,7 +178,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok((xdb.raw.prepare("SELECT COUNT(*) n FROM heroes_fts WHERE id = 'khaos'").get() as { n: number }).n === 1, 'FTS row replaced, not duplicated');
 
   // (f) A future pack at the same or newer revision still applies.
-  const newer = await mergePackHeroes(rdb as unknown as SQLiteDatabase, [{ ...byId('eric'), revision: 2, notes: 'pack v4 note' }]);
+  const newer = await mergePackHeroes(rdb as unknown as SQLiteDatabase, [{ ...byId('eric'), revision: seed.HERO_DATA_REVISION + 1, notes: 'pack v4 note' }]);
   ok(newer.applied === 1 && readHero('eric').notes === 'pack v4 note', 'newer-revision pack row applies');
 
 
@@ -216,7 +216,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
   // The published pack must parse and agree with the bundled data revisions.
   const livePack = parseManifest(JSON.parse(readFileSync(join(__dirname, '..', 'data-pack', 'manifest.json'), 'utf8')));
-  ok(livePack.version >= 3 && livePack.packs.heroes!.length === seed.heroes.length && livePack.packs.heroes!.every((h) => (h.revision ?? 0) <= seed.HERO_DATA_REVISION), 'published pack is never newer than the bundled heroes');
+  ok(livePack.version >= 3 && livePack.packs.heroes!.every((h) => seed.heroes.some((b) => b.id === h.id) && (h.revision ?? 0) <= seed.HERO_DATA_REVISION), 'published pack heroes exist in the app and are never newer');
   ok(seed.upgradeTable('gear')[39]!.essence === 210_000 && seed.upgradeTable('gear').length === 40, 'user gear table kept');
   ok(seed.upgradeTable('holystone').length === 40 && seed.upgradeTable('holystone')[29]!.arcaneCore === 1, 'holystone curve unchanged');
 
@@ -259,6 +259,14 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(cb.find((b) => b.heroId === 'saya' && b.skill === 'Construction Speed')!.value === null, '5★ Saya construction speed stays unverified (no guess)');
   const saya6 = civilBonuses(seed.heroes, { saya: { stars: 6, level: 400, enhancement: 6, bond: 1 } }).find((b) => b.skill === 'Construction Speed')!;
   ok(saya6.value === 48 && saya6.unit === '%', 'Saya 6★ +6 construction speed = +48%');
+
+  // Roster import/export
+  const rf = parseRosterFile(JSON.parse(JSON.stringify(makeRosterFile({ tania: { stars: 5, level: 999, enhancement: 9, bond: 3 }, nobody: { stars: 5, level: 1, enhancement: 0, bond: 1 } }))), seed.heroes);
+  ok(rf.entries.tania!.level === 310 && rf.entries.tania!.enhancement === 8 && rf.skipped.join() === 'nobody', 'roster import clamps values and skips unknown heroes');
+  ok(Object.keys(parseRosterFile({ app: 'frozen-codex', profile: { roster: { saya: { stars: 5, level: 210, enhancement: 1, bond: 10 } } } }, seed.heroes).entries).join() === 'saya', 'roster import reads full backups');
+  assert.throws(() => parseRosterFile({ hello: 1 }, seed.heroes));
+  ok(['sodoma', 'setemos', 'tutanhet', 'sirona', 'isabella'].every((id) => seed.heroes.some((h) => h.id === id)) && byId('isabella').rarity === 6, 'five added heroes present');
+  ok(JSON.stringify(byId('saya').civilSkills.find((c) => c.name === 'Troop Capacity')!.tiers!['6']) === JSON.stringify([null, null, null, null, null, 12500, 16000, 20000, 30000]), 'Saya 6★ troop capacity from in-game table');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });

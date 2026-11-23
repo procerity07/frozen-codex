@@ -118,3 +118,28 @@ export function civilBonuses(heroes: Hero[], roster: Record<string, RosterEntry>
   }
   return out;
 }
+
+export interface RosterFile { app: 'frozen-codex'; kind: 'roster'; version: 1; roster: Record<string, RosterEntry> }
+
+/**
+ * Reads a roster file (or a full profile backup that contains a roster). Entries for heroes the app
+ * doesn't know are skipped; every value is clamped to game rules.
+ */
+export function parseRosterFile(raw: unknown, heroes: Pick<Hero, 'id' | 'rarity'>[]): { entries: Record<string, RosterEntry>; skipped: string[] } {
+  if (typeof raw !== 'object' || raw === null) throw new Error('Not a roster file');
+  const obj = raw as Record<string, unknown>;
+  const src = (obj.roster ?? (typeof obj.profile === 'object' && obj.profile ? (obj.profile as Record<string, unknown>).roster : undefined)) as unknown;
+  if (typeof src !== 'object' || src === null || Array.isArray(src)) throw new Error('No roster found in this file');
+  const entries: Record<string, RosterEntry> = {};
+  const skipped: string[] = [];
+  for (const [id, value] of Object.entries(src as Record<string, unknown>)) {
+    const hero = heroes.find((h) => h.id === id);
+    if (!hero || typeof value !== 'object' || value === null) { skipped.push(id); continue; }
+    entries[id] = clampEntry(hero, value as Partial<RosterEntry>);
+  }
+  return { entries, skipped };
+}
+
+export function makeRosterFile(roster: Record<string, RosterEntry>): RosterFile {
+  return { app: 'frozen-codex', kind: 'roster', version: 1, roster };
+}

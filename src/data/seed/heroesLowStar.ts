@@ -20,7 +20,7 @@ const civil = (name: string, description = 'Listed on the wiki. Value not verifi
 interface LowStarInput {
   name: string;
   element: Element;
-  rarity: Extract<Rarity, 2 | 3 | 4>;
+  rarity: Rarity;
   unit: UnitType;
   sources: AcquisitionSource[];
   march?: string[];
@@ -28,6 +28,7 @@ interface LowStarInput {
   m3?: Match3Skill;
   /** false when the element was inferred from the wiki table layout rather than stated. */
   elementStated?: boolean;
+  bonds?: string[];
   notes?: string[];
   pages?: string[];
 }
@@ -40,6 +41,7 @@ function lowStar(i: LowStarInput): Hero {
   if (i.march?.length) verified.push('marchSkills');
   if (i.civil?.length) verified.push('civilSkills');
   if (i.m3) verified.push('match3Skill');
+  if (i.bonds?.length) verified.push('bondGroups');
   const id = slug(i.name);
   return {
     id,
@@ -53,7 +55,7 @@ function lowStar(i: LowStarInput): Hero {
     civilSkills: i.civil ?? [],
     match3Skill: i.m3,
     sources: i.sources,
-    bondGroups: [],
+    bondGroups: i.bonds ?? [],
     notes: '',
     confidence: 'community',
     audit: {
@@ -90,7 +92,7 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Andre', element: 'Ice', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
   lowStar({ name: 'Odell', element: 'Ice', rarity: 4, unit: 'Civil', sources: ['Epic Hero Covenant', 'Monsters', 'Monster Dens'],
     civil: [civil('Lord EXP Bonus'), civil('Medical Tent Healing Speed'), civil('Troop Capacity')], notes: ['Monsters Lv. 10+ and Monster dens Lv. 8–9 per the wiki.'] }),
-  lowStar({ name: 'Viola', element: 'Ice', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'], elementStated: false }),
+  lowStar({ name: 'Viola', element: 'Ice', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'], notes: ['Element confirmed by the in-game hero card (wiki only implies it by table position).'] }),
   // ------------------------------ Nature ------------------------------
   lowStar({ name: 'Luke', element: 'Nature', rarity: 2, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
   lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA],
@@ -114,5 +116,25 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Hanzo', element: 'Light', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Output')] }),
   // ------------------------------ Dark ------------------------------
   lowStar({ name: 'Claudia', element: 'Dark', rarity: 3, unit: 'Cavalry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Gather Speed')],
-    elementStated: false, notes: ['Sold for 50 points in the Hero Plaza point shop.'] }),
+    notes: ['Sold for 50 points in the Hero Plaza point shop.', 'Element confirmed by the in-game hero card (wiki only implies it by table position).'] }),
 ];
+
+/**
+ * 5- and 6-star heroes added 2026-11-23 after they appeared in an in-game hero list; element, stars and
+ * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
+ */
+export const addedHighStarHeroes: Hero[] = [
+  lowStar({ name: 'Sodoma', element: 'Nature', rarity: 5, unit: 'Cavalry', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial'],
+    bonds: ['Octet Wanderers'], pages: [`${W}Hero_Bond`] }),
+  lowStar({ name: 'Setemos', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Recruit Trial'],
+    civil: [civil('Hunt ATK Bonus', 'Listed on the wiki. Value not verified.', 'Unlocks at level 31'), civil('Troop DEF', 'Listed on the wiki. Value not verified.', 'Unlocks at level 131')],
+    bonds: ['Sanguine Serenade'], pages: [`${W}Hero_Bond`] }),
+  lowStar({ name: 'Tutanhet', element: 'Fire', rarity: 5, unit: 'Archer', sources: ['Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial', 'Monsters', 'Monster Dens'], pages: [PLAZA],
+    notes: ['Also sold for 1,000 points in the Hero Plaza point shop; shards drop from Monster den supply chests.'] }),
+  lowStar({ name: 'Sirona', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Timeless Recruitment', 'Recruit Trial', 'Trial Turret Shop'],
+    civil: [civil('Troop Capacity', 'Listed on the wiki. Value not verified.', 'Unlocks at level 131')],
+    bonds: ['Octet Wanderers'], pages: [`${W}Hero_Bond`, `${W}Troop_Capacity`] }),
+  lowStar({ name: 'Isabella', element: 'Nature', rarity: 6, unit: 'Civil', sources: [],
+    notes: ['The wiki lists no acquisition method.'] }),
+];
+

@@ -2,7 +2,7 @@ import type {
   AcquisitionSource, ChargeSpeed, CivilSkill, Confidence, Element, Hero, HeroSkill, Rarity, UnitType,
 } from '@/types/game';
 import { heroAudit } from './heroAudit';
-import { lowStarHeroes } from './heroesLowStar';
+import { addedHighStarHeroes, lowStarHeroes } from './heroesLowStar';
 
 interface HeroInput {
   name: string;
@@ -78,8 +78,8 @@ const baseHeroes: Hero[] = [
     name: 'Saya', title: 'Hearth Steward', element: 'Fire', rarity: 5, unit: 'Civil', role: 'Economy core',
     march: [['Warm Welcome', 'Minor troop HP buff when garrisoning the Citadel.']],
     civil: [
-      { name: 'Troop Capacity', description: 'Flat troop capacity. 5-star: +2,000 at Hero0 rising to +22,500 at Hero8. 6-star: +12,500 at Hero5 rising to +30,000 at Hero8.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
-        tiers: { '5': [2000, 3000, 4000, 6000, 8000, 10000, 12500, 15000, 22500], '6': [null, null, null, null, null, 12500, null, null, 30000] } },
+      { name: 'Troop Capacity', description: 'Flat troop capacity (confirmed in-game). 5-star: +2,000, +3,000, +4,000, +6,000, +8,000, +10,000, +12,500, +15,000, +22,500 from Hero0 to +8. 6-star: +12,500, +16,000, +20,000, +30,000 from +5 to +8.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
+        tiers: { '5': [2000, 3000, 4000, 6000, 8000, 10000, 12500, 15000, 22500], '6': [null, null, null, null, null, 12500, 16000, 20000, 30000] } },
       { name: 'Construction Speed', description: '6-star: +37.5% at Hero5 rising to +100% at Hero8. 5-star values not verified.', requirement: 'Unlocks at level 31', stat: 'buildSpeed', unit: '%',
         tiers: { '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
       { name: 'Free Speedup Time', description: '5-star: 6 minutes at Hero0 rising to 60 minutes at Hero8; 6-star values are higher.', requirement: 'Unlock level not verified', unit: 'min',
@@ -428,8 +428,9 @@ const baseHeroes: Hero[] = [
 /**
  * Revision of the bundled hero data. Bump it whenever bundled hero facts are corrected, so the
  * corrections replace older online-pack rows (which carry a lower or missing revision) on re-seed.
- * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes.
+ * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
+ * revision 3 = in-game Saya table, five added heroes, in-game element confirmations.
  */
-export const HERO_DATA_REVISION = 2;
+export const HERO_DATA_REVISION = 3;
 
-export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
+export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
