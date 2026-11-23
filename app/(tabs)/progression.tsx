@@ -72,13 +72,13 @@ function CitadelView() {
               {l.requires.map((r) => <Text key={r.building} style={type.body}>{r.building} Lv. {r.level}</Text>)}
             </>
           ) : null}
-          <Text style={[type.caption, { marginTop: space.md, marginBottom: 4 }]}>Cost · base time {formatDurationShort(l.baseSeconds)}</Text>
+          <Text style={[type.caption, { marginTop: space.md, marginBottom: 4 }]}>Cost · base time {l.baseSeconds === null ? 'unknown' : formatDurationShort(l.baseSeconds)}</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.md }}>
             {Object.entries(l.cost).filter(([, v]) => v).map(([k, v]) => <Stat key={k} label={k.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())} value={fmt(v as number)} />)}
           </View>
         </Accordion>
       ))}
-      <ConfidenceNote confidence="estimate" />
+      <ConfidenceNote confidence="community" />
       <SectionHeader title="Building directory" />
       {buildings.map((b) => (
         <Card key={b.id} style={{ marginBottom: space.sm, padding: space.md }}>
