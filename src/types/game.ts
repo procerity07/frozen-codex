@@ -248,7 +248,8 @@ export interface CitadelLevel {
   level: number;
   requires: BuildingRequirement[];
   cost: ResourceCost;
-  baseSeconds: number;
+  /** null when the build time is unknown */
+  baseSeconds: number | null;
   unlocks: string[];
   confidence: Confidence;
 }
