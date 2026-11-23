@@ -195,10 +195,13 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Kujo Mamoru', title: 'Shrine Guardian', element: 'Nature', rarity: 5, unit: 'Infantry', role: 'Tank',
-    march: [['Sacred Barrier', 'Infantry DEF up and reduces skill damage taken.']],
-    m3: { name: 'Torii Seal', desc: 'Shields all allies and reflects part of damage.', charge: 'Medium', pattern: 'All allies', effects: ['Shield', 'Reflect'] },
+    march: [
+      ['Troop skill', 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).'],
+      ...militaryTrio('Infantry').map(([n, d]) => [n, n === 'Infantry ATK' ? `${d} Unlocks at Lv. 131.` : d] as [string, string]),
+    ],
+    m3: { name: 'Zoetic Enchantment', desc: 'Evens out the damage taken among allies, and among enemies, for 4 rounds (Rage Regen: Slow). Disarm: enemies DEF −44%. Traceless Shadow: Dodge +20%. Elf\'s Shelter (unlocks Lv. 71): all allies DEF +63%. Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at +2.', charge: 'Slow', pattern: 'All allies and enemies', effects: ['Damage sharing', 'DEF down', 'Dodge', 'DEF up', 'Parry'] },
     sources: ['Strike Out', 'Timeless Recruitment'], bonds: ['Rhapsody of Genesis'],
-    notes: 'Strike Out milestone shards — easy F2P Infantry defender.',
+    notes: 'Shards also sold in the Commander Shop (5,000 each, unlimited).',
   }),
   hero({
     name: 'Rodriguez', title: 'Desert Gunner', element: 'Light', rarity: 5, unit: 'Infantry', role: 'Infantry DPS',
@@ -467,8 +470,8 @@ const baseHeroes: Hero[] = [
  * revision 9 = in-game Wu Kong skills (owned-hero troop passives); revision 10 = in-game Isabella skills;
  * revision 11 = in-game Sirona skills; revision 12 = in-game Christina skills;
  * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills;
- * revision 15 = in-game Aurora skills.
+ * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills.
  */
-export const HERO_DATA_REVISION = 15;
+export const HERO_DATA_REVISION = 16;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

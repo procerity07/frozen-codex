@@ -113,7 +113,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Infantry", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Nature Infantry (app previously: Light). Bond corrected: Rhapsody of Genesis.", "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."],
+    notes: ["Wiki: 5-star Nature Infantry (app previously: Light). Bond corrected: Rhapsody of Genesis.", "In-game (2026-11-23, Kujo Mamoru at +2): Nature Infantry confirmed; troop skill 150% of troop ATK; Infantry HP/DEF/ATK use the standard 5★/6★ table (Infantry ATK unlocks at Lv. 131); hero skills Zoetic Enchantment (Rage Regen Slow), Disarm, Traceless Shadow, Elf's Shelter (Lv. 71), Unbending (6★). Commander Shop sells his shards (5,000, unlimited). The unsourced Sacred Barrier / Torii Seal skills were replaced.", "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."],
   },
   "rodriguez": {
     checkedOn: '2026-11-23',
