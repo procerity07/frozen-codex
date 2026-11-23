@@ -9,4 +9,4 @@ export { shops } from './shops';
 export { checklistTemplate, guides } from './guides';
 
 /** Bump when bundled seed content changes; the DB re-seeds when this exceeds the stored version. */
-export const SEED_VERSION = 2;
+export const SEED_VERSION = 3;
