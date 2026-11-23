@@ -104,7 +104,17 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Wallace', element: 'Nature', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
   lowStar({ name: 'Schubert', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Combination Event'],
     civil: [civil('Training Speed'), civil('Stone Output'), civil('Rally Size')] }),
-  lowStar({ name: 'Ysera', element: 'Nature', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'] }),
+  {
+    ...lowStar({ name: 'Ysera', element: 'Nature', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, march: ['Troop skill', 'Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
+      m3: { name: 'Vine Strike', description: 'Deals 186% damage to all enemies (Rage Regen: Medium). Guardian\'s Light: all allies +34% ATK for 5 rounds. Entangle: all enemies DEF −44% for 5 rounds. Nourish: all allies +24% Rage recovery for 5 rounds. Values as shown in-game at +4.', charge: 'Medium', pattern: 'All enemies', effects: ['ATK up', 'DEF down', 'Rage up'] },
+      notes: ['In-game (2026-11-23, Ysera at +4): 4★ Nature Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK 20/30/40/50% (+2 to +5); four hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 300% of troop ATK to the enemy (at +4, in-game).' },
+      { name: 'Cavalry HP', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Cavalry DEF', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Cavalry ATK', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+    ],
+  },
   // ------------------------------ Light ------------------------------
   lowStar({ name: 'Penny', element: 'Light', rarity: 2, unit: 'Civil', sources: ['Hero Plaza'],
     civil: [civil('Hunt March Speed'), civil('Research Food Cost'), civil('Research Wood Cost')] }),
