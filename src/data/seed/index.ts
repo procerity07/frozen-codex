@@ -12,4 +12,5 @@ export { checklistTemplate, guides } from './guides';
 /** Bump when bundled seed content changes; the DB re-seeds when this exceeds the stored version. */
 // 4: hero audit (2026-11-23) — corrected bundled hero data must replace stale online-pack rows on existing installs.
 // 5: in-game Ace Lord Day 1 values (events revision 2).
-export const SEED_VERSION = 5;
+// 6: in-game Event Schedule corrections (events revision 3).
+export const SEED_VERSION = 6;

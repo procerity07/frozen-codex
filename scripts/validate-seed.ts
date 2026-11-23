@@ -218,5 +218,13 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(seed.upgradeTable('gear')[39]!.essence === 210_000 && seed.upgradeTable('gear').length === 40, 'user gear table kept');
   ok(seed.upgradeTable('holystone').length === 40 && seed.upgradeTable('holystone')[29]!.arcaneCore === 1, 'holystone curve unchanged');
 
+  // In-game Event Schedule, week of Mon 23 Nov 2026 (Ace Lord week, rotation week 3).
+  const wk = new Date(Date.UTC(2026, 10, 23, 12));
+  const wa = { aceLordAnchorWeek: weekIndex(wk), rotationAnchorWeek: weekIndex(wk) - 2 };
+  const on = (day: number, id: string) => eventsOn(seed.events, new Date(Date.UTC(2026, 10, day, 12)), wa).some((e) => e.id === id);
+  ok(on(23, 'scorching-front') && on(23, 'wonder-house') && on(23, 'shadow-expedition') && on(23, 'alliance-trial') && on(23, 'sophias-test'), 'Monday 23 Nov matches in-game');
+  ok(on(25, 'oblivion-war') && on(26, 'royal-arms-race') && !on(24, 'timeless-heroes-limited-recruitment'), 'mid-week events match in-game');
+  ok(on(23, 'resource-supply') && on(29, 'holystone-upgrades'), 'new week-long events present');
+
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });

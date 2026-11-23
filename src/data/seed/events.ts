@@ -99,9 +99,9 @@ const baseEvents: GameEvent[] = [
     rewards: ['Alliance Coins', 'Speedups'],
   }),
   ev({
-    name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA', cycleWeek: W('Both'), days: ['Sat'], startUtc: '12:00', durationHours: 2,
+    name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA, from Wednesday', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'],
     summary: 'AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.',
-    rules: ['Sign-up needs at least 10 members with Citadel Lv. 18+.', 'Occupy a structure for 3 minutes to control it; control earns Time Points.', 'Wounded go to the Battlefield Hospital and return when you leave the battlefield.', 'The alliance with more Time Points wins; both sides get rewards.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
+    rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Starts Wednesday and runs through at least Friday; the battle time was not shown.', 'Sign-up needs at least 10 members with Citadel Lv. 18+.', 'Occupy a structure for 3 minutes to control it; control earns Time Points.', 'Wounded go to the Battlefield Hospital and return when you leave the battlefield.', 'The alliance with more Time Points wins; both sides get rewards.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
   }),
   ev({
     name: 'Strike Out', category: C('Alliance'), cadence: 'Every weekend Sat–Sun', cycleWeek: W('Both'), days: ['Sat', 'Sun'],
@@ -118,10 +118,12 @@ const baseEvents: GameEvent[] = [
     name: 'Infernal Gate', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Tue', 'Fri'],
     summary: 'Rally the Infernal Emissary Lv. 1–25 (20k to 120M HP).', rules: ['71-hour personal participation cooldown.', 'Rewards depend on damage dealt.', 'Lords who leave the alliance after joining cannot rejoin the event.'], rewards: ['Regal / Deluxe Recruit Tickets', 'Alliance Coins'],
   }),
+  ev({ name: 'Resource Supply', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
+  ev({ name: 'Holystone Upgrades', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
   ev({ name: 'Alliance Trial', category: C('Alliance'), cadence: 'Weekly Mon–Wed', cycleWeek: W('Both'), days: ['Mon', 'Tue', 'Wed'], summary: 'Cooperative alliance trial stages.', rules: ['Each member contributes attempts.'], rewards: ['Alliance chests'] }),
   ev({ name: 'Alliance Party', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Wed', 'Sun'], summary: 'Social points event.', rules: ['Join the party for points and shared rewards.'], rewards: ['Party chests'] }),
   ev({ name: 'Alliance Defense', category: C('Alliance'), cadence: 'Bi-weekly (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Thu'], summary: 'Defend alliance territory against waves.', rules: ['Reinforce weaker members.'], rewards: ['Alliance Coins'] }),
-  ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Fri', 'Sat', 'Sun'], rotationWeek: 3, summary: 'Alliance expedition on a shadow map.', rules: ['Clear nodes as an alliance.'], rewards: ['Ogremire shards'], featuredHeroes: ['ogremire'] }),
+  ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], rotationWeek: 3, summary: 'Alliance expedition on a shadow map. Sign-up opens the Sunday before and closes Monday 24:00 UTC.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Sign-up phase: Sunday to Monday 24:00 UTC.', 'Runs through at least Friday; the end day was not visible.', 'Clear nodes as an alliance.'], rewards: ['Ogremire shards'], featuredHeroes: ['ogremire'] }),
   ev({ name: 'Dragon Arena / Clash', category: C('Alliance'), cadence: 'Periodic', cycleWeek: W('Both'), days: ['Sat'], summary: 'Alliance node deployment and bracket PvP.', rules: ['Deploy dragons to nodes; brackets resolve automatically.'], rewards: ['Dragon EXP', 'Dragon Crystals'] }),
 
   // ---------------- D. Cross-realm war ----------------
@@ -138,9 +140,9 @@ const baseEvents: GameEvent[] = [
     rewards: ['Realm ranking chests', 'Diamonds'],
   }),
   ev({
-    name: 'Scorching Front', category: C('Cross-Realm War'), cadence: 'Weekly Sunday / Monday', cycleWeek: W('Both'), days: ['Sun'], startUtc: '12:00', durationHours: 1,
-    summary: 'Single-session volcano battle for Fire Crystals.',
-    rules: ['1 Fire Crystal = 1 point.', '3 free teleports, then scaling diamond cost.', 'Goblin Rocket and Shield map pickups; central supply chests.', 'Realm Hospital fully heals for free after the event.'],
+    name: 'Scorching Front', category: C('Cross-Realm War'), cadence: 'Weekly, Saturday to Monday', cycleWeek: W('Both'), days: ['Sat', 'Sun', 'Mon'],
+    summary: 'Volcano battle for Fire Crystals; runs Saturday to Monday 24:00 UTC.',
+    rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', '1 Fire Crystal = 1 point.', '3 free teleports, then scaling diamond cost.', 'Goblin Rocket and Shield map pickups; central supply chests.', 'Realm Hospital fully heals for free after the event.'],
     rewards: ['Ranking chests'],
   }),
 
@@ -160,7 +162,7 @@ const baseEvents: GameEvent[] = [
 
   // ---------------- F. Recruitment, AP/Stamina & seasonal ----------------
   ev({ name: 'Astrology', category: C('Recruitment & Seasonal'), cadence: 'Random / periodic', cycleWeek: W('Random'), days: [], summary: 'Primary source for Anastasia, Maxim, Tala, Valerius and Carvell.', rules: ['Summon Scrolls do NOT expire; sub-items salvage into Summon Scrolls.'], rewards: ['Anastasia', 'Maxim', 'Tala', 'Valerius', 'Carvell'], featuredHeroes: ['anastasia', 'maxim', 'tala', 'valerius', 'carvell'], currencies: ['Astrology Summon Scrolls'] }),
-  ev({ name: 'Timeless Heroes Limited Recruitment', category: C('Recruitment & Seasonal'), cadence: 'Bi-weekly Mondays', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], summary: 'Wide 5-Star pool.', rules: ['Timeless Scrolls do NOT expire.'], rewards: ['Fiona', 'Neptune', 'Kaira', 'Sea Goddess', 'Wu Kong', 'Leona', 'Carvell', 'Edith', 'Tania', 'Freya', 'Eric', 'Eris', 'Rodriguez', 'Kujo Mamoru'], featuredHeroes: ['fiona', 'tania', 'eris', 'wu-kong'], currencies: ['Timeless Scrolls'] }),
+  ev({ name: 'Timeless Heroes Limited Recruitment', category: C('Recruitment & Seasonal'), cadence: 'Bi-weekly, ends Monday (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon'], summary: 'Wide 5-Star pool.', rules: ['In-game (week of 23 Nov 2026): ends Monday 24:00 UTC; the start day was not shown.', 'Timeless Scrolls do NOT expire.'], rewards: ['Fiona', 'Neptune', 'Kaira', 'Sea Goddess', 'Wu Kong', 'Leona', 'Carvell', 'Edith', 'Tania', 'Freya', 'Eric', 'Eris', 'Rodriguez', 'Kujo Mamoru'], featuredHeroes: ['fiona', 'tania', 'eris', 'wu-kong'], currencies: ['Timeless Scrolls'] }),
   ev({ name: 'Ashen Lands Limited Recruitment', category: C('Recruitment & Seasonal'), cadence: 'Random (with Potion Hut)', cycleWeek: W('Random'), days: [], summary: 'Limited banner.', rules: ['Unused scrolls salvage into Timeless Heroes Recruitment Scrolls.'], rewards: ['Limited heroes'], currencies: ['Ashen Lands Scrolls'] }),
   ev({ name: 'Recruit Trial / Monthly Trial', category: C('Recruitment & Seasonal'), cadence: 'Monthly (Mesdi Portal)', cycleWeek: W('Random'), days: [], summary: 'Monthly recruitment trial.', rules: ['Trial Recruit Tickets do NOT expire.'], rewards: ['Guan Yu', 'Eris', 'Freya', 'Rodriguez', 'Azure Dragon Blade Scroll'], featuredHeroes: ['guan-yu', 'eris'], currencies: ['Trial Recruit Tickets'] }),
   ev({ name: 'AP Event — Visiting Bosses', category: C('Recruitment & Seasonal'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Ode to Abundance, Visit the Blood\'s Oath, Puss in Boots\' Visit, Visit Swiftclaw.', rules: ['20 AP per attack = 2 visiting items + 1 chest + 0–1 key.', 'Visiting items EXPIRE.'], rewards: ['Kaios', 'Leona', 'Carvell'], featuredHeroes: ['kaios', 'leona', 'carvell'], currencies: ['AP Visiting items'] }),
@@ -175,8 +177,8 @@ const baseEvents: GameEvent[] = [
 /**
  * Revision of the bundled event data. Bump it whenever bundled event facts are corrected, so the
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
- * revision 2 = in-game Ace Lord Day 1 screenshots.
+ * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 2; // 2 = in-game Ace Lord Day 1 phases
+export const EVENT_DATA_REVISION = 3; // 3 = in-game Event Schedule, week of 23 Nov 2026
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
