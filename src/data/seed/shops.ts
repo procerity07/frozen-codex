@@ -14,9 +14,9 @@ const T: Verdict = 'Trap / Skip';
 /** Shops transcribed from in-game screenshots. Prices and limits are exact; verdicts are suggestions. */
 const verifiedShops: Shop[] = [
   {
-    id: 'black-market', name: 'Black Market', currency: 'Food, Wood, Stone, Iron or Diamonds', refresh: 'Every 3 hours (random items)', checkedOn: CHECKED,
+    id: 'black-market', name: 'Black Market', currency: 'Food, Wood, Stone, Iron or Diamonds', refresh: 'Every 3 hours (random items; locked items stay)', checkedOn: CHECKED,
     items: [
-      L('Speedups for resources (e.g. 6× Speedup 8-hr for 5,760,000 Food)', 'Resources', 'Varies', M, M, 'Turns spare resources into speedups. The offer changes every refresh, so check often.'),
+      L('Speedups for resources (e.g. 6× Speedup 8-hr for 5,760,000 Food)', 'Resources', 'Varies', M, M, 'Turns spare resources into speedups. Items change every 3 hours; tap the lock to keep a good offer until you can afford it.'),
       L('Research Speedups for resources (e.g. 4× 8-hr for 256,000 Stone)', 'Resources', 'Varies', M, M, 'Very good value; buy whenever you can afford it.'),
       L('Resources for other resources (e.g. 320,000 Food for 38,400 Stone)', 'Resources', 'Varies', S, S, 'Only to swap a resource you have too much of for one you lack.'),
       L('Diamond-priced items', 'Diamonds', 'Varies', T, S, 'Diamonds are better spent elsewhere for F2P.'),

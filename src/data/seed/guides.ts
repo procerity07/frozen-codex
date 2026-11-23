@@ -56,6 +56,6 @@ export const checklistTemplate: ChecklistTemplateItem[] = [
   { id: 'mesdi', label: 'Mesdi Portal', detail: 'Push the next chapter or sweep.', castle: 'main' },
   { id: 'alliance-help', label: 'Alliance help & gifts', detail: 'Help all, claim alliance gifts, donate tech.', castle: 'all' },
   { id: 'alliance-party', label: 'Alliance Party / Trial', detail: 'Join the party and use trial attempts.', castle: 'main' },
-  { id: 'black-market', label: 'Black Market refresh', detail: 'Buy resource-priced speedups; items change every 3 hours.', castle: 'all' },
+  { id: 'black-market', label: 'Black Market refresh', detail: 'Buy resource-priced speedups; items change every 3 hours (lock good offers to keep them).', castle: 'all' },
   { id: 'gather', label: 'Gather marches out', detail: 'Keep every march queue busy.', castle: 'all' },
 ];
