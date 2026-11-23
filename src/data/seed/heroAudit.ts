@@ -197,7 +197,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "sources", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Lylia"],
-    notes: ["Wiki: Fire Civil, Royal Arms Race (app previously: Dark Cavalry).", "5★ confirmed from an in-game hero list (2026-11-23)."],
+    notes: ["Wiki: Fire Civil, Royal Arms Race (app previously: Dark Cavalry).", "In-game (2026-11-23, Lylia at Hero0): Fire Civil confirmed; troop skill 100% of troop ATK; Medical Tent Healing Speed, Heal Iron Cost and Troop Capacity (Lv. 131; 5★ +8 = 41,250, 6★ +8 = 55,000) tables; hero skills Shield of Sincerity, Sword of Dragon Fire, Dragon's Gaze, Indomitable Rage (Lv. 71), Unbending (6★, Parry +30%). The unsourced Lunar Edge / Crescent Slash skills were replaced.", "5★ confirmed from an in-game hero list (2026-11-23)."],
   },
   "oskir": {
     checkedOn: '2026-11-23',

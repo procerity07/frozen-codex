@@ -312,8 +312,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Lylia', title: 'Moonblade', element: 'Fire', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Lunar Edge', 'Cavalry ATK up; extra damage vs Archers.']],
-    m3: { name: 'Crescent Slash', desc: 'Dark damage to a row twice.', charge: 'Fast', pattern: 'Row x2', effects: ['Multi-hit'] },
+    march: [['Troop skill', 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).']],
+    civil: [
+      { name: 'Medical Tent Healing Speed', description: 'In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'healSpeed', unit: '%',
+        tiers: { '5': [6, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Heal Iron Cost', description: 'In-game. 5★: −4% at Hero0, then −8/−12/−16/−20/−25/−30/−32% from +2 to +8; 6★: −25/−32/−35/−36% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [-4, null, -8, -12, -16, -20, -25, -30, -32], '6': [null, null, null, null, null, -25, -32, -35, -36] } },
+      { name: 'Troop Capacity', description: 'In-game. 5★: +4,000 at Hero0, then +8,000 at +2 up to +41,250 at +8; 6★: +25,000 at +5 up to +55,000 at +8.', requirement: 'Unlocks at level 131 (in-game)', stat: 'troopCap', unit: 'flat',
+        tiers: { '5': [4000, null, 8000, 12000, 16000, 20000, 25000, 30000, 41250], '6': [null, null, null, null, null, 25000, 32000, 37500, 55000] } },
+    ],
+    m3: { name: 'Shield of Sincerity', desc: 'Enters a defensive stance for 4 rounds: damage taken is reduced to 1 (except counterattack damage), immune to all statuses, cannot gain Rage (Rage Regen: Fast). Sword of Dragon Fire: in the stance, ATK +85% for 4 rounds. Dragon\'s Gaze: in the stance, Crit Rate +20% for 4 rounds. Indomitable Rage (unlocks Lv. 71): deals 200% damage to enemies on death. Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at Hero0.', charge: 'Fast', pattern: 'Self', effects: ['Damage immunity', 'Status immunity', 'ATK up', 'Crit Rate up', 'Death explosion', 'Parry'] },
     sources: ['Royal Arms Race'],
     notes: 'Royal Arms Race ranking reward shards.',
   }),
@@ -489,8 +497,9 @@ const baseHeroes: Hero[] = [
  * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills;
  * revision 17 = in-game Sodoma skills; revision 18 = in-game Odell skills;
  * revision 19 = in-game Fiona skills; revision 20 = in-game Setemos skills;
- * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills.
+ * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills;
+ * revision 23 = in-game Lylia skills.
  */
-export const HERO_DATA_REVISION = 22;
+export const HERO_DATA_REVISION = 23;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
