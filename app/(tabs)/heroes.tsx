@@ -11,11 +11,12 @@ import { HeroCard } from '@/components/domain/HeroCard';
 import { ElementWheel, TroopTriangle } from '@/components/domain/CounterVisualizers';
 import { useAppStore } from '@/store/useAppStore';
 import { bondExpBetween, bondGiftPlan, curioCost, fmtFull } from '@/lib/calculators';
+import { civilBonuses, clampEntry, enhancementLabel, promotionStatus, requiredEnhancementForBond, type CivilBonus } from '@/lib/roster';
 
 const ELEMENTS: Element[] = ['Fire', 'Ice', 'Nature', 'Light', 'Dark'];
 const RARITIES: Rarity[] = [6, 5, 4, 3, 2];
 const UNITS: UnitType[] = ['Infantry', 'Cavalry', 'Archer', 'All-round', 'Civil'];
-const VIEWS = ['Codex', 'Counters', 'Bonds', 'Curios'] as const;
+const VIEWS = ['Codex', 'Mine', 'Counters', 'Bonds', 'Curios'] as const;
 
 const toggle = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
@@ -24,9 +25,9 @@ export default function HeroesScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: palette.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.xs }}>
-        <Segmented options={VIEWS} value={view} onChange={setView} />
+        <Segmented options={VIEWS} value={view} onChange={setView} labels={{ Mine: 'Roster' }} />
       </View>
-      {view === 'Codex' ? <Codex /> : view === 'Counters' ? <Counters /> : view === 'Bonds' ? <Bonds /> : <Curios />}
+      {view === 'Codex' ? <Codex /> : view === 'Mine' ? <MyHeroes onBrowse={() => setView('Codex')} /> : view === 'Counters' ? <Counters /> : view === 'Bonds' ? <Bonds /> : <Curios />}
     </View>
   );
 }
@@ -38,6 +39,8 @@ function Codex() {
   const [rars, setRars] = useState<Rarity[]>([]);
   const [units, setUnits] = useState<UnitType[]>([]);
   const [rows, setRows] = useState<Hero[]>([]);
+  const roster = useAppStore((s) => s.roster);
+  const [own, setOwn] = useState<'all' | 'owned' | 'missing'>('all');
 
   useEffect(() => {
     let alive = true;
@@ -49,7 +52,10 @@ function Codex() {
     return () => { alive = false; clearTimeout(t); };
   }, [q, els, rars, units]);
 
-  const sorted = useMemo(() => (focus === 'All' ? rows : [...rows].sort((a, b) => Number(b.unitType === focus) - Number(a.unitType === focus))), [rows, focus]);
+  const sorted = useMemo(() => {
+    const filtered = own === 'all' ? rows : rows.filter((h) => (own === 'owned') === !!roster[h.id]);
+    return focus === 'All' ? filtered : [...filtered].sort((a, b) => Number(b.unitType === focus) - Number(a.unitType === focus));
+  }, [rows, focus, own, roster]);
 
   return (
     <FlatList
@@ -67,6 +73,8 @@ function Codex() {
             </Row>
           </View>
           <ChipRow>
+            <Chip label="Owned" active={own === 'owned'} color={palette.success} onPress={() => setOwn(own === 'owned' ? 'all' : 'owned')} />
+            <Chip label="Missing" active={own === 'missing'} onPress={() => setOwn(own === 'missing' ? 'all' : 'missing')} />
             {ELEMENTS.map((e) => <Chip key={e} label={e} active={els.includes(e)} color={elementColors[e]} leading={<ElementEmblem element={e} size={16} />} onPress={() => setEls(toggle(els, e))} />)}
           </ChipRow>
           <ChipRow>
@@ -78,11 +86,76 @@ function Codex() {
       }
       renderItem={({ item }) => (
         <View style={{ paddingHorizontal: space.lg }}>
-          <HeroCard hero={item} focus={focus} onPress={() => router.push(`/hero/${item.id}`)} />
+          <HeroCard hero={item} focus={focus} owned={roster[item.id] ? clampEntry(item, roster[item.id]) : undefined} onPress={() => router.push(`/hero/${item.id}`)} />
         </View>
       )}
       ListEmptyComponent={<EmptyState title="No heroes match" body="Clear a filter or try a shorter search." />}
     />
+  );
+}
+
+const BONUS_UNIT = (b: CivilBonus) => (b.value === null ? '' : b.unit === '%' ? `+${b.value}%` : b.unit === 'min' ? `${b.value} min` : `+${fmtFull(b.value)}`);
+
+function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
+  const roster = useAppStore((s) => s.roster);
+  const focus = useAppStore((s) => s.troopFocus);
+  const owned = seedHeroes.filter((h) => roster[h.id]).sort((a, b) => b.rarity - a.rarity || a.name.localeCompare(b.name));
+  const bonuses = civilBonuses(owned, roster);
+  const troopCap = bonuses.filter((b) => b.active && b.stat === 'troopCap' && b.value !== null).reduce((s, b) => s + b.value!, 0);
+  const promotable = owned.filter((h) => promotionStatus(h, clampEntry(h, roster[h.id])).eligible);
+  const byUnit = (['Infantry', 'Cavalry', 'Archer', 'All-round', 'Civil'] as UnitType[]).map((u) => ({ u, n: owned.filter((h) => h.unitType === u).length }));
+
+  if (!owned.length) {
+    return (
+      <Screen>
+        <EmptyState title="No heroes added yet" body="Open any hero in the Codex and tap “I own this hero” to start your roster." />
+        <View style={{ alignItems: 'center' }}><Chip label="Browse the Codex" onPress={onBrowse} /></View>
+      </Screen>
+    );
+  }
+
+  return (
+    <Screen>
+      <Card style={{ marginTop: space.sm }}>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <Stat label="Heroes owned" value={`${owned.length} / ${seedHeroes.length}`} color={palette.cyan} />
+          <Stat label="6★ heroes" value={String(owned.filter((h) => clampEntry(h, roster[h.id]).stars === 6).length)} align="right" />
+        </Row>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: space.md }}>
+          {byUnit.filter((x) => x.n).map((x) => <Badge key={x.u} label={`${x.u} ${x.n}`} color={troopColors[x.u]} />)}
+        </View>
+      </Card>
+
+      {promotable.length ? (
+        <>
+          <SectionHeader title="Ready to promote to 6★" />
+          <ChipRow>{promotable.map((h) => <Chip key={h.id} label={h.name} color={palette.gold} active onPress={() => router.push(`/hero/${h.id}`)} />)}</ChipRow>
+        </>
+      ) : null}
+
+      <SectionHeader title="Civil bonuses from your heroes" subtitle={troopCap ? `Known troop capacity: +${fmtFull(troopCap)}` : 'Own-only skills, active without marching'} />
+      {bonuses.length ? (
+        <Card style={{ paddingVertical: space.sm }}>
+          {bonuses.map((b, i) => (
+            <Row key={`${b.heroId}-${b.skill}`} style={{ paddingVertical: 6, alignItems: 'flex-start', borderTopWidth: i ? 1 : 0, borderTopColor: palette.border }}>
+              <View style={{ flex: 1 }}>
+                <Text style={[type.body, !b.active && { color: palette.textMuted }]}>{b.skill}</Text>
+                <Text style={type.caption}>{b.hero} · {b.note}</Text>
+              </View>
+              <Text style={[type.number, { color: b.active && b.value !== null ? palette.gold : palette.textMuted }]}>{b.active ? BONUS_UNIT(b) || '—' : 'Locked'}</Text>
+            </Row>
+          ))}
+        </Card>
+      ) : (
+        <Card><Text style={type.bodySecondary}>None of your heroes have civil skills yet.</Text></Card>
+      )}
+
+      <SectionHeader title="Your heroes" subtitle="Tap a hero to update stars, level, enhancement and bond" />
+      {owned.map((h) => (
+        <HeroCard key={h.id} hero={h} focus={focus} owned={clampEntry(h, roster[h.id])} onPress={() => router.push(`/hero/${h.id}`)} />
+      ))}
+      <Text style={[type.caption, { marginTop: space.sm }]}>Bonuses show — where the wiki doesn't list a value for that enhancement level, and those are left out of the troop capacity total.</Text>
+    </Screen>
   );
 }
 
@@ -110,6 +183,11 @@ function Counters() {
 function Bonds() {
   const [from, setFrom] = useState(1);
   const [to, setTo] = useState(30);
+  const roster = useAppStore((s) => s.roster);
+  const [heroId, setHeroId] = useState<string | null>(null);
+  const ownedHeroes = seedHeroes.filter((h) => roster[h.id]);
+  const picked = heroId ? seedHeroes.find((h) => h.id === heroId) : undefined;
+  const pickedEntry = picked && roster[picked.id] ? clampEntry(picked, roster[picked.id]) : undefined;
   const [owned, setOwned] = useState<Record<number, number>>({});
   const f = Math.min(Math.max(1, from), bondLevels.length);
   const t = Math.min(Math.max(f, to), bondLevels.length);
@@ -120,6 +198,19 @@ function Bonds() {
   return (
     <Screen>
       <SectionHeader title="Bond EXP planner" subtitle="Lv. 1–95 · Lv. 1 and Lv. 95 EXP from the wiki, levels between estimated" />
+      {ownedHeroes.length ? (
+        <ChipRow>
+          {ownedHeroes.map((h) => (
+            <Chip key={h.id} label={h.name} active={h.id === heroId} onPress={() => {
+              if (h.id === heroId) { setHeroId(null); return; }
+              setHeroId(h.id);
+              const e = clampEntry(h, roster[h.id]);
+              setFrom(e.bond);
+              setTo(Math.min(bondLevels.length, e.bond + 10));
+            }} />
+          ))}
+        </ChipRow>
+      ) : null}
       <Card>
         <Row>
           <NumberField label="Current level" value={from} onChange={setFrom} />
@@ -129,6 +220,11 @@ function Bonds() {
           <Stat label="EXP needed" value={fmtFull(need)} color={palette.cyan} />
           <Stat label="EXP in bag" value={fmtFull(ownedExp)} align="right" color={ownedExp >= need ? palette.success : palette.gold} />
         </Row>
+        {pickedEntry && requiredEnhancementForBond(t) !== null && pickedEntry.enhancement < requiredEnhancementForBond(t)! ? (
+          <Text style={[type.caption, { marginTop: space.sm, color: palette.danger }]}>
+            {picked!.name} is {enhancementLabel(pickedEntry.enhancement)}; bond Lv. {t} needs {enhancementLabel(requiredEnhancementForBond(t)!)} enhancement.
+          </Text>
+        ) : null}
         <Text style={[type.caption, { marginTop: space.sm }]}>Lv. {f}{bondLevels[f - 1]?.title ? ` ${bondLevels[f - 1]!.title}` : ''} → Lv. {t}{bondLevels[t - 1]?.title ? ` ${bondLevels[t - 1]!.title}` : ''}</Text>
       </Card>
       <SectionHeader title="Bond gifts in bag" />

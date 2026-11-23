@@ -64,6 +64,12 @@ export interface CivilSkill extends HeroSkill {
   /** Short stat key used by the planner (e.g. "buildSpeed", "troopCap"). */
   stat?: 'buildSpeed' | 'buildCost' | 'researchSpeed' | 'troopCap' | 'trainSpeed' | 'gatherSpeed' | 'healSpeed' | 'resourceOutput';
   value?: number;
+  /**
+   * Exact values by current stars ("5", "6") and enhancement index (0 = Hero0 … 8 = +8),
+   * only where the source lists them; null marks a level the source leaves blank.
+   */
+  tiers?: Partial<Record<string, (number | null)[]>>;
+  unit?: '%' | 'flat' | 'min';
 }
 
 export interface Match3Skill extends HeroSkill {

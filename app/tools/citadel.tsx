@@ -2,13 +2,13 @@ import { Text, View } from 'react-native';
 import { Stack } from 'expo-router';
 import { citadelLevels, heroes } from '@/data/seed';
 import { palette, space, type } from '@/theme';
-import { Card, ConfidenceNote, NumberField, Row, Screen, SectionHeader, Stat, Table } from '@/components/ui';
+import { Button, Card, ConfidenceNote, NumberField, Row, Screen, SectionHeader, Stat, Table } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
+import { civilBonuses } from '@/lib/roster';
 import { fmt, fmtFull, planCitadel, RESOURCE_KEYS, type ResourceKey } from '@/lib/calculators';
 import { formatDurationShort } from '@/lib/time';
 
 const LABEL: Record<ResourceKey, string> = { food: 'Food', wood: 'Wood', stone: 'Stone', iron: 'Iron', ancientTome: 'Ancient Tome', astronomyTome: 'Astronomy Tome', gloryCodex: 'Glory Codex', goldStatue: 'Gold Statue' };
-const civilBuild = heroes.flatMap((h) => h.civilSkills.filter((s) => s.stat === 'buildSpeed' || s.stat === 'buildCost').map((s) => ({ hero: h.name, ...s })));
 
 export default function CitadelPlanner() {
   const c = useAppStore((s) => s.citadel);
@@ -17,6 +17,9 @@ export default function CitadelPlanner() {
   const to = Math.min(Math.max(from + 1, c.to), 40);
   const plan = planCitadel(citadelLevels, from, to, c.owned, c.bonuses);
   const b = c.bonuses;
+  const roster = useAppStore((s) => s.roster);
+  const buildBonuses = civilBonuses(heroes, roster).filter((x) => x.stat === 'buildSpeed' || x.stat === 'buildCost');
+  const knownSpeed = buildBonuses.filter((x) => x.stat === 'buildSpeed' && x.active && x.value !== null).reduce((t, x) => t + x.value!, 0);
   const setB = (k: keyof typeof b, v: number) => set({ bonuses: { ...b, [k]: v } });
 
   return (
@@ -43,7 +46,23 @@ export default function CitadelPlanner() {
         <Row><NumberField label="Civil hero speed" value={b.civilSpeedPct} onChange={(n) => setB('civilSpeedPct', n)} suffix="%" /><NumberField label="Builder gear" value={b.builderGearPct} onChange={(n) => setB('builderGearPct', n)} suffix="%" /></Row>
         <Row style={{ marginTop: space.sm }}><NumberField label="VIP" value={b.vipPct} onChange={(n) => setB('vipPct', n)} suffix="%" /><NumberField label="Institute" value={b.institutePct} onChange={(n) => setB('institutePct', n)} suffix="%" /></Row>
         <View style={{ marginTop: space.sm }}><NumberField label="Cost reduction (William, Chloe, Dragon's Lair)" value={b.costReductionPct} onChange={(n) => setB('costReductionPct', Math.min(n, 90))} suffix="%" /></View>
-        <Text style={[type.caption, { marginTop: space.sm }]}>Own-only civil passives: {civilBuild.map((x) => `${x.hero} ${x.stat === 'buildCost' ? 'cost' : 'speed'} ${x.value !== undefined ? `${x.value}%` : '(value not verified)'}`).join(' · ')}</Text>
+        {buildBonuses.length ? (
+          <View style={{ marginTop: space.md, gap: 4 }}>
+            <Text style={type.caption}>From My Heroes</Text>
+            {buildBonuses.map((x) => (
+              <Text key={`${x.heroId}-${x.skill}`} style={type.bodySecondary}>
+                {x.hero}: {x.skill} {x.active && x.value !== null ? `+${x.value}%` : `(${x.note.toLowerCase()})`}
+              </Text>
+            ))}
+            {knownSpeed ? (
+              <View style={{ marginTop: space.sm }}>
+                <Button compact variant="secondary" label={`Use +${knownSpeed}% civil hero speed`} onPress={() => setB('civilSpeedPct', knownSpeed)} />
+              </View>
+            ) : null}
+          </View>
+        ) : (
+          <Text style={[type.caption, { marginTop: space.sm }]}>Tip: add William, Chloe, Elsa or Saya under Heroes › Roster to see their construction bonuses here.</Text>
+        )}
       </Card>
 
       <SectionHeader title="Resource deficit" subtitle={`Citadel ${from} → ${to}`} />

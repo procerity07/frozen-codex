@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TroopFocus } from '@/types/game';
+import type { RosterEntry } from '@/lib/roster';
 import { weekIndex } from '@/lib/time';
 import type { BuildBonuses, ResourceKey } from '@/lib/calculators';
 
@@ -24,6 +25,8 @@ export interface AppState {
   savedCalcs: Record<string, Record<string, number>>;
   /** App version whose update banner the user dismissed with "Later". */
   dismissedUpdate: string;
+  /** My Heroes: owned heroes by id. Entries are re-validated against game rules wherever they are read. */
+  roster: Record<string, RosterEntry>;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -44,6 +47,8 @@ export interface AppState {
   saveCalc: (key: string, values: Record<string, number>) => void;
   importState: (data: Partial<PersistedState>) => void;
   dismissUpdate: (version: string) => void;
+  setRosterEntry: (heroId: string, entry: RosterEntry) => void;
+  removeFromRoster: (heroId: string) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -66,6 +71,7 @@ export const defaultState: PersistedState = {
   citadel: { from: 15, to: 25, owned: {}, bonuses: { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 0 } },
   savedCalcs: {},
   dismissedUpdate: '',
+  roster: {},
 };
 
 export const useAppStore = create<AppState>()(
@@ -106,6 +112,12 @@ export const useAppStore = create<AppState>()(
       saveCalc: (key, values) => set({ savedCalcs: { ...get().savedCalcs, [key]: values } }),
       importState: (data) => set({ ...defaultState, ...data }),
       dismissUpdate: (dismissedUpdate) => set({ dismissedUpdate }),
+      setRosterEntry: (heroId, entry) => set({ roster: { ...get().roster, [heroId]: entry } }),
+      removeFromRoster: (heroId) => {
+        const next = { ...get().roster };
+        delete next[heroId];
+        set({ roster: next });
+      },
     }),
     {
       name: 'frozen-codex-profile',

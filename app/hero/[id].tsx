@@ -9,6 +9,7 @@ import { bondGroups, curios, events } from '@/data/seed';
 import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified } from '@/lib/heroData';
+import { MyHeroCard } from '@/components/domain/MyHeroCard';
 
 const ROLE_COLORS: Record<CombatRole, string> = { Damage: palette.danger, Support: palette.cyan, Healer: palette.success };
 
@@ -69,6 +70,8 @@ export default function HeroDetail() {
         </Row>
         <ConfidenceNote confidence={hero.confidence} />
       </Card>
+
+      <MyHeroCard hero={hero} />
 
       <SectionHeader title="Combat role" icon={Crosshair} />
       <Card style={{ padding: space.md }}>

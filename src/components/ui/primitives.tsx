@@ -141,6 +141,27 @@ export function NumberField({ label, value, onChange, suffix, width }: { label?:
   );
 }
 
+/** Compact −/+ control for small integer ranges (stars, enhancement, bond). */
+export function Stepper({ label, value, min, max, onChange, format, step = 1 }: {
+  label: string; value: number; min: number; max: number; onChange: (n: number) => void; format?: (n: number) => string; step?: number;
+}) {
+  const set = (n: number) => { const v = Math.min(max, Math.max(min, n)); if (v !== value) { haptic(); onChange(v); } };
+  return (
+    <View style={{ gap: 4, flex: 1 }}>
+      <Text style={type.caption} numberOfLines={1}>{label}</Text>
+      <View style={s.stepper}>
+        <Pressable onPress={() => set(value - step)} disabled={value <= min} hitSlop={6} accessibilityLabel={`Decrease ${label}`} style={[s.stepBtn, value <= min && { opacity: 0.35 }]}>
+          <Text style={s.stepGlyph}>{'\u2212'}</Text>
+        </Pressable>
+        <Text style={[type.number, { flex: 1, textAlign: 'center' }]} numberOfLines={1}>{format ? format(value) : value}</Text>
+        <Pressable onPress={() => set(value + step)} disabled={value >= max} hitSlop={6} accessibilityLabel={`Increase ${label}`} style={[s.stepBtn, value >= max && { opacity: 0.35 }]}>
+          <Text style={s.stepGlyph}>+</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
 export function ProgressBar({ ratio, color = palette.cyan, height = 6 }: { ratio: number; color?: string; height?: number }) {
   return (
     <View style={{ height, backgroundColor: palette.border, borderRadius: height, overflow: 'hidden' }}>
@@ -190,4 +211,7 @@ export const s = StyleSheet.create({
   numberWrap: { flexDirection: 'row', alignItems: 'center' },
   numberInput: { flex: 1, fontVariant: ['tabular-nums'], textAlign: 'right' },
   suffix: { ...type.numberSmall, marginLeft: 6, color: palette.textMuted },
+  stepper: { flexDirection: 'row', alignItems: 'center', height: 42, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, backgroundColor: palette.bg },
+  stepBtn: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
+  stepGlyph: { fontSize: 20, fontWeight: '600', color: palette.cyan },
 });

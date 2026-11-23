@@ -2,14 +2,16 @@ import { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Hero, TroopFocus } from '@/types/game';
 import { palette, radius, rarityColors, space, tint, type } from '@/theme';
-import { ElementEmblem, RarityStars, TroopEmblem } from '@/components/ui';
+import { Badge, ElementEmblem, RarityStars, TroopEmblem } from '@/components/ui';
+import type { RosterEntry } from '@/lib/roster';
+import { enhancementLabel } from '@/lib/roster';
 
 export function matchesFocus(h: Hero, focus: TroopFocus): boolean {
   if (focus === 'All') return false;
   return h.unitType === focus;
 }
 
-function HeroCardImpl({ hero, focus, onPress }: { hero: Hero; focus: TroopFocus; onPress: () => void }) {
+function HeroCardImpl({ hero, focus, onPress, owned }: { hero: Hero; focus: TroopFocus; onPress: () => void; owned?: RosterEntry }) {
   const highlighted = matchesFocus(hero, focus);
   const rc = rarityColors[hero.rarity];
   return (
@@ -23,9 +25,15 @@ function HeroCardImpl({ hero, focus, onPress }: { hero: Hero; focus: TroopFocus;
           <Text style={type.heading} numberOfLines={1}>{hero.name}</Text>
           <TroopEmblem type={hero.unitType} size={16} />
         </View>
-        <RarityStars rarity={hero.rarity} size={10} />
+        <RarityStars rarity={owned?.stars ?? hero.rarity} size={10} />
         <Text style={type.caption} numberOfLines={1}>{hero.element} · {hero.unitType}</Text>
       </View>
+      {owned ? (
+        <View style={{ alignItems: 'flex-end', gap: 4 }}>
+          <Badge label="Owned" color={palette.success} />
+          <Text style={type.numberSmall}>{enhancementLabel(owned.enhancement)} · Lv {owned.level}</Text>
+        </View>
+      ) : null}
     </Pressable>
   );
 }

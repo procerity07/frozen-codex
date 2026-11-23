@@ -78,9 +78,12 @@ const baseHeroes: Hero[] = [
     name: 'Saya', title: 'Hearth Steward', element: 'Fire', rarity: 5, unit: 'Civil', role: 'Economy core',
     march: [['Warm Welcome', 'Minor troop HP buff when garrisoning the Citadel.']],
     civil: [
-      { name: 'Troop Capacity', description: 'Flat troop capacity. 5-star: +2,000 at Hero0 rising to +22,500 at Hero8. 6-star: +12,500 at Hero5 rising to +30,000 at Hero8.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap' },
-      { name: 'Construction Speed', description: '6-star: +37.5% at Hero5 rising to +100% at Hero8. 5-star values not verified.', requirement: 'Unlocks at level 31', stat: 'buildSpeed' },
-      { name: 'Free Speedup Time', description: '5-star: 6 minutes at Hero0 rising to 60 minutes at Hero8; 6-star values are higher.', requirement: 'Unlock level not verified' },
+      { name: 'Troop Capacity', description: 'Flat troop capacity. 5-star: +2,000 at Hero0 rising to +22,500 at Hero8. 6-star: +12,500 at Hero5 rising to +30,000 at Hero8.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
+        tiers: { '5': [2000, 3000, 4000, 6000, 8000, 10000, 12500, 15000, 22500], '6': [null, null, null, null, null, 12500, null, null, 30000] } },
+      { name: 'Construction Speed', description: '6-star: +37.5% at Hero5 rising to +100% at Hero8. 5-star values not verified.', requirement: 'Unlocks at level 31', stat: 'buildSpeed', unit: '%',
+        tiers: { '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Free Speedup Time', description: '5-star: 6 minutes at Hero0 rising to 60 minutes at Hero8; 6-star values are higher.', requirement: 'Unlock level not verified', unit: 'min',
+        tiers: { '5': [6, null, null, null, null, null, null, null, 60] } },
     ],
     m3: { name: 'Sunlit Blessing', desc: 'Heals allies and cleanses one debuff.', charge: 'Fast', pattern: 'All allies', effects: ['Heal', 'Cleanse'] },
     sources: ['First Top-up', 'Ace Lord Radiant Card'], bonds: ['Rhapsody of Genesis'], curio: 'Wings of Icarus',
@@ -399,7 +402,8 @@ const baseHeroes: Hero[] = [
     civil: [
       { name: 'Construction Speed', description: 'Increases construction speed. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildSpeed' },
       { name: 'Iron Output', description: 'Increases iron output. Value not verified.', requirement: 'Unlock level not verified', stat: 'resourceOutput' },
-      { name: 'Rally Size', description: '+20,000 at the lowest tier rising to +100,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)' },
+      { name: 'Rally Size', description: '+20,000 at the lowest tier rising to +100,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)', unit: 'flat',
+        tiers: { '4': [20000, null, null, null, null, 100000] } },
     ],
     m3: { name: 'Frost Pillar', desc: 'Ice damage to a column.', charge: 'Medium', pattern: 'Column', effects: [] },
     sources: ['Hero Plaza', 'Epic Hero Covenant'],
@@ -409,9 +413,11 @@ const baseHeroes: Hero[] = [
     name: 'Gina', title: 'Harvest Keeper', element: 'Dark', rarity: 4, unit: 'Civil', role: 'Gathering',
     march: [['Forager', 'Gathering speed up when leading a gather march.']],
     civil: [
-      { name: 'Research Speed', description: '+3% at Hero0 rising to +15% at Hero5.', requirement: 'Unlock level not verified', stat: 'researchSpeed' },
+      { name: 'Research Speed', description: '+3% at Hero0 rising to +15% at Hero5.', requirement: 'Unlock level not verified', stat: 'researchSpeed', unit: '%',
+        tiers: { '4': [3, null, null, null, null, 15] } },
       { name: 'EXP Potion Output', description: 'Increases EXP Potion output. Value not verified.', requirement: 'Unlock level not verified' },
-      { name: 'Troop Capacity', description: '+2,000 at the lowest tier rising to +10,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap' },
+      { name: 'Troop Capacity', description: '+2,000 at the lowest tier rising to +10,000 at the highest.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
+        tiers: { '4': [2000, null, null, null, null, 10000] } },
     ],
     m3: { name: 'Seed Burst', desc: 'Small Nature damage to random enemies.', charge: 'Fast', pattern: 'Random x3', effects: [] },
     sources: ['Epic Hero Covenant', 'Trial Turret Shop'],
@@ -422,8 +428,8 @@ const baseHeroes: Hero[] = [
 /**
  * Revision of the bundled hero data. Bump it whenever bundled hero facts are corrected, so the
  * corrections replace older online-pack rows (which carry a lower or missing revision) on re-seed.
- * Revision 1 = 2026-11-23 community-wiki audit.
+ * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes.
  */
-export const HERO_DATA_REVISION = 1;
+export const HERO_DATA_REVISION = 2;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

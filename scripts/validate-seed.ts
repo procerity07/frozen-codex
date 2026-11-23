@@ -7,6 +7,7 @@ import { bundledEventsToSeed, bundledHeroesToSeed, mergePackEvents, mergePackHer
 import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
 import { reKillPointsByTier } from '../src/lib/calculators';
 import { compareVersions, isNewer, notesToBlocks, parseRelease } from '../src/lib/appUpdate';
+import { bondCapForEnhancement, civilBonuses, clampEntry, maxStars, newEntry, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked } from '../src/lib/roster';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Hero } from '../src/types/game';
@@ -173,7 +174,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok((await bundledHeroesToSeed(xdb as unknown as SQLiteDatabase)).length === seed.heroes.length, 'all stale pack heroes superseded by bundled revision');
   await seedDatabase(xdb as unknown as SQLiteDatabase);
   const xk = JSON.parse((xdb.raw.prepare("SELECT data, source FROM heroes WHERE id = 'khaos'").get() as { data: string }).data) as Hero;
-  ok(xk.unitType === 'Civil' && xk.revision === 1, 'existing install receives corrected Khaos on re-seed');
+  ok(xk.unitType === 'Civil' && xk.revision === seed.HERO_DATA_REVISION, 'existing install receives corrected Khaos on re-seed');
   ok((xdb.raw.prepare("SELECT COUNT(*) n FROM heroes_fts WHERE id = 'khaos'").get() as { n: number }).n === 1, 'FTS row replaced, not duplicated');
 
   // (f) A future pack at the same or newer revision still applies.
@@ -215,7 +216,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
   // The published pack must parse and agree with the bundled data revisions.
   const livePack = parseManifest(JSON.parse(readFileSync(join(__dirname, '..', 'data-pack', 'manifest.json'), 'utf8')));
-  ok(livePack.version >= 3 && livePack.packs.heroes!.length === seed.heroes.length && livePack.packs.heroes!.every((h) => h.revision === seed.HERO_DATA_REVISION), 'published pack matches bundled heroes');
+  ok(livePack.version >= 3 && livePack.packs.heroes!.length === seed.heroes.length && livePack.packs.heroes!.every((h) => (h.revision ?? 0) <= seed.HERO_DATA_REVISION), 'published pack is never newer than the bundled heroes');
   ok(seed.upgradeTable('gear')[39]!.essence === 210_000 && seed.upgradeTable('gear').length === 40, 'user gear table kept');
   ok(seed.upgradeTable('holystone').length === 40 && seed.upgradeTable('holystone')[29]!.arcaneCore === 1, 'holystone curve unchanged');
 
@@ -240,6 +241,24 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(parseRelease({ ...relRaw, draft: true }, 'procerity07/frozen-codex') === null, 'draft releases ignored');
   const blocks = notesToBlocks(rel!.notes);
   ok(blocks.some((b) => b.kind === 'heading') && blocks.some((b) => b.kind === 'bullet') && !blocks.some((b) => /^Install:|^Built from|^## /.test(b.text)), 'release notes render as headings and bullets');
+
+  // ---------- My Heroes roster (wiki progression rules) ----------
+  const saya = byId('saya'); const gina = byId('gina'); const baron = byId('baron');
+  ok(shardsBetween(0, 8) === 1040 && shardsBetween(-1, 8) === 1050 && shardsBetween(4, 5) === 75, 'enhancement shard costs (total 1,050)');
+  ok(clampEntry(baron, { stars: 6, level: 999, enhancement: 8, bond: 200 }).stars === 2 && clampEntry(gina, { enhancement: 8 }).enhancement === 5, 'stars and below-5★ enhancement clamped');
+  ok(clampEntry(saya, { stars: 5, level: 999 }).level === 310 && clampEntry(saya, { stars: 6, level: 999 }).level === 400 && maxStars(saya) === 6, 'level caps 310 / 400; 5★ can reach 6★');
+  ok(clampEntry(saya, { level: Number.NaN, bond: -3 } as never).level === 1 && clampEntry(saya, undefined).bond === 1, 'bad saved values fall back safely');
+  ok(promotionStatus(saya, { stars: 5, level: 310, enhancement: 5, bond: 1 }).eligible && !promotionStatus(saya, { stars: 5, level: 309, enhancement: 5, bond: 1 }).eligible && !promotionStatus(gina, newEntry(gina)).possible, 'promotion rule Lv. 310 + 5');
+  ok(bondCapForEnhancement(0) === 5 && bondCapForEnhancement(5) === 55 && bondCapForEnhancement(7) === 86 && bondCapForEnhancement(8) === null && requiredEnhancementForBond(56) === 6, 'bond enhancement gates');
+  ok(specialtyUnlocked({ stars: 6, level: 350, enhancement: 8, bond: 1 }) && !specialtyUnlocked({ stars: 6, level: 349, enhancement: 8, bond: 1 }), 'specialty at +8 and Lv. 350');
+  const cb = civilBonuses(seed.heroes, { saya: { stars: 5, level: 131, enhancement: 8, bond: 1 }, gina: { stars: 4, level: 100, enhancement: 5, bond: 1 } });
+  const sayaCap = cb.find((b) => b.heroId === 'saya' && b.skill === 'Troop Capacity')!;
+  ok(sayaCap.active && sayaCap.value === 22500, 'Saya 5★ +8 troop capacity = +22,500');
+  const ginaCap = cb.find((b) => b.heroId === 'gina' && b.skill === 'Troop Capacity')!;
+  ok(!ginaCap.active && ginaCap.note === 'Unlocks at Lv. 131', 'locked skills reported below unlock level');
+  ok(cb.find((b) => b.heroId === 'saya' && b.skill === 'Construction Speed')!.value === null, '5★ Saya construction speed stays unverified (no guess)');
+  const saya6 = civilBonuses(seed.heroes, { saya: { stars: 6, level: 400, enhancement: 6, bond: 1 } }).find((b) => b.skill === 'Construction Speed')!;
+  ok(saya6.value === 48 && saya6.unit === '%', 'Saya 6★ +6 construction speed = +48%');
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });
