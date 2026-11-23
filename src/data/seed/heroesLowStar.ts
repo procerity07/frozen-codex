@@ -117,8 +117,17 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA],
     march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
   lowStar({ name: 'Roger', element: 'Nature', rarity: 3, unit: 'Archer', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Gather Speed')] }),
-  lowStar({ name: 'Cassandra', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Mesdi Portal'],
-    civil: [civil('Gather March Speed'), civil('Hunt March Speed'), civil('Troop Capacity')], notes: ['Obtained from Mesdi Portal World II.'] }),
+  {
+    ...lowStar({ name: 'Cassandra', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Mesdi Portal'], march: ['Troop skill'],
+      civil: [
+        { name: 'Gather March Speed', description: 'In-game. 4★: +4% at Hero0, then +10% at +2, +13% at +3, +17% at +4, +21% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '4': [4, null, 10, 13, 17, 21] } },
+        { name: 'Hunt March Speed', description: 'In-game. 4★: +4% at Hero0, then +10% at +2, +13% at +3, +17% at +4, +21% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '4': [4, null, 10, 13, 17, 21] } },
+        { name: 'Troop Capacity', description: 'In-game. 4★: +2,000 at Hero0, then +4,000 at +2 up to +10,000 at +5.', requirement: 'Unlocks at level 131 (in-game)', stat: 'troopCap', unit: 'flat', tiers: { '4': [2000, null, 4000, 6000, 8000, 10000] } },
+      ],
+      m3: { name: 'Death Thorn', description: 'Deals 196% damage to the target and adjacent enemies (Rage Regen: Medium). Spiked Armor: all allies DEF +46% for 5 rounds. Heart of Nature: ATK +15% and Crit +8%. Primal Instinct: Dodge +20%. Values as shown in-game at Hero0.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['DEF up', 'ATK up', 'Crit', 'Dodge'] },
+      notes: ['Obtained from Mesdi Portal World II.', 'In-game (2026-11-23, Cassandra at Hero0): 4★ Nature Civil confirmed; troop skill 100% of troop ATK; Gather/Hunt March Speed 4% (Hero0), 10/13/17/21% (+2 to +5); Troop Capacity 2,000 (Hero0), 4,000–10,000 (Lv. 131); four hero skills.'] }),
+    marchSkills: [{ name: 'Troop skill', description: 'Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game).' }],
+  },
   {
     ...lowStar({ name: 'Dolly', element: 'Nature', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Archer HP', 'Archer DEF', 'Archer ATK'],
       m3: { name: "Nature's Cure", description: 'Restores 30% HP to all allies (Rage Regen: Medium). Eco Balance: dispels all buffs on enemies. Favor of Nature: ATK +15% and Crit +8%. Cosmos Blessing (unlocks Lv. 71): dispels all debuffs on allies. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'Dispel', 'ATK up', 'Crit'] },
