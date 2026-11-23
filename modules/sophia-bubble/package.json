@@ -1,0 +1,6 @@
+{
+  "name": "sophia-bubble",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional Android floating quick-search bubble for Sophia's Test answers (Frozen Codex local module)."
+}

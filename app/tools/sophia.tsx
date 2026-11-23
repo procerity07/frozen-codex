@@ -7,6 +7,7 @@ import type { SophiaQuestion } from '@/types/game';
 import { countSophia, searchSophia } from '@/db/repo';
 import { palette, radius, space, type } from '@/theme';
 import { Badge, EmptyState, IconButton, haptic } from '@/components/ui';
+import { SophiaBubbleToggle } from '@/components/domain/SophiaBubbleToggle';
 
 export default function SophiaLookup() {
   const [q, setQ] = useState('');
@@ -45,6 +46,7 @@ export default function SophiaLookup() {
           {q ? <IconButton icon={X} label="Clear" onPress={() => { setQ(''); input.current?.focus(); }} /> : null}
         </View>
         <Text style={[type.caption, { marginTop: space.sm, fontVariant: ['tabular-nums'] }]}>{rows.length} of {total} answers · {ms} ms</Text>
+        <View style={{ marginTop: space.sm }}><SophiaBubbleToggle /></View>
       </View>
       <FlatList
         data={rows}

@@ -2,7 +2,8 @@ name: Build Frozen Codex Android APK
 
 on:
   push:
-    branches: [main]
+    # main builds and publishes a release; preview/* branches only build a test APK (no release).
+    branches: [main, 'preview/**']
   workflow_dispatch:
 
 permissions:
@@ -10,7 +11,7 @@ permissions:
 
 # One build at a time, so two quick pushes can't claim the same version number.
 concurrency:
-  group: frozen-codex-release
+  group: frozen-codex-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
