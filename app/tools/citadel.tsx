@@ -31,6 +31,11 @@ export default function CitadelPlanner() {
           <Stat label="Base build time" value={formatDurationShort(plan.baseSeconds)} />
           <Stat label="Net build time" value={formatDurationShort(plan.netSeconds)} color={palette.cyan} align="right" />
         </Row>
+        {plan.unknownTimeLevels.length ? (
+          <Text style={[type.caption, { marginTop: space.sm, color: palette.gold }]}>
+            Build time unknown for Citadel {plan.unknownTimeLevels.join(', ')} — not included in these totals.
+          </Text>
+        ) : null}
       </Card>
 
       <SectionHeader title="Speed & cost bonuses" subtitle="Civil heroes, Builder gear, VIP, Institute" />
@@ -60,10 +65,10 @@ export default function CitadelPlanner() {
       <Table rows={plan.levels} columns={[
         { key: 'l', title: 'Lv', flex: 0.4, render: (r) => String(r.level) },
         { key: 'r', title: 'Requires', flex: 2.4, render: (r) => r.requires.map((q) => `${q.building} ${q.level}`).join(', ') },
-        { key: 't', title: 'Time', align: 'right', flex: 1.1, render: (r) => formatDurationShort(r.baseSeconds / (1 + (b.civilSpeedPct + b.builderGearPct + b.vipPct + b.institutePct) / 100)) },
+        { key: 't', title: 'Time', align: 'right', flex: 1.1, render: (r) => r.baseSeconds === null ? 'Unknown' : formatDurationShort(r.baseSeconds / (1 + (b.civilSpeedPct + b.builderGearPct + b.vipPct + b.institutePct) / 100)) },
       ]} />
       <Text style={[type.caption, { marginTop: space.sm }]}>Totals: {RESOURCE_KEYS.filter((k) => plan.totals[k]).map((k) => `${LABEL[k]} ${fmtFull(plan.totals[k])}`).join(' · ')}</Text>
-      <ConfidenceNote confidence="estimate" />
+      <ConfidenceNote confidence="community" />
     </Screen>
   );
 }
