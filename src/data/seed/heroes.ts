@@ -513,8 +513,9 @@ const baseHeroes: Hero[] = [
  * revision 21 = in-game Leona skills; revision 22 = in-game Tutanhet skills;
  * revision 23 = in-game Lylia skills; revision 24 = in-game Tooka skills;
  * revision 25 = in-game Carvell skills; revision 26 = in-game Kaios skills;
- * revision 27 = in-game Dolly skills; revision 28 = in-game Elsa skills.
+ * revision 27 = in-game Dolly skills; revision 28 = in-game Elsa skills;
+ * revision 29 = in-game Wallace skills.
  */
-export const HERO_DATA_REVISION = 28;
+export const HERO_DATA_REVISION = 29;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

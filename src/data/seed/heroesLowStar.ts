@@ -130,7 +130,17 @@ export const lowStarHeroes: Hero[] = [
       { name: 'Archer ATK', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game). Unlocks at Lv. 131.' },
     ],
   },
-  lowStar({ name: 'Wallace', element: 'Nature', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
+  {
+    ...lowStar({ name: 'Wallace', element: 'Nature', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Infantry HP', 'Infantry DEF', 'Infantry ATK'],
+      m3: { name: 'Greatblade of Storm', description: 'Deals 300% damage to the target (Rage Regen: Fast). Keen Edge: the target takes 18% of ATK as Poison damage for 5 rounds. Heart of the Brave: ATK +15% and Rage Regen +8%. Freedom Fighter (unlocks Lv. 71): Dodge +20%. Values as shown in-game at +1.', charge: 'Fast', pattern: 'Single target', effects: ['Poison', 'ATK up', 'Rage up', 'Dodge'] },
+      notes: ['In-game (2026-11-23, Wallace at +1): 4★ Nature Infantry confirmed; troop skill 120% of troop ATK; Infantry HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Infantry ATK unlocks at Lv. 131; four hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).' },
+      { name: 'Infantry HP', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game).' },
+      { name: 'Infantry DEF', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game).' },
+      { name: 'Infantry ATK', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   lowStar({ name: 'Schubert', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Combination Event'],
     civil: [civil('Training Speed'), civil('Stone Output'), civil('Rally Size')] }),
   {
