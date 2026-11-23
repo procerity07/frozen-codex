@@ -183,8 +183,17 @@ export const lowStarHeroes: Hero[] = [
   },
   lowStar({ name: 'Hanzo', element: 'Light', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Output')] }),
   // ------------------------------ Dark ------------------------------
-  lowStar({ name: 'Claudia', element: 'Dark', rarity: 3, unit: 'Cavalry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Gather Speed')],
-    notes: ['Sold for 50 points in the Hero Plaza point shop.', 'Element confirmed by the in-game hero card (wiki only implies it by table position).'] }),
+  {
+    ...lowStar({ name: 'Claudia', element: 'Dark', rarity: 3, unit: 'Cavalry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Troop skill', 'Cavalry DEF', 'Cavalry ATK'],
+      civil: [{ name: 'Stone Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } }],
+      m3: { name: 'Night Lights', description: 'Restores 32% HP to all allies (Rage Regen: Fast). Potent Herb: grants 10% Rage to her and adjacent allies. Adrenaline: ATK and DEF +10%. Values as shown in-game at +5.', charge: 'Fast', pattern: 'All allies', effects: ['Heal', 'Rage up', 'ATK up', 'DEF up'] },
+      notes: ['Sold for 50 points in the Hero Plaza point shop.', 'In-game (2026-11-23, Claudia at +5): 3★ Dark Cavalry confirmed; troop skill 500% of troop ATK; Stone Gather Speed 12/18/24/30% and Cavalry DEF/ATK 10/15/20/25% (+2 to +5); three hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game).' },
+      { name: 'Cavalry DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Cavalry ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when she joins troop battle (in-game).' },
+    ],
+  },
 ];
 
 /**
