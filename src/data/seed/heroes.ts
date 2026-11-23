@@ -23,10 +23,12 @@ interface HeroInput {
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-/** Standard 5★ military-skill table seen in-game (Tania, Boyd): same values for HP, DEF and ATK. */
+/** 5★ military-skill tables seen in-game; each hero uses the same values for HP, DEF and ATK. */
 const STANDARD_5STAR_MILITARY = '5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game).';
-const militaryTrio = (troop: string): [string, string][] =>
-  ['HP', 'DEF', 'ATK'].map((stat) => [`${troop} ${stat}`, STANDARD_5STAR_MILITARY] as [string, string]);
+/** All-troop version (e.g. Eris): lower values because it covers every troop type. */
+const ALL_TROOP_5STAR_MILITARY = '5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game).';
+const militaryTrio = (troop: string, table = STANDARD_5STAR_MILITARY): [string, string][] =>
+  ['HP', 'DEF', 'ATK'].map((stat) => [`${troop} ${stat}`, table] as [string, string]);
 
 function hero(i: HeroInput): Hero {
   const marchSkills: HeroSkill[] = i.march.map(([name, description]) => ({ name, description }));
@@ -180,10 +182,13 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Eris', title: 'Discord Blade', element: 'Dark', rarity: 5, unit: 'Cavalry', role: 'Assassin',
-    march: [['Sow Discord', 'Lowers enemy ATK; Cavalry crit damage up.']],
-    m3: { name: 'Apple of Strife', desc: 'Dark damage to the highest-ATK enemy and silences it.', charge: 'Fast', pattern: 'Single target', effects: ['Silence'] },
+    march: [
+      ['Troop skill', 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).'],
+      ...militaryTrio('Troop', ALL_TROOP_5STAR_MILITARY),
+    ],
+    m3: { name: 'Void Oblivion', desc: 'Deals 220% damage to all enemies (Rage Regen: Slow). Distracted Mind: reduces enemies\' Hit by 40% for 6 rounds. Fiend\'s Rage: gains 30% Rage at the start of battle. Descent of Fear: a chance to Stun enemies for 2 rounds. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3.', charge: 'Slow', pattern: 'All enemies', effects: ['Hit down', 'Rage up', 'Stun', 'Crit'] },
     sources: ['Recruit Trial', 'Timeless Recruitment'], bonds: ['Sanguine Serenade'],
-    notes: 'Silence is wasted on Elemental Seal bosses (immune), but dominant in Arena.',
+    notes: 'Hits every enemy and can Stun; her troop bonus covers all troop types.',
   }),
   hero({
     name: 'Kujo Mamoru', title: 'Shrine Guardian', element: 'Nature', rarity: 5, unit: 'Infantry', role: 'Tank',
@@ -443,8 +448,8 @@ const baseHeroes: Hero[] = [
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
  * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables;
- * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills.
+ * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills.
  */
-export const HERO_DATA_REVISION = 7;
+export const HERO_DATA_REVISION = 8;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

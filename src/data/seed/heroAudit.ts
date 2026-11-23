@@ -107,7 +107,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Cavalry", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Dark Cavalry (matches app). Bond corrected: Sanguine Serenade. Sources partly ambiguous in the extract (shared sentence with Eric).", "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."],
+    notes: ["Wiki: 5-star Dark Cavalry (matches app). Bond corrected: Sanguine Serenade. Sources partly ambiguous in the extract (shared sentence with Eric).", "In-game (2026-11-23, Eris at +3): Dark and Cavalry confirmed; troop skill 200% of troop ATK; Troop HP/DEF/ATK (all troops) 5★ 12.8/19.2/25.6/32/40/51.2/94% (+2 to +8), 6★ 40/51.2/75/125% (+5 to +8); hero skills Void Oblivion (220% to all enemies, Rage Regen Slow), Distracted Mind, Fiend's Rage, Descent of Fear, Combat Mastery (6★). The unsourced Sow Discord / Apple of Strife (Silence) skills were replaced.", "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."],
   },
   "kujo-mamoru": {
     checkedOn: '2026-11-23',
