@@ -42,7 +42,8 @@ for (const c of seed.cycleDays) ok(eventIds.has(c.eventId), `cycle days unknown 
 for (const b of seed.bagItems) for (const k of Object.keys(b.points)) ok(k in seed.bagDayLabels, `bag item ${b.id} unknown day ${k}`);
 ok(seed.citadelLevels.length === 40, 'citadel must have 40 levels');
 ok(seed.gloryBuildings.length === 14, 'glory buildings must be 14');
-ok(seed.shops.length === 12, 'shops must be 12');
+ok(seed.shops.length === 13, 'shops must be 13');
+for (const s of seed.shops) ok(new Set(s.items.map((x) => x.name)).size === s.items.length, `${s.id}: item names must be unique`);
 ok(seed.bondLevels.length === 95 && seed.bondLevels[0]!.expToNext === 1000 && seed.bondLevels[94]!.expToNext === 330000 && seed.bondLevels[0]!.title === 'Stranger' && seed.bondLevels[79]!.title === 'Confidant', 'bond levels match wiki endpoints');
 for (const e of seed.events) ok(/^\d{2}:\d{2}$/.test(e.startUtc), `event ${e.id} bad startUtc`);
 const allSeedText = JSON.stringify(seed);

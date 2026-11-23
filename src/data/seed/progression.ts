@@ -351,7 +351,7 @@ export const draconicStones: DraconicStone[] = [
   { name: 'Fiery', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Frost', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Hurricane', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Lightning', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Electric', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Meteor', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Hydro', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Nature', dragonLevel: 40, effect: 'Effect not verified', focus: 'All' },

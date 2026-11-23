@@ -393,6 +393,10 @@ export interface ShopItem {
   f2p: Verdict;
   spender: Verdict;
   reason: string;
+  /** Purchase limit per refresh as shown in-game, e.g. "10", "Unlimited", "5 per week". */
+  limit?: string;
+  /** Unlock requirement shown in-game (e.g. "Citadel Lv. 35"). */
+  requires?: string;
 }
 
 export interface Shop {
@@ -401,6 +405,8 @@ export interface Shop {
   currency: string;
   refresh: string;
   items: ShopItem[];
+  /** Date the prices and limits were checked in-game; absent = not verified. */
+  checkedOn?: string;
 }
 
 export interface GuideSection {

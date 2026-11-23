@@ -78,7 +78,7 @@ const baseEvents: GameEvent[] = [
     name: 'Elemental Seal I / II / III', category: C('Weekly'), cadence: 'Weekly Thu–Sat', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'],
     summary: 'Boss challenge requiring specific elements and minimum star levels.',
     rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Elemental Seal I runs Thursday and II runs Friday (00:00–24:00 UTC); III follows on Saturday (not visible in that week view).', 'Deploy the required element(s) at or above the stated star level.', 'Boss uses skills from Round 11+ and is immune to stun and silence.', 'Only your highest single run counts for Top 50 rank.', 'Elemental Seal I phase 1 is 125 points.'],
-    rewards: ['Diamond chest', '5,000-point item', 'Dragon tokens', '1★ crystal (red for I, green for II)', 'Gear Essence', 'Dragon points'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
+    rewards: ['Diamond chest', '5,000 Dragon EXP', 'Dragon Civil Pts and Dragon Military Pts', '1★ crystal (red for I, green for II)', 'Gear Essence'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
   }),
   ev({
     name: 'Lich Attack', category: C('Weekly'), cadence: 'Weekly Sunday', cycleWeek: W('Both'), days: ['Sun'],
@@ -179,6 +179,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 4; // 4 = in-game event pop-ups (Alliance Party, Undead Scourge, Elemental Seal)
+export const EVENT_DATA_REVISION = 5; // 5 = Elemental Seal reward names from in-game icons
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));

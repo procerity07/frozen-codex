@@ -37,6 +37,11 @@ function ShopAdvisor() {
       <Card style={{ marginBottom: space.md, padding: space.md }}>
         <Text style={type.heading}>{shop.name}</Text>
         <Text style={type.caption}>Currency: {shop.currency} · Refresh: {shop.refresh}</Text>
+        <Text style={[type.caption, { marginTop: 4, color: shop.checkedOn ? palette.success : palette.textMuted }]}>
+          {shop.checkedOn
+            ? `Prices and limits checked in-game on ${shop.checkedOn}. Buy/Skip ratings are suggestions.`
+            : 'Prices not checked in-game yet. Buy/Skip ratings are suggestions.'}
+        </Text>
       </Card>
       {items.map((i) => {
         const v = i[profile];
@@ -45,7 +50,8 @@ function ShopAdvisor() {
             <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <View style={{ flex: 1 }}>
                 <Text style={type.heading}>{i.name}</Text>
-                <Text style={type.numberSmall}>{i.price}</Text>
+                <Text style={type.numberSmall}>{i.price}{i.limit ? `  ·  limit ${i.limit}` : ''}</Text>
+                {i.requires ? <Text style={[type.caption, { color: palette.warning }]}>Requires {i.requires}</Text> : null}
               </View>
               <Badge label={v} color={verdictColors[v]} />
             </Row>
