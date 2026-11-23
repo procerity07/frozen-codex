@@ -228,7 +228,7 @@ const baseHeroes: Hero[] = [
       { name: 'Training Cost Down', description: 'In-game. 5★: −4.5% at +1, then −6/−9/−12/−15/−18.75/−22.5/−24% from +2 to +8; 6★: −18.75/−24/−26/−28% from +5 to +8.', requirement: 'Unlocks at level 131 (in-game)', unit: '%',
         tiers: { '5': [null, -4.5, -6, -9, -12, -15, -18.75, -22.5, -24], '6': [null, null, null, null, null, -18.75, -24, -26, -28] } },
     ],
-    m3: { name: 'Inferno Breath', desc: 'Deals 161% damage to all enemies (Rage Regen: Slow). Draconic Flames: Poison damage to enemies for 6 rounds. Drake Companion: all allies ATK +34% for 6 rounds. Sunset Explosion (unlocks Lv. 71): self-detonates on death for 140% damage to all enemies. Combat Mastery: locked, value not captured. Values as shown in-game at +1.', charge: 'Slow', pattern: 'All enemies', effects: ['Poison', 'ATK up', 'Death explosion'] },
+    m3: { name: 'Inferno Breath', desc: 'Deals 161% damage to all enemies (Rage Regen: Slow). Draconic Flames: Poison damage to enemies for 6 rounds. Drake Companion: all allies ATK +34% for 6 rounds. Sunset Explosion (unlocks Lv. 71): self-detonates on death for 140% damage to all enemies. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at +1.', charge: 'Slow', pattern: 'All enemies', effects: ['Poison', 'ATK up', 'Death explosion', 'Crit'] },
     sources: ['Timeless Recruitment'], bonds: ['Octet Wanderers'],
     notes: 'Training speed and cost cuts work just by owning her. Shards also sold in the Sapphire Shop (350,000 each).',
   }),
