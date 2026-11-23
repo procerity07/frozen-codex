@@ -76,14 +76,14 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Saya', title: 'Hearth Steward', element: 'Fire', rarity: 5, unit: 'Civil', role: 'Economy core',
-    march: [['Warm Welcome', 'Minor troop HP buff when garrisoning the Citadel.']],
+    march: [['Troop skill', '+120% at +1 (in-game; full description not captured).']],
     civil: [
       { name: 'Troop Capacity', description: 'Flat troop capacity (confirmed in-game). 5-star: +2,000, +3,000, +4,000, +6,000, +8,000, +10,000, +12,500, +15,000, +22,500 from Hero0 to +8. 6-star: +12,500, +16,000, +20,000, +30,000 from +5 to +8.', requirement: 'Unlocks at level 131 (as listed on the wiki)', stat: 'troopCap', unit: 'flat',
         tiers: { '5': [2000, 3000, 4000, 6000, 8000, 10000, 12500, 15000, 22500], '6': [null, null, null, null, null, 12500, 16000, 20000, 30000] } },
-      { name: 'Construction Speed', description: '6-star: +37.5% at Hero5 rising to +100% at Hero8. 5-star values not verified.', requirement: 'Unlocks at level 31', stat: 'buildSpeed', unit: '%',
-        tiers: { '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
-      { name: 'Free Speedup Time', description: '5-star: 6 minutes at Hero0 rising to 60 minutes at Hero8; 6-star values are higher.', requirement: 'Unlock level not verified', unit: 'min',
-        tiers: { '5': [6, null, null, null, null, null, null, null, 60] } },
+      { name: 'Construction Speed', description: 'In-game. 5-star: +9% at +1, then +12%, +18%, +24%, +30%, +37.5%, +45%, +75% at +8. 6-star: +37.5%, +48%, +56%, +100% from +5 to +8.', requirement: 'Unlocks at level 31', stat: 'buildSpeed', unit: '%',
+        tiers: { '5': [null, 9, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Free Speedup Time', description: 'In-game. 5-star: 9 min at +1, then 12, 18, 24, 30, 40, 45, 60 min at +8 (6 min at Hero0 per the wiki). 6-star: 37.5, 51.2, 55, 80 min from +5 to +8.', requirement: 'Unlock level not verified', unit: 'min',
+        tiers: { '5': [6, 9, 12, 18, 24, 30, 40, 45, 60], '6': [null, null, null, null, null, 37.5, 51.2, 55, 80] } },
     ],
     m3: { name: 'Sunlit Blessing', desc: 'Heals allies and cleanses one debuff.', charge: 'Fast', pattern: 'All allies', effects: ['Heal', 'Cleanse'] },
     sources: ['First Top-up', 'Ace Lord Radiant Card'], bonds: ['Rhapsody of Genesis'], curio: 'Wings of Icarus',
@@ -431,8 +431,8 @@ const baseHeroes: Hero[] = [
  * corrections replace older online-pack rows (which carry a lower or missing revision) on re-seed.
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
- * revision 4 = in-game Gina skill tables and element.
+ * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables.
  */
-export const HERO_DATA_REVISION = 4;
+export const HERO_DATA_REVISION = 5;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

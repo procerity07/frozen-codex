@@ -258,7 +258,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(sayaCap.active && sayaCap.value === 22500, 'Saya 5★ +8 troop capacity = +22,500');
   const ginaCap = cb.find((b) => b.heroId === 'gina' && b.skill === 'Troop Capacity')!;
   ok(!ginaCap.active && ginaCap.note === 'Unlocks at Lv. 131', 'locked skills reported below unlock level');
-  ok(cb.find((b) => b.heroId === 'saya' && b.skill === 'Construction Speed')!.value === null, '5★ Saya construction speed stays unverified (no guess)');
+  ok(cb.find((b) => b.heroId === 'saya' && b.skill === 'Construction Speed')!.value === 75, '5★ +8 Saya construction speed = 75% (in-game)');
+  ok(civilBonuses(seed.heroes, { saya: { stars: 5, level: 131, enhancement: 0, bond: 1 } }).find((b) => b.skill === 'Construction Speed')!.value === null, 'Saya Hero0 construction speed stays unverified (not shown in-game)');
+  ok(cb.find((b) => b.heroId === 'gina' && b.skill === 'EXP Potion Output')!.value === 100, 'Gina 4★ +5 EXP Potion Output = 100% (in-game)');
   const saya6 = civilBonuses(seed.heroes, { saya: { stars: 6, level: 400, enhancement: 6, bond: 1 } }).find((b) => b.skill === 'Construction Speed')!;
   ok(saya6.value === 48 && saya6.unit === '%', 'Saya 6★ +6 construction speed = +48%');
 
