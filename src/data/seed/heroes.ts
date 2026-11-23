@@ -227,8 +227,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Wu Kong', title: 'Monkey King', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Seventy-Two Forms', 'Infantry ATK up; chance to dodge.']],
-    m3: { name: 'Ruyi Strike', desc: 'Fire damage to a column 3 times.', charge: 'Medium', pattern: 'Column x3', effects: ['Multi-hit'] },
+    march: [['Troop skill', 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).']],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: 'Cosmic Rod', desc: 'Deals 450% damage to the enemy target (Rage Regen: Fast). Might of a Thousand: also deals 20% of ATK as True Damage (ignores DEF). Immobilization Spell: immobilizes the target for 2 rounds (cannot attack, gain Rage or recover HP). Immunity to Evil: immune to Poison and Burn. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3.', charge: 'Fast', pattern: 'Single target', effects: ['True damage', 'Immobilize', 'Poison/Burn immunity', 'Crit'] },
     sources: ['Timeless Recruitment', 'Mythic Hero Choice Card III', 'Stamina Event'],
     notes: 'Stamina Event drops expire — spend them before the event ends.',
   }),
@@ -448,8 +456,9 @@ const baseHeroes: Hero[] = [
  * Revision 1 = 2026-11-23 community-wiki audit; revision 2 = civil-skill value tables for My Heroes;
  * revision 3 = in-game Saya table, five added heroes, in-game element confirmations;
  * revision 4 = in-game Gina skill tables and element; revision 5 = in-game Saya Construction Speed and Free Speedup tables;
- * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills.
+ * revision 6 = in-game Tania troop skills and hero skills; revision 7 = in-game Boyd skills; revision 8 = in-game Eris skills;
+ * revision 9 = in-game Wu Kong skills (owned-hero troop passives).
  */
-export const HERO_DATA_REVISION = 8;
+export const HERO_DATA_REVISION = 9;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

@@ -143,7 +143,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "sources"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Wu_Kong"],
-    notes: ["Wiki: 5-star Light Civil; Timeless Heroes Limited Recruitment, Mythic Hero Choice Card III, Stamina Event (app previously: Fire Infantry). Stamina Event appears on the Heroes table but not on the hero page."],
+    notes: ["Wiki: 5-star Light Civil; Timeless Heroes Limited Recruitment, Mythic Hero Choice Card III, Stamina Event (app previously: Fire Infantry). Stamina Event appears on the Heroes table but not on the hero page.", "In-game (2026-11-23, Wu Kong at +3, S2 badge): Light confirmed; troop skill 200% of troop ATK; Troop HP/DEF/ATK (Passive) apply to all troops just by owning him: 5★ 12.8/19.2/25.6/32/40/51.2/94% (+2 to +8), 6★ 40/51.2/75/125% (+5 to +8); hero skills Cosmic Rod (450%, Rage Regen Fast), Might of a Thousand, Immobilization Spell, Immunity to Evil, Combat Mastery (6★). The unsourced Seventy-Two Forms / Ruyi Strike skills were replaced."],
   },
   "oichi": {
     checkedOn: '2026-11-23',
