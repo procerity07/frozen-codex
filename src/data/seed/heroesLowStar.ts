@@ -119,7 +119,17 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Roger', element: 'Nature', rarity: 3, unit: 'Archer', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Gather Speed')] }),
   lowStar({ name: 'Cassandra', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Mesdi Portal'],
     civil: [civil('Gather March Speed'), civil('Hunt March Speed'), civil('Troop Capacity')], notes: ['Obtained from Mesdi Portal World II.'] }),
-  lowStar({ name: 'Dolly', element: 'Nature', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Archer HP', 'Archer DEF', 'Archer ATK'] }),
+  {
+    ...lowStar({ name: 'Dolly', element: 'Nature', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Archer HP', 'Archer DEF', 'Archer ATK'],
+      m3: { name: "Nature's Cure", description: 'Restores 30% HP to all allies (Rage Regen: Medium). Eco Balance: dispels all buffs on enemies. Favor of Nature: ATK +15% and Crit +8%. Cosmos Blessing (unlocks Lv. 71): dispels all debuffs on allies. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'Dispel', 'ATK up', 'Crit'] },
+      notes: ['In-game (2026-11-23, Dolly at +1): 4★ Nature Archer confirmed; troop skill 120% of troop ATK; Archer HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Archer ATK unlocks at Lv. 131; four hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).' },
+      { name: 'Archer HP', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Archer DEF', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Archer ATK', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   lowStar({ name: 'Wallace', element: 'Nature', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
   lowStar({ name: 'Schubert', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Combination Event'],
     civil: [civil('Training Speed'), civil('Stone Output'), civil('Rally Size')] }),
