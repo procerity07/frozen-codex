@@ -470,8 +470,9 @@ const baseHeroes: Hero[] = [
  * revision 9 = in-game Wu Kong skills (owned-hero troop passives); revision 10 = in-game Isabella skills;
  * revision 11 = in-game Sirona skills; revision 12 = in-game Christina skills;
  * revision 13 = in-game Ysera skills; revision 14 = in-game Edith skills;
- * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills.
+ * revision 15 = in-game Aurora skills; revision 16 = in-game Kujo Mamoru skills;
+ * revision 17 = in-game Sodoma skills.
  */
-export const HERO_DATA_REVISION = 16;
+export const HERO_DATA_REVISION = 17;
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));

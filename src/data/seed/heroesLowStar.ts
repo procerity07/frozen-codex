@@ -144,8 +144,19 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
-  lowStar({ name: 'Sodoma', element: 'Nature', rarity: 5, unit: 'Cavalry', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial'],
-    bonds: ['Octet Wanderers'], pages: [`${W}Hero_Bond`] }),
+  {
+    ...lowStar({ name: 'Sodoma', element: 'Nature', rarity: 5, unit: 'Cavalry', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial'],
+      march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
+      m3: { name: 'Wraith Spear', description: 'Deals 440% damage to the target (Rage Regen: Medium). Direwolf Raid: depletes 25% of the target\'s Rage. Savage Blessing: +20% Heal Bonus to her and adjacent allies for 5 rounds. Fenrir\'s Terror (unlocks Lv. 71): +35% ATK to her and adjacent allies for 5 rounds. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at +1.', charge: 'Medium', pattern: 'Single target', effects: ['Rage down', 'Heal Bonus', 'ATK up', 'Crit'] },
+      bonds: ['Octet Wanderers'], pages: [`${W}Hero_Bond`],
+      notes: ['In-game (2026-11-23, Sodoma at +1): 5★ Nature Cavalry confirmed; troop skill 120% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).' },
+      { name: 'Troop HP', description: '5★: +9.6% at +1, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when she joins troop battle (in-game).' },
+      { name: 'Troop DEF', description: '5★: +9.6% at +1, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when she joins troop battle (in-game).' },
+      { name: 'Troop ATK', description: '5★: +9.6% at +1, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   lowStar({ name: 'Setemos', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Recruit Trial'],
     civil: [civil('Hunt ATK Bonus', 'Listed on the wiki. Value not verified.', 'Unlocks at level 31'), civil('Troop DEF', 'Listed on the wiki. Value not verified.', 'Unlocks at level 131')],
     bonds: ['Sanguine Serenade'], pages: [`${W}Hero_Bond`] }),
