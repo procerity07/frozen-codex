@@ -1,0 +1,50 @@
+name: Inspect Claude ZIP
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate and extract archive without running its code
+        shell: python
+        run: |
+          import os, stat, zipfile
+          from pathlib import Path, PurePosixPath
+          output = Path(os.environ['RUNNER_TEMP']) / 'claude-zip-review'
+          output.mkdir()
+          with zipfile.ZipFile('frozen-codex.zip') as archive:
+              entries = archive.infolist()
+              if len(entries) > 10000 or sum(x.file_size for x in entries) > 200_000_000:
+                  raise ValueError('Archive exceeds inspection limits')
+              seen = set()
+              for entry in entries:
+                  p = PurePosixPath(entry.filename)
+                  if p.is_absolute() or '..' in p.parts or '\\' in entry.filename or ':' in entry.filename:
+                      raise ValueError('Unsafe archive path: ' + entry.filename)
+                  if not p.parts:
+                      raise ValueError('Empty archive path')
+                  if stat.S_ISLNK(entry.external_attr >> 16):
+                      raise ValueError('Symbolic links are not allowed')
+                  if '.git' in p.parts:
+                      raise ValueError('Embedded Git metadata is not allowed')
+                  if p.as_posix() in seen:
+                      raise ValueError('Duplicate archive path: ' + entry.filename)
+                  seen.add(p.as_posix())
+              listing = '\n'.join(f'{x.file_size:>10}  {x.filename}' for x in entries)
+              print(listing)
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as report:
+                  report.write('## Claude ZIP inspection\n\nNo application files were replaced. No archive code was executed.\n\n```text\n' + listing[:800000] + '\n```\n')
+              archive.extractall(output)
+          (output / 'ARCHIVE_FILE_LIST.txt').write_text(listing)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: claude-zip-review
+          path: ${{ runner.temp }}/claude-zip-review
+          include-hidden-files: true
+          retention-days: 3
