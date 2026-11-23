@@ -4,7 +4,7 @@ export const cycleDays: CycleEventDays[] = [
   {
     eventId: 'ace-lord',
     days: [
-      { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Omni Shards', 'Hero EXP', 'Bond Gifts', 'Timeless / Deluxe Scrolls'] },
+      { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Recruit items: Timeless Scroll 20,000 · Deluxe Recruit Ticket 10,000', 'Hero shards: 5★ Omni 30,000 · 4★ Omni 10,000 · 3★ Omni 3,000 · 2★ Hero Shard 750', 'Bond Gifts: T1 75 · T2 375 · T3 750 · T4 9,375 · T5 18,750', 'Mythic Hero Choice Cards, Realm Cards and Hero Plaza exchanges give 0'] },
       { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['Construction power', 'Research power', 'Build/Research speedups'] },
       { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['Stamina spent', 'AP spent', 'Resources gathered'] },
       { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups', 'Troops trained'] },
@@ -47,16 +47,16 @@ export const royalArmsRace: RoyalArmsRaceSlot[] = [
 ];
 
 /**
- * Ace Lord Day 1 phases. Wiki: phase 1 = 15,000 and phase 6 = 600,000 (2x Radiant Hero Choice Card) on Days 1–4;
- * Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000. Phases 2–5 thresholds and rewards are not verified.
+ * Ace Lord Day 1 (Heroes Assemble) phases — confirmed from in-game screenshots (2026-11-23).
+ * Wiki: Days 2–4 share the 600,000 top phase; Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000.
  */
 export const aceLordPhases: PhaseReward[] = [
-  { phase: 1, points: 15000, reward: 'Phase 1 (rewards not verified)' },
-  { phase: 2, points: 80000, reward: 'Phase 2 (threshold and rewards not verified)' },
-  { phase: 3, points: 160000, reward: 'Phase 3 (threshold and rewards not verified)' },
-  { phase: 4, points: 280000, reward: 'Phase 4 (threshold and rewards not verified)' },
-  { phase: 5, points: 420000, reward: 'Phase 5 (threshold and rewards not verified)' },
-  { phase: 6, points: 600000, reward: '2x Radiant Hero Choice Card (Days 1–4; Day 6 top 800,000, Day 7 top 1,200,000)' },
+  { phase: 1, points: 15000, reward: '3x 60m Speedup, 8x 60m Speedup, 150,000 Food, 150,000 Wood' },
+  { phase: 2, points: 30000, reward: '3x 60m Speedup, 8x 60m Speedup, 150,000 Food, 150,000 Wood' },
+  { phase: 3, points: 60000, reward: '3x 60m Speedup, 8x 60m Speedup, 150,000 Food, 150,000 Wood' },
+  { phase: 4, points: 120000, reward: '3x 60m Speedup, 8x 60m Speedup, 150,000 Food, 150,000 Wood' },
+  { phase: 5, points: 300000, reward: '400-Diamond chest, 3x 60m Speedup, 1x 30% boost, 150,000 Food, 150,000 Wood' },
+  { phase: 6, points: 600000, reward: '2x Hero Choice Card, 3x 60m Speedup, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
 ];
 
 export const armsRacePhases: PhaseReward[] = [
@@ -80,25 +80,25 @@ export const aceCards: RealmAgeCard[] = [
   { card: 'Ace Hero Choice Card III', minWeeks: 22, heroes: ['Apan', 'Norris', 'Patty', 'Angelita'] },
 ];
 
-const b = (id: string, label: string, group: BagItem['group'], unit: string, points: BagItem['points']): BagItem =>
-  ({ id, label, group, unit, points, confidence: 'estimate' });
+const b = (id: string, label: string, group: BagItem['group'], unit: string, points: BagItem['points'], verifiedDays?: BagItem['verifiedDays']): BagItem =>
+  ({ id, label, group, unit, points, confidence: 'estimate', verifiedDays });
 
 /**
  * Bag Hoard point values per day. Keys: AL = Ace Lord, AR = Arms Race, AD = Alliance Duel.
  * Values are modelled from community spreadsheets and must be refreshed via the OTA data pack.
  */
 export const bagItems: BagItem[] = [
-  b('omni5', '5-Star Omni Shard', 'Shards', 'shard', { AL1: 10000, AR1: 10000, AD4: 8000 }),
-  b('omni4', '4-Star Omni Shard', 'Shards', 'shard', { AL1: 3000, AR1: 3000, AD4: 2400 }),
-  b('omni3', '3-Star Omni Shard', 'Shards', 'shard', { AL1: 600, AR1: 600, AD4: 480 }),
-  b('omni2', '2-Star Omni Shard', 'Shards', 'shard', { AL1: 100, AR1: 100, AD4: 80 }),
-  b('timeless', 'Timeless Scroll', 'Scrolls', 'scroll', { AL1: 1500, AR1: 1500 }),
-  b('deluxe', 'Deluxe Recruit Scroll', 'Scrolls', 'scroll', { AL1: 500, AR1: 500 }),
-  b('bond1', 'T1 Bond Gift', 'Bond', 'gift', { AL1: 10, AR1: 10, AD4: 10 }),
-  b('bond2', 'T2 Bond Gift', 'Bond', 'gift', { AL1: 50, AR1: 50, AD4: 50 }),
-  b('bond3', 'T3 Bond Gift', 'Bond', 'gift', { AL1: 200, AR1: 200, AD4: 200 }),
-  b('bond4', 'T4 Bond Gift', 'Bond', 'gift', { AL1: 1000, AR1: 1000, AD4: 1000 }),
-  b('bond5', 'T5 Bond Gift', 'Bond', 'gift', { AL1: 5000, AR1: 5000, AD4: 5000 }),
+  b('omni5', '5-Star Omni Hero Shard', 'Shards', 'shard', { AL1: 30000, AR1: 10000, AD4: 8000 }, ['AL1']),
+  b('omni4', '4-Star Omni Hero Shard', 'Shards', 'shard', { AL1: 10000, AR1: 3000, AD4: 2400 }, ['AL1']),
+  b('omni3', '3-Star Omni Hero Shard', 'Shards', 'shard', { AL1: 3000, AR1: 600, AD4: 480 }, ['AL1']),
+  b('omni2', '2-Star Hero Shard', 'Shards', 'shard', { AL1: 750, AR1: 100, AD4: 80 }, ['AL1']),
+  b('timeless', 'Timeless Heroes Recruitment Scroll', 'Scrolls', 'scroll', { AL1: 20000, AR1: 1500 }, ['AL1']),
+  b('deluxe', 'Deluxe Recruit Ticket', 'Scrolls', 'ticket', { AL1: 10000, AR1: 500 }, ['AL1']),
+  b('bond1', 'T1 Bond Gift', 'Bond', 'gift', { AL1: 75, AR1: 10, AD4: 10 }, ['AL1']),
+  b('bond2', 'T2 Bond Gift', 'Bond', 'gift', { AL1: 375, AR1: 50, AD4: 50 }, ['AL1']),
+  b('bond3', 'T3 Bond Gift', 'Bond', 'gift', { AL1: 750, AR1: 200, AD4: 200 }, ['AL1']),
+  b('bond4', 'T4 Bond Gift', 'Bond', 'gift', { AL1: 9375, AR1: 1000, AD4: 1000 }, ['AL1']),
+  b('bond5', 'T5 Bond Gift', 'Bond', 'gift', { AL1: 18750, AR1: 5000, AD4: 5000 }, ['AL1']),
   b('stamina', 'Stamina (per point)', 'AP & Stamina', 'stamina', { AL3: 30 }),
   b('ap', 'Action Points (per point)', 'AP & Stamina', 'AP', { AL3: 40 }),
   b('speedBuild', 'Build Speedup', 'Speedups', 'minute', { AL2: 30, AL7: 30, AR2: 25 }),

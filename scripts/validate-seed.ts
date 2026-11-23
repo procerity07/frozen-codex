@@ -86,7 +86,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
   // ---------- Calculators ----------
   const bag = bagPoints(seed.bagItems, { omni5: 10, omni4: 5, bond5: 2 }, 'AL1');
-  ok(bag.total === 10 * 10000 + 5 * 3000 + 2 * 5000, `bag total ${bag.total}`);
+  ok(bag.total === 10 * 30000 + 5 * 10000 + 2 * 18750, `bag total ${bag.total}`);
+  ok(seed.aceLordPhases.map((p) => p.points).join() === '15000,30000,60000,120000,300000,600000', 'Ace Lord Day 1 phases match in-game');
+  ok(seed.bagItems.filter((i) => i.points.AL1).every((i) => i.verifiedDays?.includes('AL1')), 'all Ace Lord Day 1 bag values confirmed in-game');
   ok(phaseProgress(600000, seed.aceLordPhases).reached.length === 6, 'phase 6 reached at 600k');
   ok(colExchange(12000, 10, 'lost').powerNeeded === 30_000_000, 'CoL 12k lost = 30M power');
   ok(colExchange(100, 1, 'killed').powerNeeded === 1_000_000, 'CoL 100 killed = 1M power');

@@ -20,7 +20,7 @@ const baseEvents: GameEvent[] = [
     name: 'Ace Lord', category: C('Core Cycle'), cadence: 'Bi-weekly (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: WEEK,
     summary: 'Seven daily themes; personal points unlock 6 reward phases ending in a Radiant Hero Choice Card.',
     rules: ['Runs Monday 00:00 UTC to Sunday 00:00 UTC.', 'Day 1 Heroes Assemble (hero upgrade)', 'Day 2 Path to Development (build & research)', 'Day 3 Daily Activity (stamina/AP & gathering)', 'Day 4 Training Master (training speedup)', 'Day 5 Draconic Stone (draconic stone & refinement crest)', 'Day 6 Supreme Power (obtain essences)', 'Day 7 Path of Eternity (build / research / training speedup)'],
-    rewards: ['Each day has 6 phases. Days 1–4: phase 1 = 15,000, phase 6 = 600,000 pts (2x Radiant Hero Choice Card).', 'Day 6 tops out at 800,000; Day 7 runs from 30,000 to 1,200,000.', 'Rank rewards need at least 100,000 personal points.', 'Card pool: Boyd (>0d), Monica (>4w), Kaios, Aerposia (>22w)'],
+    rewards: ['Each day has 6 phases. Day 1 (confirmed in-game): 15,000 · 30,000 · 60,000 · 120,000 · 300,000 · 600,000 pts; phase 6 gives 2x Hero Choice Card.', 'Days 2–4 also top out at 600,000 (wiki).', 'Day 6 tops out at 800,000; Day 7 runs from 30,000 to 1,200,000.', 'Rank rewards need at least 100,000 personal points.', 'Card pool: Boyd (>0d), Monica (>4w), Kaios, Aerposia (>22w)'],
     tips: ['Hoard shards, scrolls, essences and speedups between cycles and dump on the matching day.', 'Day 7 accepts all speedup types — leftover speedups go here.'],
     featuredHeroes: ['boyd', 'monica', 'kaios', 'aerposia'],
   }),
@@ -174,8 +174,9 @@ const baseEvents: GameEvent[] = [
 
 /**
  * Revision of the bundled event data. Bump it whenever bundled event facts are corrected, so the
- * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check.
+ * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
+ * revision 2 = in-game Ace Lord Day 1 screenshots.
  */
-export const EVENT_DATA_REVISION = 1;
+export const EVENT_DATA_REVISION = 2; // 2 = in-game Ace Lord Day 1 phases
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));

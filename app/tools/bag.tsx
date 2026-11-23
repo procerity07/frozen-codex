@@ -21,6 +21,7 @@ export default function BagHoard() {
   const [earned, setEarned] = useState(0);
 
   const result = useMemo(() => bagPoints(bagItems, inv, day), [inv, day]);
+  const dayVerified = bagItems.filter((i) => i.points[day]).every((i) => i.verifiedDays?.includes(day));
   const perDay = useMemo(() => DAY_KEYS.map((k) => ({ key: k, total: bagPoints(bagItems, inv, k).total })), [inv]);
   const isAL = day.startsWith('AL');
   const isAR = day.startsWith('AR');
@@ -93,7 +94,7 @@ export default function BagHoard() {
               <Row key={i.id} style={{ marginBottom: space.sm, opacity: i.points[day] ? 1 : 0.55 }}>
                 <View style={{ flex: 1 }}>
                   <Text style={type.body}>{i.label}</Text>
-                  <Text style={type.caption}>{i.points[day] ? `${fmtFull(i.points[day]!)} pts / ${i.unit}` : 'No points today'}</Text>
+                  <Text style={type.caption}>{i.points[day] ? `${fmtFull(i.points[day]!)} pts / ${i.unit}${i.verifiedDays?.includes(day) ? ' · in-game' : ''}` : 'No points today'}</Text>
                 </View>
                 <NumberField value={inv[i.id] ?? 0} onChange={(n) => setQty(i.id, n)} width={110} />
               </Row>
@@ -111,7 +112,11 @@ export default function BagHoard() {
           </Row>
         ))}
       </Card>
-      <ConfidenceNote confidence="estimate" />
+      {dayVerified ? (
+        <Text style={[type.caption, { marginTop: space.sm, color: palette.success }]}>Point values for this day were confirmed in-game.</Text>
+      ) : (
+        <ConfidenceNote confidence="estimate" />
+      )}
     </Screen>
   );
 }

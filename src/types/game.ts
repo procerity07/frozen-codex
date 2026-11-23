@@ -253,6 +253,8 @@ export interface BagItem {
   unit: string;
   points: Partial<Record<BagDayKey, number>>;
   confidence: Confidence;
+  /** Day keys whose point value was confirmed from in-game screenshots. */
+  verifiedDays?: BagDayKey[];
 }
 
 export type BagDayKey =
