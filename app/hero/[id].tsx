@@ -5,8 +5,10 @@ import { Gem, Shield, Sparkles, Swords, Users } from 'lucide-react-native';
 import type { Hero } from '@/types/game';
 import { getHero } from '@/db/repo';
 import { bondGroups, curios, events } from '@/data/seed';
-import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
+import { elementColors, palette, rarityColors, rarityLabels, space, tierColors, tint, type } from '@/theme';
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
+
+const MODE_LABELS: Record<keyof Hero['tiers'], string> = { pve: 'PvE / Campaign', pvp: 'PvP / Arena', boss: 'Monster Den / Boss', economy: 'Economy' };
 
 export default function HeroDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -42,6 +44,16 @@ export default function HeroDetail() {
         </Row>
         <ConfidenceNote confidence={hero.confidence} />
       </Card>
+
+      <SectionHeader title="Mode tier ratings" />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.sm }}>
+        {(Object.keys(MODE_LABELS) as (keyof Hero['tiers'])[]).map((k) => (
+          <Card key={k} style={{ width: '48%', flexGrow: 1, padding: space.md }}>
+            <Text style={type.caption}>{MODE_LABELS[k]}</Text>
+            <Text style={{ fontSize: 24, fontWeight: '800', color: tierColors[hero.tiers[k]], fontVariant: ['tabular-nums'] }}>{hero.tiers[k]}</Text>
+          </Card>
+        ))}
+      </View>
 
       {hero.marchSkills.length ? (
         <>
