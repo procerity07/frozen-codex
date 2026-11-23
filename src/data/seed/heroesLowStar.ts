@@ -90,8 +90,18 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
   lowStar({ name: 'Axel', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
   lowStar({ name: 'Andre', element: 'Ice', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
-  lowStar({ name: 'Odell', element: 'Ice', rarity: 4, unit: 'Civil', sources: ['Epic Hero Covenant', 'Monsters', 'Monster Dens'],
-    civil: [civil('Lord EXP Bonus'), civil('Medical Tent Healing Speed'), civil('Troop Capacity')], notes: ['Monsters Lv. 10+ and Monster dens Lv. 8–9 per the wiki.'] }),
+  {
+    ...lowStar({ name: 'Odell', element: 'Ice', rarity: 4, unit: 'Civil', sources: ['Epic Hero Covenant', 'Monsters', 'Monster Dens'],
+      march: ['Troop skill'],
+      civil: [
+        { name: 'Lord EXP Bonus', description: 'In-game. 4★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '4': [null, null, 12, 18, 24, 30] } },
+        { name: 'Medical Tent Healing Speed', description: 'In-game. 4★: +8% at +2, +12% at +3, +16% at +4, +20% at +5.', requirement: 'Active while owned (in-game)', stat: 'healSpeed', unit: '%', tiers: { '4': [null, null, 8, 12, 16, 20] } },
+        { name: 'Troop Capacity', description: 'In-game. 4★: +4,000 at +2, +6,000 at +3, +8,000 at +4, +10,000 at +5.', requirement: 'Active while owned (in-game)', stat: 'troopCap', unit: 'flat', tiers: { '4': [null, null, 4000, 6000, 8000, 10000] } },
+      ],
+      m3: { name: 'Blindside', description: 'Deals 178% damage to all enemies (Rage Regen: Slow). Wild Roar: enemies ATK −28% for 5 rounds. Forest Dominator: ATK +15% and Dodge +6%. Ice Blade: enemies DEF −44% for 5 rounds. Values as shown in-game at +2.', charge: 'Slow', pattern: 'All enemies', effects: ['ATK down', 'DEF down', 'ATK up', 'Dodge'] },
+      notes: ['Monsters Lv. 10+ and Monster dens Lv. 8–9 per the wiki.', 'In-game (2026-11-23, Odell at +2): 4★ Ice Civil confirmed; troop skill 150% of troop ATK; civil skill tables (+2 to +5); four hero skills.'] }),
+    marchSkills: [{ name: 'Troop skill', description: 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).' }],
+  },
   lowStar({ name: 'Viola', element: 'Ice', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'], notes: ['Element confirmed by the in-game hero card (wiki only implies it by table position).'] }),
   // ------------------------------ Nature ------------------------------
   lowStar({ name: 'Luke', element: 'Nature', rarity: 2, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
