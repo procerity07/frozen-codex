@@ -80,7 +80,13 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Lucia', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Monsters', 'Monster Dens'], pages: [PLAZA],
     civil: [civil('Training Capacity'), civil('Research Stone Cost'), civil('Research Iron Cost')], notes: ['Sold for 50 points in the Hero Plaza point shop.'] }),
   lowStar({ name: 'Tulios', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza'], pages: [PLAZA],
-    civil: [civil('Iron Gather Speed'), civil('Hunt March Speed'), civil('Hunt ATK Bonus')] }),
+    civil: [
+      { name: 'Iron Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } },
+      { name: 'Hunt March Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Unlocks at level 31 (in-game)', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } },
+      { name: 'Hunt ATK Bonus', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Unlocks at level 71 (in-game)', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } },
+    ],
+    m3: { name: 'Penetrating Pike', description: 'Deals 174% damage to the target and adjacent enemies (Rage Regen: Medium). Charge of Honor (unlocks Lv. 11): depletes 16% Rage of the target and adjacent enemies. Spirit of Fighter (unlocks Lv. 31): DEF +10% and Rage Regen +5%. Values as shown in-game at +3.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Rage down', 'DEF up', 'Rage up'] },
+    notes: ['In-game (2026-11-24, Tulios at +3): 3★ Fire Civil confirmed; Iron Gather Speed, Hunt March Speed (Lv. 31) and Hunt ATK Bonus (Lv. 71) all 12/18/24/30% (+2 to +5), active while owned; three hero skills.'] }),
   lowStar({ name: 'Capos', element: 'Fire', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
     m3: { name: 'Override', description: 'Deals 235% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
   {
