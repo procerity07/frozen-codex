@@ -56,6 +56,7 @@ export function combatRoleLabel(h: Pick<Hero, 'combatRole'>): CombatRole | 'Not 
 }
 
 /** True when this hero's troop/hero skills were taken from in-game screenshots (not the wiki or older data). */
-export function skillsCheckedInGame(hero: Pick<Hero, 'marchSkills' | 'match3Skill'>): boolean {
-  return hero.marchSkills.some((s) => /in-game/i.test(s.description)) || /in-game/i.test(hero.match3Skill?.description ?? '');
+export function skillsCheckedInGame(hero: Pick<Hero, 'marchSkills' | 'match3Skill' | 'civilSkills'>): boolean {
+  return hero.marchSkills.some((s) => /in-game/i.test(s.description)) || /in-game/i.test(hero.match3Skill?.description ?? '')
+    || hero.civilSkills.some((s) => /in-game/i.test(s.description));
 }

@@ -1,6 +1,6 @@
 {
-  "version": 11,
-  "publishedAt": "2026-11-24T03:40:43.910Z",
+  "version": 12,
+  "publishedAt": "2026-11-24T03:43:59.879Z",
   "packs": {
     "heroes": [
       {
@@ -12,6 +12,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Rift Charge",
             "description": "Cavalry ATK up while leading a rally; first strike ignores part of enemy DEF."
@@ -58,7 +62,7 @@
             "One third-party tier list associates Khaos with Nature; the wiki hero page and Heroes table both say Dark, so Dark is kept."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "anastasia",
@@ -69,6 +73,10 @@
         "unitType": "All-round",
         "role": "Garrison anchor",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Eternal Winter",
             "description": "Infantry DEF and HP up; reduces damage taken by the garrison."
@@ -115,7 +123,7 @@
             "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "maxim",
@@ -126,6 +134,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Ironclad Advance",
             "description": "Infantry ATK and DEF up; scales with number of Infantry in the march."
@@ -168,7 +180,7 @@
             "Unconfirmed acquisition sources: Astrology."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "guan-yu",
@@ -179,6 +191,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Green Dragon Crescent",
             "description": "Cavalry ATK up; extra damage against Infantry."
@@ -225,7 +241,7 @@
             "Exclusive curio Azure Dragon Blade confirmed; its attributes were corrected (troop DEF/HP/ATK, not Cavalry ATK)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "saya",
@@ -238,7 +254,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "+120% at +1 (in-game; full description not captured)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -385,7 +401,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "tania",
@@ -398,7 +414,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Cavalry HP",
@@ -461,7 +477,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "dimina",
@@ -472,6 +488,10 @@
         "unitType": "Cavalry",
         "role": "Support caster",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Prophecy",
             "description": "Archer DEF up and reduces enemy Cavalry ATK."
@@ -510,7 +530,7 @@
             "Wiki: 5-star Nature Cavalry, Glory's Gift Roulette (app previously: Light Archer)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "kanye",
@@ -521,6 +541,10 @@
         "unitType": "Archer",
         "role": "Archer DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Drumline Charge",
             "description": "Cavalry ATK up; first 3 rounds deal extra damage."
@@ -559,7 +583,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "norris",
@@ -572,7 +596,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Archer HP",
@@ -629,7 +653,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "edith",
@@ -642,7 +666,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Archer HP",
@@ -699,7 +723,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "boyd",
@@ -712,7 +736,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 300% of troop ATK to the enemy (at +4, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Cavalry HP",
@@ -765,7 +789,7 @@
             "In-game (2026-11-23, Boyd at +4): Nature and Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK use the standard 5★/6★ table; hero skills Claw of Void (530%, Rage Regen Medium), Strength Absorption, Self-healing Instinct, Cold Blood, Target Weakness (6★). The unsourced fire-themed skills (Burning Hooves, Flame Charge) were replaced. His title 'Ember Captain' is not verified."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "monica",
@@ -776,6 +800,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Radiant Lance",
             "description": "Cavalry ATK and HP up."
@@ -814,7 +842,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "kaios",
@@ -827,7 +855,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -963,7 +991,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "aerposia",
@@ -974,6 +1002,10 @@
         "unitType": "Cavalry",
         "role": "Cavalry DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Skyfall",
             "description": "Archer ATK up; damage up when attacking structures."
@@ -1012,7 +1044,7 @@
             "Wiki: 5-star Dark Cavalry from Ace Lord (app previously: Light Archer)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "valerius",
@@ -1023,6 +1055,10 @@
         "unitType": "All-round",
         "role": "All-troop DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Blood Oath",
             "description": "Infantry ATK up; heals a portion of damage dealt."
@@ -1063,7 +1099,7 @@
             "Not listed in Sanguine Serenade on the Hero Bond page; removed from that group."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "tala",
@@ -1074,6 +1110,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Hunter Instinct",
             "description": "Archer ATK up; crit chance vs Cavalry."
@@ -1111,7 +1151,7 @@
             "Wiki: 5-star Nature Civil, Astrology (app previously: Archer)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "eris",
@@ -1124,7 +1164,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -1181,7 +1221,7 @@
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "kujo-mamoru",
@@ -1194,7 +1234,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Infantry HP",
@@ -1252,7 +1292,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "rodriguez",
@@ -1265,7 +1305,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -1327,7 +1367,7 @@
             "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "freya",
@@ -1340,7 +1380,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -1399,7 +1439,7 @@
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "fiona",
@@ -1412,7 +1452,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -1549,7 +1589,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "carvell",
@@ -1562,7 +1602,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -1704,7 +1744,7 @@
             "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "wu-kong",
@@ -1717,7 +1757,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -1850,7 +1890,7 @@
             "In-game (2026-11-23, Wu Kong at +3, S2 badge): Light confirmed; troop skill 200% of troop ATK; Troop HP/DEF/ATK (Passive) apply to all troops just by owning him: 5★ 12.8/19.2/25.6/32/40/51.2/94% (+2 to +8), 6★ 40/51.2/75/125% (+5 to +8); hero skills Cosmic Rod (450%, Rage Regen Fast), Might of a Thousand, Immobilization Spell, Immunity to Evil, Combat Mastery (6★). The unsourced Seventy-Two Forms / Ruyi Strike skills were replaced."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "oichi",
@@ -1861,6 +1901,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Sakura Charge",
             "description": "Cavalry ATK up; bonus vs Infantry."
@@ -1899,7 +1943,7 @@
             "Wiki: 6-star Fire Civil, Battle Pass Event (app previously: 5-star Nature Cavalry from Hero Plaza)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "sirius",
@@ -1910,6 +1954,10 @@
         "unitType": "Archer",
         "role": "Archer DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Brightest Star",
             "description": "Archer ATK up; crit rate up at night-time battles."
@@ -1948,7 +1996,7 @@
             "Wiki: 6-star Fire Archer, Battle Pass Event (app previously: 5-star Light, Hero Plaza)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "vynora",
@@ -1959,6 +2007,10 @@
         "unitType": "All-round",
         "role": "DoT",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Toxic Volley",
             "description": "Archer ATK up; poisons on hit."
@@ -1998,7 +2050,7 @@
             "Wiki: 6-star Ice All-round, Battle Pass Event (app previously: 5-star Dark Archer, Hero Plaza)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "snowball-and-ivy",
@@ -2009,6 +2061,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Twin Bond",
             "description": "All troop DEF up slightly."
@@ -2046,7 +2102,7 @@
             "Unconfirmed acquisition sources: Battle Pass."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "leora",
@@ -2057,6 +2113,10 @@
         "unitType": "Cavalry",
         "role": "Cavalry DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Pride",
             "description": "Infantry ATK up; damage up per surviving ally."
@@ -2095,7 +2155,7 @@
             "Unconfirmed acquisition sources: Hero Plaza."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "apan",
@@ -2106,6 +2166,10 @@
         "unitType": "Infantry",
         "role": "Infantry DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Gale Charge",
             "description": "Cavalry ATK and march speed up."
@@ -2148,7 +2212,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "patty",
@@ -2159,6 +2223,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Sugar Rush",
             "description": "Archer ATK up; attack speed up in the first round."
@@ -2197,7 +2265,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "angelita",
@@ -2208,6 +2276,10 @@
         "unitType": "Archer",
         "role": "Healer",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Mercy",
             "description": "Reduces troop losses and raises all troop HP."
@@ -2248,7 +2320,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "lylia",
@@ -2261,7 +2333,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -2397,7 +2469,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "oskir",
@@ -2408,6 +2480,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Runic Armor",
             "description": "Infantry DEF up; damage reduction vs skills."
@@ -2447,7 +2523,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "echo",
@@ -2458,6 +2534,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Resonance",
             "description": "Archer ATK up; repeats a portion of skill damage."
@@ -2497,7 +2577,7 @@
             "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "ogremire",
@@ -2508,6 +2588,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Bog Hide",
             "description": "Infantry HP up significantly."
@@ -2546,7 +2630,7 @@
             "Unconfirmed acquisition sources: Shadow Expedition."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "neptune",
@@ -2557,6 +2641,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Tidal Force",
             "description": "Archer ATK up."
@@ -2595,7 +2683,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "kaira",
@@ -2606,6 +2694,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Coral Ward",
             "description": "All troop DEF up slightly."
@@ -2645,7 +2737,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "sea-goddess",
@@ -2656,6 +2748,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Abyssal Pressure",
             "description": "Lowers enemy march speed and Archer DEF."
@@ -2694,7 +2790,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "leona",
@@ -2707,7 +2803,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -2839,7 +2935,7 @@
             "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "basilong",
@@ -2850,6 +2946,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Scale Armor",
             "description": "Infantry ATK and DEF up."
@@ -2887,7 +2987,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "edmund",
@@ -2898,6 +2998,10 @@
         "unitType": "Civil",
         "role": "Civil — passive skills",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Gilded Charge",
             "description": "Cavalry HP and ATK up."
@@ -2953,7 +3057,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "aurora",
@@ -2966,7 +3070,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -3101,7 +3205,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "selantia",
@@ -3112,6 +3216,10 @@
         "unitType": "Infantry",
         "role": "Support",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Moonlit Rite",
             "description": "All troop ATK up slightly."
@@ -3151,7 +3259,7 @@
             "Unconfirmed acquisition sources: Glory's Gift Roulette."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "eric",
@@ -3162,6 +3270,10 @@
         "unitType": "Infantry",
         "role": "Infantry DPS",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Blade Dance",
             "description": "Infantry ATK up; crit chance up."
@@ -3201,7 +3313,7 @@
             "Unconfirmed acquisition sources: Lucky Spin, Timeless Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "william",
@@ -3211,7 +3323,12 @@
         "rarity": 2,
         "unitType": "Civil",
         "role": "Construction",
-        "marchSkills": [],
+        "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          }
+        ],
         "civilSkills": [
           {
             "name": "Iron Output",
@@ -3265,7 +3382,7 @@
             "Unconfirmed acquisition sources: Starter / Campaign."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "chloe",
@@ -3278,7 +3395,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -3373,7 +3490,7 @@
             "Unconfirmed acquisition sources: Hero Recruitment."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "elsa",
@@ -3386,7 +3503,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -3482,7 +3599,7 @@
             "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "gina",
@@ -3493,6 +3610,10 @@
         "unitType": "Civil",
         "role": "Gathering",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Skill",
             "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
@@ -3588,7 +3709,7 @@
             "In-game max level at 4★: 210."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "baron",
@@ -3599,6 +3720,10 @@
         "unitType": "Archer",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Archer DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -3641,7 +3766,7 @@
             "Added from the wiki: 2-star Fire Archer."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "lucia",
@@ -3651,7 +3776,12 @@
         "rarity": 3,
         "unitType": "Civil",
         "role": "",
-        "marchSkills": [],
+        "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          }
+        ],
         "civilSkills": [
           {
             "name": "Training Capacity",
@@ -3699,7 +3829,7 @@
             "Sold for 50 points in the Hero Plaza point shop."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "tulios",
@@ -3709,7 +3839,12 @@
         "rarity": 3,
         "unitType": "Civil",
         "role": "",
-        "marchSkills": [],
+        "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          }
+        ],
         "civilSkills": [
           {
             "name": "Iron Gather Speed",
@@ -3753,7 +3888,7 @@
             "Added from the wiki: 3-star Fire Civil."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "capos",
@@ -3764,6 +3899,10 @@
         "unitType": "Cavalry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Cavalry HP",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -3814,7 +3953,7 @@
             "Added from the wiki: 4-star Fire Cavalry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "tooka",
@@ -3827,7 +3966,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -3884,7 +4023,7 @@
             "Separate \"Infernal Tooka\" variant on the Civil page is not included."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "sophia",
@@ -3895,6 +4034,10 @@
         "unitType": "Cavalry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Cavalry DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -3937,7 +4080,7 @@
             "Added from the wiki: 2-star Ice Cavalry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "ada",
@@ -3948,6 +4091,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Infantry HP",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -3988,7 +4135,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "axel",
@@ -3999,6 +4146,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Infantry DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4042,7 +4193,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "andre",
@@ -4053,6 +4204,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Infantry DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4097,7 +4252,7 @@
             "Added from the wiki: 4-star Ice Infantry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "odell",
@@ -4110,7 +4265,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -4208,7 +4363,7 @@
             "In-game (2026-11-23, Odell at +2): 4★ Ice Civil confirmed; troop skill 150% of troop ATK; civil skill tables (+2 to +5); four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "viola",
@@ -4219,6 +4374,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Troop HP",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4259,7 +4418,7 @@
             "Element confirmed by the in-game hero card (wiki only implies it by table position)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "luke",
@@ -4270,6 +4429,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Infantry DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4312,7 +4475,7 @@
             "Added from the wiki: 2-star Nature Infantry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "gerolin",
@@ -4323,6 +4486,10 @@
         "unitType": "Infantry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Infantry DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4369,7 +4536,7 @@
             "Added from the wiki: 3-star Nature Infantry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "roger",
@@ -4380,6 +4547,10 @@
         "unitType": "Archer",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Archer DEF",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4423,7 +4594,7 @@
             "Added from the wiki: 3-star Nature Archer."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "cassandra",
@@ -4436,7 +4607,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -4531,7 +4702,7 @@
             "In-game (2026-11-23, Cassandra at Hero0): 4★ Nature Civil confirmed; troop skill 100% of troop ATK; Gather/Hunt March Speed 4% (Hero0), 10/13/17/21% (+2 to +5); Troop Capacity 2,000 (Hero0), 4,000–10,000 (Lv. 131); four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "dolly",
@@ -4544,7 +4715,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Archer HP",
@@ -4601,7 +4772,7 @@
             "In-game (2026-11-23, Dolly at +1): 4★ Nature Archer confirmed; troop skill 120% of troop ATK; Archer HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Archer ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "wallace",
@@ -4614,7 +4785,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Infantry HP",
@@ -4671,7 +4842,7 @@
             "In-game (2026-11-23, Wallace at +1): 4★ Nature Infantry confirmed; troop skill 120% of troop ATK; Infantry HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Infantry ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "schubert",
@@ -4681,7 +4852,12 @@
         "rarity": 4,
         "unitType": "Civil",
         "role": "",
-        "marchSkills": [],
+        "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          }
+        ],
         "civilSkills": [
           {
             "name": "Training Speed",
@@ -4724,7 +4900,7 @@
             "Added from the wiki: 4-star Nature Civil."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "ysera",
@@ -4737,7 +4913,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 300% of troop ATK to the enemy (at +4, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Cavalry HP",
@@ -4792,7 +4968,7 @@
             "In-game (2026-11-23, Ysera at +4): 4★ Nature Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK 20/30/40/50% (+2 to +5); four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "penny",
@@ -4802,7 +4978,12 @@
         "rarity": 2,
         "unitType": "Civil",
         "role": "",
-        "marchSkills": [],
+        "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          }
+        ],
         "civilSkills": [
           {
             "name": "Hunt March Speed",
@@ -4845,7 +5026,7 @@
             "Added from the wiki: 2-star Light Civil."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "aemon",
@@ -4858,7 +5039,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK at +2, 200% at +3, 300% at +4, 500% at +5 (in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Archer HP",
@@ -4914,7 +5095,7 @@
             "In-game (2026-11-24, Aemon at +2): 3★ Light Archer confirmed; troop skill 150/200/300/500% of troop ATK (+2 to +5); Archer HP/DEF/ATK 10/15/20/25% (+2 to +5), Archer DEF unlocks at Lv. 31 and Archer ATK at Lv. 71; three hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "hannah",
@@ -4925,6 +5106,10 @@
         "unitType": "Cavalry",
         "role": "",
         "marchSkills": [
+          {
+            "name": "Troop skill",
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
+          },
           {
             "name": "Cavalry HP",
             "description": "Troop stat bonus listed on the wiki. Value not verified."
@@ -4975,7 +5160,7 @@
             "Added from the wiki: 3-star Light Cavalry."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "christina",
@@ -4988,7 +5173,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Cavalry DEF",
@@ -5059,7 +5244,7 @@
             "In-game (2026-11-23, Christina at +5): 4★ Light Cavalry confirmed. Her skills are a 500% troop skill, Stone Output (civil, active while owned) and Cavalry DEF / ATK (military). This resolves the wiki conflict: she has one civil skill and two (not three) Cavalry stat skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "hanzo",
@@ -5072,7 +5257,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Archer DEF",
@@ -5144,7 +5329,7 @@
             "In-game (2026-11-24, Hanzo at +3): 4★ Light Archer confirmed; troop skill 200% of troop ATK; Wood Output 40/60/80/100% (owned); Archer DEF (Lv. 31) and ATK (Lv. 131) 20/30/40/50% (+2 to +5); four hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "claudia",
@@ -5157,7 +5342,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 500% of troop ATK to the enemy (at +5, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Cavalry DEF",
@@ -5228,7 +5413,7 @@
             "In-game (2026-11-23, Claudia at +5): 3★ Dark Cavalry confirmed; troop skill 500% of troop ATK; Stone Gather Speed 12/18/24/30% and Cavalry DEF/ATK 10/15/20/25% (+2 to +5); three hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "sodoma",
@@ -5241,7 +5426,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -5303,7 +5488,7 @@
             "In-game (2026-11-23, Sodoma at +1): 5★ Nature Cavalry confirmed; troop skill 120% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "setemos",
@@ -5316,7 +5501,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -5456,7 +5641,7 @@
             "In-game (2026-11-23, Setemos at +1): 5★ Dark Civil confirmed; troop skill 120% of troop ATK; Safe Resources, Hunt ATK Bonus and Troop DEF (Passive, Lv. 131) tables for 5★ and 6★; five hero skills. Hunt ATK Bonus applies while owned (the wiki said it unlocks at level 31)."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "tutanhet",
@@ -5469,7 +5654,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 100% of troop ATK to the enemy (at Hero0, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           },
           {
             "name": "Troop HP",
@@ -5530,7 +5715,7 @@
             "In-game (2026-11-23, Tutanhet at Hero0): 5★ Fire Archer confirmed; troop skill 100% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "sirona",
@@ -5543,7 +5728,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -5689,7 +5874,7 @@
             "In-game (2026-11-23, Sirona at +2): 5★ Dark Civil confirmed; troop skill 150% of troop ATK; Resource Gather Speed, Medical Tent Healing Speed and Troop Capacity tables for 5★ and 6★; five hero skills."
           ]
         },
-        "revision": 36
+        "revision": 37
       },
       {
         "id": "isabella",
@@ -5702,7 +5887,7 @@
         "marchSkills": [
           {
             "name": "Troop skill",
-            "description": "Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game)."
+            "description": "Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8."
           }
         ],
         "civilSkills": [
@@ -5837,7 +6022,7 @@
             "In-game (2026-11-23, Isabella at +1, S3 badge): 6★ Nature Civil confirmed; troop skill 120% of troop ATK at +1; Troop HP/DEF/ATK passives apply to all troops while owned (6★ and 7★ tables); five hero skills (Blessing of Vitality, Courage, Resolve, Faith, and Glory at 7★). She can be promoted to 7★; the 7★ rules are not in the app yet."
           ]
         },
-        "revision": 36
+        "revision": 37
       }
     ],
     "events": [

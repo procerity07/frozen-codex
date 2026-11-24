@@ -379,3 +379,6 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(seed.heroes.some((h) => !skillsCheckedInGame(h)), 'unchecked heroes flagged');
 }
 
+// Every hero has the shared main troop skill table, capped at 500% (+5)
+ok(seed.heroes.every((h) => h.marchSkills[0]?.name === 'Troop skill' && h.marchSkills.filter((m) => m.name === 'Troop skill').length === 1 && /500% at \+5/.test(h.marchSkills[0]!.description)), 'main troop skill on every hero, once');
+

@@ -529,6 +529,14 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 36; // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 37; // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
-export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
+/**
+ * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
+ * 100% of troop ATK at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4 and 500% at +5. It stops at +5.
+ */
+export const MAIN_TROOP_SKILL = { name: 'Troop skill', description: 'Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8.' };
+
+const withMainTroopSkill = (h: Hero): Hero => ({ ...h, marchSkills: [MAIN_TROOP_SKILL, ...h.marchSkills.filter((m) => m.name !== 'Troop skill')] });
+
+export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => withMainTroopSkill({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
