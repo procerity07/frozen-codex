@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "publishedAt": "2026-11-24T02:11:05.386Z",
+  "version": 6,
+  "publishedAt": "2026-11-24T03:28:38.581Z",
   "packs": {
     "heroes": [
       {
@@ -568,22 +568,37 @@
         "element": "Fire",
         "rarity": 5,
         "unitType": "Archer",
-        "role": "Tank",
+        "role": "AoE damage (Burn)",
         "marchSkills": [
           {
-            "name": "Shield Wall",
-            "description": "Infantry DEF up; reduces damage from Cavalry."
+            "name": "Troop skill",
+            "description": "Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game)."
+          },
+          {
+            "name": "Archer HP",
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+          },
+          {
+            "name": "Archer DEF",
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
+          },
+          {
+            "name": "Archer ATK",
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
-          "name": "Permafrost Guard",
-          "description": "Taunts enemies and gains a large shield.",
+          "name": "Bloody Praise",
+          "description": "Deals 170% damage to all enemies and Burns all enemies for 5 rounds (Rage Regen: Medium). Fatal Gaze (unlocks Lv. 11): inflicts Blast on the target, dealing high damage when it wears off. Crimson Realm (unlocks Lv. 31): Fire allies +10% Rage Regen at battle start (cannot be dispelled). Blood Rush (unlocks Lv. 71): ATK +5% per round from the start of battle, up to 80% (cannot be dispelled). Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at +3.",
           "charge": "Medium",
-          "pattern": "Self + taunt",
+          "pattern": "All enemies",
           "effects": [
-            "Taunt",
-            "Shield"
+            "Burn",
+            "Blast",
+            "Rage up",
+            "ATK up",
+            "Crit"
           ]
         },
         "sources": [
@@ -609,6 +624,7 @@
           ],
           "notes": [
             "Wiki: Fire Archer (app previously: Ice Infantry). Star rating not stated. Bond corrected: Sanguine Serenade.",
+            "In-game (2026-11-24, Norris at +3, bond 8): 5★ Fire Archer confirmed; troop skill 200% of troop ATK; Archer HP/DEF/ATK use the standard 5★/6★ table (Archer DEF unlocks at Lv. 31, Archer ATK at Lv. 131); hero skills Bloody Praise (170% to all enemies + Burn, Rage Regen Medium), Fatal Gaze (Lv. 11), Crimson Realm (Lv. 31), Blood Rush (Lv. 71), Combat Mastery (6★). The unsourced tank skills (Shield Wall, Permafrost Guard) were replaced.",
             "Unconfirmed acquisition sources: Arms Race Ace Card.",
             "Star rating not stated in the sources checked; existing value kept."
           ]

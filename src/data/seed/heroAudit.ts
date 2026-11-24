@@ -59,7 +59,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Archer", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: Fire Archer (app previously: Ice Infantry). Star rating not stated. Bond corrected: Sanguine Serenade.", "Unconfirmed acquisition sources: Arms Race Ace Card.", "Star rating not stated in the sources checked; existing value kept."],
+    notes: ["Wiki: Fire Archer (app previously: Ice Infantry). Star rating not stated. Bond corrected: Sanguine Serenade.", "In-game (2026-11-24, Norris at +3, bond 8): 5★ Fire Archer confirmed; troop skill 200% of troop ATK; Archer HP/DEF/ATK use the standard 5★/6★ table (Archer DEF unlocks at Lv. 31, Archer ATK at Lv. 131); hero skills Bloody Praise (170% to all enemies + Burn, Rage Regen Medium), Fatal Gaze (Lv. 11), Crimson Realm (Lv. 31), Blood Rush (Lv. 71), Combat Mastery (6★). The unsourced tank skills (Shield Wall, Permafrost Guard) were replaced.", "Unconfirmed acquisition sources: Arms Race Ace Card.", "Star rating not stated in the sources checked; existing value kept."],
   },
   "edith": {
     checkedOn: '2026-11-23',

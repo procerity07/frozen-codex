@@ -122,9 +122,12 @@ const baseHeroes: Hero[] = [
     notes: 'Strong burn damage in Elemental Seal when Fire is a required element.',
   }),
   hero({
-    name: 'Norris', title: 'Bulwark Marshal', element: 'Fire', rarity: 5, unit: 'Archer', role: 'Tank',
-    march: [['Shield Wall', 'Infantry DEF up; reduces damage from Cavalry.']],
-    m3: { name: 'Permafrost Guard', desc: 'Taunts enemies and gains a large shield.', charge: 'Medium', pattern: 'Self + taunt', effects: ['Taunt', 'Shield'] },
+    name: 'Norris', title: 'Bulwark Marshal', element: 'Fire', rarity: 5, unit: 'Archer', role: 'AoE damage (Burn)',
+    march: [
+      ['Troop skill', 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).'],
+      ...militaryTrio('Archer').map(([n, d]) => [n, n === 'Archer DEF' ? `${d} Unlocks at Lv. 31.` : n === 'Archer ATK' ? `${d} Unlocks at Lv. 131.` : d] as [string, string]),
+    ],
+    m3: { name: 'Bloody Praise', desc: 'Deals 170% damage to all enemies and Burns all enemies for 5 rounds (Rage Regen: Medium). Fatal Gaze (unlocks Lv. 11): inflicts Blast on the target, dealing high damage when it wears off. Crimson Realm (unlocks Lv. 31): Fire allies +10% Rage Regen at battle start (cannot be dispelled). Blood Rush (unlocks Lv. 71): ATK +5% per round from the start of battle, up to 80% (cannot be dispelled). Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at +3.', charge: 'Medium', pattern: 'All enemies', effects: ['Burn', 'Blast', 'Rage up', 'ATK up', 'Crit'] },
     sources: ['Arms Race Ace Card'], bonds: ['Sanguine Serenade'],
     notes: 'Arms Race Ace Hero Choice Card pick for early realms (> 4 weeks).',
   }),
