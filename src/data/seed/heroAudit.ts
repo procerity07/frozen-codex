@@ -125,7 +125,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Archer", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Nature Archer; several sources incl. Lucky Spin (app previously: Ice Cavalry). Bond corrected: Rhapsody of Genesis.", "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."],
+    notes: ["In-game (2026-11-24, Freya at +2, bond 6): 5★ Nature Archer confirmed; troop skill 150% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop DEF unlocks at Lv. 31 and Troop ATK at Lv. 131; hero skills Quaking Shot (300% + Stun, Rage Regen Medium), Shield Erosion (Lv. 11), Will of Elf (Lv. 31), Vigor of Cosmos (Lv. 71), Target Weakness (6★). The unsourced Valhalla Ride / Einherjar skills were replaced.", "Wiki: 5-star Nature Archer; several sources incl. Lucky Spin (app previously: Ice Cavalry). Bond corrected: Rhapsody of Genesis.", "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."],
   },
   "fiona": {
     checkedOn: '2026-11-23',

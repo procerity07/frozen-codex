@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "publishedAt": "2026-11-24T03:28:38.581Z",
+  "version": 7,
+  "publishedAt": "2026-11-24T03:31:55.621Z",
   "packs": {
     "heroes": [
       {
@@ -58,7 +58,7 @@
             "One third-party tier list associates Khaos with Nature; the wiki hero page and Heroes table both say Dark, so Dark is kept."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "anastasia",
@@ -115,7 +115,7 @@
             "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "maxim",
@@ -168,7 +168,7 @@
             "Unconfirmed acquisition sources: Astrology."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "guan-yu",
@@ -225,7 +225,7 @@
             "Exclusive curio Azure Dragon Blade confirmed; its attributes were corrected (troop DEF/HP/ATK, not Cavalry ATK)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "saya",
@@ -385,7 +385,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "tania",
@@ -461,7 +461,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "dimina",
@@ -510,7 +510,7 @@
             "Wiki: 5-star Nature Cavalry, Glory's Gift Roulette (app previously: Light Archer)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "kanye",
@@ -559,7 +559,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "norris",
@@ -629,7 +629,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "edith",
@@ -699,7 +699,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "boyd",
@@ -765,7 +765,7 @@
             "In-game (2026-11-23, Boyd at +4): Nature and Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK use the standard 5★/6★ table; hero skills Claw of Void (530%, Rage Regen Medium), Strength Absorption, Self-healing Instinct, Cold Blood, Target Weakness (6★). The unsourced fire-themed skills (Burning Hooves, Flame Charge) were replaced. His title 'Ember Captain' is not verified."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "monica",
@@ -814,7 +814,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "kaios",
@@ -963,7 +963,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "aerposia",
@@ -1012,7 +1012,7 @@
             "Wiki: 5-star Dark Cavalry from Ace Lord (app previously: Light Archer)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "valerius",
@@ -1063,7 +1063,7 @@
             "Not listed in Sanguine Serenade on the Hero Bond page; removed from that group."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "tala",
@@ -1111,7 +1111,7 @@
             "Wiki: 5-star Nature Civil, Astrology (app previously: Archer)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "eris",
@@ -1181,7 +1181,7 @@
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "kujo-mamoru",
@@ -1252,7 +1252,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "rodriguez",
@@ -1310,7 +1310,7 @@
             "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "freya",
@@ -1319,21 +1319,37 @@
         "element": "Nature",
         "rarity": 5,
         "unitType": "Archer",
-        "role": "Archer DPS",
+        "role": "Single-target damage and Stun",
         "marchSkills": [
           {
-            "name": "Valhalla Ride",
-            "description": "Cavalry ATK up; extra damage when HP is above 50%."
+            "name": "Troop skill",
+            "description": "Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game)."
+          },
+          {
+            "name": "Troop HP",
+            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game)."
+          },
+          {
+            "name": "Troop DEF",
+            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game). Unlocks at Lv. 31."
+          },
+          {
+            "name": "Troop ATK",
+            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
-          "name": "Einherjar",
-          "description": "Ice damage to a row and grants ally ATK up.",
+          "name": "Quaking Shot",
+          "description": "Deals 300% damage to the target and Stuns it for 2 rounds (Rage Regen: Medium). Shield Erosion (unlocks Lv. 11): target and adjacent enemies DEF −30% for 4 rounds. Will of Elf (unlocks Lv. 31): immune to debuffs for 3 rounds (cannot be dispelled). Vigor of Cosmos (unlocks Lv. 71): deals 40% more damage to Dark enemies (cannot be dispelled). Target Weakness (unlocks at 6★): Break +30%. Values as shown in-game at +2.",
           "charge": "Medium",
-          "pattern": "Row",
+          "pattern": "Single target",
           "effects": [
-            "ATK up"
+            "Stun",
+            "DEF down",
+            "Debuff immunity",
+            "Bonus vs Dark",
+            "Break"
           ]
         },
         "sources": [
@@ -1361,11 +1377,12 @@
             "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"
           ],
           "notes": [
+            "In-game (2026-11-24, Freya at +2, bond 6): 5★ Nature Archer confirmed; troop skill 150% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop DEF unlocks at Lv. 31 and Troop ATK at Lv. 131; hero skills Quaking Shot (300% + Stun, Rage Regen Medium), Shield Erosion (Lv. 11), Will of Elf (Lv. 31), Vigor of Cosmos (Lv. 71), Target Weakness (6★). The unsourced Valhalla Ride / Einherjar skills were replaced.",
             "Wiki: 5-star Nature Archer; several sources incl. Lucky Spin (app previously: Ice Cavalry). Bond corrected: Rhapsody of Genesis.",
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "fiona",
@@ -1515,7 +1532,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "carvell",
@@ -1670,7 +1687,7 @@
             "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "wu-kong",
@@ -1816,7 +1833,7 @@
             "In-game (2026-11-23, Wu Kong at +3, S2 badge): Light confirmed; troop skill 200% of troop ATK; Troop HP/DEF/ATK (Passive) apply to all troops just by owning him: 5★ 12.8/19.2/25.6/32/40/51.2/94% (+2 to +8), 6★ 40/51.2/75/125% (+5 to +8); hero skills Cosmic Rod (450%, Rage Regen Fast), Might of a Thousand, Immobilization Spell, Immunity to Evil, Combat Mastery (6★). The unsourced Seventy-Two Forms / Ruyi Strike skills were replaced."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "oichi",
@@ -1865,7 +1882,7 @@
             "Wiki: 6-star Fire Civil, Battle Pass Event (app previously: 5-star Nature Cavalry from Hero Plaza)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "sirius",
@@ -1914,7 +1931,7 @@
             "Wiki: 6-star Fire Archer, Battle Pass Event (app previously: 5-star Light, Hero Plaza)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "vynora",
@@ -1964,7 +1981,7 @@
             "Wiki: 6-star Ice All-round, Battle Pass Event (app previously: 5-star Dark Archer, Hero Plaza)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "snowball-and-ivy",
@@ -2012,7 +2029,7 @@
             "Unconfirmed acquisition sources: Battle Pass."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "leora",
@@ -2061,7 +2078,7 @@
             "Unconfirmed acquisition sources: Hero Plaza."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "apan",
@@ -2114,7 +2131,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "patty",
@@ -2163,7 +2180,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "angelita",
@@ -2214,7 +2231,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "lylia",
@@ -2363,7 +2380,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "oskir",
@@ -2413,7 +2430,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "echo",
@@ -2463,7 +2480,7 @@
             "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "ogremire",
@@ -2512,7 +2529,7 @@
             "Unconfirmed acquisition sources: Shadow Expedition."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "neptune",
@@ -2561,7 +2578,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "kaira",
@@ -2611,7 +2628,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "sea-goddess",
@@ -2660,7 +2677,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "leona",
@@ -2805,7 +2822,7 @@
             "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "basilong",
@@ -2853,7 +2870,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "edmund",
@@ -2919,7 +2936,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "aurora",
@@ -3067,7 +3084,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "selantia",
@@ -3117,7 +3134,7 @@
             "Unconfirmed acquisition sources: Glory's Gift Roulette."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "eric",
@@ -3167,7 +3184,7 @@
             "Unconfirmed acquisition sources: Lucky Spin, Timeless Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "william",
@@ -3231,7 +3248,7 @@
             "Unconfirmed acquisition sources: Starter / Campaign."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "chloe",
@@ -3298,7 +3315,7 @@
             "Unconfirmed acquisition sources: Hero Recruitment."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "elsa",
@@ -3407,7 +3424,7 @@
             "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "gina",
@@ -3513,7 +3530,7 @@
             "In-game max level at 4★: 210."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "baron",
@@ -3566,7 +3583,7 @@
             "Added from the wiki: 2-star Fire Archer."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "lucia",
@@ -3624,7 +3641,7 @@
             "Sold for 50 points in the Hero Plaza point shop."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "tulios",
@@ -3678,7 +3695,7 @@
             "Added from the wiki: 3-star Fire Civil."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "capos",
@@ -3739,7 +3756,7 @@
             "Added from the wiki: 4-star Fire Cavalry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "tooka",
@@ -3809,7 +3826,7 @@
             "Separate \"Infernal Tooka\" variant on the Civil page is not included."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "sophia",
@@ -3862,7 +3879,7 @@
             "Added from the wiki: 2-star Ice Cavalry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "ada",
@@ -3913,7 +3930,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "axel",
@@ -3967,7 +3984,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "andre",
@@ -4022,7 +4039,7 @@
             "Added from the wiki: 4-star Ice Infantry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "odell",
@@ -4133,7 +4150,7 @@
             "In-game (2026-11-23, Odell at +2): 4★ Ice Civil confirmed; troop skill 150% of troop ATK; civil skill tables (+2 to +5); four hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "viola",
@@ -4184,7 +4201,7 @@
             "Element confirmed by the in-game hero card (wiki only implies it by table position)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "luke",
@@ -4237,7 +4254,7 @@
             "Added from the wiki: 2-star Nature Infantry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "gerolin",
@@ -4294,7 +4311,7 @@
             "Added from the wiki: 3-star Nature Infantry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "roger",
@@ -4348,7 +4365,7 @@
             "Added from the wiki: 3-star Nature Archer."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "cassandra",
@@ -4456,7 +4473,7 @@
             "In-game (2026-11-23, Cassandra at Hero0): 4★ Nature Civil confirmed; troop skill 100% of troop ATK; Gather/Hunt March Speed 4% (Hero0), 10/13/17/21% (+2 to +5); Troop Capacity 2,000 (Hero0), 4,000–10,000 (Lv. 131); four hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "dolly",
@@ -4526,7 +4543,7 @@
             "In-game (2026-11-23, Dolly at +1): 4★ Nature Archer confirmed; troop skill 120% of troop ATK; Archer HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Archer ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "wallace",
@@ -4596,7 +4613,7 @@
             "In-game (2026-11-23, Wallace at +1): 4★ Nature Infantry confirmed; troop skill 120% of troop ATK; Infantry HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Infantry ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "schubert",
@@ -4649,7 +4666,7 @@
             "Added from the wiki: 4-star Nature Civil."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "ysera",
@@ -4717,7 +4734,7 @@
             "In-game (2026-11-23, Ysera at +4): 4★ Nature Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK 20/30/40/50% (+2 to +5); four hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "penny",
@@ -4770,7 +4787,7 @@
             "Added from the wiki: 2-star Light Civil."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "aemon",
@@ -4822,7 +4839,7 @@
             "Added from the wiki: 3-star Light Archer."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "hannah",
@@ -4883,7 +4900,7 @@
             "Added from the wiki: 3-star Light Cavalry."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "christina",
@@ -4967,7 +4984,7 @@
             "In-game (2026-11-23, Christina at +5): 4★ Light Cavalry confirmed. Her skills are a 500% troop skill, Stone Output (civil, active while owned) and Cavalry DEF / ATK (military). This resolves the wiki conflict: she has one civil skill and two (not three) Cavalry stat skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "hanzo",
@@ -5022,7 +5039,7 @@
             "Added from the wiki: 4-star Light Archer."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "claudia",
@@ -5106,7 +5123,7 @@
             "In-game (2026-11-23, Claudia at +5): 3★ Dark Cavalry confirmed; troop skill 500% of troop ATK; Stone Gather Speed 12/18/24/30% and Cavalry DEF/ATK 10/15/20/25% (+2 to +5); three hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "sodoma",
@@ -5181,7 +5198,7 @@
             "In-game (2026-11-23, Sodoma at +1): 5★ Nature Cavalry confirmed; troop skill 120% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "setemos",
@@ -5334,7 +5351,7 @@
             "In-game (2026-11-23, Setemos at +1): 5★ Dark Civil confirmed; troop skill 120% of troop ATK; Safe Resources, Hunt ATK Bonus and Troop DEF (Passive, Lv. 131) tables for 5★ and 6★; five hero skills. Hunt ATK Bonus applies while owned (the wiki said it unlocks at level 31)."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "tutanhet",
@@ -5408,7 +5425,7 @@
             "In-game (2026-11-23, Tutanhet at Hero0): 5★ Fire Archer confirmed; troop skill 100% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "sirona",
@@ -5567,7 +5584,7 @@
             "In-game (2026-11-23, Sirona at +2): 5★ Dark Civil confirmed; troop skill 150% of troop ATK; Resource Gather Speed, Medical Tent Healing Speed and Troop Capacity tables for 5★ and 6★; five hero skills."
           ]
         },
-        "revision": 31
+        "revision": 32
       },
       {
         "id": "isabella",
@@ -5715,7 +5732,7 @@
             "In-game (2026-11-23, Isabella at +1, S3 badge): 6★ Nature Civil confirmed; troop skill 120% of troop ATK at +1; Troop HP/DEF/ATK passives apply to all troops while owned (6★ and 7★ tables); five hero skills (Blessing of Vitality, Courage, Resolve, Faith, and Glory at 7★). She can be promoted to 7★; the 7★ rules are not in the app yet."
           ]
         },
-        "revision": 31
+        "revision": 32
       }
     ],
     "events": [

@@ -219,9 +219,12 @@ const baseHeroes: Hero[] = [
     notes: 'Bi-weekly Personal Activity shards make him a free long-term Infantry hero.',
   }),
   hero({
-    name: 'Freya', title: 'Valkyrie', element: 'Nature', rarity: 5, unit: 'Archer', role: 'Archer DPS',
-    march: [['Valhalla Ride', 'Cavalry ATK up; extra damage when HP is above 50%.']],
-    m3: { name: 'Einherjar', desc: 'Ice damage to a row and grants ally ATK up.', charge: 'Medium', pattern: 'Row', effects: ['ATK up'] },
+    name: 'Freya', title: 'Valkyrie', element: 'Nature', rarity: 5, unit: 'Archer', role: 'Single-target damage and Stun',
+    march: [
+      ['Troop skill', 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).'],
+      ...militaryTrio('Troop', ALL_TROOP_5STAR_MILITARY).map(([n, d]) => [n, n === 'Troop DEF' ? `${d} Unlocks at Lv. 31.` : n === 'Troop ATK' ? `${d} Unlocks at Lv. 131.` : d] as [string, string]),
+    ],
+    m3: { name: 'Quaking Shot', desc: 'Deals 300% damage to the target and Stuns it for 2 rounds (Rage Regen: Medium). Shield Erosion (unlocks Lv. 11): target and adjacent enemies DEF −30% for 4 rounds. Will of Elf (unlocks Lv. 31): immune to debuffs for 3 rounds (cannot be dispelled). Vigor of Cosmos (unlocks Lv. 71): deals 40% more damage to Dark enemies (cannot be dispelled). Target Weakness (unlocks at 6★): Break +30%. Values as shown in-game at +2.', charge: 'Medium', pattern: 'Single target', effects: ['Stun', 'DEF down', 'Debuff immunity', 'Bonus vs Dark', 'Break'] },
     sources: ['Lucky Spin', 'Recruit Trial', 'Timeless Recruitment'], bonds: ['Rhapsody of Genesis'],
     notes: 'Lucky Spin banner on newer realms.',
   }),
@@ -520,6 +523,6 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 31;
+export const HERO_DATA_REVISION = 32; // 32 = in-game Freya skills
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
