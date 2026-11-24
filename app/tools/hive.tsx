@@ -1,49 +1,54 @@
 import { useMemo, useState } from 'react';
 import { Alert, Pressable, ScrollView, Share, StyleSheet, Switch, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { Stack } from 'expo-router';
-import { Copy, Download, LayoutGrid, Maximize, Plus, Search, Settings2, Share2, Trash, Users, ZoomIn, ZoomOut } from 'lucide-react-native';
+import Svg, { Line } from 'react-native-svg';
+import { Copy, Download, LayoutGrid, Maximize, Move, Plus, Search, Settings2, Share2, Trash, Users, X, ZoomIn, ZoomOut } from 'lucide-react-native';
 import { palette, radius, space, tint, type } from '@/theme';
-import { BottomSheet, Button, Card, Chip, ChipRow, EmptyState, Field, NumberField, Row, Screen, SectionHeader, haptic } from '@/components/ui';
+import { BottomSheet, Button, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import {
-  cellAt, coordsOf, DEFAULT_OUTPOST_TILES, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, MEMBER_COLOR, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, outpostAreas, parseMembers, resize, setCell, unplaced,
-  type CellKind, type Hive, type HiveColor,
+  canPlace, coordsOf, DEFAULT_OUTPOST_TILES, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, KIND_LABELS, KIND_SIZE, MAX_SIDE,
+  MEMBER_COLOR, migrateHive, newHive, outpostAreas, parseMembers, pieceAt, putPiece, removePiece, resize, unplaced,
+  type Hive, type HiveColor, type HivePiece, type PieceKind,
 } from '@/lib/hive';
 
-const CELL = 66;
-const ZOOM_MIN = 0.35;
-const ZOOM_MAX = 1.8;
-const KINDS: CellKind[] = ['member', 'fort', 'gate', 'gather', 'marker', 'blocked', 'empty'];
-const KIND_COLOR: Record<CellKind, string> = {
-  empty: palette.surface, member: palette.surface, fort: palette.success, gate: palette.success, gather: palette.success, marker: palette.cyan, blocked: palette.bg,
+/** On-screen size of one map tile at 100% zoom. A castle is 2×2 tiles. */
+const TILE = 34;
+const ZOOM_MIN = 0.3;
+const ZOOM_MAX = 2;
+const KINDS: PieceKind[] = ['member', 'fort', 'gate', 'gather', 'outpost', 'blocked'];
+const KIND_FILL: Record<PieceKind, string> = {
+  member: palette.surface, fort: palette.success, gate: palette.success, gather: palette.success, outpost: palette.cyan, blocked: palette.textMuted,
 };
 const newId = () => `h${Date.now().toString(36)}`;
 
-/** Alliance hive planner: a grid of castle spots (one square = one 2x2 castle) with names, special squares and coordinates. */
+type Editing = { piece: HivePiece } | { col: number; row: number };
+
+/**
+ * Alliance hive planner on a grid of map tiles: castles, the Fort, the Gate and Alliance Gather cover 2×2 tiles,
+ * outposts and blocked spots 1 tile. Tap an empty tile to place, tap a piece to edit or move it.
+ */
 export default function HivePlanner() {
-  const hives = useAppStore((s) => s.hives);
+  const stored = useAppStore((s) => s.hives);
   const saveHive = useAppStore((s) => s.saveHive);
   const removeHive = useAppStore((s) => s.removeHive);
+  const hives = useMemo(() => stored.map((h) => migrateHive(h)), [stored]);
   const [activeId, setActiveId] = useState<string | null>(hives[0]?.id ?? null);
-  const found = hives.find((h) => h.id === activeId) ?? hives[0] ?? null;
-  const hive = found ? { ...found, legend: normalizeLegend(found.legend) } : null;
+  const hive = hives.find((h) => h.id === activeId) ?? hives[0] ?? null;
   const { width } = useWindowDimensions();
   const [zoom, setZoom] = useState(1);
-  const [editing, setEditing] = useState<{ col: number; row: number } | null>(null);
+  const [editing, setEditing] = useState<Editing | null>(null);
+  const [moving, setMoving] = useState<HivePiece | null>(null);
   const [panel, setPanel] = useState<'none' | 'settings' | 'members' | 'import'>('none');
   const [query, setQuery] = useState('');
 
-  const hits = useMemo(() => (hive ? findName(hive, query) : []), [hive, query]);
-  const hitSet = new Set(hits.map((h) => `${h.col},${h.row}`));
-
   const create = () => { const h = newHive(newId(), hives.length ? `Hive ${hives.length + 1}` : 'Main hive'); saveHive(h); setActiveId(h.id); };
-  const update = (h: Hive) => saveHive(h);
 
   if (!hive) {
     return (
       <Screen>
         <Stack.Screen options={{ title: 'Hive Planner' }} />
-        <Text style={type.bodySecondary}>Plan where every alliance member's castle goes around the fort. One square is one castle (2×2 tiles); set one square's coordinates and every spot shows its own X:Y for teleporting.</Text>
+        <Text style={type.bodySecondary}>Plan where every alliance member's castle goes around the fort. The plan is made of map tiles: castles, the Fort and the Gate cover 2×2 tiles, outposts 1 tile. Set one tile's coordinates and every castle shows its own X:Y for teleporting.</Text>
         <View style={{ marginTop: space.md, gap: space.sm }}>
           <Button icon={Plus} label="New hive plan" onPress={create} />
           <Button icon={Download} variant="secondary" label="Import a shared plan" onPress={() => setPanel('import')} />
@@ -53,12 +58,36 @@ export default function HivePlanner() {
     );
   }
 
+  const tile = Math.round(TILE * zoom);
+  const W = tile * hive.cols;
+  const H = tile * hive.rows;
+  const hits = findName(hive, query);
+  const hitIds = new Set(hits.map((p) => p.id));
   const waiting = unplaced(hive);
-  const ref = coordsOf(hive, hive.ref.col, hive.ref.row);
-  const size = Math.round(CELL * zoom);
-  const fit = () => setZoom(Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, (width - space.md * 2) / (CELL * hive.cols))));
+  const used = HIVE_COLORS.filter((c) => hive.pieces.some((p) => p.color === c));
+  const fit = () => setZoom(Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, (width - space.md * 2) / (TILE * hive.cols))));
   const step = (f: number) => setZoom((z) => Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, Math.round(z * f * 100) / 100)));
-  const used = HIVE_COLORS.filter((c) => hive.cells.some((x) => x.color === c));
+
+  const tapTile = (col: number, row: number) => {
+    haptic();
+    if (moving) {
+      // Place the moving piece with its top-left on the tapped tile (nudged back inside the plan).
+      const c = Math.min(col, hive.cols - moving.size);
+      const r = Math.min(row, hive.rows - moving.size);
+      const next = putPiece(hive, { ...moving, col: c, row: r });
+      if (!next) { Alert.alert('No room there', `A ${KIND_LABELS[moving.kind].toLowerCase()} needs ${moving.size}×${moving.size} free tiles.`); return; }
+      saveHive(next);
+      setMoving(null);
+      return;
+    }
+    const p = pieceAt(hive, col, row);
+    setEditing(p ? { piece: p } : { col, row });
+  };
+
+  // Grid lines (no hook: this code runs after the early return above).
+  const lines: { x1: number; y1: number; x2: number; y2: number; major: boolean }[] = [];
+  for (let c = 0; c <= hive.cols; c++) lines.push({ x1: c * tile, y1: 0, x2: c * tile, y2: H, major: c % 2 === 0 });
+  for (let r = 0; r <= hive.rows; r++) lines.push({ x1: 0, y1: r * tile, x2: W, y2: r * tile, major: r % 2 === 0 });
 
   return (
     <View style={{ flex: 1, backgroundColor: palette.bg }}>
@@ -69,7 +98,7 @@ export default function HivePlanner() {
           <Chip label="+ New" onPress={create} />
         </ChipRow>
         <Row style={{ marginTop: space.xs }}>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, paddingHorizontal: space.sm }}>
+          <View style={st.search}>
             <Search size={15} color={palette.textMuted} />
             <TextInput value={query} onChangeText={setQuery} placeholder="Find a member" placeholderTextColor={palette.textMuted} style={[type.body, { flex: 1, paddingVertical: 8 }]} autoCapitalize="none" />
           </View>
@@ -85,59 +114,62 @@ export default function HivePlanner() {
         </Row>
         {used.length ? (
           <Row style={{ marginTop: 6, flexWrap: 'wrap' }} gap={8}>
-            {used.map((c) => (
-              <Row key={c} gap={4}><View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[c] }]} /><Text style={type.caption}>{hive.legend[c]}</Text></Row>
-            ))}
+            {used.map((c) => <Row key={c} gap={4}><View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[c] }]} /><Text style={type.caption}>{hive.legend[c]}</Text></Row>)}
           </Row>
         ) : null}
-        <Text style={[type.caption, { marginTop: 4 }]}>
-          {query ? (hits.length ? `${hits.length} match${hits.length > 1 ? 'es' : ''}: ${hits.map((h) => { const c = coordsOf(hive, h.col, h.row); return `X:${c.x} Y:${c.y}`; }).join(' · ')}` : 'No member with that name')
-            : `Tap a square to edit. Reference square: X:${ref.x} Y:${ref.y}`}
-        </Text>
+        {moving ? (
+          <Row style={[st.banner, { marginTop: 6 }]}>
+            <Move size={15} color={palette.gold} />
+            <Text style={[type.body, { flex: 1 }]}>Tap where {moving.kind === 'member' ? moving.name : KIND_LABELS[moving.kind]} should go (top-left tile).</Text>
+            <Pressable onPress={() => setMoving(null)} accessibilityLabel="Cancel move"><X size={18} color={palette.textSecondary} /></Pressable>
+          </Row>
+        ) : (
+          <Text style={[type.caption, { marginTop: 4 }]}>
+            {query
+              ? (hits.length ? hits.map((p) => { const c = coordsOf(hive, p.col, p.row); return `${p.name} X:${c.x} Y:${c.y}`; }).join(' · ') : 'No member with that name')
+              : 'Tap an empty tile to place a castle; tap a castle to edit or move it.'}
+          </Text>
+        )}
       </View>
 
       <ScrollView style={{ flex: 1, marginTop: space.sm }} contentContainerStyle={{ paddingBottom: space.xxl }}>
         <ScrollView horizontal contentContainerStyle={{ padding: space.md }}>
-          <View style={{ position: 'relative' }}>
-            {Array.from({ length: hive.rows }, (_, row) => (
-              <View key={row} style={{ flexDirection: 'row' }}>
-                {Array.from({ length: hive.cols }, (_, col) => {
-                  const c = cellAt(hive, col, row);
-                  const hit = hitSet.has(`${col},${row}`);
-                  const isRef = hive.ref.col === col && hive.ref.row === row;
-                  return (
-                    <Pressable key={col} onPress={() => { haptic(); setEditing({ col, row }); }}
-                      style={[st.cell, { width: size, height: size },
-                        { backgroundColor: c.color ? tint(HIVE_COLOR_HEX[c.color], 0.4) : c.kind === 'member' || c.kind === 'empty' ? palette.surface : tint(KIND_COLOR[c.kind], c.kind === 'blocked' ? 1 : 0.35) },
-                        c.color && { borderColor: HIVE_COLOR_HEX[c.color] },
-                        c.kind === 'blocked' && { borderColor: palette.bg }, hit && { borderColor: palette.gold, borderWidth: 2 }, isRef && { borderColor: palette.cyan }]}
-                      accessibilityLabel={`Square ${col + 1}, ${row + 1}: ${c.kind === 'member' ? c.name : KIND_LABELS[c.kind]}${c.color ? `, ${hive.legend[c.color]}` : ''}`}>
-                      {zoom >= 0.5 ? (
-                        <Text style={[st.cellText, { fontSize: Math.max(7, Math.round(10 * zoom)) }, c.kind !== 'member' && { color: palette.textSecondary, fontWeight: '700' }]} numberOfLines={2}>
-                          {c.kind === 'member' ? c.name : c.kind === 'empty' || c.kind === 'blocked' ? '' : KIND_LABELS[c.kind].toUpperCase()}
-                        </Text>
-                      ) : null}
-                    </Pressable>
-                  );
-                })}
-              </View>
-            ))}
+          <View style={{ width: W, height: H }}>
+            <Pressable style={StyleSheet.absoluteFill} onPress={(e) => tapTile(Math.floor(e.nativeEvent.locationX / tile), Math.floor(e.nativeEvent.locationY / tile))}>
+              <Svg width={W} height={H} pointerEvents="none">
+                {lines.map((l, i) => <Line key={i} {...l} stroke={l.major ? palette.borderStrong : palette.border} strokeWidth={l.major ? 1 : 0.5} />)}
+              </Svg>
+            </Pressable>
             {outpostAreas(hive).map((a, i) => (
-              <View key={i} pointerEvents="none" style={{
-                position: 'absolute', left: a.col0 * size, top: a.row0 * size, width: (a.col1 - a.col0 + 1) * size, height: (a.row1 - a.row0 + 1) * size,
-                borderWidth: 2, borderColor: palette.success, backgroundColor: tint(palette.success, 0.08),
-              }} />
+              <View key={`o${i}`} pointerEvents="none" style={{ position: 'absolute', left: a.col0 * tile, top: a.row0 * tile, width: (a.col1 - a.col0 + 1) * tile, height: (a.row1 - a.row0 + 1) * tile, borderWidth: 2, borderColor: palette.success, backgroundColor: tint(palette.success, 0.08) }} />
             ))}
+            {hive.pieces.map((p) => {
+              const fill = p.color ? HIVE_COLOR_HEX[p.color] : KIND_FILL[p.kind];
+              const isRef = hive.ref.col === p.col && hive.ref.row === p.row;
+              return (
+                <Pressable key={p.id} onPress={() => { if (moving) return; haptic(); setEditing({ piece: p }); }}
+                  style={[st.piece, { left: p.col * tile, top: p.row * tile, width: p.size * tile, height: p.size * tile, backgroundColor: tint(fill, p.kind === 'blocked' ? 0.5 : 0.35), borderColor: fill },
+                    hitIds.has(p.id) && { borderColor: palette.text, borderWidth: 3 }, isRef && { borderColor: palette.cyan, borderWidth: 2 }, moving?.id === p.id && { opacity: 0.4 }]}
+                  accessibilityLabel={p.kind === 'member' ? `${p.name}` : KIND_LABELS[p.kind]}>
+                  {zoom >= 0.5 && p.size > 1 ? (
+                    <Text style={[st.pieceText, { fontSize: Math.max(7, Math.round(10 * zoom)) }, p.kind !== 'member' && { fontWeight: '800' }]} numberOfLines={2}>
+                      {p.kind === 'member' ? p.name : KIND_LABELS[p.kind].toUpperCase()}
+                    </Text>
+                  ) : null}
+                </Pressable>
+              );
+            })}
           </View>
         </ScrollView>
       </ScrollView>
 
       {editing ? (
-        <CellSheet hive={hive} at={editing} waiting={waiting} onClose={() => setEditing(null)}
-          onSave={(h) => { update(h); setEditing(null); }} />
+        <PieceSheet hive={hive} editing={editing} waiting={waiting} onClose={() => setEditing(null)}
+          onSave={(h) => { saveHive(h); setEditing(null); }}
+          onMove={(p) => { setEditing(null); setMoving(p); }} />
       ) : null}
-      <MembersSheet open={panel === 'members'} hive={hive} onClose={() => setPanel('none')} onSave={update} />
-      <SettingsSheet open={panel === 'settings'} hive={hive} onClose={() => setPanel('none')} onSave={update}
+      <MembersSheet open={panel === 'members'} hive={hive} onClose={() => setPanel('none')} onSave={saveHive} />
+      <SettingsSheet open={panel === 'settings'} hive={hive} onClose={() => setPanel('none')} onSave={saveHive}
         onImport={() => setPanel('import')}
         onDelete={() => Alert.alert('Delete this plan?', `"${hive.name}" will be removed from this phone.`, [
           { text: 'Cancel', style: 'cancel' },
@@ -157,17 +189,32 @@ function IconPill({ icon: Icon, label, onPress }: { icon: typeof Users; label?: 
   );
 }
 
-function CellSheet({ hive, at, waiting, onClose, onSave }: { hive: Hive; at: { col: number; row: number }; waiting: string[]; onClose: () => void; onSave: (h: Hive) => void }) {
-  const cur = cellAt(hive, at.col, at.row);
-  const [kind, setKind] = useState<CellKind>(cur.kind === 'empty' ? 'member' : cur.kind);
-  const [name, setName] = useState(cur.name ?? '');
-  // New member squares start in the Alliance member colour; other kinds start uncoloured.
-  const [color, setColor] = useState<HiveColor | undefined>(cur.color ?? (cur.kind === 'empty' || cur.kind === 'member' ? MEMBER_COLOR : undefined));
-  const c = coordsOf(hive, at.col, at.row);
+function PieceSheet({ hive, editing, waiting, onClose, onSave, onMove }: {
+  hive: Hive; editing: Editing; waiting: string[]; onClose: () => void; onSave: (h: Hive) => void; onMove: (p: HivePiece) => void;
+}) {
+  const existing = 'piece' in editing ? editing.piece : null;
+  const col = existing ? existing.col : (editing as { col: number }).col;
+  const row = existing ? existing.row : (editing as { row: number }).row;
+  const [kind, setKind] = useState<PieceKind>(existing?.kind ?? 'member');
+  const [name, setName] = useState(existing?.name ?? '');
+  const [color, setColor] = useState<HiveColor | undefined>(existing ? existing.color : MEMBER_COLOR);
+  const c = coordsOf(hive, col, row);
   const suggestions = waiting.filter((m) => !name || m.toLowerCase().includes(name.toLowerCase())).slice(0, 12);
+
+  const save = () => {
+    const size = KIND_SIZE[kind];
+    // New pieces near the bottom/right edge are nudged inside the plan.
+    const pc = existing ? col : Math.min(col, hive.cols - size);
+    const pr = existing ? row : Math.min(row, hive.rows - size);
+    if (kind === 'member' && !name.trim()) { Alert.alert('Add a name', 'Type the member name or pick one from your list.'); return; }
+    if (!canPlace(hive, pc, pr, size, existing?.id)) { Alert.alert('No room here', `A ${KIND_LABELS[kind].toLowerCase()} needs ${size}×${size} free tiles. Move or clear what is in the way.`); return; }
+    const next = putPiece(hive, { id: existing?.id, kind, col: pc, row: pr, name, color });
+    if (next) onSave(next);
+  };
+
   return (
-    <BottomSheet visible onClose={onClose} title={cur.kind === 'member' && cur.name ? cur.name : 'Edit square'} subtitle={`X:${c.x} Y:${c.y} · column ${at.col + 1}, row ${at.row + 1}`}>
-      <ChipRow>{KINDS.map((k) => <Chip key={k} label={KIND_LABELS[k]} active={kind === k} onPress={() => setKind(k)} />)}</ChipRow>
+    <BottomSheet visible onClose={onClose} title={existing ? (existing.kind === 'member' ? existing.name ?? 'Castle' : KIND_LABELS[existing.kind]) : 'Place on the map'} subtitle={`X:${c.x} Y:${c.y}`}>
+      <ChipRow>{KINDS.map((k) => <Chip key={k} label={`${KIND_LABELS[k]} (${KIND_SIZE[k]}×${KIND_SIZE[k]})`} active={kind === k} onPress={() => setKind(k)} />)}</ChipRow>
       {kind === 'member' ? (
         <>
           <Field label="Member name" value={name} onChangeText={setName} autoCapitalize="none" placeholder="Type or pick below" />
@@ -179,27 +226,26 @@ function CellSheet({ hive, at, waiting, onClose, onSave }: { hive: Hive; at: { c
           ) : null}
         </>
       ) : null}
-      {kind !== 'empty' ? (
-        <>
-          <Text style={[type.caption, { marginTop: space.md }]}>Colour (optional)</Text>
-          <Row style={{ marginTop: 6, flexWrap: 'wrap' }} gap={6}>
-            <Pressable onPress={() => setColor(undefined)} style={[st.swatch, !color && st.swatchOn]}><Text style={type.caption}>None</Text></Pressable>
-            {HIVE_COLORS.map((k) => (
-              <Pressable key={k} onPress={() => { haptic(); setColor(k); }} style={[st.swatch, color === k && st.swatchOn]} accessibilityLabel={hive.legend[k]}>
-                <View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[k] }]} />
-                <Text style={type.caption}>{hive.legend[k]}</Text>
-              </Pressable>
-            ))}
-          </Row>
-        </>
-      ) : null}
-      <Row style={{ marginTop: space.md }}>
-        <View style={{ flex: 1 }}><Button variant="secondary" label="Clear" onPress={() => onSave(setCell(hive, at.col, at.row, { kind: 'empty' }))} /></View>
-        <View style={{ flex: 1 }}><Button label="Save" onPress={() => onSave(setCell(hive, at.col, at.row, { kind, name, color }))} /></View>
+      <Text style={[type.caption, { marginTop: space.md }]}>Colour (optional)</Text>
+      <Row style={{ marginTop: 6, flexWrap: 'wrap' }} gap={6}>
+        <Pressable onPress={() => setColor(undefined)} style={[st.swatch, !color && st.swatchOn]}><Text style={type.caption}>None</Text></Pressable>
+        {HIVE_COLORS.map((k) => (
+          <Pressable key={k} onPress={() => { haptic(); setColor(k); }} style={[st.swatch, color === k && st.swatchOn]} accessibilityLabel={hive.legend[k]}>
+            <View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[k] }]} />
+            <Text style={type.caption}>{hive.legend[k]}</Text>
+          </Pressable>
+        ))}
       </Row>
-      <View style={{ marginTop: space.sm }}>
-        <Button compact variant="ghost" icon={LayoutGrid} label="Use this square as the coordinate reference" onPress={() => onSave({ ...hive, ref: { col: at.col, row: at.row, x: c.x, y: c.y } })} />
-      </View>
+      <Row style={{ marginTop: space.md }}>
+        {existing ? <View style={{ flex: 1 }}><Button variant="secondary" icon={Trash} label="Remove" onPress={() => onSave(removePiece(hive, existing.id))} /></View> : null}
+        <View style={{ flex: 1 }}><Button label={existing ? 'Save' : 'Place'} onPress={save} /></View>
+      </Row>
+      {existing ? (
+        <View style={{ marginTop: space.sm, gap: 4 }}>
+          <Button compact variant="ghost" icon={Move} label="Move" onPress={() => onMove(existing)} />
+          <Button compact variant="ghost" icon={LayoutGrid} label="Use this as the coordinate reference" onPress={() => onSave({ ...hive, ref: { col, row, x: c.x, y: c.y } })} />
+        </View>
+      ) : null}
     </BottomSheet>
   );
 }
@@ -210,8 +256,7 @@ function MembersSheet({ open, hive, onClose, onSave }: { open: boolean; hive: Hi
   return (
     <BottomSheet visible={open} onClose={onClose} title="Alliance members" subtitle={`${hive.members.length} listed · ${waiting.length} not placed yet`}>
       <Text style={type.caption}>Paste your member list, one name per line (or separated by commas). Placed names drop off the "not placed" list.</Text>
-      <TextInput value={text} onChangeText={setText} multiline placeholder={'Crisa\nSemiX\n~-Ice-~'} placeholderTextColor={palette.textMuted}
-        style={[type.body, st.textarea]} autoCapitalize="none" />
+      <TextInput value={text} onChangeText={setText} multiline placeholder={'Crisa\nSemiX\n~-Ice-~'} placeholderTextColor={palette.textMuted} style={[type.body, st.textarea]} autoCapitalize="none" />
       <Button label="Save list" onPress={() => { onSave({ ...hive, members: parseMembers(text) }); onClose(); }} />
       {waiting.length ? <Text style={[type.caption, { marginTop: space.md }]}>Not placed: {waiting.join(', ')}</Text> : null}
     </BottomSheet>
@@ -224,14 +269,14 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
     <BottomSheet visible={open} onClose={onClose} title="Plan settings">
       <Field label="Plan name" value={hive.name} onChangeText={(name) => set({ name })} />
       <Row style={{ marginTop: space.sm }}>
-        <NumberField label={`Columns (max ${MAX_SIDE})`} value={hive.cols} onChange={(n) => onSave(resize(hive, n, hive.rows))} />
-        <NumberField label={`Rows (max ${MAX_SIDE})`} value={hive.rows} onChange={(n) => onSave(resize(hive, hive.cols, n))} />
+        <NumberField label={`Width in tiles (max ${MAX_SIDE})`} value={hive.cols} onChange={(n) => onSave(resize(hive, n, hive.rows))} />
+        <NumberField label={`Height in tiles (max ${MAX_SIDE})`} value={hive.rows} onChange={(n) => onSave(resize(hive, hive.cols, n))} />
       </Row>
-      <SectionHeader title="Coordinates" subtitle={`Reference square: column ${hive.ref.col + 1}, row ${hive.ref.row + 1} (outlined in cyan)`} />
+      <Text style={[type.caption, { marginTop: 4 }]}>A castle is 2×2 tiles, so 24×24 tiles fits 12×12 castles.</Text>
+      <SectionHeader title="Coordinates" subtitle={`Reference: tile ${hive.ref.col + 1}, ${hive.ref.row + 1} (outlined in cyan)`} />
       <Row>
         <NumberField label="Its X" value={hive.ref.x} onChange={(x) => set({ ref: { ...hive.ref, x } })} />
         <NumberField label="Its Y" value={hive.ref.y} onChange={(y) => set({ ref: { ...hive.ref, y } })} />
-        <NumberField label="Tiles per square" value={hive.step} onChange={(step) => set({ step: Math.max(1, Math.min(10, step || 2)) })} />
       </Row>
       <Row style={{ marginTop: space.sm, justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
@@ -243,7 +288,6 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
       <Row style={{ marginTop: space.sm }}>
         <NumberField label="Outpost territory (tiles wide)" value={hive.outpostTiles ?? DEFAULT_OUTPOST_TILES} onChange={(n) => set({ outpostTiles: Math.max(2, Math.min(40, n || DEFAULT_OUTPOST_TILES)) })} />
       </Row>
-      <Text style={[type.caption, { marginTop: 4 }]}>Each outpost shows its territory as a green outline ({Math.round((hive.outpostTiles ?? DEFAULT_OUTPOST_TILES) / hive.step)} squares wide at {hive.step} tiles per square).</Text>
       <SectionHeader title="Colour meanings" subtitle="Rename to match your alliance" />
       {HIVE_COLORS.map((k) => (
         <Row key={k} style={{ marginBottom: 6, alignItems: 'center' }}>
@@ -251,7 +295,6 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
           <TextInput value={hive.legend[k]} onChangeText={(v) => set({ legend: { ...hive.legend, [k]: v.slice(0, 24) } })} style={[type.body, st.legendInput]} placeholderTextColor={palette.textMuted} />
         </Row>
       ))}
-      <Text style={[type.caption, { marginTop: space.sm }]}>A castle is 2×2 tiles, so neighbouring spots are 2 apart. Tap any square and choose "Use this square as the coordinate reference" to move the reference.</Text>
       <View style={{ marginTop: space.lg, gap: space.sm }}>
         <Button icon={Copy} variant="secondary" label="Share plan code" onPress={() => { Share.share({ message: exportCode(hive) }).catch(() => undefined); }} />
         <Button icon={Download} variant="secondary" label="Import a shared plan" onPress={onImport} />
@@ -264,8 +307,8 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
 function ImportSheet({ open, onClose, onImport }: { open: boolean; onClose: () => void; onImport: (h: Hive) => void }) {
   const [text, setText] = useState('');
   return (
-    <BottomSheet visible={open} onClose={onClose} title="Import a hive plan" subtitle="Paste the code someone shared (starts with FCHIVE1:)">
-      <TextInput value={text} onChangeText={setText} multiline placeholder="FCHIVE1:{...}" placeholderTextColor={palette.textMuted} style={[type.body, st.textarea]} autoCapitalize="none" autoCorrect={false} />
+    <BottomSheet visible={open} onClose={onClose} title="Import a hive plan" subtitle="Paste the code someone shared (starts with FCHIVE)">
+      <TextInput value={text} onChangeText={setText} multiline placeholder="FCHIVE2:{...}" placeholderTextColor={palette.textMuted} style={[type.body, st.textarea]} autoCapitalize="none" autoCorrect={false} />
       <Button icon={Download} label="Import" onPress={() => {
         try { onImport(importCode(text, newId())); setText(''); onClose(); }
         catch (e) { Alert.alert('Could not import', e instanceof Error ? e.message : String(e)); }
@@ -275,12 +318,14 @@ function ImportSheet({ open, onClose, onImport }: { open: boolean; onClose: () =
 }
 
 const st = StyleSheet.create({
-  cell: { width: CELL, height: CELL, borderWidth: StyleSheet.hairlineWidth, borderColor: palette.border, alignItems: 'center', justifyContent: 'center', padding: 2 },
-  cellText: { color: palette.text, fontSize: 10, fontWeight: '600', textAlign: 'center' },
+  search: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, paddingHorizontal: space.sm },
+  piece: { position: 'absolute', borderWidth: 1, borderRadius: 3, alignItems: 'center', justifyContent: 'center', padding: 2 },
+  pieceText: { color: palette.text, fontWeight: '600', textAlign: 'center' },
+  banner: { alignItems: 'center', gap: 8, borderWidth: 1, borderColor: palette.goldLine, borderRadius: radius.md, padding: space.sm, backgroundColor: palette.surface },
   pill: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, paddingHorizontal: 10, paddingVertical: 9 },
   dot: { width: 10, height: 10, borderRadius: 5 },
   swatch: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 8, paddingVertical: 6, borderRadius: radius.sm, borderWidth: 1, borderColor: palette.border },
   swatchOn: { borderColor: palette.cyan, backgroundColor: palette.cyanDim },
-  legendInput: { flex: 1, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, paddingHorizontal: space.sm, paddingVertical: 6 },
   textarea: { minHeight: 140, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, padding: space.sm, marginVertical: space.sm, textAlignVertical: 'top' },
+  legendInput: { flex: 1, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, paddingHorizontal: space.sm, paddingVertical: 6 },
 });
