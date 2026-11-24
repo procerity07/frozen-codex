@@ -8,6 +8,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { getDb } from '@/db/client';
 import { useAppStore } from '@/store/useAppStore';
+import { autoSync, DEFAULT_MANIFEST_URL } from '@/db/ota';
+import { clearContentCache } from '@/services/content';
 import { palette, space, type } from '@/theme';
 import { Button } from '@/components/ui';
 
@@ -21,7 +23,12 @@ export default function RootLayout() {
   const boot = () => {
     setState('loading');
     Promise.all([getDb(), waitForProfile()])
-      .then(() => setState('ready'))
+      .then(() => {
+        setState('ready');
+        // Pull data fixes in the background; no new APK needed for heroes, events, Sophia, codes or shops.
+        const url = useAppStore.getState().manifestUrl.trim() || DEFAULT_MANIFEST_URL;
+        autoSync(url).then((r) => { if (r?.status === 'updated') clearContentCache(); }).catch(() => undefined);
+      })
       .catch((e: unknown) => { setError(e instanceof Error ? e.message : String(e)); setState('error'); })
       .finally(() => { SplashScreen.hideAsync().catch(() => undefined); });
   };

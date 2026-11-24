@@ -10,6 +10,7 @@
     "lint:data": "tsx scripts/validate-seed.ts",
     "build:apk": "eas build -p android --profile preview",
     "export:seed": "tsx scripts/export-seed-json.ts",
+    "pack": "tsx scripts/export-seed-json.ts",
     "assets": "node scripts/render-assets.cjs",
     "verify": "tsc --noEmit && tsx scripts/validate-seed.ts",
     "build:apk:local": "expo prebuild --platform android --clean && cd android && ./gradlew assembleRelease"

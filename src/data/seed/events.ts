@@ -25,8 +25,8 @@ const baseEvents: GameEvent[] = [
     featuredHeroes: ['boyd', 'monica', 'kaios', 'aerposia'],
   }),
   ev({
-    name: 'Alliance Duel', category: C('Core Cycle'), cadence: 'Bi-weekly (parallel to Ace Lord Week)', cycleWeek: W('Ace Lord'), days: WEEK,
-    summary: 'Alliance-vs-alliance daily themes running on different days from Ace Lord in the same week.',
+    name: 'Alliance Duel', category: C('Core Cycle'), cadence: 'Not seen in-game on current realms (wiki only)', cycleWeek: W('Random'), days: [],
+    summary: 'Listed on the wiki but not in the in-game Event Center (checked 24 Nov 2026), so it is not shown in the schedule. In Ace Lord weeks the side event is the daily mini-event instead (e.g. Curio on Tuesday).',
     rules: ['Day 1 Rune & Holystone', 'Day 2 Dragon & Totem', 'Day 3 Draconic & Glory', 'Day 4 Hero Growth', 'Day 5 Dragon Crystal & Curio', 'Day 6–7 Duel Moment (kill troops)', 'Ascending/salvaging runes gives 0 pts on Day 1 — only obtaining essences/spinels/crystals/scrolls scores.'],
     rewards: ['Oskir shards (Gold league rank 1: 15x Oskir Shard, 5x Mythic Hero Covenant)', 'Day 1 phases run from 50,000 to 800,000 points', 'Daily rank rewards by league: Iron, Bronze, Silver, Gold'], featuredHeroes: ['oskir'],
     tips: ['Day 4 Hero Growth overlaps nothing in Ace Lord — use leftover Bond Gifts.', 'Duel Moment: coordinate kills on Sat/Sun with Conquest of Lords.'],
@@ -242,6 +242,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 11; // 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 12; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));

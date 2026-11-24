@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { Database, Settings } from 'lucide-react-native';
-import { guides, shops } from '@/data/seed';
+import { guides } from '@/data/seed';
+import { useShops } from '@/services/content';
 import { palette, space, type, verdictColors } from '@/theme';
 import { Accordion, Badge, Button, Card, Chip, ChipRow, Row, Screen, SectionHeader, Segmented } from '@/components/ui';
 import type { Verdict } from '@/types/game';
@@ -24,8 +25,9 @@ export default function GuidesScreen() {
 
 function ShopAdvisor() {
   const [profile, setProfile] = useState<'f2p' | 'spender'>('f2p');
+  const shops = useShops();
   const [shopId, setShopId] = useState(shops[0]!.id);
-  const shop = shops.find((s) => s.id === shopId)!;
+  const shop = shops.find((s) => s.id === shopId) ?? shops[0]!;
   const items = [...shop.items].sort((a, b) => ORDER.indexOf(a[profile]) - ORDER.indexOf(b[profile]));
   return (
     <Screen sticky={<View style={{ backgroundColor: palette.bg, paddingTop: space.sm }}>

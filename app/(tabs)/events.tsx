@@ -142,7 +142,7 @@ function Planner() {
   const now = useNow(60_000);
   return (
     <Screen>
-      <SectionHeader title="Ace Lord × Alliance Duel" subtitle="Same week, different daily themes" />
+      <SectionHeader title="Ace Lord week planner" subtitle="Daily theme, side events and Royal Arms Race" />
       {plan.map((d) => (
         <Card key={d.weekday} style={{ marginBottom: space.sm, padding: space.md }} accent={d.shared.length ? palette.success : undefined}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -151,7 +151,7 @@ function Planner() {
           </Row>
           <Row style={{ marginTop: space.sm, alignItems: 'flex-start' }}>
             <View style={{ flex: 1 }}><Text style={[type.caption, { color: palette.gold }]}>Ace Lord</Text><Text style={type.body}>{d.aceLord}</Text></View>
-            <View style={{ flex: 1 }}><Text style={[type.caption, { color: palette.cyan }]}>Alliance Duel</Text><Text style={type.body}>{d.allianceDuel}</Text></View>
+            <View style={{ flex: 1 }}><Text style={[type.caption, { color: palette.cyan }]}>Daily event</Text><Text style={type.body}>{d.allianceDuel}</Text></View>
           </Row>
           {d.royal.length ? <Text style={[type.caption, { marginTop: space.sm }]}>Royal Arms Race: {d.royal.map((r) => `${r.utc} ${r.theme}`).join(' · ')}</Text> : null}
           <Text style={[type.bodySecondary, { marginTop: space.sm }]}>{d.advice}</Text>

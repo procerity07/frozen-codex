@@ -1,3 +1,5 @@
+import { packContent } from './pack-content';
+import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
 import { anchorFor, cleanAllianceTime, timeForWeek, upcomingStarts } from '../src/lib/allianceTimes';
 import { coordsOf, exportCode, importCode, newHive, parseMembers, resize, setCell, unplaced } from '../src/lib/hive';
@@ -130,7 +132,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const sat = new Date(Date.UTC(2026, 10, 28, 11));
   ok(eventsOn(seed.events, sat, a).some((e) => e.id === 'conquest-of-lords'), 'CoL on Ace Lord Saturday');
   ok(!eventsOn(seed.events, sat, a).some((e) => e.id === 'realm-expedition'), 'no RE on Ace Lord Saturday');
-  ok(todayThemes(mon, a).map((t) => t.theme).join('|') === 'Heroes Assemble (Hero Upgrade)|Rune & Holystone', 'Monday themes');
+  ok(todayThemes(mon, a).map((t) => t.theme).join('|') === 'Heroes Assemble (Hero Upgrade)', 'Monday themes (no Alliance Duel)');
+  ok(todayThemes(new Date(mon.getTime() + 86_400_000), a).map((t) => t.theme).join('|') === 'Path to Development (Build & Research)|Curio', 'Tuesday shows Curio as the daily event');
+  ok(!eventsOn(seed.events, mon, a).some((e) => e.id === 'alliance-duel'), 'Alliance Duel not scheduled');
   ok(doubleDipPlan().length === 7, 'double dip plan');
 
 
@@ -352,5 +356,13 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
     ok(tRotation(now, rotA) === wk && tCycle(now, aceA) === (wk % 2 === 1 ? 'Ace Lord' : 'Arms Race'), `week ${wk} sets a matching cycle`);
     ok(tRotation(next, rotA) === (wk % 4) + 1 && tCycle(next, aceA) !== tCycle(now, aceA), `week ${wk} rolls over consistently`);
   }
+}
+
+// The online data pack must match the bundled data (run `npm run pack` after data changes)
+{
+  const pack = JSON.parse(readPackFile(new URL('../data-pack/manifest.json', import.meta.url), 'utf8')) as { version: number; packs: unknown };
+  ok(JSON.stringify(pack.packs) === JSON.stringify(packContent()), 'data pack is up to date (run npm run pack)');
+  const parsed = parseManifest(pack);
+  ok(parsed.packs.shops!.length === seed.shops.length && parsed.packs.sophia!.length === seed.sophiaQuestions.length, 'data pack parses, including shops');
 }
 

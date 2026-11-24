@@ -8,6 +8,7 @@ import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, Se
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
 import { dbStats, getMeta } from '@/db/repo';
 import { checkForUpdates, DEFAULT_MANIFEST_URL, type SyncResult } from '@/db/ota';
+import { clearContentCache } from '@/services/content';
 import { exportProfile, exportRoster, importProfile, importRoster } from '@/services/backup';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import { SEED_VERSION } from '@/data/seed';
@@ -39,6 +40,7 @@ export default function SettingsScreen() {
   const sync = async (force: boolean) => {
     setBusy(true);
     const r = await checkForUpdates(s.manifestUrl.trim() || DEFAULT_MANIFEST_URL, force);
+    if (r.status === 'updated') clearContentCache();
     setResult(r);
     setBusy(false);
     loadStats();
@@ -153,7 +155,7 @@ export default function SettingsScreen() {
         </Row>
       </Card>
 
-      <SectionHeader title="Database updates" icon={Database} subtitle="Merge new heroes, events, codes and Sophia answers without a new APK" />
+      <SectionHeader title="Database updates" icon={Database} subtitle="Checked automatically when the app opens (every 3 hours): heroes, events, Sophia answers, codes and shops update without a new APK" />
       <Card>
         <Row style={{ justifyContent: 'space-between' }}>
           <Stat label="Bundled seed" value={`v${SEED_VERSION}`} />

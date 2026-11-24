@@ -34,6 +34,7 @@ export async function applyManifest(manifest: DataManifest): Promise<SyncResult[
     const bundledIds = new Set(sophiaQuestions.map((q) => q.id));
     await upsertSophia(db, sophia.filter((q) => !bundledIds.has(q.id)), 'ota');
   });
+  if (manifest.packs.shops?.length) await setMeta('ota_shops', JSON.stringify(manifest.packs.shops));
   await setMeta('ota_version', String(manifest.version));
   await setMeta('ota_synced_at', new Date().toISOString());
   return { heroes: heroResult.applied, events: eventResult.applied, giftCodes: giftCodes.length, sophia: sophia.length, skippedHeroes: [...heroResult.skipped, ...eventResult.skipped] };
@@ -57,5 +58,23 @@ export async function checkForUpdates(url: string = DEFAULT_MANIFEST_URL, force 
     return { status: 'updated', version: manifest.version, counts, skippedHeroes, message: `Merged data pack v${manifest.version}.${skippedNote}` };
   } catch (e) {
     return { status: 'error', version: 0, counts: empty, message: e instanceof Error ? e.message : 'Unknown error' };
+  }
+}
+
+const AUTO_SYNC_EVERY_MS = 3 * 60 * 60 * 1000;
+
+/**
+ * Quietly checks the online data pack when the app opens (at most every 3 hours), so data fixes
+ * arrive without installing a new APK. Never throws.
+ */
+export async function autoSync(url: string = DEFAULT_MANIFEST_URL): Promise<SyncResult | null> {
+  try {
+    const last = Date.parse((await getMeta('ota_checked_at')) ?? '');
+    if (Number.isFinite(last) && Date.now() - last < AUTO_SYNC_EVERY_MS) return null;
+    const r = await checkForUpdates(url, false);
+    if (r.status !== 'error') await setMeta('ota_checked_at', new Date().toISOString());
+    return r;
+  } catch {
+    return null;
   }
 }

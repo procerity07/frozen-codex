@@ -1,5 +1,5 @@
 import type { GameEvent, Weekday } from '@/types/game';
-import { cycleDays } from '@/data/seed';
+import { cycleDays, events as allEvents } from '@/data/seed';
 import { cycleForDate, rotationWeek, utcDayOfWeek, utcWeekday } from './time';
 
 export interface Anchors { aceLordAnchorWeek: number; rotationAnchorWeek: number }
@@ -24,12 +24,16 @@ export function todayThemes(d: Date, a: Anchors): { label: string; theme: string
   const out: { label: string; theme: string; eventId: string }[] = [];
   if (cycle === 'Ace Lord') {
     const al = pick('ace-lord');
-    const ad = pick('alliance-duel');
     if (al) out.push({ label: `Ace Lord · Day ${day}`, theme: al.theme, eventId: 'ace-lord' });
-    if (ad) out.push({ label: `Alliance Duel · Day ${day}`, theme: ad.theme, eventId: 'alliance-duel' });
   } else {
     const ar = pick('arms-race');
     if (ar) out.push({ label: `Arms Race · Day ${day}`, theme: ar.theme, eventId: 'arms-race' });
+  }
+  // Daily mini-events that run inside the cycle (e.g. Curio on Tuesday of Ace Lord weeks).
+  for (const e of allEvents) {
+    if (e.category === 'Core Cycle' && e.id !== 'ace-lord' && e.id !== 'arms-race' && isEventOn(e, d, a)) {
+      out.push({ label: 'Daily event', theme: e.name.replace(' (Event)', ''), eventId: e.id });
+    }
   }
   return out;
 }

@@ -439,5 +439,7 @@ export interface DataManifest {
     events?: GameEvent[];
     giftCodes?: GiftCode[];
     sophia?: SophiaQuestion[];
+    /** Shop advisor data; replaces the bundled shops when present. */
+    shops?: Shop[];
   };
 }

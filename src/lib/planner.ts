@@ -1,4 +1,4 @@
-import { cycleDays, royalArmsRace } from '@/data/seed';
+import { cycleDays, events, royalArmsRace } from '@/data/seed';
 import type { Weekday } from '@/types/game';
 
 const TAGS: Record<string, string[]> = {
@@ -44,17 +44,20 @@ export function doubleDipPlan(): DoubleDipRow[] {
   const days: Weekday[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   return days.map((weekday) => {
     const al = dayText('ace-lord', weekday);
-    const ad = dayText('alliance-duel', weekday);
+    // Daily mini-event on this weekday in Ace Lord weeks (e.g. Curio on Tuesday).
+    const side = events.find((e) => e.category === 'Core Cycle' && e.id !== 'ace-lord' && e.id !== 'arms-race' && e.days.includes(weekday) && e.cycleWeek !== 'Arms Race');
+    const sideTheme = side ? side.name.replace(' (Event)', '') : '—';
     const royalDay = ['Thu', 'Fri', 'Sat', 'Sun'].includes(weekday);
     const royal = royalDay ? royalArmsRace.flatMap((s) => s.themes.map((theme) => ({ utc: s.utc, theme }))) : [];
     const alTags = tagsFor(al.full);
-    const adTags = tagsFor(ad.full);
-    const shared = [...alTags].filter((t) => adTags.has(t));
-    const royalShared = royal.filter((r) => [...tagsFor(r.theme)].some((t) => alTags.has(t) || adTags.has(t)));
+    const sideTags = side ? tagsFor(`${side.name} ${side.summary}`) : new Set<string>();
+    const shared = [...alTags].filter((t) => sideTags.has(t));
+    const royalShared = royal.filter((r) => [...tagsFor(r.theme)].some((t) => alTags.has(t) || sideTags.has(t)));
     let advice: string;
-    if (shared.length) advice = `Double-dip: ${shared.join(', ')} items score in both Ace Lord and Alliance Duel today.`;
-    else advice = `No overlap — spend ${al.theme} items for Ace Lord; hold ${ad.theme} items for the Duel.`;
-    if (royalShared.length) advice += ` Possible triple-dip if Royal Arms Race draws: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
-    return { weekday, aceLord: al.theme, allianceDuel: ad.theme, royal, shared, advice };
+    if (shared.length) advice = `Double-dip: ${shared.join(', ')} items score in both Ace Lord and ${sideTheme} today.`;
+    else if (side) advice = `Spend ${al.theme} items for Ace Lord; ${sideTheme} runs alongside today.`;
+    else advice = `Spend ${al.theme} items for Ace Lord.`;
+    if (royalShared.length) advice += ` Possible double-dip if Royal Arms Race draws: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
+    return { weekday, aceLord: al.theme, allianceDuel: sideTheme, royal, shared, advice };
   });
 }
