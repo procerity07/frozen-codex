@@ -1,3 +1,4 @@
+import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
 import { anchorFor, cleanAllianceTime, timeForWeek, upcomingStarts } from '../src/lib/allianceTimes';
 import { coordsOf, exportCode, importCode, newHive, parseMembers, resize, setCell, unplaced } from '../src/lib/hive';
 import { nextOccurrence, weeklyTriggers, normalizeTime, describeDays } from '../src/lib/reminders';
@@ -334,5 +335,18 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const thisWeekB = cleanAllianceTime({ time: '19:00', altTime: '21:00', zone: 'utc', anchorWeek: anchorFor(tue, 'B') })!;
   ok(timeForWeek(thisWeekB, tue) === '21:00', 'choose which time applies this week');
   ok(cleanAllianceTime({ time: '25:00', zone: 'utc', anchorWeek: 0 }) === null && !cleanAllianceTime({ time: '19:00', altTime: '19:00', zone: 'utc', anchorWeek: 0 })!.altTime, 'alliance time validation');
+}
+
+// One 4-week picker keeps cycle and rotation consistent
+{
+  const now = new Date(Date.UTC(2026, 10, 24, 12));
+  for (const wk of [1, 2, 3, 4] as const) {
+    const w = tWeekIndex(now);
+    const rotA = w - (wk - 1);
+    const aceA = wk % 2 === 1 ? w : w + 1; // same rule as setCycleWeek in the store
+    const next = new Date(now.getTime() + 7 * 86_400_000);
+    ok(tRotation(now, rotA) === wk && tCycle(now, aceA) === (wk % 2 === 1 ? 'Ace Lord' : 'Arms Race'), `week ${wk} sets a matching cycle`);
+    ok(tRotation(next, rotA) === (wk % 4) + 1 && tCycle(next, aceA) !== tCycle(now, aceA), `week ${wk} rolls over consistently`);
+  }
 }
 

@@ -53,6 +53,8 @@ export interface AppState {
   toggleClaimed: (code: string) => void;
   flipCycle: (now: Date) => void;
   setRotationWeek: (now: Date, week: 1 | 2 | 3 | 4) => void;
+  /** Sets the 4-week rotation; weeks 1 and 3 are Ace Lord weeks, 2 and 4 Arms Race weeks. */
+  setCycleWeek: (now: Date, week: 1 | 2 | 3 | 4) => void;
   setAlarm: (eventId: string, on: boolean) => void;
   setAlarmLead: (m: number) => void;
   setManifestUrl: (u: string) => void;
@@ -133,6 +135,7 @@ export const useAppStore = create<AppState>()(
         set({ aceLordAnchorWeek: isAce ? w + 1 : w });
       },
       setRotationWeek: (d, week) => set({ rotationAnchorWeek: weekIndex(d) - (week - 1) }),
+      setCycleWeek: (d, week) => { const w = weekIndex(d); set({ rotationAnchorWeek: w - (week - 1), aceLordAnchorWeek: week % 2 === 1 ? w : w + 1 }); },
       setAlarm: (eventId, on) => set({ alarms: { ...get().alarms, [eventId]: on } }),
       setAlarmLead: (alarmLeadMinutes) => set({ alarmLeadMinutes }),
       setManifestUrl: (manifestUrl) => set({ manifestUrl }),

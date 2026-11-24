@@ -5,14 +5,15 @@ import { Bell, Brain, LayoutGrid, Calculator, Castle, Check, Gift, HeartPulse, H
 import type { LucideIcon } from 'lucide-react-native';
 import { checklistTemplate, events, royalArmsRace } from '@/data/seed';
 import { elementColors, palette, radius, space, tint, troopColors, type } from '@/theme';
-import { Badge, Button, Card, Chip, ChipRow, Field, IconButton, Row, Screen, SectionHeader, Segmented, haptic } from '@/components/ui';
+import { Badge, Button, Card, Chip, ChipRow, Field, IconButton, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { useNow } from '@/store/useNow';
-import { cycleForDate, formatDuration, rotationWeek, royalSlot, utcWeekday } from '@/lib/time';
+import { formatDuration, royalSlot, utcWeekday } from '@/lib/time';
 import { eventsOn, todayThemes } from '@/lib/schedule';
 import { scheduleCooldown, ensurePermission } from '@/services/notifications';
 import { UpdateBanner } from '@/components/domain/UpdateBanner';
 import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
+import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
   { label: "Sophia's Test", sub: '30-second lookup', icon: Brain, href: '/tools/sophia', color: palette.cyan },
@@ -29,8 +30,6 @@ export default function HomeScreen() {
   const now = useNow(1000);
   const s = useAppStore();
   const anchors = { aceLordAnchorWeek: s.aceLordAnchorWeek, rotationAnchorWeek: s.rotationAnchorWeek };
-  const cycle = cycleForDate(now, s.aceLordAnchorWeek);
-  const rot = rotationWeek(now, s.rotationAnchorWeek);
   const themes = todayThemes(now, anchors);
   const weekday = utcWeekday(now);
   const todayEvents = eventsOn(events, now, anchors).filter((e) => e.category !== 'Core Cycle');
@@ -44,23 +43,8 @@ export default function HomeScreen() {
       <Card style={{ marginTop: space.xs }}>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>
-          <Segmented
-            options={['Ace Lord', 'Arms Race'] as const}
-            value={cycle}
-            onChange={(v) => { if (v !== cycle) s.flipCycle(now); }}
-            labels={{ 'Ace Lord': 'Ace Lord + CoL', 'Arms Race': 'Arms Race + RE' }}
-          />
+          <CycleWeekPicker now={now} />
         </View>
-        <Row style={{ marginTop: space.md, justifyContent: 'space-between' }}>
-          <Text style={type.caption}>4-week rotation</Text>
-          <Row gap={6}>
-            {([1, 2, 3, 4] as const).map((w) => (
-              <Pressable key={w} onPress={() => { haptic(); s.setRotationWeek(now, w); }} style={[st.rot, w === rot && st.rotActive]} accessibilityLabel={`Rotation week ${w}`}>
-                <Text style={[type.numberSmall, w === rot && { color: palette.text }]}>{w}</Text>
-              </Pressable>
-            ))}
-          </Row>
-        </Row>
         <View style={{ marginTop: space.md, gap: space.sm }}>
           {themes.map((t) => (
             <Pressable key={t.label} onPress={() => router.push(`/event/${t.eventId}`)} style={st.theme}>
@@ -163,8 +147,6 @@ function DailyChecklist({ now }: { now: Date }) {
 }
 
 const st = StyleSheet.create({
-  rot: { width: 30, height: 28, borderRadius: radius.sm, borderWidth: 1, borderColor: palette.border, alignItems: 'center', justifyContent: 'center' },
-  rotActive: { borderColor: palette.cyan, backgroundColor: palette.cyanDim },
   theme: { borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, padding: space.md, backgroundColor: palette.bg },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm },
   tool: { width: '31.5%', flexGrow: 1, backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderRadius: radius.lg, padding: space.md, gap: 4 },

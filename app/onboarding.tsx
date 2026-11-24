@@ -6,9 +6,9 @@ import { ArrowLeft, ArrowRight, Bell, Check, Crown, Search } from 'lucide-react-
 import { palette, space, type } from '@/theme';
 import { Button, Card, Field, NumberField, Row, Segmented } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
-import { cycleForDate } from '@/lib/time';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import type { TroopFocus } from '@/types/game';
+import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
 import { CURRENT_VERSION } from '@/services/appUpdate';
 
 const STEPS = 3;
@@ -21,7 +21,6 @@ export default function Onboarding() {
   const insets = useSafeAreaInsets();
   const [step, setStep] = useState(0);
   const now = new Date();
-  const cycle = cycleForDate(now, s.aceLordAnchorWeek);
   const [reminder, setReminder] = useState(!!s.alarms['daily-reset']);
 
   const finish = () => {
@@ -98,15 +97,10 @@ export default function Onboarding() {
           <>
             <Text style={type.title}>This week</Text>
             <Card>
-              <Text style={type.heading}>Which cycle is running now?</Text>
-              <Text style={[type.caption, { marginTop: 4 }]}>Your realm alternates weekly. Check the in-game event list: is Ace Lord on this week, or Arms Race?</Text>
+              <Text style={type.heading}>Which week of the cycle is it?</Text>
+              <Text style={[type.caption, { marginTop: 4 }]}>Your realm runs a 4-week rotation: weeks 1 and 3 are Ace Lord weeks, 2 and 4 Arms Race weeks. Check which special events are on in-game.</Text>
               <View style={{ marginTop: space.sm }}>
-                <Segmented
-                  options={['Ace Lord', 'Arms Race'] as const}
-                  value={cycle}
-                  onChange={(v) => { if (v !== cycle) s.flipCycle(now); }}
-                  labels={{ 'Ace Lord': 'Ace Lord', 'Arms Race': 'Arms Race' }}
-                />
+                <CycleWeekPicker now={now} />
               </View>
               <Text style={[type.caption, { marginTop: space.sm }]}>The event calendar uses this to show the right events every week.</Text>
             </Card>
