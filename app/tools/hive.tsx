@@ -6,7 +6,7 @@ import { palette, radius, space, tint, type } from '@/theme';
 import { BottomSheet, Button, Card, Chip, ChipRow, EmptyState, Field, NumberField, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import {
-  cellAt, coordsOf, DEFAULT_OUTPOST_TILES, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, outpostAreas, parseMembers, resize, setCell, unplaced,
+  cellAt, coordsOf, DEFAULT_OUTPOST_TILES, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, MEMBER_COLOR, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, outpostAreas, parseMembers, resize, setCell, unplaced,
   type CellKind, type Hive, type HiveColor,
 } from '@/lib/hive';
 
@@ -161,7 +161,8 @@ function CellSheet({ hive, at, waiting, onClose, onSave }: { hive: Hive; at: { c
   const cur = cellAt(hive, at.col, at.row);
   const [kind, setKind] = useState<CellKind>(cur.kind === 'empty' ? 'member' : cur.kind);
   const [name, setName] = useState(cur.name ?? '');
-  const [color, setColor] = useState<HiveColor | undefined>(cur.color);
+  // New member squares start in the Alliance member colour; other kinds start uncoloured.
+  const [color, setColor] = useState<HiveColor | undefined>(cur.color ?? (cur.kind === 'empty' || cur.kind === 'member' ? MEMBER_COLOR : undefined));
   const c = coordsOf(hive, at.col, at.row);
   const suggestions = waiting.filter((m) => !name || m.toLowerCase().includes(name.toLowerCase())).slice(0, 12);
   return (

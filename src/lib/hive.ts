@@ -6,11 +6,18 @@ export type HiveColor = 'gold' | 'red' | 'orange' | 'purple' | 'green' | 'blue' 
 
 export interface HiveCell { kind: CellKind; name?: string; color?: HiveColor }
 
-export const HIVE_COLORS: HiveColor[] = ['gold', 'red', 'orange', 'purple', 'green', 'blue', 'pink', 'grey'];
+/** Order shown in the picker: Alliance member, Farm, Alliance building first. */
+export const HIVE_COLORS: HiveColor[] = ['gold', 'green', 'blue', 'red', 'orange', 'purple', 'pink', 'grey'];
 export const HIVE_COLOR_HEX: Record<HiveColor, string> = {
   gold: '#F5B83D', red: '#EF4444', orange: '#F97316', purple: '#A855F7', green: '#22C55E', blue: '#38BDF8', pink: '#EC4899', grey: '#94A3B8',
 };
 export const DEFAULT_LEGEND: Record<HiveColor, string> = {
+  gold: 'Alliance member', green: 'Farm', blue: 'Alliance building', red: 'R4 / R5', orange: 'Rally leader', purple: 'Ally / guest', pink: 'Other', grey: 'Inactive',
+};
+/** Colour every new member square gets automatically. */
+export const MEMBER_COLOR: HiveColor = 'gold';
+/** Labels from the first version; plans still using them get the new defaults. */
+const OLD_DEFAULTS: Record<HiveColor, string> = {
   gold: 'R4 / R5', red: 'Rally leader', orange: 'Fighter', purple: 'Support', green: 'Farm', blue: 'Alliance building', pink: 'Ally / guest', grey: 'Inactive',
 };
 const isColor = (c: unknown): c is HiveColor => typeof c === 'string' && (HIVE_COLORS as string[]).includes(c);
@@ -148,7 +155,10 @@ export function importCode(text: string, id: string): Hive {
 export function normalizeLegend(raw: unknown): Record<HiveColor, string> {
   const r = (typeof raw === 'object' && raw ? raw : {}) as Record<string, unknown>;
   const out = { ...DEFAULT_LEGEND };
-  for (const c of HIVE_COLORS) if (typeof r[c] === 'string' && (r[c] as string).trim()) out[c] = (r[c] as string).trim().slice(0, 24);
+  for (const c of HIVE_COLORS) {
+    const v = typeof r[c] === 'string' ? (r[c] as string).trim() : '';
+    if (v && v !== OLD_DEFAULTS[c]) out[c] = v.slice(0, 24);
+  }
   return out;
 }
 

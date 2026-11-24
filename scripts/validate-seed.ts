@@ -1,5 +1,5 @@
 import { skillsCheckedInGame } from '../src/lib/heroData';
-import { outpostAreas } from '../src/lib/hive';
+import { normalizeLegend, outpostAreas } from '../src/lib/hive';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
@@ -324,7 +324,8 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(resize(h, 5, 5).cells.length === 25 && resize(h, 99, 1).cols === 30, 'hive resize clamps');
   const coloured = setCell({ ...h, legend: { ...h.legend, green: 'Farms' } }, 4, 4, { kind: 'member', name: 'FarmA', color: 'green' });
   const rt = importCode(exportCode(coloured), 'c');
-  ok(rt.cells[4 * 12 + 4]!.color === 'green' && rt.legend.green === 'Farms' && rt.legend.gold === 'R4 / R5', 'hive colours and legend round-trip');
+  ok(rt.cells[4 * 12 + 4]!.color === 'green' && rt.legend.green === 'Farms' && rt.legend.gold === 'Alliance member', 'hive colours and legend round-trip');
+  ok(normalizeLegend({ gold: 'R4 / R5', red: 'My leaders' }).gold === 'Alliance member' && normalizeLegend({ red: 'My leaders' }).red === 'My leaders', 'old default labels upgrade; custom labels kept');
   ok(setCell(h, 0, 0, { kind: 'empty', color: 'red' }).cells[0]!.color === undefined, 'empty squares carry no colour');
   const op = outpostAreas(setCell(h, 5, 5, { kind: 'marker' }))[0]!;
   ok(op.col0 === 3 && op.col1 === 7 && op.row0 === 3 && op.row1 === 7, 'outpost territory: 10 tiles = 5 squares centred on the outpost');
