@@ -13,6 +13,7 @@ import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import { SEED_VERSION } from '@/data/seed';
 import { checkForAppUpdate, CURRENT_VERSION, type UpdateCheck } from '@/services/appUpdate';
 import { openDownload } from '@/components/domain/UpdateBanner';
+import { hasWhatsNew, WhatsNewSheet } from '@/components/domain/Dashboard';
 
 const LEADS = [5, 10, 15, 30, 60];
 
@@ -26,6 +27,7 @@ export default function SettingsScreen() {
   const [resetAlarm, setResetAlarm] = useState(!!s.alarms['daily-reset']);
   const [appCheck, setAppCheck] = useState<UpdateCheck | null>(null);
   const [appBusy, setAppBusy] = useState(false);
+  const [notesOpen, setNotesOpen] = useState(false);
 
   const loadStats = () => {
     dbStats().then(setStats).catch(() => undefined);
@@ -63,7 +65,9 @@ export default function SettingsScreen() {
           )}
         </View>
         {appCheck?.status === 'error' ? <Text style={[type.caption, { marginTop: space.sm, color: palette.danger }]}>{appCheck.message}</Text> : null}
+        {hasWhatsNew() ? <View style={{ marginTop: space.sm }}><Button icon={Sparkles} variant="ghost" label={`What's new in v${CURRENT_VERSION}`} onPress={() => setNotesOpen(true)} /></View> : null}
       </Card>
+      <WhatsNewSheet open={notesOpen} onClose={() => setNotesOpen(false)} />
 
       <SectionHeader title="Hero portraits" />
       <Card>

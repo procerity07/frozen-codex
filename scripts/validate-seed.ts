@@ -1,3 +1,4 @@
+import { nextOccurrence, weeklyTriggers, normalizeTime, describeDays } from '../src/lib/reminders';
 /* Validates seed integrity, runs the real migrations + seeder on SQLite, and exercises search + calculators. */
 import assert from 'node:assert/strict';
 import type { SQLiteDatabase } from 'expo-sqlite';
@@ -288,3 +289,16 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
   console.log(`Seed validation passed: ${checks} checks · ${seed.heroes.length} heroes · ${seed.events.length} events · ${seed.sophiaQuestions.length} Sophia answers · ${seed.giftCodes.length} codes`);
 })().catch((e) => { console.error(e); process.exit(1); });
+// User reminders
+{
+  const base = { id: 't', title: 't', enabled: true } as const;
+  const mon = new Date(Date.UTC(2026, 10, 23, 10, 0)); // Monday 10:00 UTC
+  ok(nextOccurrence({ ...base, days: [], time: '12:00', zone: 'utc' }, mon)!.toISOString() === '2026-11-23T12:00:00.000Z', 'daily UTC reminder later today');
+  ok(nextOccurrence({ ...base, days: [], time: '09:00', zone: 'utc' }, mon)!.toISOString() === '2026-11-24T09:00:00.000Z', 'daily UTC reminder rolls to tomorrow');
+  ok(nextOccurrence({ ...base, days: [0], time: '00:00', zone: 'utc' }, mon)!.toISOString() === '2026-11-30T00:00:00.000Z', 'weekly Monday reset reminder');
+  ok(nextOccurrence({ ...base, days: [5], time: '10:00', zone: 'utc' }, mon)!.toISOString() === '2026-11-28T10:00:00.000Z', 'Saturday reminder');
+  ok(weeklyTriggers({ ...base, days: [], time: '12:00', zone: 'utc' }, mon).length === 7 && weeklyTriggers({ ...base, days: [2, 4], time: '12:00', zone: 'utc' }, mon).length === 2, 'one weekly trigger per chosen day');
+  ok(normalizeTime('7:05') === '07:05' && normalizeTime('24:00') === null && normalizeTime('ab') === null, 'reminder time validation');
+  ok(describeDays([]) === 'Every day' && describeDays([5, 6]) === 'Weekends' && describeDays([0, 2]) === 'Mon, Wed', 'reminder day labels');
+}
+

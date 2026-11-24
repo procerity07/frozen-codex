@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { TroopFocus } from '@/types/game';
 import type { RosterEntry } from '@/lib/roster';
+import type { Reminder } from '@/lib/reminders';
 import { weekIndex } from '@/lib/time';
 import type { BuildBonuses, ResourceKey } from '@/lib/calculators';
 
@@ -31,6 +32,10 @@ export interface AppState {
   showPortraits: boolean;
   /** First-run setup finished or skipped. */
   onboarded: boolean;
+  /** Version whose "What's new" notes were last shown. */
+  seenWhatsNew: string;
+  /** Reminders the user created. */
+  reminders: Reminder[];
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -56,6 +61,9 @@ export interface AppState {
   mergeRoster: (entries: Record<string, RosterEntry>) => void;
   setShowPortraits: (on: boolean) => void;
   setOnboarded: (on: boolean) => void;
+  setSeenWhatsNew: (version: string) => void;
+  saveReminder: (r: Reminder) => void;
+  removeReminder: (id: string) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -81,6 +89,8 @@ export const defaultState: PersistedState = {
   roster: {},
   showPortraits: true,
   onboarded: false,
+  seenWhatsNew: '',
+  reminders: [],
 };
 
 export const useAppStore = create<AppState>()(
@@ -125,6 +135,9 @@ export const useAppStore = create<AppState>()(
       mergeRoster: (entries) => set({ roster: { ...get().roster, ...entries } }),
       setShowPortraits: (showPortraits) => set({ showPortraits }),
       setOnboarded: (onboarded) => set({ onboarded }),
+      setSeenWhatsNew: (seenWhatsNew) => set({ seenWhatsNew }),
+      saveReminder: (r) => set({ reminders: [...get().reminders.filter((x) => x.id !== r.id), r] }),
+      removeReminder: (id) => set({ reminders: get().reminders.filter((x) => x.id !== id) }),
       removeFromRoster: (heroId) => {
         const next = { ...get().roster };
         delete next[heroId];

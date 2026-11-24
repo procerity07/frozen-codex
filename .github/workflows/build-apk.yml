@@ -88,6 +88,14 @@ jobs:
         run: |
           node -e "const fs=require('fs');const a=JSON.parse(fs.readFileSync('app.json','utf8'));a.expo.version=process.env.APP_VERSION;a.expo.android.versionCode=Number(process.env.APP_VERSION_CODE);fs.writeFileSync('app.json',JSON.stringify(a,null,2)+'\n');console.log('app.json ->',a.expo.version,a.expo.android.versionCode)"
 
+      - name: Bake "What's new" notes into the app
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
+          PREVIOUS_TAG: ${{ steps.version.outputs.previous }}
+        run: |
+          python3 scripts/release-notes.py "$PREVIOUS_TAG" "$APP_VERSION" "${{ github.sha }}" > whats-new.md
+          node -e "const fs=require('fs');fs.writeFileSync('src/data/whatsNew.json',JSON.stringify({version:process.env.APP_VERSION,notes:fs.readFileSync('whats-new.md','utf8')},null,2)+'\n')"
+
       - name: Generate native Android project (Expo Prebuild)
         run: |
           npx expo prebuild --platform android --clean --no-install

@@ -2,6 +2,7 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import type { GameEvent } from '@/types/game';
 import { nextUtcOccurrence } from '@/lib/time';
+import { weeklyTriggers, type Reminder } from '@/lib/reminders';
 
 const CHANNEL = 'events';
 
@@ -72,4 +73,27 @@ export async function scheduleDailyReset(on: boolean, leadMinutes: number): Prom
     content: { title: 'Daily reset soon', body: `00:00 UTC reset in ${leadMinutes} min — finish dailies on every castle.` },
     trigger: { type: Notifications.SchedulableTriggerInputTypes.DAILY, hour: at.getHours(), minute: at.getMinutes(), channelId: CHANNEL },
   });
+}
+
+const remTag = (id: string) => `rem:${id}:`;
+
+/** Cancels every scheduled notification of one user reminder. */
+export async function cancelReminder(id: string): Promise<void> {
+  const all = await Notifications.getAllScheduledNotificationsAsync();
+  await Promise.all(all.filter((r) => r.identifier.startsWith(remTag(id))).map((r) => Notifications.cancelScheduledNotificationAsync(r.identifier)));
+}
+
+/** (Re)schedules a user reminder as weekly repeating notifications. Returns how many were set. */
+export async function scheduleReminder(r: Reminder): Promise<number> {
+  await cancelReminder(r.id);
+  if (!r.enabled) return 0;
+  const triggers = weeklyTriggers(r);
+  for (const t of triggers) {
+    await Notifications.scheduleNotificationAsync({
+      identifier: `${remTag(r.id)}${t.weekday}-${t.hour}-${t.minute}`,
+      content: { title: r.title || 'Frozen Codex reminder', body: `Your reminder (${r.time} ${r.zone === 'utc' ? 'UTC' : 'local'}).` },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.WEEKLY, weekday: t.weekday, hour: t.hour, minute: t.minute, channelId: CHANNEL },
+    });
+  }
+  return triggers.length;
 }

@@ -9,6 +9,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { cycleForDate } from '@/lib/time';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import type { TroopFocus } from '@/types/game';
+import { CURRENT_VERSION } from '@/services/appUpdate';
 
 const STEPS = 3;
 const FOCUS: readonly TroopFocus[] = ['Infantry', 'Cavalry', 'Archer', 'All'];
@@ -25,6 +26,7 @@ export default function Onboarding() {
 
   const finish = () => {
     s.setOnboarded(true);
+    s.setSeenWhatsNew(CURRENT_VERSION);
     router.replace('/');
   };
 

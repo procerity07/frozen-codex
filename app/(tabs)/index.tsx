@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router, type Href } from 'expo-router';
-import { Brain, Calculator, Castle, Check, Gift, HeartPulse, Hourglass, Plus, Swords, Timer, Trash } from 'lucide-react-native';
+import { Bell, Brain, Calculator, Castle, Check, Gift, HeartPulse, Hourglass, Plus, Swords, Timer, Trash } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import { checklistTemplate, events, royalArmsRace } from '@/data/seed';
 import { elementColors, palette, radius, space, tint, troopColors, type } from '@/theme';
@@ -12,6 +12,7 @@ import { cycleForDate, formatDuration, rotationWeek, royalSlot, utcWeekday } fro
 import { eventsOn, todayThemes } from '@/lib/schedule';
 import { scheduleCooldown, ensurePermission } from '@/services/notifications';
 import { UpdateBanner } from '@/components/domain/UpdateBanner';
+import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
   { label: "Sophia's Test", sub: '30-second lookup', icon: Brain, href: '/tools/sophia', color: palette.cyan },
@@ -20,6 +21,7 @@ const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: 
   { label: 'Citadel Planner', sub: 'Deficit & time', icon: Castle, href: '/tools/citadel', color: palette.success },
   { label: 'Sanctuary Guard', sub: 'Casualty sim', icon: HeartPulse, href: '/tools/casualty', color: palette.danger },
   { label: 'War Room', sub: 'CoL · RE · Mail', icon: Swords, href: '/tools/war-room', color: troopColors.Cavalry },
+  { label: 'My Reminders', sub: 'Your own alarms', icon: Bell, href: '/tools/reminders', color: palette.gold },
 ];
 
 export default function HomeScreen() {
@@ -37,7 +39,9 @@ export default function HomeScreen() {
   return (
     <Screen>
       <UpdateBanner />
-      <Card style={{ marginTop: space.xs }}>
+      <AutoWhatsNew />
+      <Dashboard now={now} />
+      <Card style={{ marginTop: space.md }}>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>
           <Segmented
