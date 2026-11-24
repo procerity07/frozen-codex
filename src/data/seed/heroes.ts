@@ -561,7 +561,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 45; // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 46; // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
@@ -571,4 +571,40 @@ export const MAIN_TROOP_SKILL = { name: 'Troop skill', description: 'Deals damag
 
 const withMainTroopSkill = (h: Hero): Hero => ({ ...h, marchSkills: [MAIN_TROOP_SKILL, ...h.marchSkills.filter((m) => m.name !== 'Troop skill')] });
 
-export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => withMainTroopSkill({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
+/**
+ * 5★ unlock rules (confirmed in-game by the player): of the three troop/civil skills under the main skill,
+ * the 1st is active on obtaining the hero, the 2nd unlocks at Lv. 31 and the 3rd at Lv. 131. Hero skills:
+ * 1st on obtaining, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.
+ * Levels already stated for a skill are kept; the remaining slots are filled in order.
+ */
+const SLOT_REQ = ['Active from obtaining the hero (in-game rule)', 'Unlocks at level 31', 'Unlocks at level 131'];
+const levelIn = (t: string) => { const m = /level\s+(\d+)/i.exec(t); return m ? Number(m[1]) : null; };
+function withFiveStarUnlocks(h: Hero): Hero {
+  if (h.rarity !== 5) return h;
+  let civilSkills = h.civilSkills;
+  if (civilSkills.length === 3) {
+    const used = new Set(civilSkills.map((c) => levelIn(c.requirement)).filter((n): n is number => n !== null));
+    const free = [null, 31, 131].filter((l) => l === null || !used.has(l));
+    let k = 0;
+    civilSkills = civilSkills.map((c) => {
+      if (levelIn(c.requirement) !== null) return c;
+      const lvl = free[k++] ?? null;
+      return { ...c, requirement: lvl === null ? SLOT_REQ[0]! : `Unlocks at level ${lvl}`, description: c.description.replace(/(applies|active)( to all troops)? while you own (him|her)/i, '$1$2 once unlocked') };
+    });
+  }
+  const stats = h.marchSkills.filter((m) => m.name !== 'Troop skill');
+  let marchSkills = h.marchSkills;
+  if (stats.length === 3) {
+    marchSkills = h.marchSkills.map((m) => {
+      const i = stats.indexOf(m);
+      if (i < 1 || /unlocks at lv/i.test(m.description)) return m;
+      return { ...m, description: `${m.description} Unlocks at Lv. ${i === 1 ? 31 : 131}.` };
+    });
+  }
+  const m3 = h.match3Skill && !/Lv\. 71/.test(h.match3Skill.description)
+    ? { ...h.match3Skill, description: `${h.match3Skill.description} Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.` }
+    : h.match3Skill;
+  return { ...h, civilSkills, marchSkills, ...(m3 ? { match3Skill: m3 } : {}) };
+}
+
+export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => withFiveStarUnlocks(withMainTroopSkill({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION })));

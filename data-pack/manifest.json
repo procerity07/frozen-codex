@@ -1,6 +1,6 @@
 {
-  "version": 20,
-  "publishedAt": "2026-11-24T03:57:49.720Z",
+  "version": 21,
+  "publishedAt": "2026-11-24T04:06:32.722Z",
   "packs": {
     "heroes": [
       {
@@ -28,7 +28,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Abyssal Collapse",
-          "description": "Huge Dark damage to all enemies and lowers their ATK.",
+          "description": "Huge Dark damage to all enemies and lowers their ATK. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All enemies",
           "effects": [
@@ -62,7 +62,7 @@
             "One third-party tier list associates Khaos with Nature; the wiki hero page and Heroes table both say Dark, so Dark is kept."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "anastasia",
@@ -83,17 +83,17 @@
           },
           {
             "name": "Troop DEF",
-            "description": "5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Troop ATK",
-            "description": "5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
           "name": "Dance of Rebirth",
-          "description": "All dead allies have a 33% chance to Revive with 10% HP (Rage Regen: Slow). Joyous: all members recover 15% HP each round for 4 rounds. Inspiring: all members recover a little Rage each round for 4 rounds. Resolute: immune to Rage reduction. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.",
+          "description": "All dead allies have a 33% chance to Revive with 10% HP (Rage Regen: Slow). Joyous: all members recover 15% HP each round for 4 rounds. Inspiring: all members recover a little Rage each round for 4 rounds. Resolute: immune to Rage reduction. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All allies",
           "effects": [
@@ -132,7 +132,7 @@
             "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "maxim",
@@ -159,7 +159,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Molten Bastion",
-          "description": "Fire damage to a column and raises team DEF.",
+          "description": "Fire damage to a column and raises team DEF. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Column",
           "effects": [
@@ -189,7 +189,7 @@
             "Unconfirmed acquisition sources: Astrology."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "guan-yu",
@@ -216,7 +216,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Azure Dragon Sweep",
-          "description": "Nature damage in a wide cone and stuns the target for 1 turn.",
+          "description": "Nature damage in a wide cone and stuns the target for 1 turn. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Cone (3x3)",
           "effects": [
@@ -250,7 +250,7 @@
             "Exclusive curio Azure Dragon Blade confirmed; its attributes were corrected (troop DEF/HP/ATK, not Cavalry ATK)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "saya",
@@ -332,7 +332,7 @@
           {
             "name": "Free Speedup Time",
             "description": "In-game. 5-star: 9 min at +1, then 12, 18, 24, 30, 40, 45, 60 min at +8 (6 min at Hero0 per the wiki). 6-star: 37.5, 51.2, 55, 80 min from +5 to +8.",
-            "requirement": "Unlock level not verified",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "min",
             "tiers": {
               "5": [
@@ -362,7 +362,7 @@
         ],
         "match3Skill": {
           "name": "Sunlit Blessing",
-          "description": "Heals allies and cleanses one debuff.",
+          "description": "Heals allies and cleanses one debuff. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Fast",
           "pattern": "All allies",
           "effects": [
@@ -410,7 +410,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "tania",
@@ -431,17 +431,17 @@
           },
           {
             "name": "Cavalry DEF",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Cavalry ATK",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
           "name": "Allegro of Life",
-          "description": "Restores 44% HP to all allies (Rage Regen: Medium). Watershield: all allies DEF +63% for 5 rounds (unlocks Lv. 11). Moisture: dispels all debuffs on allies (unlocks Lv. 31). Elegy: chance to Stun the enemy for 2 rounds when she dies. Iron Will (unlocks at 6★): Crit Res. +30%, a chance to take normal damage from a critical hit. Values as shown in-game at +5.",
+          "description": "Restores 44% HP to all allies (Rage Regen: Medium). Watershield: all allies DEF +63% for 5 rounds (unlocks Lv. 11). Moisture: dispels all debuffs on allies (unlocks Lv. 31). Elegy: chance to Stun the enemy for 2 rounds when she dies. Iron Will (unlocks at 6★): Crit Res. +30%, a chance to take normal damage from a critical hit. Values as shown in-game at +5. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "All allies",
           "effects": [
@@ -486,7 +486,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "dimina",
@@ -509,7 +509,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Constellation",
-          "description": "Boosts ally mana gain and deals Light damage to a row.",
+          "description": "Boosts ally mana gain and deals Light damage to a row. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Fast",
           "pattern": "Row",
           "effects": [
@@ -539,7 +539,7 @@
             "Wiki: 5-star Nature Cavalry, Glory's Gift Roulette (app previously: Light Archer)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "kanye",
@@ -562,7 +562,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Bass Drop",
-          "description": "Fire damage to a 3x3 area and burns for 2 turns.",
+          "description": "Fire damage to a 3x3 area and burns for 2 turns. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "3x3",
           "effects": [
@@ -592,7 +592,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "norris",
@@ -662,7 +662,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "edith",
@@ -683,7 +683,7 @@
           },
           {
             "name": "Archer DEF",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Archer ATK",
@@ -732,7 +732,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "boyd",
@@ -753,17 +753,17 @@
           },
           {
             "name": "Cavalry DEF",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Cavalry ATK",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
           "name": "Claw of Void",
-          "description": "Deals 530% damage to the target; if the enemy falls, gains Crit Rate +30% for 5 rounds (Rage Regen: Medium). Strength Absorption: transfers buffs on the target to random allies. Self-healing Instinct: at battle start, restores 5% HP to Nature allies each round for 6 rounds. Cold Blood: deals 40% more damage to Fire heroes (cannot be dispelled). Target Weakness (unlocks at 6★): Break +30%, a chance to ignore parry. Values as shown in-game at +4.",
+          "description": "Deals 530% damage to the target; if the enemy falls, gains Crit Rate +30% for 5 rounds (Rage Regen: Medium). Strength Absorption: transfers buffs on the target to random allies. Self-healing Instinct: at battle start, restores 5% HP to Nature allies each round for 6 rounds. Cold Blood: deals 40% more damage to Fire heroes (cannot be dispelled). Target Weakness (unlocks at 6★): Break +30%, a chance to ignore parry. Values as shown in-game at +4. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Single target",
           "effects": [
@@ -798,7 +798,7 @@
             "In-game (2026-11-23, Boyd at +4): Nature and Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK use the standard 5★/6★ table; hero skills Claw of Void (530%, Rage Regen Medium), Strength Absorption, Self-healing Instinct, Cold Blood, Target Weakness (6★). The unsourced fire-themed skills (Burning Hooves, Flame Charge) were replaced. His title 'Ember Captain' is not verified."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "monica",
@@ -817,8 +817,8 @@
         "civilSkills": [
           {
             "name": "Castle Battle HP (Passive)",
-            "description": "In-game: troop HP bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game: troop HP bonus when fighting in your castle (defending), active once unlocked. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -847,8 +847,8 @@
           },
           {
             "name": "Castle Battle DEF (Passive)",
-            "description": "In-game: troop DEF bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game: troop DEF bonus when fighting in your castle (defending), active once unlocked. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -877,8 +877,8 @@
           },
           {
             "name": "Castle Battle ATK (Passive)",
-            "description": "In-game: troop ATK bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game: troop ATK bonus when fighting in your castle (defending), active once unlocked. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.",
+            "requirement": "Unlocks at level 131",
             "unit": "%",
             "tiers": {
               "5": [
@@ -908,7 +908,7 @@
         ],
         "match3Skill": {
           "name": "Deadly Phantom",
-          "description": "Deals 360% damage to the target (Rage Regen: Medium). Twisted Spirit: dispels the target's buffs and drains 40% of its Rage. Heartbreak Moment: enemies' Heal Rate −50% for 4 rounds (cannot be dispelled). Energy Extraction: converts 70% of the damage dealt into HP. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8.",
+          "description": "Deals 360% damage to the target (Rage Regen: Medium). Twisted Spirit: dispels the target's buffs and drains 40% of its Rage. Heartbreak Moment: enemies' Heal Rate −50% for 4 rounds (cannot be dispelled). Energy Extraction: converts 70% of the damage dealt into HP. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Single target",
           "effects": [
@@ -943,7 +943,7 @@
             "Unconfirmed acquisition sources: Ace Lord Radiant Card."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "kaios",
@@ -962,8 +962,8 @@
         "civilSkills": [
           {
             "name": "Infantry HP (Passive)",
-            "description": "In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies once unlocked. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -992,8 +992,8 @@
           },
           {
             "name": "Cavalry HP (Passive)",
-            "description": "In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies once unlocked. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -1093,7 +1093,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "aerposia",
@@ -1116,7 +1116,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Celestial Rain",
-          "description": "Light damage to all enemies.",
+          "description": "Light damage to all enemies. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All enemies",
           "effects": [
@@ -1146,7 +1146,7 @@
             "Wiki: 5-star Dark Cavalry from Ace Lord (app previously: Light Archer)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "valerius",
@@ -1169,7 +1169,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Crimson Cleave",
-          "description": "Fire damage to a row with lifesteal.",
+          "description": "Fire damage to a row with lifesteal. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Row",
           "effects": [
@@ -1201,7 +1201,7 @@
             "Not listed in Sanguine Serenade on the Hero Bond page; removed from that group."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "tala",
@@ -1224,7 +1224,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Thornstorm",
-          "description": "Nature damage to a column and poisons for 3 turns.",
+          "description": "Nature damage to a column and poisons for 3 turns. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Fast",
           "pattern": "Column",
           "effects": [
@@ -1253,7 +1253,7 @@
             "Wiki: 5-star Nature Civil, Astrology (app previously: Archer)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "eris",
@@ -1274,17 +1274,17 @@
           },
           {
             "name": "Troop DEF",
-            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Troop ATK",
-            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 12.8/19.2/25.6/32/40/51.2/94%; 6★ +5 to +8: 40/51.2/75/125%. Applies to all troops when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
           "name": "Void Oblivion",
-          "description": "Deals 220% damage to all enemies (Rage Regen: Slow). Distracted Mind: reduces enemies' Hit by 40% for 6 rounds. Fiend's Rage: gains 30% Rage at the start of battle. Descent of Fear: a chance to Stun enemies for 2 rounds. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3.",
+          "description": "Deals 220% damage to all enemies (Rage Regen: Slow). Distracted Mind: reduces enemies' Hit by 40% for 6 rounds. Fiend's Rage: gains 30% Rage at the start of battle. Descent of Fear: a chance to Stun enemies for 2 rounds. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All enemies",
           "effects": [
@@ -1323,7 +1323,7 @@
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "kujo-mamoru",
@@ -1344,7 +1344,7 @@
           },
           {
             "name": "Infantry DEF",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Infantry ATK",
@@ -1394,7 +1394,7 @@
             "Unconfirmed acquisition sources: Strike Out, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "rodriguez",
@@ -1469,7 +1469,7 @@
             "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "freya",
@@ -1541,7 +1541,7 @@
             "Unconfirmed acquisition sources: Recruit Trial, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "fiona",
@@ -1561,7 +1561,7 @@
           {
             "name": "Training Speed",
             "description": "In-game. 5★: +7.5% at +1, then 10/15/20/25/31.25/37.5/75% from +2 to +8; 6★: 31.25/40/50/100% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "stat": "trainSpeed",
             "unit": "%",
             "tiers": {
@@ -1592,7 +1592,7 @@
           {
             "name": "Stamina Cost Down",
             "description": "In-game. 5★: −4.5% at +1, then −6/−9/−12/−15/−18.75/−22.5/−24% from +2 to +8; 6★: −18.75/−24/−26/−28% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -1691,7 +1691,7 @@
             "Unconfirmed acquisition sources: Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "carvell",
@@ -1711,7 +1711,7 @@
           {
             "name": "Research Speed",
             "description": "In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "stat": "researchSpeed",
             "unit": "%",
             "tiers": {
@@ -1742,7 +1742,7 @@
           {
             "name": "Training Speed",
             "description": "In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "stat": "trainSpeed",
             "unit": "%",
             "tiers": {
@@ -1846,7 +1846,7 @@
             "Unconfirmed acquisition sources: Astrology, Feast of Destiny / Wonder House, Pyramid Event, AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "wu-kong",
@@ -1865,8 +1865,8 @@
         "civilSkills": [
           {
             "name": "Troop HP (Passive)",
-            "description": "In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -1895,8 +1895,8 @@
           },
           {
             "name": "Troop DEF (Passive)",
-            "description": "In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -1925,8 +1925,8 @@
           },
           {
             "name": "Troop ATK (Passive)",
-            "description": "In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Unlocks at level 131",
             "unit": "%",
             "tiers": {
               "5": [
@@ -1956,7 +1956,7 @@
         ],
         "match3Skill": {
           "name": "Cosmic Rod",
-          "description": "Deals 450% damage to the enemy target (Rage Regen: Fast). Might of a Thousand: also deals 20% of ATK as True Damage (ignores DEF). Immobilization Spell: immobilizes the target for 2 rounds (cannot attack, gain Rage or recover HP). Immunity to Evil: immune to Poison and Burn. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3.",
+          "description": "Deals 450% damage to the enemy target (Rage Regen: Fast). Might of a Thousand: also deals 20% of ATK as True Damage (ignores DEF). Immobilization Spell: immobilizes the target for 2 rounds (cannot attack, gain Rage or recover HP). Immunity to Evil: immune to Poison and Burn. Combat Mastery (unlocks at 6★): Crit +30%, a chance to deal double damage. Values as shown in-game at +3. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Fast",
           "pattern": "Single target",
           "effects": [
@@ -1992,7 +1992,7 @@
             "In-game (2026-11-23, Wu Kong at +3, S2 badge): Light confirmed; troop skill 200% of troop ATK; Troop HP/DEF/ATK (Passive) apply to all troops just by owning him: 5★ 12.8/19.2/25.6/32/40/51.2/94% (+2 to +8), 6★ 40/51.2/75/125% (+5 to +8); hero skills Cosmic Rod (450%, Rage Regen Fast), Might of a Thousand, Immobilization Spell, Immunity to Evil, Combat Mastery (6★). The unsourced Seventy-Two Forms / Ruyi Strike skills were replaced."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "oichi",
@@ -2045,7 +2045,7 @@
             "Wiki: 6-star Fire Civil, Battle Pass Event (app previously: 5-star Nature Cavalry from Hero Plaza)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "sirius",
@@ -2098,7 +2098,7 @@
             "Wiki: 6-star Fire Archer, Battle Pass Event (app previously: 5-star Light, Hero Plaza)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "vynora",
@@ -2152,7 +2152,7 @@
             "Wiki: 6-star Ice All-round, Battle Pass Event (app previously: 5-star Dark Archer, Hero Plaza)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "snowball-and-ivy",
@@ -2204,7 +2204,7 @@
             "Unconfirmed acquisition sources: Battle Pass."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "leora",
@@ -2257,7 +2257,7 @@
             "Unconfirmed acquisition sources: Hero Plaza."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "apan",
@@ -2278,17 +2278,17 @@
           },
           {
             "name": "Infantry DEF",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Infantry ATK",
-            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game)."
+            "description": "5★ +2 to +8: 32/48/64/80/100/115/188%; 6★ +5 to +8: 100/128/150/250%. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 131."
           }
         ],
         "civilSkills": [],
         "match3Skill": {
           "name": "Peace of Mind",
-          "description": "For 4 rounds, whenever he or adjacent allies are attacked he counterattacks with 125% of the damage received (Rage Regen: Medium). Perseverance: restores 5% HP to him and adjacent allies each round for 4 rounds. Virtuous Commitment: his DEF against Nature enemies +46% for 4 rounds (cannot be dispelled). Silver Lining: takes 50% less damage when HP is below 60% (cannot be dispelled). Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at 6★ +8.",
+          "description": "For 4 rounds, whenever he or adjacent allies are attacked he counterattacks with 125% of the damage received (Rage Regen: Medium). Perseverance: restores 5% HP to him and adjacent allies each round for 4 rounds. Virtuous Commitment: his DEF against Nature enemies +46% for 4 rounds (cannot be dispelled). Silver Lining: takes 50% less damage when HP is below 60% (cannot be dispelled). Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Self + adjacent",
           "effects": [
@@ -2327,7 +2327,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "patty",
@@ -2347,7 +2347,7 @@
           {
             "name": "Resource Gather Speed",
             "description": "In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "stat": "gatherSpeed",
             "unit": "%",
             "tiers": {
@@ -2378,7 +2378,7 @@
           {
             "name": "Rally ATK",
             "description": "In-game. 5★: +20% at +2 up to +113% at +8; 6★: +66.5% at +5 up to +150% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -2408,7 +2408,7 @@
           {
             "name": "Troop Capacity",
             "description": "In-game. 5★: +3,200 at +2 up to +18,750 at +8; 6★: +10,000 at +5 up to +25,000 at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 131",
             "stat": "troopCap",
             "unit": "flat",
             "tiers": {
@@ -2439,7 +2439,7 @@
         ],
         "match3Skill": {
           "name": "Queen's Might",
-          "description": "Prevents the target from restoring Rage for 4 rounds (Rage Regen: Medium). Brilliance of Life: restores 26% HP for all allies. Golden Code: at battle start, Light allies restore 5% Rage per round for 6 rounds. Desert Protection: all allies immune to new debuffs for 2 rounds (cannot be dispelled). Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.",
+          "description": "Prevents the target from restoring Rage for 4 rounds (Rage Regen: Medium). Brilliance of Life: restores 26% HP for all allies. Golden Code: at battle start, Light allies restore 5% Rage per round for 6 rounds. Desert Protection: all allies immune to new debuffs for 2 rounds (cannot be dispelled). Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Single target",
           "effects": [
@@ -2474,7 +2474,7 @@
             "Unconfirmed acquisition sources: Arms Race Ace Card."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "angelita",
@@ -2497,7 +2497,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Halo",
-          "description": "Heals all allies and revives one fallen hero at 30% HP.",
+          "description": "Heals all allies and revives one fallen hero at 30% HP. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All allies",
           "effects": [
@@ -2529,7 +2529,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "lylia",
@@ -2549,7 +2549,7 @@
           {
             "name": "Medical Tent Healing Speed",
             "description": "In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "stat": "healSpeed",
             "unit": "%",
             "tiers": {
@@ -2580,7 +2580,7 @@
           {
             "name": "Heal Iron Cost",
             "description": "In-game. 5★: −4% at Hero0, then −8/−12/−16/−20/−25/−30/−32% from +2 to +8; 6★: −25/−32/−35/−36% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -2678,7 +2678,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "oskir",
@@ -2701,7 +2701,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Glyph Ward",
-          "description": "Shields the front row and reduces enemy ATK.",
+          "description": "Shields the front row and reduces enemy ATK. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Front row allies",
           "effects": [
@@ -2732,7 +2732,7 @@
             "Star rating not stated in the sources checked; existing value kept."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "echo",
@@ -2751,8 +2751,8 @@
         "civilSkills": [
           {
             "name": "Infantry ATK (Passive)",
-            "description": "In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies once unlocked. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -2781,8 +2781,8 @@
           },
           {
             "name": "Cavalry ATK (Passive)",
-            "description": "In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies once unlocked. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -2811,8 +2811,8 @@
           },
           {
             "name": "Archer ATK (Passive)",
-            "description": "In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies once unlocked. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.",
+            "requirement": "Unlocks at level 131",
             "unit": "%",
             "tiers": {
               "5": [
@@ -2842,7 +2842,7 @@
         ],
         "match3Skill": {
           "name": "Wrath of Storm",
-          "description": "Deals 440% damage to the target (Rage Regen: Medium). Raging Wind: steals the target's HP restoration for 3 rounds (cannot be dispelled). Cleansing Air: dispels all buffs on enemies. Wind of Tranquility: Ice allies +10% Crit Rate for 4 rounds (cannot be dispelled). Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8.",
+          "description": "Deals 440% damage to the target (Rage Regen: Medium). Raging Wind: steals the target's HP restoration for 3 rounds (cannot be dispelled). Cleansing Air: dispels all buffs on enemies. Wind of Tranquility: Ice allies +10% Crit Rate for 4 rounds (cannot be dispelled). Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Single target",
           "effects": [
@@ -2877,7 +2877,7 @@
             "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "ogremire",
@@ -2900,7 +2900,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Mire Slam",
-          "description": "Nature damage to a 3x3 area and slows mana gain.",
+          "description": "Nature damage to a 3x3 area and slows mana gain. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "3x3",
           "effects": [
@@ -2930,7 +2930,7 @@
             "Unconfirmed acquisition sources: Shadow Expedition."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "neptune",
@@ -2953,7 +2953,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Trident Wave",
-          "description": "Ice damage to all enemies.",
+          "description": "Ice damage to all enemies. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All enemies",
           "effects": [
@@ -2983,7 +2983,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "kaira",
@@ -3002,8 +3002,8 @@
         "civilSkills": [
           {
             "name": "Troop HP (Passive)",
-            "description": "In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3032,8 +3032,8 @@
           },
           {
             "name": "Troop DEF (Passive)",
-            "description": "In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3062,8 +3062,8 @@
           },
           {
             "name": "Troop ATK (Passive)",
-            "description": "In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "description": "In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.",
+            "requirement": "Unlocks at level 131",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3093,7 +3093,7 @@
         ],
         "match3Skill": {
           "name": "Destiny's Gift",
-          "description": "Allies recover 44% HP (Rage Regen: Medium). Fate's Barrier: extra healing of 20% of max HP for herself and nearby allies; overhealing becomes a shield. Power of Destiny: allies with the shield gain a little Rage each round and are immune to Rage reduction. Child of Destiny: at battle start, all members' ATK +10% for 6 rounds. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.",
+          "description": "Allies recover 44% HP (Rage Regen: Medium). Fate's Barrier: extra healing of 20% of max HP for herself and nearby allies; overhealing becomes a shield. Power of Destiny: allies with the shield gain a little Rage each round and are immune to Rage reduction. Child of Destiny: at battle start, all members' ATK +10% for 6 rounds. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "All allies",
           "effects": [
@@ -3129,7 +3129,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "sea-goddess",
@@ -3152,7 +3152,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Maelstrom",
-          "description": "Ice damage to a 3x3 area and freezes for 2 turns.",
+          "description": "Ice damage to a 3x3 area and freezes for 2 turns. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "3x3",
           "effects": [
@@ -3182,7 +3182,7 @@
             "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "leona",
@@ -3202,7 +3202,7 @@
           {
             "name": "Safe Resources",
             "description": "In-game. 5★: +1.2% at Hero0, then 2.4/3.6/4.8/6/7.5/9/15% from +2 to +8; 6★: 7.5/9.6/11.2/20% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3232,7 +3232,7 @@
           {
             "name": "Reinforcement March Speed",
             "description": "In-game. 5★: +6% at Hero0, then 12/18/24/30/37.5/45/75% from +2 to +8; 6★: 37.5/48/56/100% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3327,7 +3327,7 @@
             "Unconfirmed acquisition sources: AP Event, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "basilong",
@@ -3350,7 +3350,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Dragon Breath",
-          "description": "Fire damage to a cone and burns.",
+          "description": "Fire damage to a cone and burns. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Cone",
           "effects": [
@@ -3379,7 +3379,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "edmund",
@@ -3413,7 +3413,7 @@
         ],
         "match3Skill": {
           "name": "Gleam",
-          "description": "Light damage to a row and blinds (accuracy down).",
+          "description": "Light damage to a row and blinds (accuracy down). Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Row",
           "effects": [
@@ -3449,7 +3449,7 @@
             "Unconfirmed acquisition sources: Lucky Flip."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "aurora",
@@ -3469,7 +3469,7 @@
           {
             "name": "Gather March Speed",
             "description": "In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3499,7 +3499,7 @@
           {
             "name": "Heal Stone Cost",
             "description": "In-game. 5★: −8% at +2 up to −32% at +8; 6★: −25% at +5 up to −36% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -3597,7 +3597,7 @@
             "5★ confirmed from an in-game hero list (2026-11-23)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "selantia",
@@ -3620,7 +3620,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Eclipse",
-          "description": "Dark damage to all enemies and lowers their DEF.",
+          "description": "Dark damage to all enemies and lowers their DEF. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Slow",
           "pattern": "All enemies",
           "effects": [
@@ -3651,7 +3651,7 @@
             "Unconfirmed acquisition sources: Glory's Gift Roulette."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "eric",
@@ -3674,7 +3674,7 @@
         "civilSkills": [],
         "match3Skill": {
           "name": "Thousand Cuts",
-          "description": "Nature damage to a single target 5 times.",
+          "description": "Nature damage to a single target 5 times. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "Single x5",
           "effects": [
@@ -3705,7 +3705,7 @@
             "Unconfirmed acquisition sources: Lucky Spin, Timeless Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "william",
@@ -3774,7 +3774,7 @@
             "Unconfirmed acquisition sources: Starter / Campaign."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "chloe",
@@ -3882,7 +3882,7 @@
             "Unconfirmed acquisition sources: Hero Recruitment."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "elsa",
@@ -3991,7 +3991,7 @@
             "Civil skills from the wiki: Construction Speed, Iron Output, Rally Size (+20,000 to +100,000, unlocks at level 131)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "gina",
@@ -4101,7 +4101,7 @@
             "In-game max level at 4★: 210."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "baron",
@@ -4158,7 +4158,7 @@
             "Added from the wiki: 2-star Fire Archer."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "lucia",
@@ -4221,7 +4221,7 @@
             "Sold for 50 points in the Hero Plaza point shop."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "tulios",
@@ -4327,7 +4327,7 @@
             "In-game (2026-11-24, Tulios at +3): 3★ Fire Civil confirmed; Iron Gather Speed, Hunt March Speed (Lv. 31) and Hunt ATK Bonus (Lv. 71) all 12/18/24/30% (+2 to +5), active while owned; three hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "capos",
@@ -4392,7 +4392,7 @@
             "Added from the wiki: 4-star Fire Cavalry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "tooka",
@@ -4462,7 +4462,7 @@
             "Separate \"Infernal Tooka\" variant on the Civil page is not included."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "sophia",
@@ -4519,7 +4519,7 @@
             "Added from the wiki: 2-star Ice Cavalry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "ada",
@@ -4574,7 +4574,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "axel",
@@ -4632,7 +4632,7 @@
             "Added from the wiki: 3-star Ice Infantry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "andre",
@@ -4691,7 +4691,7 @@
             "Added from the wiki: 4-star Ice Infantry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "odell",
@@ -4802,7 +4802,7 @@
             "In-game (2026-11-23, Odell at +2): 4★ Ice Civil confirmed; troop skill 150% of troop ATK; civil skill tables (+2 to +5); four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "viola",
@@ -4857,7 +4857,7 @@
             "Element confirmed by the in-game hero card (wiki only implies it by table position)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "luke",
@@ -4914,7 +4914,7 @@
             "Added from the wiki: 2-star Nature Infantry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "gerolin",
@@ -4975,7 +4975,7 @@
             "Added from the wiki: 3-star Nature Infantry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "roger",
@@ -5033,7 +5033,7 @@
             "Added from the wiki: 3-star Nature Archer."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "cassandra",
@@ -5141,7 +5141,7 @@
             "In-game (2026-11-23, Cassandra at Hero0): 4★ Nature Civil confirmed; troop skill 100% of troop ATK; Gather/Hunt March Speed 4% (Hero0), 10/13/17/21% (+2 to +5); Troop Capacity 2,000 (Hero0), 4,000–10,000 (Lv. 131); four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "dolly",
@@ -5211,7 +5211,7 @@
             "In-game (2026-11-23, Dolly at +1): 4★ Nature Archer confirmed; troop skill 120% of troop ATK; Archer HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Archer ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "wallace",
@@ -5281,7 +5281,7 @@
             "In-game (2026-11-23, Wallace at +1): 4★ Nature Infantry confirmed; troop skill 120% of troop ATK; Infantry HP/DEF/ATK 15/20/30/40/50% (+1 to +5), Infantry ATK unlocks at Lv. 131; four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "schubert",
@@ -5339,7 +5339,7 @@
             "Added from the wiki: 4-star Nature Civil."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "ysera",
@@ -5407,7 +5407,7 @@
             "In-game (2026-11-23, Ysera at +4): 4★ Nature Cavalry confirmed; troop skill 300% of troop ATK; Cavalry HP/DEF/ATK 20/30/40/50% (+2 to +5); four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "penny",
@@ -5465,7 +5465,7 @@
             "Added from the wiki: 2-star Light Civil."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "aemon",
@@ -5534,7 +5534,7 @@
             "In-game (2026-11-24, Aemon at +2): 3★ Light Archer confirmed; troop skill 150/200/300/500% of troop ATK (+2 to +5); Archer HP/DEF/ATK 10/15/20/25% (+2 to +5), Archer DEF unlocks at Lv. 31 and Archer ATK at Lv. 71; three hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "hannah",
@@ -5599,7 +5599,7 @@
             "Added from the wiki: 3-star Light Cavalry."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "christina",
@@ -5683,7 +5683,7 @@
             "In-game (2026-11-23, Christina at +5): 4★ Light Cavalry confirmed. Her skills are a 500% troop skill, Stone Output (civil, active while owned) and Cavalry DEF / ATK (military). This resolves the wiki conflict: she has one civil skill and two (not three) Cavalry stat skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "hanzo",
@@ -5768,7 +5768,7 @@
             "In-game (2026-11-24, Hanzo at +3): 4★ Light Archer confirmed; troop skill 200% of troop ATK; Wood Output 40/60/80/100% (owned); Archer DEF (Lv. 31) and ATK (Lv. 131) 20/30/40/50% (+2 to +5); four hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "claudia",
@@ -5852,7 +5852,7 @@
             "In-game (2026-11-23, Claudia at +5): 3★ Dark Cavalry confirmed; troop skill 500% of troop ATK; Stone Gather Speed 12/18/24/30% and Cavalry DEF/ATK 10/15/20/25% (+2 to +5); three hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "sodoma",
@@ -5873,7 +5873,7 @@
           },
           {
             "name": "Troop DEF",
-            "description": "5★: +9.6% at +1, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when she joins troop battle (in-game)."
+            "description": "5★: +9.6% at +1, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Troop ATK",
@@ -5927,7 +5927,7 @@
             "In-game (2026-11-23, Sodoma at +1): 5★ Nature Cavalry confirmed; troop skill 120% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "setemos",
@@ -5947,7 +5947,7 @@
           {
             "name": "Safe Resources",
             "description": "In-game. 5★: +1.8% at +1, then 2.4/3.6/4.8/6/7.5/9/15% from +2 to +8; 6★: 7.5/9.6/11.2/20% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "unit": "%",
             "tiers": {
               "5": [
@@ -5977,7 +5977,7 @@
           {
             "name": "Hunt ATK Bonus",
             "description": "In-game. 5★: +22.5% at +1, then 30/45/60/75/95/110/169% from +2 to +8; 6★: 95/120/135/225% from +5 to +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "unit": "%",
             "tiers": {
               "5": [
@@ -6080,7 +6080,7 @@
             "In-game (2026-11-23, Setemos at +1): 5★ Dark Civil confirmed; troop skill 120% of troop ATK; Safe Resources, Hunt ATK Bonus and Troop DEF (Passive, Lv. 131) tables for 5★ and 6★; five hero skills. Hunt ATK Bonus applies while owned (the wiki said it unlocks at level 31)."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "tutanhet",
@@ -6101,7 +6101,7 @@
           },
           {
             "name": "Troop DEF",
-            "description": "5★: +6.4% at Hero0, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when he joins troop battle (in-game)."
+            "description": "5★: +6.4% at Hero0, then 12.8/19.2/25.6/32/40/51.2/94% from +2 to +8; 6★: 40/51.2/75/125% from +5 to +8. Applies to all troops when he joins troop battle (in-game). Unlocks at Lv. 31."
           },
           {
             "name": "Troop ATK",
@@ -6154,7 +6154,7 @@
             "In-game (2026-11-23, Tutanhet at Hero0): 5★ Fire Archer confirmed; troop skill 100% of troop ATK; Troop HP/DEF/ATK (all troops) table, Troop ATK unlocks at Lv. 131; five hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "sirona",
@@ -6174,7 +6174,7 @@
           {
             "name": "Resource Gather Speed",
             "description": "In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Active from obtaining the hero (in-game rule)",
             "stat": "gatherSpeed",
             "unit": "%",
             "tiers": {
@@ -6205,7 +6205,7 @@
           {
             "name": "Medical Tent Healing Speed",
             "description": "In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.",
-            "requirement": "Active while owned (in-game)",
+            "requirement": "Unlocks at level 31",
             "stat": "healSpeed",
             "unit": "%",
             "tiers": {
@@ -6267,7 +6267,7 @@
         ],
         "match3Skill": {
           "name": "Silent Moon",
-          "description": "Restores 44% HP to all allies (Rage Regen: Medium). Crescent Blessing: all allies +24% Rage Regen for 6 rounds. Healing Moonlight: restores 2% HP per round for 6 rounds. Lunatus Nirvana: a chance to Revive on death, once per battle. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at +2.",
+          "description": "Restores 44% HP to all allies (Rage Regen: Medium). Crescent Blessing: all allies +24% Rage Regen for 6 rounds. Healing Moonlight: restores 2% HP per round for 6 rounds. Lunatus Nirvana: a chance to Revive on death, once per battle. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at +2. Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.",
           "charge": "Medium",
           "pattern": "All allies",
           "effects": [
@@ -6313,7 +6313,7 @@
             "In-game (2026-11-23, Sirona at +2): 5★ Dark Civil confirmed; troop skill 150% of troop ATK; Resource Gather Speed, Medical Tent Healing Speed and Troop Capacity tables for 5★ and 6★; five hero skills."
           ]
         },
-        "revision": 45
+        "revision": 46
       },
       {
         "id": "isabella",
@@ -6461,7 +6461,7 @@
             "In-game (2026-11-23, Isabella at +1, S3 badge): 6★ Nature Civil confirmed; troop skill 120% of troop ATK at +1; Troop HP/DEF/ATK passives apply to all troops while owned (6★ and 7★ tables); five hero skills (Blessing of Vitality, Courage, Resolve, Faith, and Glory at 7★). She can be promoted to 7★; the 7★ rules are not in the app yet."
           ]
         },
-        "revision": 45
+        "revision": 46
       }
     ],
     "events": [

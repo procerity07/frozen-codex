@@ -16,7 +16,7 @@ import { combatRoleLabel, normalizeHero } from '../src/lib/heroData';
 import { reKillPointsByTier } from '../src/lib/calculators';
 import { compareVersions, isNewer, notesToBlocks, parseRelease } from '../src/lib/appUpdate';
 import { chunk, parsePortraitResponse, portraitQueryUrl } from '../src/lib/portraits';
-import { bondCapForEnhancement, civilBonuses, clampEntry, makeRosterFile, maxStars, newEntry, parseRosterFile, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked } from '../src/lib/roster';
+import { bondCapForEnhancement, civilBonuses, clampEntry, makeRosterFile, maxStars, newEntry, parseRosterFile, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked, unlockLevelOf } from '../src/lib/roster';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Hero } from '../src/types/game';
@@ -381,4 +381,15 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
 // Every hero has the shared main troop skill table, capped at 500% (+5)
 ok(seed.heroes.every((h) => h.marchSkills[0]?.name === 'Troop skill' && h.marchSkills.filter((m) => m.name === 'Troop skill').length === 1 && /500% at \+5/.test(h.marchSkills[0]!.description)), 'main troop skill on every hero, once');
+
+// 5★ unlock rules: 1st troop/civil skill on obtaining, 2nd at Lv. 31, 3rd at Lv. 131
+{
+  const monica = seed.heroes.find((h) => h.id === 'monica')!;
+  ok(monica.civilSkills.map((c) => unlockLevelOf(c)).join() === ',31,131', 'Monica: Castle Battle HP on obtaining, DEF Lv. 31, ATK Lv. 131');
+  const saya = seed.heroes.find((h) => h.id === 'saya')!;
+  ok(saya.civilSkills.find((c) => c.name === 'Free Speedup Time') && unlockLevelOf(saya.civilSkills.find((c) => c.name === 'Free Speedup Time')!) === null && unlockLevelOf(saya.civilSkills.find((c) => c.name === 'Troop Capacity')!) === 131, 'Saya keeps stated levels; remaining slot is on obtaining');
+  const lowMonica = civilBonuses(seed.heroes, { monica: { stars: 5, level: 30, enhancement: 8, bond: 1 } });
+  ok(lowMonica.filter((b) => b.active).length === 1, 'below Lv. 31 only the first civil skill is active');
+  ok(seed.heroes.filter((h) => h.rarity === 5 && h.match3Skill).every((h) => /Lv\. 71/.test(h.match3Skill!.description)), '5★ hero skill unlock levels shown');
+}
 
