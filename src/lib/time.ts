@@ -12,10 +12,13 @@ export function utcClock(d: Date): string {
   return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
 }
 
+/** Countdown text: "05:12:09" under a day, "2d 03h 12m 09s" from 24 hours up. */
 export function formatDuration(ms: number): string {
   const s = Math.max(0, Math.floor(ms / 1000));
-  const h = Math.floor(s / 3600);
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
   const m = Math.floor((s % 3600) / 60);
+  if (d > 0) return `${d}d ${pad(h)}h ${pad(m)}m ${pad(s % 60)}s`;
   return `${pad(h)}:${pad(m)}:${pad(s % 60)}`;
 }
 

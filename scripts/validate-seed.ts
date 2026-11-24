@@ -1,3 +1,4 @@
+import { formatDuration as fmtDur } from '../src/lib/time';
 import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
 import { packContent } from './pack-content';
@@ -399,4 +400,6 @@ ok(seed.heroes.every((h) => h.marchSkills[0]?.name === 'Troop skill' && h.marchS
   const isa = seed.heroes.find((h) => h.id === 'isabella')!;
   ok(isa.civilSkills.map((c) => unlockLevelOf(c)).join() === ',31,131', '6★ Isabella: passives on obtaining / Lv. 31 / Lv. 131');
 }
+
+ok(fmtDur(5 * 3600_000 + 12 * 60_000 + 9_000) === '05:12:09' && fmtDur(2 * 86_400_000 + 3 * 3600_000 + 12 * 60_000 + 9_000) === '2d 03h 12m 09s', 'countdowns of 24h+ show days');
 
