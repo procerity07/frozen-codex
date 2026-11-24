@@ -153,7 +153,24 @@ const baseEvents: GameEvent[] = [
   ev({ name: 'Alliance Trial', category: C('Alliance'), cadence: 'Weekly Mon–Wed', cycleWeek: W('Both'), days: ['Mon', 'Tue', 'Wed'], summary: 'Cooperative alliance trial stages.', rules: ['Each member contributes attempts.'], rewards: ['Alliance chests'] }),
   ev({ name: 'Alliance Party', category: C('Alliance'), cadence: 'Twice weekly, Tuesday and Friday', cycleWeek: W('Both'), days: ['Tue', 'Fri'], summary: 'Alliance social event, open all day (00:00–24:00 UTC).', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Runs Tuesday and Friday, 00:00–24:00 UTC.', 'Join the party for points and shared rewards.'], rewards: ['Diamond chest', 'Upgrade item', 'Gold orb', '150K Wood', '150K Food'] }),
   ev({ name: 'Alliance Defense', category: C('Alliance'), cadence: 'Bi-weekly (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Thu'], summary: 'Defend alliance territory against waves.', rules: ['Reinforce weaker members.'], rewards: ['Alliance Coins'] }),
-  ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], rotationWeek: 3, summary: 'Alliance expedition on a shadow map. Sign-up opens the Sunday before and closes Monday 24:00 UTC.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Sign-up phase: Sunday to Monday 24:00 UTC.', 'Runs through at least Friday; the end day was not visible.', 'Clear nodes as an alliance.'], rewards: ['Ogremire shards'], featuredHeroes: ['ogremire'] }),
+  ev({ name: 'Shadow Expedition', category: C('Alliance'), cadence: 'Every 4th week (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], rotationWeek: 3, summary: 'Four alliance squads fight through 13 Monster strongholds to take the Evil Dragon King Castle of the Shadow Dragon Valazur. Sign-up Sunday to Monday 24:00 UTC.',
+    rules: [
+      'Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026): sign-up Sunday to Monday 24:00 UTC; the Combat Phase runs to at least Friday.',
+      'Registration: alliance Lv. 5 or higher; Lords need Citadel Lv. 20+, pick their competing Hero and join a squad before the event starts.',
+      'Map: four squads start at their own bases on a 13-stronghold map. At first a squad can only attack the Monster Den next to its base; dens can only be attacked when connected to a stronghold your squad holds.',
+      'The squad that dealt the highest share of damage to a Monster Den occupies it and lights up the routes from it.',
+      'Holding all four inner-ring strongholds unlocks the Evil Dragon King Castle. An R4 or higher must start the castle challenge (this starts the siege timer); then every squad member can attack.',
+      'Once the castle falls, the remaining monsters flee and the alliance gets all their remaining Alliance points at once. Castle monsters then have infinite HP and give personal points only.',
+      'Heroes become fatigued after fighting; Supply Packs (handed out daily at 00:00 UTC) let them keep going. Unused packs are salvaged when the event ends.',
+      'All heroes are set to a fixed level; enhancement and Destiny Weapons still count.',
+      'Difficulty leagues (monster strength): Novice 100%, Adept 133%, Master 200%, Legend 270%, Ex. 300%. Clear a difficulty twice in a row to go up; fail twice in a row to drop back.',
+      'Points are kept if you leave the battlefield, and you can re-enter during the event. Leaving the alliance you signed up with blocks re-entry until you return to it.',
+      'Alliance ranking is by total points; ties go to the alliance that took the castle earlier, then to the one that took less time.',
+      'Rewards: personal stage rewards, occupation rewards for every member when a Monster Den is taken, and personal and alliance ranking rewards by mail.',
+    ],
+    rewards: ['Ogremire shards', 'Personal points rewards', 'Monster Den occupation rewards', 'Personal and alliance ranking rewards'],
+    tips: ['Spread squads so all four inner-ring strongholds fall quickly; the castle tiebreak rewards taking it early.', 'Make sure an R4/R5 is online to start the castle challenge as soon as it unlocks.', 'Use every daily Supply Pack before the event ends; leftovers are salvaged.'],
+    featuredHeroes: ['ogremire'], confidence: 'verified' }),
   ev({ name: 'Dragon Arena / Clash', category: C('Alliance'), cadence: 'Periodic', cycleWeek: W('Both'), days: ['Sat'], summary: 'Alliance node deployment and bracket PvP.', rules: ['Deploy dragons to nodes; brackets resolve automatically.'], rewards: ['Dragon EXP', 'Dragon Crystals'] }),
 
   // ---------------- D. Cross-realm war ----------------
@@ -220,6 +237,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 9; // 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 10; // 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
