@@ -375,10 +375,18 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Kaira', title: 'Coral Priestess', element: 'Nature', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Coral Ward', 'All troop DEF up slightly.']],
-    m3: { name: 'Sea Hymn', desc: 'Heals all allies and cleanses freeze/burn.', charge: 'Fast', pattern: 'All allies', effects: ['Heal', 'Cleanse'] },
+    march: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40% at +5 up to +125% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: "Destiny's Gift", desc: "Allies recover 44% HP (Rage Regen: Medium). Fate's Barrier: extra healing of 20% of max HP for herself and nearby allies; overhealing becomes a shield. Power of Destiny: allies with the shield gain a little Rage each round and are immune to Rage reduction. Child of Destiny: at battle start, all members' ATK +10% for 6 rounds. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.", charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'Shield', 'Rage up', 'Rage-reduction immunity', 'ATK up', 'Crit Res.'] },
     sources: ['Stamina Event', 'Timeless Recruitment'],
-    notes: 'Cleanse is useful vs Fire burn bosses.',
+    notes: 'Her Troop HP, DEF and ATK bonuses apply to all troops just by owning her (+125% each at 6★ +8).',
   }),
   hero({
     name: 'Sea Goddess', title: 'Mother of Waves', element: 'Nature', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
@@ -529,7 +537,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 39; // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 40; // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

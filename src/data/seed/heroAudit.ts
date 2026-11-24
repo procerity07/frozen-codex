@@ -227,7 +227,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes"],
-    notes: ["Wiki: 5-star Nature Civil (app previously: Ice All-round).", "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."],
+    notes: ["In-game (2026-11-24, Kaira 6★ +8, S2 badge): Nature Civil confirmed; troop skill 500%; Troop HP/DEF/ATK (Passive) apply to all troops while owned: 5★ 12.8–94%, 6★ 40/51.2/75/125%; hero skills Destiny's Gift (44% heal), Fate's Barrier, Power of Destiny, Child of Destiny, Iron Will (6★). The unsourced Coral Ward / Sea Hymn skills were replaced.", "Wiki: 5-star Nature Civil (app previously: Ice All-round).", "Unconfirmed acquisition sources: Stamina Event, Timeless Recruitment."],
   },
   "sea-goddess": {
     checkedOn: '2026-11-23',
