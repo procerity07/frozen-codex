@@ -391,5 +391,11 @@ ok(seed.heroes.every((h) => h.marchSkills[0]?.name === 'Troop skill' && h.marchS
   const lowMonica = civilBonuses(seed.heroes, { monica: { stars: 5, level: 30, enhancement: 8, bond: 1 } });
   ok(lowMonica.filter((b) => b.active).length === 1, 'below Lv. 31 only the first civil skill is active');
   ok(seed.heroes.filter((h) => h.rarity === 5 && h.match3Skill).every((h) => /Lv\. 71/.test(h.match3Skill!.description)), '5★ hero skill unlock levels shown');
+  const odell = seed.heroes.find((h) => h.id === 'odell')!;
+  ok(odell.civilSkills.map((c) => unlockLevelOf(c)).join() === ',31,131', '4★ Odell: civil skills on obtaining / Lv. 31 / Lv. 131');
+  const claudia = seed.heroes.find((h) => h.id === 'claudia')!;
+  ok(unlockLevelOf(claudia.civilSkills[0]!) === null && /Lv\. 31/.test(claudia.marchSkills[1]!.description) && /Lv\. 71/.test(claudia.marchSkills[2]!.description), '3★ Claudia: Lv. 31 and Lv. 71 troop unlocks');
+  const isa = seed.heroes.find((h) => h.id === 'isabella')!;
+  ok(isa.civilSkills.map((c) => unlockLevelOf(c)).join() === ',31,131', '6★ Isabella: passives on obtaining / Lv. 31 / Lv. 131');
 }
 

@@ -561,7 +561,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 46; // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 47; // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
@@ -569,42 +569,61 @@ export const HERO_DATA_REVISION = 46; // 46 = 5★ unlock levels (31/131 troop, 
  */
 export const MAIN_TROOP_SKILL = { name: 'Troop skill', description: 'Deals damage equal to a share of troop ATK to the enemy: 100% at Hero0, 120% at +1, 150% at +2, 200% at +3, 300% at +4, 500% at +5. Maximum 500%: it does not increase at +6 to +8.' };
 
-const withMainTroopSkill = (h: Hero): Hero => ({ ...h, marchSkills: [MAIN_TROOP_SKILL, ...h.marchSkills.filter((m) => m.name !== 'Troop skill')] });
+const withMainTroopSkill = (h: Hero): Hero => ({ ...h, marchSkills: [MAIN_TROOP_SKILL, ...h.marchSkills.filter((m) => m.name !== 'Troop skill' && m.name !== 'Skill')] });
 
 /**
- * 5★ unlock rules (confirmed in-game by the player): of the three troop/civil skills under the main skill,
- * the 1st is active on obtaining the hero, the 2nd unlocks at Lv. 31 and the 3rd at Lv. 131. Hero skills:
- * 1st on obtaining, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.
+ * Skill unlock rules by star rating (confirmed in-game by the player). The skills listed under the main troop
+ * skill unlock in order: 4★–6★ heroes get the 1st on obtaining, the 2nd at Lv. 31 and the 3rd at Lv. 131;
+ * 3★ heroes get the 1st on obtaining, then Lv. 31 and Lv. 71. Hero skills unlock at Lv. 11, 31 and 71 after
+ * the first, plus a 5th at 6★ (5★ heroes) or 7★ (6★ heroes); 4★ heroes have four, 3★ heroes three.
  * Levels already stated for a skill are kept; the remaining slots are filled in order.
  */
-const SLOT_REQ = ['Active from obtaining the hero (in-game rule)', 'Unlocks at level 31', 'Unlocks at level 131'];
+const TROOP_SLOTS: Record<number, (number | null)[]> = { 3: [null, 31, 71], 4: [null, 31, 131], 5: [null, 31, 131], 6: [null, 31, 131] };
+const HERO_SKILL_UNLOCKS: Record<number, string> = {
+  3: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31.',
+  4: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71.',
+  5: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.',
+  6: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 7★.',
+};
+const OWNED_REQ = 'Active from obtaining the hero (in-game rule)';
 const levelIn = (t: string) => { const m = /level\s+(\d+)/i.exec(t); return m ? Number(m[1]) : null; };
-function withFiveStarUnlocks(h: Hero): Hero {
-  if (h.rarity !== 5) return h;
-  let civilSkills = h.civilSkills;
-  if (civilSkills.length === 3) {
-    const used = new Set(civilSkills.map((c) => levelIn(c.requirement)).filter((n): n is number => n !== null));
-    const free = [null, 31, 131].filter((l) => l === null || !used.has(l));
-    let k = 0;
-    civilSkills = civilSkills.map((c) => {
-      if (levelIn(c.requirement) !== null) return c;
-      const lvl = free[k++] ?? null;
-      return { ...c, requirement: lvl === null ? SLOT_REQ[0]! : `Unlocks at level ${lvl}`, description: c.description.replace(/(applies|active)( to all troops)? while you own (him|her)/i, '$1$2 once unlocked') };
-    });
-  }
+const lvIn = (t: string) => { const m = /unlocks at lv\.\s*(\d+)/i.exec(t); return m ? Number(m[1]) : null; };
+
+function withUnlockRules(h: Hero): Hero {
+  const slots = TROOP_SLOTS[h.rarity];
+  if (!slots) return h;
   const stats = h.marchSkills.filter((m) => m.name !== 'Troop skill');
+  // Game order: civil skills, then in-battle stat skills.
+  const items: ({ kind: 'civil'; i: number; lvl: number | null } | { kind: 'march'; m: typeof stats[number]; lvl: number | null })[] = [
+    ...h.civilSkills.map((c, i) => ({ kind: 'civil' as const, i, lvl: levelIn(c.requirement) })),
+    ...stats.map((m) => ({ kind: 'march' as const, m, lvl: lvIn(m.description) })),
+  ];
+  let civilSkills = h.civilSkills;
   let marchSkills = h.marchSkills;
-  if (stats.length === 3) {
+  if (items.length === 3) {
+    const used = new Set(items.map((x) => x.lvl).filter((n): n is number => n !== null));
+    const free = slots.filter((l) => l === null || !used.has(l));
+    let k = 0;
+    const assigned = new Map<unknown, number | null>();
+    for (const it of items) if (it.lvl === null && !(it.kind === 'march' && k === 0 && free[0] === null && false)) assigned.set(it, free[k++] ?? null);
+    civilSkills = h.civilSkills.map((c, i) => {
+      const it = items.find((x) => x.kind === 'civil' && x.i === i)!;
+      if (!assigned.has(it)) return c;
+      const lvl = assigned.get(it)!;
+      return { ...c, requirement: lvl === null ? OWNED_REQ : `Unlocks at level ${lvl}`, description: c.description.replace(/(applies|active)( to all troops)? while you own (him|her)/i, '$1$2 once unlocked') };
+    });
     marchSkills = h.marchSkills.map((m) => {
-      const i = stats.indexOf(m);
-      if (i < 1 || /unlocks at lv/i.test(m.description)) return m;
-      return { ...m, description: `${m.description} Unlocks at Lv. ${i === 1 ? 31 : 131}.` };
+      const it = items.find((x) => x.kind === 'march' && x.m === m);
+      if (!it || !assigned.has(it)) return m;
+      const lvl = assigned.get(it)!;
+      return lvl === null ? m : { ...m, description: `${m.description} Unlocks at Lv. ${lvl}.` };
     });
   }
-  const m3 = h.match3Skill && !/Lv\. 71/.test(h.match3Skill.description)
-    ? { ...h.match3Skill, description: `${h.match3Skill.description} Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71, 5th at 6★.` }
+  const rule = HERO_SKILL_UNLOCKS[h.rarity];
+  const m3 = h.match3Skill && rule && !h.match3Skill.description.includes(h.rarity === 3 ? 'Lv. 31' : 'Lv. 71')
+    ? { ...h.match3Skill, description: `${h.match3Skill.description} ${rule}` }
     : h.match3Skill;
   return { ...h, civilSkills, marchSkills, ...(m3 ? { match3Skill: m3 } : {}) };
 }
 
-export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => withFiveStarUnlocks(withMainTroopSkill({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION })));
+export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => withUnlockRules(withMainTroopSkill({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION })));
