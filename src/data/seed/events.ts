@@ -167,7 +167,7 @@ const baseEvents: GameEvent[] = [
       'Points are kept if you leave the battlefield, and you can re-enter during the event. Leaving the alliance you signed up with blocks re-entry until you return to it.',
       'Alliance ranking is by total points; ties go to the alliance that took the castle earlier, then to the one that took less time.',
       'Rewards: personal stage rewards, occupation rewards for every member when a Monster Den is taken, and personal and alliance ranking rewards by mail.',
-      'Points (current difficulty, in-game): outer-ring outposts (Forest of Life, Mushroom Jungle, Origin Outpost, Boneyard) give 2,880,000 Alliance and 2,880,000 Personal points each; inner-ring outposts such as Gold Plains have stronger enemies (values not captured yet).',
+      'Points (current difficulty, in-game): outer-ring outposts (Forest of Life, Mushroom Jungle, Origin Outpost, Boneyard) give 2,880,000 Alliance and 2,880,000 Personal points each; inner-ring outposts (Gold Plains, Amethyst Pit, Lionheart Fort, Demon Sealing Altar, Ancient Ruins, Dawnlight Harbor, Demonlord Cave, Obsidian Fortress) have stronger enemies and give 3,456,000 Alliance and 3,456,000 Personal points each; the Evil Dragon King Castle has extremely strong enemies and gives 1,088,640 Alliance points and unlimited Personal points.',
     ],
     rewards: ['Ogremire shards', 'Personal points rewards', 'Monster Den occupation rewards', 'Personal and alliance ranking rewards'],
     tips: ['Spread squads so all four inner-ring strongholds fall quickly; the castle tiebreak rewards taking it early.', 'Make sure an R4/R5 is online to start the castle challenge as soon as it unlocks.', 'Use every daily Supply Pack before the event ends; leftovers are salvaged.'],
