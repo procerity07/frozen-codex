@@ -183,7 +183,18 @@ const baseEvents: GameEvent[] = [
   ev({ name: "Glory's Gift Roulette", category: C('Mini-Game'), cadence: 'Bi-weekly Wed–Fri (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Wed', 'Thu', 'Fri'], summary: 'Roulette with Lucky Star Coins.', rules: ['Lucky Star Coins do NOT expire.', 'Free spins reset every day.'], rewards: ['Kanye', 'Selantia', 'Dimina'], featuredHeroes: ['kanye', 'selantia', 'dimina'], currencies: ['Lucky Star Coins'] }),
   ev({ name: 'Tundra Ruins', category: C('Mini-Game'), cadence: 'Every 4th weekend (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Sat', 'Sun'], rotationWeek: 2, summary: 'Dig through ruins with Ice Picks.', rules: ['Ice Picks do NOT expire.'], rewards: ['Rare materials'], currencies: ['Ice Picks'] }),
   ev({ name: 'Feast of Destiny', category: C('Mini-Game'), cadence: 'Every 4th week Mon–Wed (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], rotationWeek: 1, summary: 'Divination draws; alternates with Wonder House.', rules: ['Divination Crystals EXPIRE.'], rewards: ['Echo', 'Carvell'], featuredHeroes: ['echo', 'carvell'], currencies: ['Divination Crystals'] }),
-  ev({ name: 'Wonder House', category: C('Mini-Game'), cadence: 'Every 4th week Mon–Wed (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], rotationWeek: 3, summary: 'Divination draws; alternates with Feast of Destiny.', rules: ['Divination Crystals EXPIRE.'], rewards: ['Echo', 'Carvell'], featuredHeroes: ['echo', 'carvell'], currencies: ['Divination Crystals'] }),
+  ev({ name: 'Wonder House', category: C('Mini-Game'), cadence: 'Every 4th week Mon–Wed (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed'], rotationWeek: 3, summary: 'Pick 9 rewards for your own prize pool, then draw them with Divination Crystals; alternates with Feast of Destiny.',
+    rules: [
+      'Select 9 rewards from the treasury to make your own prize pool, then spend Divination Crystals to draw from it.',
+      'A new round starts once all 9 rewards are claimed. Each draw has a chance to give extra Divination Crystals.',
+      'Crystals from daily activity: 1 each at 25, 50, 75, 100, 120 and 140 Daily Activity Pts, and 2 at 160 (8 per day).',
+      'Crystals from spending: 1 per 100 Diamonds from pack purchases. Diamond Chests and Monthly Card daily diamonds do not count.',
+      'Unused Divination Crystals are cleared when the event ends.',
+      'Example pool seen in-game: 5★ Hero Shards (10), 5★ choice chests, 40x 60m Speedups, a 2,000-Diamond chest.',
+    ],
+    rewards: ['Echo', 'Carvell', '5★ Hero Shards', '5★ chests', '60m Speedups', 'Diamond chest'],
+    tips: ['Hit 160 Daily Activity Pts every day of the event for 8 crystals a day.', 'Put the rewards you want most in the pool; you get all 9 eventually, so order only matters if you run out of crystals.', 'Spend every crystal before the event ends; leftovers are deleted.'],
+    featuredHeroes: ['echo', 'carvell'], currencies: ['Divination Crystals'], confidence: 'verified' }),
   ev({ name: 'Pyramid Event', category: C('Mini-Game'), cadence: 'Random (paired with AP Event)', cycleWeek: W('Random'), days: [], summary: 'Explore the pyramid with themed tools.', rules: ['Ancient Amulet, Frost Candlestick and Lava Lantern do NOT expire.'], rewards: ['Carvell'], featuredHeroes: ['carvell'], currencies: ['Ancient Amulet', 'Frost Candlestick', 'Lava Lantern'] }),
   ev({ name: 'Arcane Puzzle', category: C('Mini-Game'), cadence: 'Random / bi-weekly Mondays', cycleWeek: W('Ace Lord'), days: ['Mon'], summary: 'Puzzle board alongside Timeless Recruitment.', rules: ['Refresh, Remove and Return tools do NOT expire.'], rewards: ['Timeless Scrolls', 'Materials'], currencies: ['Arcane Puzzle tools'] }),
   ev({ name: "Dwarf's Treasury", category: C('Mini-Game'), cadence: 'Random', cycleWeek: W('Random'), days: [], summary: 'Treasure mini-game.', rules: ['Event-limited tools.'], rewards: ['Materials'] }),
@@ -209,6 +220,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 8; // 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 9; // 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
