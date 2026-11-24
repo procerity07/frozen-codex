@@ -2,7 +2,18 @@
 
 export type CellKind = 'empty' | 'member' | 'fort' | 'gate' | 'gather' | 'marker' | 'blocked';
 
-export interface HiveCell { kind: CellKind; name?: string }
+export type HiveColor = 'gold' | 'red' | 'orange' | 'purple' | 'green' | 'blue' | 'pink' | 'grey';
+
+export interface HiveCell { kind: CellKind; name?: string; color?: HiveColor }
+
+export const HIVE_COLORS: HiveColor[] = ['gold', 'red', 'orange', 'purple', 'green', 'blue', 'pink', 'grey'];
+export const HIVE_COLOR_HEX: Record<HiveColor, string> = {
+  gold: '#F5B83D', red: '#EF4444', orange: '#F97316', purple: '#A855F7', green: '#22C55E', blue: '#38BDF8', pink: '#EC4899', grey: '#94A3B8',
+};
+export const DEFAULT_LEGEND: Record<HiveColor, string> = {
+  gold: 'R4 / R5', red: 'Rally leader', orange: 'Fighter', purple: 'Support', green: 'Farm', blue: 'Alliance building', pink: 'Ally / guest', grey: 'Inactive',
+};
+const isColor = (c: unknown): c is HiveColor => typeof c === 'string' && (HIVE_COLORS as string[]).includes(c);
 
 export interface Hive {
   id: string;
@@ -18,6 +29,8 @@ export interface Hive {
   /** Whether in-game Y grows going down the plan (true) or up (false). */
   yDown: boolean;
   members: string[];
+  /** What each colour means in this plan (editable). */
+  legend: Record<HiveColor, string>;
 }
 
 export const KIND_LABELS: Record<CellKind, string> = {
@@ -33,7 +46,7 @@ export function newHive(id: string, name = 'Main hive', cols = 12, rows = 12): H
   const cells: HiveCell[] = Array.from({ length: c * r }, () => ({ kind: 'empty' as const }));
   const mid = Math.floor(r / 2) * c + Math.floor(c / 2);
   cells[mid] = { kind: 'fort' };
-  return { id, name, cols: c, rows: r, cells, ref: { col: 0, row: r - 1, x: 0, y: 0 }, step: 2, yDown: true, members: [] };
+  return { id, name, cols: c, rows: r, cells, ref: { col: 0, row: r - 1, x: 0, y: 0 }, step: 2, yDown: true, members: [], legend: { ...DEFAULT_LEGEND } };
 }
 
 export const cellAt = (h: Hive, col: number, row: number): HiveCell => h.cells[row * h.cols + col] ?? { kind: 'empty' };
@@ -47,7 +60,8 @@ export function coordsOf(h: Hive, col: number, row: number): { x: number; y: num
 export function setCell(h: Hive, col: number, row: number, cell: HiveCell): Hive {
   const cells = h.cells.slice();
   const name = cell.name?.trim();
-  cells[row * h.cols + col] = cell.kind === 'member' && name ? { kind: 'member', name } : cell.kind === 'member' ? { kind: 'empty' } : { kind: cell.kind };
+  const color = cell.kind !== 'empty' && isColor(cell.color) ? { color: cell.color } : {};
+  cells[row * h.cols + col] = cell.kind === 'member' && name ? { kind: 'member', name, ...color } : cell.kind === 'member' ? { kind: 'empty' } : { kind: cell.kind, ...color };
   return { ...h, cells };
 }
 
@@ -90,8 +104,9 @@ const FROM_CODE = Object.fromEntries(Object.entries(CODE).map(([k, v]) => [v, k]
 /** Text code to share a plan in chat; paste it into Import on another phone. */
 export function exportCode(h: Hive): string {
   const names: Record<string, string> = {};
-  h.cells.forEach((c, i) => { if (c.kind === 'member' && c.name) names[i] = c.name; });
-  return PREFIX + JSON.stringify({ n: h.name, c: h.cols, r: h.rows, g: h.cells.map((c) => CODE[c.kind]).join(''), m: names, ref: h.ref, s: h.step, yd: h.yDown, l: h.members });
+  const colors: Record<string, HiveColor> = {};
+  h.cells.forEach((c, i) => { if (c.kind === 'member' && c.name) names[i] = c.name; if (c.color) colors[i] = c.color; });
+  return PREFIX + JSON.stringify({ n: h.name, c: h.cols, r: h.rows, g: h.cells.map((c) => CODE[c.kind]).join(''), m: names, k: colors, lg: h.legend, ref: h.ref, s: h.step, yd: h.yDown, l: h.members });
 }
 
 /** Reads a shared code. Throws a readable error when it is not a valid plan. */
@@ -105,10 +120,13 @@ export function importCode(text: string, id: string): Hive {
   const rows = clamp(Number(raw.r), 1, MAX_SIDE);
   const grid = typeof raw.g === 'string' ? raw.g : '';
   const names = (typeof raw.m === 'object' && raw.m ? raw.m : {}) as Record<string, unknown>;
+  const colors = (typeof raw.k === 'object' && raw.k ? raw.k : {}) as Record<string, unknown>;
+  const lg = (typeof raw.lg === 'object' && raw.lg ? raw.lg : {}) as Record<string, unknown>;
   const cells: HiveCell[] = Array.from({ length: cols * rows }, (_, i) => {
     const kind = FROM_CODE[grid[i] ?? '.'] ?? 'empty';
     const name = typeof names[i] === 'string' ? (names[i] as string).trim().slice(0, 40) : '';
-    return kind === 'member' ? (name ? { kind, name } : { kind: 'empty' }) : { kind };
+    const color = kind !== 'empty' && isColor(colors[i]) ? { color: colors[i] as HiveColor } : {};
+    return kind === 'member' ? (name ? { kind, name, ...color } : { kind: 'empty' }) : { kind, ...color };
   });
   const ref = (typeof raw.ref === 'object' && raw.ref ? raw.ref : {}) as Record<string, unknown>;
   return {
@@ -119,5 +137,14 @@ export function importCode(text: string, id: string): Hive {
     step: clamp(Number(raw.s ?? 2), 1, 10),
     yDown: raw.yd !== false,
     members: Array.isArray(raw.l) ? parseMembers(raw.l.filter((x) => typeof x === 'string').join('\n')) : [],
+    legend: normalizeLegend(lg),
   };
+}
+
+/** Fills in any missing colour labels (older plans and imports). */
+export function normalizeLegend(raw: unknown): Record<HiveColor, string> {
+  const r = (typeof raw === 'object' && raw ? raw : {}) as Record<string, unknown>;
+  const out = { ...DEFAULT_LEGEND };
+  for (const c of HIVE_COLORS) if (typeof r[c] === 'string' && (r[c] as string).trim()) out[c] = (r[c] as string).trim().slice(0, 24);
+  return out;
 }

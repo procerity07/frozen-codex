@@ -316,6 +316,10 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const back = importCode('shared: ' + exportCode(h), 'n');
   ok(back.cells[3 * 12 + 2]!.name === 'Crisa' && back.ref.x === 252 && back.members.length === 3 && back.cells.filter((c) => c.kind === 'fort').length === 1, 'hive share code round-trips');
   ok(resize(h, 5, 5).cells.length === 25 && resize(h, 99, 1).cols === 30, 'hive resize clamps');
+  const coloured = setCell({ ...h, legend: { ...h.legend, green: 'Farms' } }, 4, 4, { kind: 'member', name: 'FarmA', color: 'green' });
+  const rt = importCode(exportCode(coloured), 'c');
+  ok(rt.cells[4 * 12 + 4]!.color === 'green' && rt.legend.green === 'Farms' && rt.legend.gold === 'R4 / R5', 'hive colours and legend round-trip');
+  ok(setCell(h, 0, 0, { kind: 'empty', color: 'red' }).cells[0]!.color === undefined, 'empty squares carry no colour');
   let threw = false; try { importCode('hello', 'x'); } catch { threw = true; }
   ok(threw, 'invalid hive code rejected');
 }

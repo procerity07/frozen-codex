@@ -1,16 +1,18 @@
 import { useMemo, useState } from 'react';
-import { Alert, Pressable, ScrollView, Share, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, ScrollView, Share, StyleSheet, Switch, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { Stack } from 'expo-router';
-import { Copy, Download, LayoutGrid, Plus, Search, Settings2, Share2, Trash, Users } from 'lucide-react-native';
+import { Copy, Download, LayoutGrid, Maximize, Plus, Search, Settings2, Share2, Trash, Users, ZoomIn, ZoomOut } from 'lucide-react-native';
 import { palette, radius, space, tint, type } from '@/theme';
 import { BottomSheet, Button, Card, Chip, ChipRow, EmptyState, Field, NumberField, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import {
-  cellAt, coordsOf, exportCode, findName, importCode, KIND_LABELS, MAX_SIDE, newHive, parseMembers, resize, setCell, unplaced,
-  type CellKind, type Hive,
+  cellAt, coordsOf, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, parseMembers, resize, setCell, unplaced,
+  type CellKind, type Hive, type HiveColor,
 } from '@/lib/hive';
 
 const CELL = 66;
+const ZOOM_MIN = 0.35;
+const ZOOM_MAX = 1.8;
 const KINDS: CellKind[] = ['member', 'fort', 'gate', 'gather', 'marker', 'blocked', 'empty'];
 const KIND_COLOR: Record<CellKind, string> = {
   empty: palette.surface, member: palette.surface, fort: palette.success, gate: palette.success, gather: palette.success, marker: palette.cyan, blocked: palette.bg,
@@ -23,7 +25,10 @@ export default function HivePlanner() {
   const saveHive = useAppStore((s) => s.saveHive);
   const removeHive = useAppStore((s) => s.removeHive);
   const [activeId, setActiveId] = useState<string | null>(hives[0]?.id ?? null);
-  const hive = hives.find((h) => h.id === activeId) ?? hives[0] ?? null;
+  const found = hives.find((h) => h.id === activeId) ?? hives[0] ?? null;
+  const hive = found ? { ...found, legend: normalizeLegend(found.legend) } : null;
+  const { width } = useWindowDimensions();
+  const [zoom, setZoom] = useState(1);
   const [editing, setEditing] = useState<{ col: number; row: number } | null>(null);
   const [panel, setPanel] = useState<'none' | 'settings' | 'members' | 'import'>('none');
   const [query, setQuery] = useState('');
@@ -50,6 +55,10 @@ export default function HivePlanner() {
 
   const waiting = unplaced(hive);
   const ref = coordsOf(hive, hive.ref.col, hive.ref.row);
+  const size = Math.round(CELL * zoom);
+  const fit = () => setZoom(Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, (width - space.md * 2) / (CELL * hive.cols))));
+  const step = (f: number) => setZoom((z) => Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, Math.round(z * f * 100) / 100)));
+  const used = HIVE_COLORS.filter((c) => hive.cells.some((x) => x.color === c));
 
   return (
     <View style={{ flex: 1, backgroundColor: palette.bg }}>
@@ -68,6 +77,19 @@ export default function HivePlanner() {
           <IconPill icon={Settings2} onPress={() => setPanel('settings')} />
           <IconPill icon={Share2} onPress={() => { Share.share({ message: exportCode(hive) }).catch(() => undefined); }} />
         </Row>
+        <Row style={{ marginTop: space.xs, alignItems: 'center' }}>
+          <IconPill icon={ZoomOut} onPress={() => step(1 / 1.25)} />
+          <IconPill icon={ZoomIn} onPress={() => step(1.25)} />
+          <IconPill icon={Maximize} label="Fit" onPress={fit} />
+          <Text style={[type.caption, { marginLeft: 4 }]}>{Math.round(zoom * 100)}%</Text>
+        </Row>
+        {used.length ? (
+          <Row style={{ marginTop: 6, flexWrap: 'wrap' }} gap={8}>
+            {used.map((c) => (
+              <Row key={c} gap={4}><View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[c] }]} /><Text style={type.caption}>{hive.legend[c]}</Text></Row>
+            ))}
+          </Row>
+        ) : null}
         <Text style={[type.caption, { marginTop: 4 }]}>
           {query ? (hits.length ? `${hits.length} match${hits.length > 1 ? 'es' : ''}: ${hits.map((h) => { const c = coordsOf(hive, h.col, h.row); return `X:${c.x} Y:${c.y}`; }).join(' · ')}` : 'No member with that name')
             : `Tap a square to edit. Reference square: X:${ref.x} Y:${ref.y}`}
@@ -85,12 +107,16 @@ export default function HivePlanner() {
                   const isRef = hive.ref.col === col && hive.ref.row === row;
                   return (
                     <Pressable key={col} onPress={() => { haptic(); setEditing({ col, row }); }}
-                      style={[st.cell, { backgroundColor: c.kind === 'member' || c.kind === 'empty' ? palette.surface : tint(KIND_COLOR[c.kind], c.kind === 'blocked' ? 1 : 0.35) },
+                      style={[st.cell, { width: size, height: size },
+                        { backgroundColor: c.color ? tint(HIVE_COLOR_HEX[c.color], 0.4) : c.kind === 'member' || c.kind === 'empty' ? palette.surface : tint(KIND_COLOR[c.kind], c.kind === 'blocked' ? 1 : 0.35) },
+                        c.color && { borderColor: HIVE_COLOR_HEX[c.color] },
                         c.kind === 'blocked' && { borderColor: palette.bg }, hit && { borderColor: palette.gold, borderWidth: 2 }, isRef && { borderColor: palette.cyan }]}
-                      accessibilityLabel={`Square ${col + 1}, ${row + 1}: ${c.kind === 'member' ? c.name : KIND_LABELS[c.kind]}`}>
-                      <Text style={[st.cellText, c.kind !== 'member' && { color: palette.textSecondary, fontWeight: '700' }]} numberOfLines={2}>
-                        {c.kind === 'member' ? c.name : c.kind === 'empty' || c.kind === 'blocked' ? '' : KIND_LABELS[c.kind].toUpperCase()}
-                      </Text>
+                      accessibilityLabel={`Square ${col + 1}, ${row + 1}: ${c.kind === 'member' ? c.name : KIND_LABELS[c.kind]}${c.color ? `, ${hive.legend[c.color]}` : ''}`}>
+                      {zoom >= 0.5 ? (
+                        <Text style={[st.cellText, { fontSize: Math.max(7, Math.round(10 * zoom)) }, c.kind !== 'member' && { color: palette.textSecondary, fontWeight: '700' }]} numberOfLines={2}>
+                          {c.kind === 'member' ? c.name : c.kind === 'empty' || c.kind === 'blocked' ? '' : KIND_LABELS[c.kind].toUpperCase()}
+                        </Text>
+                      ) : null}
                     </Pressable>
                   );
                 })}
@@ -129,6 +155,7 @@ function CellSheet({ hive, at, waiting, onClose, onSave }: { hive: Hive; at: { c
   const cur = cellAt(hive, at.col, at.row);
   const [kind, setKind] = useState<CellKind>(cur.kind === 'empty' ? 'member' : cur.kind);
   const [name, setName] = useState(cur.name ?? '');
+  const [color, setColor] = useState<HiveColor | undefined>(cur.color);
   const c = coordsOf(hive, at.col, at.row);
   const suggestions = waiting.filter((m) => !name || m.toLowerCase().includes(name.toLowerCase())).slice(0, 12);
   return (
@@ -145,9 +172,23 @@ function CellSheet({ hive, at, waiting, onClose, onSave }: { hive: Hive; at: { c
           ) : null}
         </>
       ) : null}
+      {kind !== 'empty' ? (
+        <>
+          <Text style={[type.caption, { marginTop: space.md }]}>Colour (optional)</Text>
+          <Row style={{ marginTop: 6, flexWrap: 'wrap' }} gap={6}>
+            <Pressable onPress={() => setColor(undefined)} style={[st.swatch, !color && st.swatchOn]}><Text style={type.caption}>None</Text></Pressable>
+            {HIVE_COLORS.map((k) => (
+              <Pressable key={k} onPress={() => { haptic(); setColor(k); }} style={[st.swatch, color === k && st.swatchOn]} accessibilityLabel={hive.legend[k]}>
+                <View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[k] }]} />
+                <Text style={type.caption}>{hive.legend[k]}</Text>
+              </Pressable>
+            ))}
+          </Row>
+        </>
+      ) : null}
       <Row style={{ marginTop: space.md }}>
         <View style={{ flex: 1 }}><Button variant="secondary" label="Clear" onPress={() => onSave(setCell(hive, at.col, at.row, { kind: 'empty' }))} /></View>
-        <View style={{ flex: 1 }}><Button label="Save" onPress={() => onSave(setCell(hive, at.col, at.row, { kind, name }))} /></View>
+        <View style={{ flex: 1 }}><Button label="Save" onPress={() => onSave(setCell(hive, at.col, at.row, { kind, name, color }))} /></View>
       </Row>
       <View style={{ marginTop: space.sm }}>
         <Button compact variant="ghost" icon={LayoutGrid} label="Use this square as the coordinate reference" onPress={() => onSave({ ...hive, ref: { col: at.col, row: at.row, x: c.x, y: c.y } })} />
@@ -192,6 +233,13 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
         </View>
         <Switch value={hive.yDown} onValueChange={(yDown) => set({ yDown })} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
       </Row>
+      <SectionHeader title="Colour meanings" subtitle="Rename to match your alliance" />
+      {HIVE_COLORS.map((k) => (
+        <Row key={k} style={{ marginBottom: 6, alignItems: 'center' }}>
+          <View style={[st.dot, { backgroundColor: HIVE_COLOR_HEX[k], width: 14, height: 14 }]} />
+          <TextInput value={hive.legend[k]} onChangeText={(v) => set({ legend: { ...hive.legend, [k]: v.slice(0, 24) } })} style={[type.body, st.legendInput]} placeholderTextColor={palette.textMuted} />
+        </Row>
+      ))}
       <Text style={[type.caption, { marginTop: space.sm }]}>A castle is 2×2 tiles, so neighbouring spots are 2 apart. Tap any square and choose "Use this square as the coordinate reference" to move the reference.</Text>
       <View style={{ marginTop: space.lg, gap: space.sm }}>
         <Button icon={Copy} variant="secondary" label="Share plan code" onPress={() => { Share.share({ message: exportCode(hive) }).catch(() => undefined); }} />
@@ -219,5 +267,9 @@ const st = StyleSheet.create({
   cell: { width: CELL, height: CELL, borderWidth: StyleSheet.hairlineWidth, borderColor: palette.border, alignItems: 'center', justifyContent: 'center', padding: 2 },
   cellText: { color: palette.text, fontSize: 10, fontWeight: '600', textAlign: 'center' },
   pill: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, paddingHorizontal: 10, paddingVertical: 9 },
+  dot: { width: 10, height: 10, borderRadius: 5 },
+  swatch: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 8, paddingVertical: 6, borderRadius: radius.sm, borderWidth: 1, borderColor: palette.border },
+  swatchOn: { borderColor: palette.cyan, backgroundColor: palette.cyanDim },
+  legendInput: { flex: 1, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, paddingHorizontal: space.sm, paddingVertical: 6 },
   textarea: { minHeight: 140, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, padding: space.sm, marginVertical: space.sm, textAlignVertical: 'top' },
 });
