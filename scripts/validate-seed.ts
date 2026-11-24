@@ -1,3 +1,4 @@
+import { coordsOf, exportCode, importCode, newHive, parseMembers, resize, setCell, unplaced } from '../src/lib/hive';
 import { nextOccurrence, weeklyTriggers, normalizeTime, describeDays } from '../src/lib/reminders';
 /* Validates seed integrity, runs the real migrations + seeder on SQLite, and exercises search + calculators. */
 import assert from 'node:assert/strict';
@@ -300,5 +301,21 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(weeklyTriggers({ ...base, days: [], time: '12:00', zone: 'utc' }, mon).length === 7 && weeklyTriggers({ ...base, days: [2, 4], time: '12:00', zone: 'utc' }, mon).length === 2, 'one weekly trigger per chosen day');
   ok(normalizeTime('7:05') === '07:05' && normalizeTime('24:00') === null && normalizeTime('ab') === null, 'reminder time validation');
   ok(describeDays([]) === 'Every day' && describeDays([5, 6]) === 'Weekends' && describeDays([0, 2]) === 'Mon, Wed', 'reminder day labels');
+}
+
+// Hive planner
+{
+  let h = newHive('t', 'Test', 12, 12);
+  h = { ...h, ref: { col: 0, row: 11, x: 252, y: 506 } };
+  ok(coordsOf(h, 0, 11).x === 252 && coordsOf(h, 1, 11).x === 254 && coordsOf(h, 0, 10).y === 504, 'hive coords step 2 from reference (Y down)');
+  ok(coordsOf({ ...h, yDown: false }, 0, 10).y === 508, 'hive coords with Y going up');
+  h = setCell(h, 2, 3, { kind: 'member', name: '  Crisa ' });
+  h = { ...h, members: parseMembers('Crisa\nSemiX, ~-Ice-~\ncrisa') };
+  ok(h.members.length === 3 && unplaced(h).join() === 'SemiX,~-Ice-~', 'member list dedupes and tracks placed names');
+  const back = importCode('shared: ' + exportCode(h), 'n');
+  ok(back.cells[3 * 12 + 2]!.name === 'Crisa' && back.ref.x === 252 && back.members.length === 3 && back.cells.filter((c) => c.kind === 'fort').length === 1, 'hive share code round-trips');
+  ok(resize(h, 5, 5).cells.length === 25 && resize(h, 99, 1).cols === 30, 'hive resize clamps');
+  let threw = false; try { importCode('hello', 'x'); } catch { threw = true; }
+  ok(threw, 'invalid hive code rejected');
 }
 
