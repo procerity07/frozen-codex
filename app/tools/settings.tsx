@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Switch, Text, View } from 'react-native';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import Constants from 'expo-constants';
-import { Database, Download, RefreshCw, Smartphone, Upload } from 'lucide-react-native';
+import { Database, Download, RefreshCw, Smartphone, Sparkles, Upload } from 'lucide-react-native';
 import { palette, space, type } from '@/theme';
 import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
@@ -88,6 +88,9 @@ export default function SettingsScreen() {
         </Row>
         <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Bag Hoard calculator shows.</Text>
       </Card>
+      <View style={{ marginTop: space.sm }}>
+        <Button icon={Sparkles} variant="secondary" label="Run first-time setup again" onPress={() => { s.setOnboarded(false); router.replace('/onboarding'); }} />
+      </View>
 
       <SectionHeader title="Alarms" />
       <Text style={type.caption}>Lead time before event start</Text>

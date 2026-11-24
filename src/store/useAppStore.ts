@@ -29,6 +29,8 @@ export interface AppState {
   roster: Record<string, RosterEntry>;
   /** Load hero portraits from the community wiki (off = letter badges, no image downloads). */
   showPortraits: boolean;
+  /** First-run setup finished or skipped. */
+  onboarded: boolean;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -53,6 +55,7 @@ export interface AppState {
   removeFromRoster: (heroId: string) => void;
   mergeRoster: (entries: Record<string, RosterEntry>) => void;
   setShowPortraits: (on: boolean) => void;
+  setOnboarded: (on: boolean) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -77,6 +80,7 @@ export const defaultState: PersistedState = {
   dismissedUpdate: '',
   roster: {},
   showPortraits: true,
+  onboarded: false,
 };
 
 export const useAppStore = create<AppState>()(
@@ -115,11 +119,12 @@ export const useAppStore = create<AppState>()(
       resetBag: () => set({ bagInventory: {} }),
       setCitadel: (c) => set({ citadel: { ...get().citadel, ...c } }),
       saveCalc: (key, values) => set({ savedCalcs: { ...get().savedCalcs, [key]: values } }),
-      importState: (data) => set({ ...defaultState, ...data }),
+      importState: (data) => set({ ...defaultState, ...data, onboarded: true }),
       dismissUpdate: (dismissedUpdate) => set({ dismissedUpdate }),
       setRosterEntry: (heroId, entry) => set({ roster: { ...get().roster, [heroId]: entry } }),
       mergeRoster: (entries) => set({ roster: { ...get().roster, ...entries } }),
       setShowPortraits: (showPortraits) => set({ showPortraits }),
+      setOnboarded: (onboarded) => set({ onboarded }),
       removeFromRoster: (heroId) => {
         const next = { ...get().roster };
         delete next[heroId];

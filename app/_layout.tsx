@@ -7,6 +7,7 @@ import * as SystemUI from 'expo-system-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { getDb } from '@/db/client';
+import { useAppStore } from '@/store/useAppStore';
 import { palette, space, type } from '@/theme';
 import { Button } from '@/components/ui';
 
@@ -19,7 +20,7 @@ export default function RootLayout() {
 
   const boot = () => {
     setState('loading');
-    getDb()
+    Promise.all([getDb(), waitForProfile()])
       .then(() => setState('ready'))
       .catch((e: unknown) => { setError(e instanceof Error ? e.message : String(e)); setState('error'); })
       .finally(() => { SplashScreen.hideAsync().catch(() => undefined); });
@@ -46,6 +47,7 @@ export default function RootLayout() {
             }}
           >
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="onboarding" options={{ headerShown: false, animation: 'fade' }} />
           </Stack>
         ) : (
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: space.md, padding: space.xxl }}>
@@ -66,4 +68,12 @@ export default function RootLayout() {
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
+}
+
+/** Resolves once the saved profile has loaded, so first-run setup never flashes for existing users. */
+function waitForProfile(): Promise<void> {
+  if (useAppStore.persist.hasHydrated()) return Promise.resolve();
+  return new Promise((resolve) => {
+    const unsub = useAppStore.persist.onFinishHydration(() => { unsub(); resolve(); });
+  });
 }

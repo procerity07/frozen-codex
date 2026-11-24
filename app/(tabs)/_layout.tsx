@@ -1,4 +1,5 @@
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
+import { useAppStore } from '@/store/useAppStore';
 import { BookOpen, CalendarDays, Castle, Crown, House } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommanderBar } from '@/components/domain/CommanderBar';
@@ -6,6 +7,8 @@ import { palette } from '@/theme';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
+  const onboarded = useAppStore((st) => st.onboarded);
+  if (!onboarded) return <Redirect href="/onboarding" />;
   return (
     <Tabs
       screenOptions={{
