@@ -66,9 +66,11 @@ const baseEvents: GameEvent[] = [
           'Craft a Curio: Common +20,000, Uncommon +50,000, Superb +100,000, Epic +200,000, Legendary +500,000.',
           'Salvaging for Enhance materials gives no points.',
           'Runs for one day (in-game timer); Point Reward, Personal Rank and Realm Rank tabs.',
+          'Personal Rank: you need at least 1,000,000 points to qualify; rank rewards scale with how many times the event has run on your realm. Rankings update every hour.',
+          'Personal Rank rewards (Curio scroll cards): #1 30, #2 25, #3 20, Top 1% 15, Top 2% 12, Top 5% 10, Top 10% 8, Top 30% 6, Top 50% 4, Top 75% 3, Last 25% 2 (plus 10K Hero EXP potions and 60m speedups).',
         ],
         rewards: ['Curio scroll (1 at phases 1–3, 2 at phase 4)', '3x 60m Speedups (Healing, Training, Research)', '10x 10K Food and Wood', '200 Diamonds (phase 5)', 'Dragon EXP and Dragon Civil Pts (phase 6)', '5,000 Stone and 2,500 Iron (phases 5–6)'],
-        tips: ['Crafting one Curio is worth far more than collecting materials; save crafts for this day.', 'A single Common Curio (+20,000) clears phase 1.'],
+        tips: ['Crafting one Curio is worth far more than collecting materials; save crafts for this day.', 'A single Common Curio (+20,000) clears phase 1.', 'Rank rewards need 1,000,000 points: two Legendary crafts, or one Legendary plus several Epic.'],
         confidence: 'verified',
       },
     };
