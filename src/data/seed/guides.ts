@@ -45,6 +45,83 @@ export const guides: Guide[] = [
       { heading: 'Cooldowns', points: ['Instant Output has a 12-hour cooldown — use it twice a day.', 'Refresh Greenhouse seeds every time you log in.'] },
     ],
   },
+  {
+    id: 'troop-focus', title: 'Pick One Troop Type and Stack It', summary: 'Every stat system has an Infantry, Cavalry and Archer version — put everything into one.',
+    sections: [
+      { heading: 'Why', points: ['Choose Infantry, Cavalry or Archer and build heroes of that type; spreading upgrades over three types makes all of them weak.', 'Set it in Settings (Main troop type) so the app highlights the right heroes.'] },
+      { heading: 'What to upgrade for your type', points: ['Gear (the biggest single stat source).', 'Runes: Strength = Infantry, Charge = Cavalry, Accuracy = Archer, Troop Runes = all troops. 6 sets of 4 runes.', 'Totems (Weapon Forge Lv. 16): Bear = Infantry, Wolf = Cavalry, Eagle = Archer.', 'Holystones (Weapon Forge Lv. 25): Strength, Eternal and Life holystones each boost different troop stats when modified.', 'Draconic Stones (unlock at Dragon Lv. 30) and Dragon skills.', 'Glory Levels and Curios (Weapon Forge Lv. 20).'] },
+      { heading: 'Formations', points: ['Institute Lv. 28 unlocks Cavalry and Archer Formations (Infantry is the default).', 'A formation puts that troop type at the front. It only matters when you send mixed troops — research the one for your main type.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: FAQ, Runes, Totems, Holystone, Draconic Stone, Formations (checked Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'owned-heroes', title: 'Heroes That Help Just by Being Owned', summary: 'Civil and "(Passive)" skills work without marching — and when they unlock.',
+    sections: [
+      { heading: 'How it works', points: ['Skills marked Civil or "(Passive)" say "Own the hero to activate this effect": they boost your account even if the hero never marches.', 'Skills that say "Takes effect when the hero joins troop battle" only work in that hero\'s march.', 'My Heroes adds up every owned bonus for you.'] },
+      { heading: 'Unlock levels (confirmed in-game)', points: ['3★: the skill under the main skill is active on obtaining, then Lv. 31 and Lv. 71.', '4★, 5★ and 6★: active on obtaining, then Lv. 31 and Lv. 131.', 'Hero skills: 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71; the 5th unlocks at 6★ (5★ heroes) or 7★ (6★ heroes).', 'The main troop skill grows 100% → 120% → 150% → 200% → 300% → 500% of troop ATK from Hero0 to +5, and stops at 500%.'] },
+      { heading: 'Strong owned bonuses (checked in-game)', points: ['All troops: Wu Kong, Kaira and Isabella (HP, DEF, ATK); Setemos (DEF); Leona (ATK).', 'By troop type: Kaios (Infantry/Cavalry/Archer HP), Echo (Infantry/Cavalry/Archer ATK).', 'Castle defence: Monica (Castle Battle HP, DEF, ATK when fighting in your castle).', 'Troop capacity: Saya, Sirona, Lylia, Carvell, Patty, Odell, Gina.', 'Building: Saya and Elsa (construction speed), Chloe (construction cost).'] },
+      { heading: 'Tip', points: ['Levelling an owned civil hero to Lv. 31 and Lv. 131 unlocks its 2nd and 3rd bonus — often cheaper than enhancing a marching hero.'] },
+    ],
+  },
+  {
+    id: 'save-for-events', title: 'What to Save and When to Spend', summary: 'Most items are worth more on the right event day.',
+    sections: [
+      { heading: 'Weekly timing', points: ['Hero shards, recruits and covenants: Ace Lord Day 1 (Monday, Heroes Assemble).', 'Construction and research: Ace Lord Day 2 (+5 points per 1 power gained).', 'Troop training: Thursday (Army Expansion and Ace Lord Day 4).', 'Curio crafting: the Curio day (Tuesday in Ace Lord weeks). One Common craft is +20,000 points; a Legendary is +500,000.'] },
+      { heading: 'Items that keep — save them', points: ['Lucky Flip Coins: wait until you have 50, which guarantees the Grand Prize.', 'Green stamina bottles: for the Stamina Event.', 'Astrology Summon Scrolls: 405 saved scrolls get a March Skin.', 'Arcane Puzzle tools (Refresh, Remove, Return) do not expire.'] },
+      { heading: 'Items that expire — use them', points: ['Divination Crystals (Wonder House / Feast of Destiny) are deleted when the event ends.', 'Shadow Expedition Supply Packs are salvaged at the end.', 'Daily Arena rank rewards must be claimed by hand or they expire the next day.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: FAQ, Events. Point values from in-game event screens (Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'resources', title: 'Resource Value and Cheap Resources', summary: 'How to compare resources and where they come cheapest.',
+    sections: [
+      { heading: 'Exchange rate', points: ['1 Iron = 4 Stone = 20 Wood = 20 Food. Use it to judge any resource trade.', 'Iron is the scarcest — prioritise iron when a shop or chest lets you choose.'] },
+      { heading: 'Cheap sources', points: ['Black Market: resource-priced speedups are almost always worth buying; lock good offers to keep them through the 3-hour refresh.', 'Wishing Pool: up to 10 free claims a day (more with upgrades); unused claims do not carry over.', 'Instant Output: 12-hour cooldown, claim twice a day.', 'Diamond Shop: small resource packs cost slightly less per unit than big ones, but gathering is free — only buy when stuck.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: FAQ, Wishing Pool. Shop prices checked in-game (Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'gear-refine', title: 'Gear Modification and Refinement', summary: 'Lock good rolls before modifying; where Refinement Crests come from.',
+    sections: [
+      { heading: 'Modification', points: ['Each modification rolls random attributes; every gear piece has one exclusive attribute plus common ones (no duplicate common types).', 'Lock a good attribute BEFORE modifying. A locked slot only changes if the same attribute rolls higher.', 'Each extra lock raises the material cost — lock only what you want to keep.', 'When every open slot reaches rank 5, another slot unlocks (up to 4).'] },
+      { heading: 'Refinement Crests', points: ['Used for Gear, Rune, Totem, Draconic Stone and Glory Refinement.', 'Diamond Shop sells them for 100 diamonds each; they also come from Alliance Showdown, Feast of Destiny, Wonder House, Glory\'s Gift Roulette, Lucky Flip, Pyramid Event and Tundra Ruins.', 'Using them on Ace Lord Day 5 also scores event points.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: Gear, Refinement (checked Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'glory', title: 'Glory Levels', summary: 'Building upgrades past Lv. 15 that add battle stats.',
+    sections: [
+      { heading: 'Basics', points: ['Glory Levels unlock on a building once it reaches Lv. 15 and are raised with Marks of Glory.', 'They give large battle bonuses, and Glory Refinement adds more on top.'] },
+      { heading: 'Which buildings give troop stats', points: ['Citadel and Vehicle Workshop: Troop ATK, DEF and HP.', 'War Hall: Troop ATK. Wishing Pool: Troop HP. Lookout: Troop DEF.', 'Also available on Wall, Warehouse, Institute, Weapon Forge, Posthouse, Embassy, the three troop camps and more.'] },
+      { heading: 'Where Marks of Glory come from', points: ['Sapphire Shop and Oblivion War Shop sell Marks of Glory with no limit — a good sink for leftover currency.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: Glory Level, Troop Attributes. Shop listings checked in-game (Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'arena', title: 'Arena Basics', summary: 'Royal Arena, Apex Arena and their rules.',
+    sections: [
+      { heading: 'Royal Arena', points: ['Unlocks after Chapter 5. Ratings reset every Monday 00:00 UTC.', 'Daily rank rewards are based on the previous day — claim them by hand or they expire the next day.', 'Each week 3 heroes are banned and 3 are boosted (+20% ATK and +20% HP) — check before setting your defence.', 'Arena Tokens buy items in the Royal Shop.'] },
+      { heading: 'Apex Arena', points: ['Opens 21 days after the server launches; the top 500 of the Royal Arena Battle Division qualify.', 'Best-of-three matches. Castle buffs do not apply here.', 'Arena Badges buy items in the Apex Shop (troop runes and rune crystals are the best value).'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: Arena (checked Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'bosses', title: 'Boss Events: Elemental Seal, Lich Attack, Infernal Gate', summary: 'How each boss works and what to bring.',
+    sections: [
+      { heading: 'Elemental Seal', points: ['Only heroes of the listed elements and minimum stars can join.', 'You can attack many times; only your highest damage counts for rewards and rank (top 50 get rank rewards).', 'Bosses are immune to stun and silence, and start using skills from round 11 — bring damage over time and raw damage, not control.'] },
+      { heading: 'Lich Attack', points: ['Citadel Lv. 6+ can join. Attacking the Lich King loses no troops, and marches move 10x faster.', 'Rewards come from each hit\'s damage, plus rank rewards for the top 50.'] },
+      { heading: 'Infernal Gate', points: ['Your alliance rallies the Emissary; each kill gives every member a kill reward (once per 71 hours).', 'Damage rewards jump at 10,001 damage (4★ crystals) and 500,001 damage (red-star crystals).', 'Set your alliance\'s time on the event page so the alarm matches.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: Elemental Seal, Lich Attack. Infernal Gate from in-game screens (Nov 2026).'] },
+    ],
+  },
+  {
+    id: 'greenhouse', title: 'Nursery Greenhouse', summary: 'Seeds, helping other lords and crop upgrades.',
+    sections: [
+      { heading: 'Getting seeds', points: ['Seed tasks refresh at 00:00 UTC (or when you next log in).', 'Refreshing a task can raise its quality — better tasks give better seeds.', 'A higher-level greenhouse gives more tasks and more crop boxes.'] },
+      { heading: 'Growing', points: ['One seed per box. Better seeds grow longer and give more, but are more likely to become unstable.', 'Unstable crops need help from other lords; each help raises the final yield.', 'Helping other lords gives you crops too — visit alliance greenhouses daily.'] },
+      { heading: 'Sources', points: ['Puzzles & Chaos wiki: Nursery Greenhouse (checked Nov 2026).'] },
+    ],
+  },
 ];
 
 export const checklistTemplate: ChecklistTemplateItem[] = [
