@@ -155,7 +155,7 @@ export default function SettingsScreen() {
         </Row>
       </Card>
 
-      <SectionHeader title="Database updates" icon={Database} subtitle="Checked automatically when the app opens (every 3 hours): heroes, events, Sophia answers, codes and shops update without a new APK" />
+      <SectionHeader title="Database updates" icon={Database} subtitle="Tap to get the latest heroes, events, Sophia answers, codes and shops without a new APK" />
       <Card>
         <Row style={{ justifyContent: 'space-between' }}>
           <Stat label="Bundled seed" value={`v${SEED_VERSION}`} />
