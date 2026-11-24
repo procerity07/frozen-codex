@@ -166,7 +166,7 @@ const baseHeroes: Hero[] = [
       { name: 'Cavalry HP (Passive)', description: 'In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [12, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
       { name: 'Archer HP (Passive)', description: 'In-game, applies while you own him. 5★: +12% at Hero0, then 24/36/48/60/75/90/150% from +2 to +8; 6★: 75/90/120/200% from +5 to +8.', requirement: 'Unlocks at level 131 (in-game)', unit: '%', tiers: { '5': [12, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
     ],
-    m3: { name: 'Temporal Rift', desc: 'Deals 330% damage to the target (Rage Regen: Medium). Time Cage: Silences the target for 3 rounds. Back to the Past: converts 75% of the damage dealt into his own HP. Cycle of Rebirth (unlocks Lv. 71): at battle start gains the ability to revive with 50% HP after death. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at Hero0.', charge: 'Medium', pattern: 'Single target', effects: ['Silence', 'Lifesteal', 'Revive', 'Crit'] },
+    m3: { name: 'Temporal Rift', desc: 'Deals 330% damage to the target at Hero0, rising to 390% at 6★ +8 (Rage Regen: Medium). Time Cage: Silences the target for 3 rounds. Back to the Past: converts 75% of the damage dealt into his own HP. Cycle of Rebirth (unlocks Lv. 71): at battle start gains the ability to revive with 50% HP after death. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at Hero0.', charge: 'Medium', pattern: 'Single target', effects: ['Silence', 'Lifesteal', 'Revive', 'Crit'] },
     sources: ['Ace Lord', 'AP Event'],
     notes: 'His Infantry, Cavalry and Archer HP bonuses work just by owning him. AP Visiting events also feature his shards.',
   }),
@@ -537,7 +537,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 40; // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 41; // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
