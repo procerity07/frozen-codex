@@ -6,7 +6,7 @@ import { palette, radius, space, tint, type } from '@/theme';
 import { BottomSheet, Button, Card, Chip, ChipRow, EmptyState, Field, NumberField, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import {
-  cellAt, coordsOf, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, parseMembers, resize, setCell, unplaced,
+  cellAt, coordsOf, DEFAULT_OUTPOST_TILES, exportCode, findName, HIVE_COLOR_HEX, HIVE_COLORS, importCode, KIND_LABELS, MAX_SIDE, newHive, normalizeLegend, outpostAreas, parseMembers, resize, setCell, unplaced,
   type CellKind, type Hive, type HiveColor,
 } from '@/lib/hive';
 
@@ -98,7 +98,7 @@ export default function HivePlanner() {
 
       <ScrollView style={{ flex: 1, marginTop: space.sm }} contentContainerStyle={{ paddingBottom: space.xxl }}>
         <ScrollView horizontal contentContainerStyle={{ padding: space.md }}>
-          <View>
+          <View style={{ position: 'relative' }}>
             {Array.from({ length: hive.rows }, (_, row) => (
               <View key={row} style={{ flexDirection: 'row' }}>
                 {Array.from({ length: hive.cols }, (_, col) => {
@@ -121,6 +121,12 @@ export default function HivePlanner() {
                   );
                 })}
               </View>
+            ))}
+            {outpostAreas(hive).map((a, i) => (
+              <View key={i} pointerEvents="none" style={{
+                position: 'absolute', left: a.col0 * size, top: a.row0 * size, width: (a.col1 - a.col0 + 1) * size, height: (a.row1 - a.row0 + 1) * size,
+                borderWidth: 2, borderColor: palette.success, backgroundColor: tint(palette.success, 0.08),
+              }} />
             ))}
           </View>
         </ScrollView>
@@ -233,6 +239,10 @@ function SettingsSheet({ open, hive, onClose, onSave, onDelete, onImport }: { op
         </View>
         <Switch value={hive.yDown} onValueChange={(yDown) => set({ yDown })} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
       </Row>
+      <Row style={{ marginTop: space.sm }}>
+        <NumberField label="Outpost territory (tiles wide)" value={hive.outpostTiles ?? DEFAULT_OUTPOST_TILES} onChange={(n) => set({ outpostTiles: Math.max(2, Math.min(40, n || DEFAULT_OUTPOST_TILES)) })} />
+      </Row>
+      <Text style={[type.caption, { marginTop: 4 }]}>Each outpost shows its territory as a green outline ({Math.round((hive.outpostTiles ?? DEFAULT_OUTPOST_TILES) / hive.step)} squares wide at {hive.step} tiles per square).</Text>
       <SectionHeader title="Colour meanings" subtitle="Rename to match your alliance" />
       {HIVE_COLORS.map((k) => (
         <Row key={k} style={{ marginBottom: 6, alignItems: 'center' }}>

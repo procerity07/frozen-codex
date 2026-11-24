@@ -31,6 +31,8 @@ export interface Hive {
   members: string[];
   /** What each colour means in this plan (editable). */
   legend: Record<HiveColor, string>;
+  /** Width of an outpost's territory in map tiles (shown as a green outline). */
+  outpostTiles?: number;
 }
 
 export const KIND_LABELS: Record<CellKind, string> = {
@@ -106,7 +108,7 @@ export function exportCode(h: Hive): string {
   const names: Record<string, string> = {};
   const colors: Record<string, HiveColor> = {};
   h.cells.forEach((c, i) => { if (c.kind === 'member' && c.name) names[i] = c.name; if (c.color) colors[i] = c.color; });
-  return PREFIX + JSON.stringify({ n: h.name, c: h.cols, r: h.rows, g: h.cells.map((c) => CODE[c.kind]).join(''), m: names, k: colors, lg: h.legend, ref: h.ref, s: h.step, yd: h.yDown, l: h.members });
+  return PREFIX + JSON.stringify({ n: h.name, c: h.cols, r: h.rows, g: h.cells.map((c) => CODE[c.kind]).join(''), m: names, k: colors, lg: h.legend, ref: h.ref, s: h.step, yd: h.yDown, l: h.members, ot: h.outpostTiles ?? DEFAULT_OUTPOST_TILES });
 }
 
 /** Reads a shared code. Throws a readable error when it is not a valid plan. */
@@ -138,6 +140,7 @@ export function importCode(text: string, id: string): Hive {
     yDown: raw.yd !== false,
     members: Array.isArray(raw.l) ? parseMembers(raw.l.filter((x) => typeof x === 'string').join('\n')) : [],
     legend: normalizeLegend(lg),
+    outpostTiles: clamp(Number(raw.ot ?? 10), 2, 40),
   };
 }
 
@@ -146,5 +149,22 @@ export function normalizeLegend(raw: unknown): Record<HiveColor, string> {
   const r = (typeof raw === 'object' && raw ? raw : {}) as Record<string, unknown>;
   const out = { ...DEFAULT_LEGEND };
   for (const c of HIVE_COLORS) if (typeof r[c] === 'string' && (r[c] as string).trim()) out[c] = (r[c] as string).trim().slice(0, 24);
+  return out;
+}
+
+export const DEFAULT_OUTPOST_TILES = 10;
+
+/** Square ranges covered by each outpost's territory, clipped to the plan. */
+export function outpostAreas(h: Hive): { col0: number; row0: number; col1: number; row1: number }[] {
+  const span = Math.max(1, Math.round((h.outpostTiles ?? DEFAULT_OUTPOST_TILES) / Math.max(1, h.step)));
+  const before = Math.floor((span - 1) / 2);
+  const after = span - 1 - before;
+  const out: { col0: number; row0: number; col1: number; row1: number }[] = [];
+  h.cells.forEach((c, i) => {
+    if (c.kind !== 'marker') return;
+    const col = i % h.cols;
+    const row = Math.floor(i / h.cols);
+    out.push({ col0: Math.max(0, col - before), row0: Math.max(0, row - before), col1: Math.min(h.cols - 1, col + after), row1: Math.min(h.rows - 1, row + after) });
+  });
   return out;
 }

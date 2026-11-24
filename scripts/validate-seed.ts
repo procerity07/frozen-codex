@@ -1,3 +1,4 @@
+import { outpostAreas } from '../src/lib/hive';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
@@ -324,6 +325,10 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const rt = importCode(exportCode(coloured), 'c');
   ok(rt.cells[4 * 12 + 4]!.color === 'green' && rt.legend.green === 'Farms' && rt.legend.gold === 'R4 / R5', 'hive colours and legend round-trip');
   ok(setCell(h, 0, 0, { kind: 'empty', color: 'red' }).cells[0]!.color === undefined, 'empty squares carry no colour');
+  const op = outpostAreas(setCell(h, 5, 5, { kind: 'marker' }))[0]!;
+  ok(op.col0 === 3 && op.col1 === 7 && op.row0 === 3 && op.row1 === 7, 'outpost territory: 10 tiles = 5 squares centred on the outpost');
+  const edge = outpostAreas(setCell(h, 0, 0, { kind: 'marker' }))[0]!;
+  ok(edge.col0 === 0 && edge.row0 === 0 && edge.col1 === 2, 'outpost territory clipped at the plan edge');
   let threw = false; try { importCode('hello', 'x'); } catch { threw = true; }
   ok(threw, 'invalid hive code rejected');
 }
