@@ -153,10 +153,18 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Monica', title: 'Silver Lancer', element: 'Dark', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Radiant Lance', 'Cavalry ATK and HP up.']],
-    m3: { name: 'Dawn Pierce', desc: 'Light damage to a column; ignores 30% DEF.', charge: 'Medium', pattern: 'Column', effects: ['DEF ignore'] },
+    march: [],
+    civil: [
+      { name: 'Castle Battle HP (Passive)', description: 'In-game: troop HP bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Castle Battle DEF (Passive)', description: 'In-game: troop DEF bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Castle Battle ATK (Passive)', description: 'In-game: troop ATK bonus when fighting in your castle (defending), active while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95% at +5 up to +225% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+    ],
+    m3: { name: 'Deadly Phantom', desc: 'Deals 360% damage to the target (Rage Regen: Medium). Twisted Spirit: dispels the target\'s buffs and drains 40% of its Rage. Heartbreak Moment: enemies\' Heal Rate −50% for 4 rounds (cannot be dispelled). Energy Extraction: converts 70% of the damage dealt into HP. Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Single target', effects: ['Dispel', 'Rage down', 'Heal down', 'Lifesteal', 'Crit'] },
     sources: ['Ace Lord Radiant Card'],
-    notes: 'Radiant Card option once realm age exceeds 4 weeks.',
+    notes: 'Castle defender: her HP, DEF and ATK bonuses apply to your troops when fighting in your castle, just by owning her. Radiant Card option once realm age exceeds 4 weeks.',
   }),
   hero({
     name: 'Kaios', title: 'Tidebinder', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
@@ -553,7 +561,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 44; // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 45; // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

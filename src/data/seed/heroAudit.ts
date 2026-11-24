@@ -77,7 +77,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Monica"],
-    notes: ["Wiki: 5-star Dark Civil (app previously: Light Cavalry).", "Unconfirmed acquisition sources: Ace Lord Radiant Card."],
+    notes: ["In-game (2026-11-24, Monica 6★ +8): Dark Civil confirmed; troop skill 500%; Castle Battle HP/DEF/ATK (Passive, while owned, when fighting in castle) 5★ 30–169%, 6★ 95/120/135/225%; hero skills Deadly Phantom (360%), Twisted Spirit, Heartbreak Moment, Energy Extraction, Combat Mastery (6★). The unsourced Radiant Lance / Dawn Pierce skills were replaced.", "Wiki: 5-star Dark Civil (app previously: Light Cavalry).", "Unconfirmed acquisition sources: Ace Lord Radiant Card."],
   },
   "kaios": {
     checkedOn: '2026-11-23',
