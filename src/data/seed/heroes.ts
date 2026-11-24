@@ -61,9 +61,9 @@ const baseHeroes: Hero[] = [
     notes: 'Civil hero: skills apply by owning the hero. Listed as obtainable only through the Combination Event.', confidence: 'estimate',
   }),
   hero({
-    name: 'Anastasia', title: 'Frost Empress', element: 'Fire', rarity: 5, unit: 'All-round', role: 'Garrison anchor',
-    march: [['Eternal Winter', 'Infantry DEF and HP up; reduces damage taken by the garrison.'], ['Crown of Rime', 'Chance to freeze enemy Cavalry, lowering their damage for 2 rounds.']],
-    m3: { name: 'Joyous', desc: 'Heals all members each round. Second hero skill, Inspiring: restores Rage. Full skill text and values not verified.', pattern: 'All allies', effects: ['Heal', 'Rage restore'] },
+    name: 'Anastasia', title: 'Frost Empress', element: 'Fire', rarity: 5, unit: 'All-round', role: 'Revive and sustain support',
+    march: [['Troop HP', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game).'], ['Troop DEF', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game).'], ['Troop ATK', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when she joins troop battle (in-game).']],
+    m3: { name: 'Dance of Rebirth', desc: 'All dead allies have a 33% chance to Revive with 10% HP (Rage Regen: Slow). Joyous: all members recover 15% HP each round for 4 rounds. Inspiring: all members recover a little Rage each round for 4 rounds. Resolute: immune to Rage reduction. Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.', charge: 'Slow', pattern: 'All allies', effects: ['Revive', 'Heal over time', 'Rage up', 'Rage-reduction immunity', 'Crit Res.'] },
     sources: ['Astrology'], curio: 'Rimecrown Sceptre',
     notes: 'Astrology hero. Astrology Summon Scrolls do not expire, so they can be saved across events.',
   }),
@@ -545,7 +545,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 42; // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 43; // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

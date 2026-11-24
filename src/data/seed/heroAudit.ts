@@ -17,7 +17,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "sources", "match3Skill"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/All-round", "https://puzzles-chaos.fandom.com/wiki/Anastasia"],
-    notes: ["Wiki: 5-star Fire All-round, obtained via Astrology (app previously: 6-star Ice Infantry). Three sources agree on Fire.", "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."],
+    notes: ["In-game (2026-11-24, Anastasia 6★ +8): Fire confirmed (all-round unit icon); troop skill 500%; Troop HP/DEF/ATK (all troops, in battle) 5★ 18.4–135.3%, 6★ 57.6/73.7/108/180%; hero skills Dance of Rebirth (33% revive, Rage Regen Slow), Joyous, Inspiring, Resolute, Iron Will (6★). The unsourced Eternal Winter / Crown of Rime skills were replaced.", "Wiki: 5-star Fire All-round, obtained via Astrology (app previously: 6-star Ice Infantry). Three sources agree on Fire.", "Match-3 skill corrected from the wiki: 'Joyous' heals all members each round; 'Inspiring' restores Rage. Full text and values not verified."],
   },
   "maxim": {
     checkedOn: '2026-11-23',
