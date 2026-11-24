@@ -5,6 +5,7 @@ import type { TroopFocus } from '@/types/game';
 import type { RosterEntry } from '@/lib/roster';
 import type { Reminder } from '@/lib/reminders';
 import type { Hive } from '@/lib/hive';
+import type { AllianceTime } from '@/lib/allianceTimes';
 import { weekIndex } from '@/lib/time';
 import type { BuildBonuses, ResourceKey } from '@/lib/calculators';
 
@@ -39,6 +40,8 @@ export interface AppState {
   reminders: Reminder[];
   /** Hive plans (alliance castle layouts). */
   hives: Hive[];
+  /** Start times your alliance chose, by event id. */
+  allianceTimes: Record<string, AllianceTime>;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -69,6 +72,7 @@ export interface AppState {
   removeReminder: (id: string) => void;
   saveHive: (h: Hive) => void;
   removeHive: (id: string) => void;
+  setAllianceTime: (eventId: string, at: AllianceTime | null) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -97,6 +101,7 @@ export const defaultState: PersistedState = {
   seenWhatsNew: '',
   reminders: [],
   hives: [],
+  allianceTimes: {},
 };
 
 export const useAppStore = create<AppState>()(
@@ -146,6 +151,11 @@ export const useAppStore = create<AppState>()(
       removeReminder: (id) => set({ reminders: get().reminders.filter((x) => x.id !== id) }),
       saveHive: (h) => set({ hives: get().hives.some((x) => x.id === h.id) ? get().hives.map((x) => (x.id === h.id ? h : x)) : [...get().hives, h] }),
       removeHive: (id) => set({ hives: get().hives.filter((x) => x.id !== id) }),
+      setAllianceTime: (eventId, at) => {
+        const next = { ...get().allianceTimes };
+        if (at) next[eventId] = at; else delete next[eventId];
+        set({ allianceTimes: next });
+      },
       removeFromRoster: (heroId) => {
         const next = { ...get().roster };
         delete next[heroId];

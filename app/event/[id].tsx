@@ -9,7 +9,9 @@ import { palette, space, type } from '@/theme';
 import { Badge, Button, Card, Chip, ChipRow, ConfidenceNote, EmptyState, Row, Screen, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { utcToLocalLabel } from '@/lib/time';
-import { cancelEventAlarm, ensurePermission, scheduleEventAlarm } from '@/services/notifications';
+import { cancelEventAlarm, ensurePermission, scheduleAllianceEventAlarm, scheduleEventAlarm } from '@/services/notifications';
+import { isAllianceTimed } from '@/lib/allianceTimes';
+import { AllianceTimeCard } from '@/components/domain/AllianceTimeCard';
 
 export default function EventDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -17,6 +19,9 @@ export default function EventDetail() {
   const alarmOn = useAppStore((s) => !!s.alarms[String(id)]);
   const setAlarm = useAppStore((s) => s.setAlarm);
   const lead = useAppStore((s) => s.alarmLeadMinutes);
+  const allianceTime = useAppStore((s) => s.allianceTimes[String(id)]);
+  const aceAnchor = useAppStore((s) => s.aceLordAnchorWeek);
+  const rotAnchor = useAppStore((s) => s.rotationAnchorWeek);
   useEffect(() => { getEvent(String(id)).then(setEv).catch(() => setEv(null)); }, [id]);
 
   if (ev === undefined) return <Screen><Stack.Screen options={{ title: '' }} /></Screen>;
@@ -29,7 +34,8 @@ export default function EventDetail() {
   const toggle = async () => {
     if (!alarmOn) {
       if (!(await ensurePermission())) return;
-      await scheduleEventAlarm(ev, lead);
+      if (allianceTime) await scheduleAllianceEventAlarm(ev, allianceTime, lead, { aceLordAnchorWeek: aceAnchor, rotationAnchorWeek: rotAnchor });
+      else await scheduleEventAlarm(ev, lead);
     } else await cancelEventAlarm(ev.id);
     setAlarm(ev.id, !alarmOn);
   };
@@ -48,7 +54,9 @@ export default function EventDetail() {
         {ev.days.length ? (
           <>
             <View style={{ marginTop: space.md, gap: 4 }}>
-              {ev.days.map((d) => (
+              {isAllianceTimed(ev.id) ? (
+                <Text style={type.body}>{ev.days.join(', ')} · time set by your alliance</Text>
+              ) : ev.days.map((d) => (
                 <Row key={d} style={{ justifyContent: 'space-between' }}>
                   <Text style={type.body}>{d} {ev.startUtc} UTC</Text>
                   <Text style={type.numberSmall}>Local {utcToLocalLabel(d, ev.startUtc)}</Text>
@@ -56,12 +64,17 @@ export default function EventDetail() {
               ))}
             </View>
             <View style={{ marginTop: space.md }}>
-              <Button variant={alarmOn ? 'secondary' : 'primary'} icon={alarmOn ? BellOff : Bell} label={alarmOn ? 'Alarm on — tap to cancel' : `Alarm ${lead} min before`} onPress={() => { toggle().catch(() => undefined); }} />
+              {isAllianceTimed(ev.id) && !allianceTime ? (
+                <Text style={type.caption}>Set your alliance's time below to turn on an alarm.</Text>
+              ) : (
+                <Button variant={alarmOn ? 'secondary' : 'primary'} icon={alarmOn ? BellOff : Bell} label={alarmOn ? 'Alarm on — tap to cancel' : `Alarm ${lead} min before`} onPress={() => { toggle().catch(() => undefined); }} />
+              )}
             </View>
           </>
         ) : null}
         <ConfidenceNote confidence={ev.confidence} />
       </Card>
+      {isAllianceTimed(ev.id) ? <AllianceTimeCard ev={ev} /> : null}
 
       {days ? (
         <>

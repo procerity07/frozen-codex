@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 import type { GameEvent } from '@/types/game';
 import { nextUtcOccurrence } from '@/lib/time';
 import { weeklyTriggers, type Reminder } from '@/lib/reminders';
+import { upcomingStarts, type AllianceTime } from '@/lib/allianceTimes';
+import type { Anchors } from '@/lib/schedule';
 
 const CHANNEL = 'events';
 
@@ -96,4 +98,23 @@ export async function scheduleReminder(r: Reminder): Promise<number> {
     });
   }
   return triggers.length;
+}
+
+/**
+ * Alarms for an event at your alliance's chosen time. Uses one-off alarms for the next few weeks
+ * (so alternating weekly times work); they are refreshed each time the app opens.
+ */
+export async function scheduleAllianceEventAlarm(event: GameEvent, at: AllianceTime, leadMinutes: number, anchors: Anchors): Promise<number> {
+  await cancelEventAlarm(event.id);
+  const now = new Date();
+  const starts = upcomingStarts(event, at, now, anchors, 28).filter((d) => d.getTime() - leadMinutes * 60_000 > now.getTime() + 30_000).slice(0, 12);
+  for (const start of starts) {
+    const local = `${String(start.getHours()).padStart(2, '0')}:${String(start.getMinutes()).padStart(2, '0')}`;
+    await Notifications.scheduleNotificationAsync({
+      identifier: `evt:${event.id}:a${start.getTime()}`,
+      content: { title: event.name, body: `Starts in ${leadMinutes} min (your alliance's time, ${local} your time).`, data: { eventId: event.id } },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(start.getTime() - leadMinutes * 60_000), channelId: CHANNEL },
+    });
+  }
+  return starts.length;
 }

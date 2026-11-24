@@ -11,7 +11,8 @@ import { cycleForDate, formatDuration, msUntilUtcMidnight, nextUtcOccurrence, ut
 import { eventsOn } from '@/lib/schedule';
 import { nextOccurrence } from '@/lib/reminders';
 import { CURRENT_VERSION } from '@/services/appUpdate';
-import { scheduleReminder } from '@/services/notifications';
+import { scheduleAllianceEventAlarm, scheduleReminder } from '@/services/notifications';
+import { upcomingStarts } from '@/lib/allianceTimes';
 import { ReleaseNotes } from './UpdateBanner';
 
 const WEEK_MS = 7 * 86_400_000;
@@ -34,6 +35,11 @@ export function Dashboard({ now }: { now: Date }) {
   const todayIds = new Set(eventsOn(events, now, anchors).map((e) => e.id));
   const startingTomorrow = eventsOn(events, tomorrow, anchors).filter((e) => e.category !== 'Core Cycle' && !todayIds.has(e.id));
 
+  const nextAlliance = Object.entries(s.allianceTimes)
+    .map(([id, at]) => { const e = events.find((x) => x.id === id); return e ? { e, at: upcomingStarts(e, at, now, anchors, 14)[0] } : null; })
+    .filter((x): x is { e: (typeof events)[number]; at: Date } => !!x && !!x.at)
+    .sort((a, b) => a.at.getTime() - b.at.getTime())[0];
+
   const nextReminder = s.reminders
     .filter((r) => r.enabled)
     .map((r) => ({ r, at: nextOccurrence(r, now) }))
@@ -45,7 +51,14 @@ export function Dashboard({ now }: { now: Date }) {
   useEffect(() => {
     if (rescheduled.current) return;
     rescheduled.current = true;
-    for (const r of useAppStore.getState().reminders) if (r.enabled) scheduleReminder(r).catch(() => undefined);
+    const st = useAppStore.getState();
+    for (const r of st.reminders) if (r.enabled) scheduleReminder(r).catch(() => undefined);
+    // Alliance-time alarms are one-off, so top them up for the coming weeks.
+    const a = { aceLordAnchorWeek: st.aceLordAnchorWeek, rotationAnchorWeek: st.rotationAnchorWeek };
+    for (const [id, at] of Object.entries(st.allianceTimes)) {
+      const e = events.find((x) => x.id === id);
+      if (e && st.alarms[id]) scheduleAllianceEventAlarm(e, at, st.alarmLeadMinutes, a).catch(() => undefined);
+    }
   }, []);
 
   return (
@@ -58,6 +71,12 @@ export function Dashboard({ now }: { now: Date }) {
         <Pressable onPress={() => router.push(`/event/${war.e.id}`)} style={st.line}>
           <Text style={type.caption}>Next war event</Text>
           <Text style={type.body}><Text style={{ fontWeight: '700' }}>{war.e.name}</Text> in {formatDuration(war.at.getTime() - now.getTime())}</Text>
+        </Pressable>
+      ) : null}
+      {nextAlliance ? (
+        <Pressable onPress={() => router.push(`/event/${nextAlliance.e.id}`)} style={st.line}>
+          <Text style={type.caption}>Next alliance event (your alliance's time)</Text>
+          <Text style={type.body}><Text style={{ fontWeight: '700' }}>{nextAlliance.e.name}</Text> in {formatDuration(nextAlliance.at.getTime() - now.getTime())}</Text>
         </Pressable>
       ) : null}
       {startingTomorrow.length ? (

@@ -1,3 +1,4 @@
+import { anchorFor, cleanAllianceTime, timeForWeek, upcomingStarts } from '../src/lib/allianceTimes';
 import { coordsOf, exportCode, importCode, newHive, parseMembers, resize, setCell, unplaced } from '../src/lib/hive';
 import { nextOccurrence, weeklyTriggers, normalizeTime, describeDays } from '../src/lib/reminders';
 /* Validates seed integrity, runs the real migrations + seeder on SQLite, and exercises search + calculators. */
@@ -317,5 +318,22 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(resize(h, 5, 5).cells.length === 25 && resize(h, 99, 1).cols === 30, 'hive resize clamps');
   let threw = false; try { importCode('hello', 'x'); } catch { threw = true; }
   ok(threw, 'invalid hive code rejected');
+}
+
+// Alliance-chosen event times
+{
+  const gate = seed.events.find((e) => e.id === 'infernal-gate')!;
+  const tue = new Date(Date.UTC(2026, 10, 24, 8, 0)); // Tuesday 08:00 UTC
+  const a0 = { aceLordAnchorWeek: 0, rotationAnchorWeek: 0 };
+  const fixed = cleanAllianceTime({ time: '19:00', zone: 'utc', anchorWeek: anchorFor(tue, 'A') })!;
+  const s1 = upcomingStarts(gate, fixed, tue, a0, 14);
+  ok(s1[0]!.toISOString() === '2026-11-24T19:00:00.000Z' && s1[1]!.toISOString() === '2026-11-27T19:00:00.000Z', 'alliance time on event days (Tue, Fri)');
+  const alt = cleanAllianceTime({ time: '19:00', altTime: '21:00', zone: 'utc', anchorWeek: anchorFor(tue, 'A') })!;
+  const nextWeek = new Date(tue.getTime() + 7 * 86_400_000);
+  ok(timeForWeek(alt, tue) === '19:00' && timeForWeek(alt, nextWeek) === '21:00', 'alternating weekly times');
+  ok(upcomingStarts(gate, alt, tue, a0, 14).slice(0, 4).map((d) => d.toISOString().slice(11, 16)).join() === '19:00,19:00,21:00,21:00', 'alternating times across two weeks');
+  const thisWeekB = cleanAllianceTime({ time: '19:00', altTime: '21:00', zone: 'utc', anchorWeek: anchorFor(tue, 'B') })!;
+  ok(timeForWeek(thisWeekB, tue) === '21:00', 'choose which time applies this week');
+  ok(cleanAllianceTime({ time: '25:00', zone: 'utc', anchorWeek: 0 }) === null && !cleanAllianceTime({ time: '19:00', altTime: '19:00', zone: 'utc', anchorWeek: 0 })!.altTime, 'alliance time validation');
 }
 
