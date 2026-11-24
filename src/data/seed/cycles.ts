@@ -5,7 +5,7 @@ export const cycleDays: CycleEventDays[] = [
     eventId: 'ace-lord',
     days: [
       { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Recruit items: Timeless Scroll 20,000 · Deluxe Recruit Ticket 10,000', 'Hero shards: 5★ Omni 30,000 · 4★ Omni 10,000 · 3★ Omni 3,000 · 2★ Hero Shard 750', 'Bond Gifts: T1 75 · T2 375 · T3 750 · T4 9,375 · T5 18,750', 'Mythic Hero Choice Cards, Realm Cards and Hero Plaza exchanges give 0'] },
-      { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['Construction power', 'Research power', 'Build/Research speedups'] },
+      { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['+5 points per 1 power from Construction (in-game)', '+5 points per 1 power from Research (in-game)'] },
       { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['Stamina spent', 'AP spent', 'Resources gathered'] },
       { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups', 'Troops trained'] },
       { day: 5, weekday: 'Fri', theme: 'Draconic Stone (Draconic Stone & Refinement Crest)', scoring: ['Draconic Stone EXP', 'Refinement Crests'] },
@@ -48,6 +48,7 @@ export const royalArmsRace: RoyalArmsRaceSlot[] = [
 
 /**
  * Ace Lord Day 1 (Heroes Assemble) phases — confirmed from in-game screenshots (2026-11-23).
+ * Day 2 (Path to Development) uses the same point thresholds; its phases 1–4 give 6x 60m speedups (in-game, 2026-11-24).
  * Wiki: Days 2–4 share the 600,000 top phase; Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000.
  */
 export const aceLordPhases: PhaseReward[] = [

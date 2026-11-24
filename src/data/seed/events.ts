@@ -56,10 +56,27 @@ const baseEvents: GameEvent[] = [
       'Consume Diamond (Event)': { days: ['Sat', 'Sun'], cycleWeek: 'Arms Race', cadence: 'Usually Sat–Sun in Arms Race weeks' },
       'Curio (Event)': { days: ['Tue'], cycleWeek: 'Ace Lord', cadence: 'Usually Tuesday in Ace Lord weeks' },
     };
+    // In-game point tables (screenshots 2026-11-24).
+    const extra: Record<string, Partial<E>> = {
+      'Curio (Event)': {
+        summary: 'Points for obtaining Curio materials and crafting Curios. Phases at 12,000 / 24,000 / 44,000 / 60,000 / 120,000 / 240,000 points.',
+        rules: [
+          'Obtain a Curio Spinel: +1,000. Obtain a Curio Crystal: +5,000.',
+          'Obtain a Curio Essence: 1★ +100, 2★ +500, 3★ +2,000, 4★ +5,000, 5★ +20,000.',
+          'Craft a Curio: Common +20,000, Uncommon +50,000, Superb +100,000, Epic +200,000, Legendary +500,000.',
+          'Salvaging for Enhance materials gives no points.',
+          'Runs for one day (in-game timer); Point Reward, Personal Rank and Realm Rank tabs.',
+        ],
+        rewards: ['Curio scroll (1 at phases 1–3, 2 at phase 4)', '3x 60m Speedups (Healing, Training, Research)', '10x 10K Food and Wood', '200 Diamonds (phase 5)', 'Dragon EXP and Dragon Civil Pts (phase 6)', '5,000 Stone and 2,500 Iron (phases 5–6)'],
+        tips: ['Crafting one Curio is worth far more than collecting materials; save crafts for this day.', 'A single Common Curio (+20,000) clears phase 1.'],
+        confidence: 'verified',
+      },
+    };
     return ev({
       name: name!, category: C('Core Cycle'), cadence: 'Inside Arms Race / Ace Lord cycles', cycleWeek: W('Both'), days: [], summary: summary!,
       rules: ['Runs as a sub-tracker during the matching day of the parent cycle.'], tips: ['Use the Bag Hoard calculator to time your dump with the parent day.'],
       ...known[name!],
+      ...extra[name!],
     });
   }),
 
@@ -179,6 +196,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 6; // 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards (essence colours matched to the Diamond Shop)
+export const EVENT_DATA_REVISION = 7; // 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
