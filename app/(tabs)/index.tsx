@@ -40,8 +40,7 @@ export default function HomeScreen() {
     <Screen>
       <UpdateBanner />
       <AutoWhatsNew />
-      <Dashboard now={now} />
-      <Card style={{ marginTop: space.md }}>
+      <Card style={{ marginTop: space.xs }}>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>
           <Segmented
@@ -92,6 +91,9 @@ export default function HomeScreen() {
       <ChipRow>
         {todayEvents.map((e) => <Chip key={e.id} label={e.name} onPress={() => router.push(`/event/${e.id}`)} />)}
       </ChipRow>
+
+      <SectionHeader title="At a glance" />
+      <Dashboard now={now} />
 
       <DailyChecklist now={now} />
     </Screen>

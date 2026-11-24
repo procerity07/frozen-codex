@@ -49,7 +49,7 @@ export function Dashboard({ now }: { now: Date }) {
   }, []);
 
   return (
-    <Card style={{ marginTop: space.xs }}>
+    <Card>
       <Row style={{ justifyContent: 'space-between' }}>
         <Countdown icon={Clock} label="Daily reset" value={formatDuration(msUntilUtcMidnight(now))} />
         <Countdown icon={CalendarClock} label={`Weekly reset · ${nextCycle} next`} value={formatDuration(weeklyMs)} align="right" />

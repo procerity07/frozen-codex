@@ -118,9 +118,9 @@ const baseEvents: GameEvent[] = [
     rewards: ['Diamonds', 'Speedup 60-min', 'Dragon Civil Pts', '1★ Gear Essence', '1★ Rune Essence', '1★ Totem Essence', 'Alliance Coins'],
   }),
   ev({
-    name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA, from Wednesday', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'],
-    summary: 'AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.',
-    rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Starts Wednesday and runs through at least Friday; the battle time was not shown.', 'Sign-up needs at least 10 members with Citadel Lv. 18+.', 'Occupy a structure for 3 minutes to control it; control earns Time Points.', 'Wounded go to the Battlefield Hospital and return when you leave the battlefield.', 'The alliance with more Time Points wins; both sides get rewards.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
+    name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA: registration Wednesday–Thursday, battle Friday', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'],
+    summary: 'Registration opens Wednesday; the battle itself is on Friday. AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.',
+    rules: ['Registration opens on Wednesday (sign up Wednesday–Thursday).', 'The actual battle takes place on Friday.', 'Schedule confirmed in-game (week of 23 Nov 2026); the exact Friday battle time was not shown.', 'Sign-up needs at least 10 members with Citadel Lv. 18+.', 'Occupy a structure for 3 minutes to control it; control earns Time Points.', 'Wounded go to the Battlefield Hospital and return when you leave the battlefield.', 'The alliance with more Time Points wins; both sides get rewards.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
   }),
   ev({
     name: 'Strike Out', category: C('Alliance'), cadence: 'Every weekend Sat–Sun', cycleWeek: W('Both'), days: ['Sat', 'Sun'],
@@ -242,6 +242,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 10; // 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 11; // 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
