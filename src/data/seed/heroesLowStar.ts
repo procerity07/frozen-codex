@@ -166,7 +166,17 @@ export const lowStarHeroes: Hero[] = [
   // ------------------------------ Light ------------------------------
   lowStar({ name: 'Penny', element: 'Light', rarity: 2, unit: 'Civil', sources: ['Hero Plaza'],
     civil: [civil('Hunt March Speed'), civil('Research Food Cost'), civil('Research Wood Cost')] }),
-  lowStar({ name: 'Aemon', element: 'Light', rarity: 3, unit: 'Archer', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Archer HP', 'Archer DEF', 'Archer ATK'] }),
+  {
+    ...lowStar({ name: 'Aemon', element: 'Light', rarity: 3, unit: 'Archer', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Troop skill', 'Archer HP', 'Archer DEF', 'Archer ATK'],
+      m3: { name: 'Dawn Break', description: 'Deals 316% damage to the target (Rage Regen: Fast). Light Cone (unlocks Lv. 11): target Hit −32% for 4 rounds. Blessed Light (unlocks Lv. 31): ATK +10% and Crit +5%. Values as shown in-game at +2.', charge: 'Fast', pattern: 'Single target', effects: ['Hit down', 'ATK up', 'Crit'] },
+      notes: ['In-game (2026-11-24, Aemon at +2): 3★ Light Archer confirmed; troop skill 150/200/300/500% of troop ATK (+2 to +5); Archer HP/DEF/ATK 10/15/20/25% (+2 to +5), Archer DEF unlocks at Lv. 31 and Archer ATK at Lv. 71; three hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 150% of troop ATK at +2, 200% at +3, 300% at +4, 500% at +5 (in-game).' },
+      { name: 'Archer HP', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when he joins troop battle (in-game).' },
+      { name: 'Archer DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Archer ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
   lowStar({ name: 'Hannah', element: 'Light', rarity: 3, unit: 'Cavalry', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
     m3: { name: 'Valiant Throw', description: 'Deals 208% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
   {
