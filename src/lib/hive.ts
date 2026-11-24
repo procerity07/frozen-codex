@@ -21,7 +21,7 @@ export interface Hive {
 }
 
 export const KIND_LABELS: Record<CellKind, string> = {
-  empty: 'Empty', member: 'Member', fort: 'Fort', gate: 'Gate', gather: 'Gather', marker: 'Tower / flag', blocked: 'Blocked',
+  empty: 'Empty', member: 'Member', fort: 'Fort', gate: 'Gate', gather: 'Gather', marker: 'Outpost', blocked: 'Blocked',
 };
 
 export const MAX_SIDE = 30;

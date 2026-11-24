@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import * as Haptics from 'expo-haptics';
-import { Copy } from 'lucide-react-native';
+import { Copy, LayoutGrid } from 'lucide-react-native';
 import { palette, radius, space, type } from '@/theme';
 import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table } from '@/components/ui';
 import { colExchange, COL_PERSONAL_TARGET, fmtFull, reKillPoints, reKillPointsByTier, troopPowerByTier } from '@/lib/calculators';
@@ -37,6 +37,11 @@ export default function WarRoom() {
   return (
     <Screen sticky={<View style={{ paddingHorizontal: space.lg, paddingTop: space.md, backgroundColor: palette.bg }}><Segmented options={VIEWS} value={view} onChange={setView} /></View>}>
       <Stack.Screen options={{ title: 'War Room' }} />
+      <Card style={{ marginBottom: space.md }}>
+        <Text style={type.heading}>Alliance Hive Planner</Text>
+        <Text style={[type.caption, { marginTop: 2 }]}>Plan where every member's castle goes around the fort, with teleport coordinates for each spot.</Text>
+        <View style={{ marginTop: space.sm }}><Button icon={LayoutGrid} variant="secondary" label="Open Hive Planner" onPress={() => router.push('/tools/hive')} /></View>
+      </Card>
       {view === 'Compare' && <Compare />}
       {view === 'CoL Calc' && <ColCalc />}
       {view === 'RE Points' && <RePoints />}
