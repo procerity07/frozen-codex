@@ -119,7 +119,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Infantry", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Light Infantry; Hero Plaza, Mythic Hero Covenant and other sources (app previously: Fire Archer).", "Previous app sources (Personal Activity, Recruit Trial, Timeless Recruitment) kept but not confirmed. Bond corrected: Rhapsody of Genesis.", "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."],
+    notes: ["In-game (2026-11-24, Rodriguez at +1): 5★ Light Infantry confirmed; troop skill 120% of troop ATK; Troop HP/DEF/ATK (all troops) table, 9.6% at +1 (Troop DEF Lv. 31, Troop ATK Lv. 131); hero skills Pledge of Victory (allies ATK +70%, Hit −35%), Art of Command (Lv. 11), Kingly Prowess (Lv. 31), Faith Deprivation (Lv. 71), Unbending (6★). Matches the Sophia answer: Rodriguez cannot reduce enemy DEF. The unsourced Powder Keg / Dynamite skills were replaced.", "Wiki: 5-star Light Infantry; Hero Plaza, Mythic Hero Covenant and other sources (app previously: Fire Archer).", "Previous app sources (Personal Activity, Recruit Trial, Timeless Recruitment) kept but not confirmed. Bond corrected: Rhapsody of Genesis.", "Unconfirmed acquisition sources: Personal Activity, Recruit Trial, Timeless Recruitment."],
   },
   "freya": {
     checkedOn: '2026-11-23',

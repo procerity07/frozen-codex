@@ -212,11 +212,14 @@ const baseHeroes: Hero[] = [
     notes: 'Shards also sold in the Commander Shop (5,000 each, unlimited).',
   }),
   hero({
-    name: 'Rodriguez', title: 'Desert Gunner', element: 'Light', rarity: 5, unit: 'Infantry', role: 'Infantry DPS',
-    march: [['Powder Keg', 'Archer ATK up; bonus damage vs structures.']],
-    m3: { name: 'Dynamite', desc: 'Fire damage to a 3x3 area.', charge: 'Medium', pattern: '3x3', effects: ['AoE'] },
+    name: 'Rodriguez', title: 'Desert Gunner', element: 'Light', rarity: 5, unit: 'Infantry', role: 'Team ATK buffer',
+    march: [
+      ['Troop skill', 'Deals damage equal to 120% of troop ATK to the enemy (at +1, in-game).'],
+      ...militaryTrio('Troop', ALL_TROOP_5STAR_MILITARY).map(([n, d]) => [n, n === 'Troop DEF' ? `${d} Unlocks at Lv. 31.` : n === 'Troop ATK' ? `${d} Unlocks at Lv. 131.` : d] as [string, string]),
+    ],
+    m3: { name: 'Pledge of Victory', desc: 'All allies ATK +70% and Hit −35% (Rage Regen: Medium). Art of Command (unlocks Lv. 11): the Hit penalty drops from 35% to 25%. Kingly Prowess (unlocks Lv. 31): enemies ATK −20% for 5 rounds. Faith Deprivation (unlocks Lv. 71): dispels all buffs enemies gained from active skills. Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All allies', effects: ['ATK up', 'Hit down', 'ATK down', 'Dispel', 'Parry'] },
     sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Personal Activity', 'Recruit Trial', 'Timeless Recruitment'], bonds: ['Rhapsody of Genesis'],
-    notes: 'Bi-weekly Personal Activity shards make him a free long-term Infantry hero.',
+    notes: 'Team buffer: +70% ATK for all allies. Bi-weekly Personal Activity shards make him a free long-term hero.',
   }),
   hero({
     name: 'Freya', title: 'Valkyrie', element: 'Nature', rarity: 5, unit: 'Archer', role: 'Single-target damage and Stun',
@@ -523,6 +526,6 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 33; // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 34; // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
