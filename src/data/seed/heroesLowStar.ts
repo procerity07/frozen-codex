@@ -181,7 +181,17 @@ export const lowStarHeroes: Hero[] = [
       { name: 'Cavalry ATK', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when she joins troop battle (in-game).' },
     ],
   },
-  lowStar({ name: 'Hanzo', element: 'Light', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Output')] }),
+  {
+    ...lowStar({ name: 'Hanzo', element: 'Light', rarity: 4, unit: 'Archer', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Archer DEF', 'Archer ATK'],
+      civil: [{ name: 'Wood Output', description: 'In-game. 4★: +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '4': [null, null, 40, 60, 80, 100] } }],
+      m3: { name: 'Ultimate Thunderbolt', description: 'Deals 358% damage to the target (Rage Regen: Medium). Genjutsu: Bridling Anger (unlocks Lv. 11): depletes 25% of the target\'s Rage. Taijutsu: Repeated Struggles (unlocks Lv. 31): ATK +15% and Crit +8%. Ninjutsu: Blood Drain (unlocks Lv. 71): converts 75% of the damage dealt into HP. Values as shown in-game at +3.', charge: 'Medium', pattern: 'Single target', effects: ['Rage down', 'ATK up', 'Crit', 'Lifesteal'] },
+      notes: ['In-game (2026-11-24, Hanzo at +3): 4★ Light Archer confirmed; troop skill 200% of troop ATK; Wood Output 40/60/80/100% (owned); Archer DEF (Lv. 31) and ATK (Lv. 131) 20/30/40/50% (+2 to +5); four hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).' },
+      { name: 'Archer DEF', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Archer ATK', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   // ------------------------------ Dark ------------------------------
   {
     ...lowStar({ name: 'Claudia', element: 'Dark', rarity: 3, unit: 'Cavalry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Troop skill', 'Cavalry DEF', 'Cavalry ATK'],
