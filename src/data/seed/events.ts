@@ -135,7 +135,18 @@ const baseEvents: GameEvent[] = [
   }),
   ev({
     name: 'Infernal Gate', category: C('Alliance'), cadence: 'Twice weekly', cycleWeek: W('Both'), days: ['Tue', 'Fri'],
-    summary: 'Rally the Infernal Emissary Lv. 1–25 (20k to 120M HP).', rules: ['71-hour personal participation cooldown.', 'Rewards depend on damage dealt.', 'Lords who leave the alliance after joining cannot rejoin the event.'], rewards: ['Regal / Deluxe Recruit Tickets', 'Alliance Coins'],
+    summary: 'Rally the Infernal Emissary Lv. 1–25 (20k to 120M HP) with your alliance within the time limit.',
+    rules: [
+      'Rally the Infernal Gate with allies within the time limit; defeating the Infernal Emissary gives every alliance member a kill reward (once per 71 hours).',
+      'After the gate closes, damage rewards are given by each Lord\'s damage.',
+      'Each Lord has a 71-hour cooldown for taking part.',
+      'Lords who take part and then leave the alliance cannot take part again after returning.',
+      'Monsters cycle Lich, Arachnid Queen, Leviathan, Dragon, Sandworm King (Lv. 1–5, 6–10 and so on).',
+      'Kill rewards (in-game): Lv. 1–9 give 2–6 Recruit Tickets and 1,800–3,050 Alliance Coins (+150 per level); Lv. 10 gives 2 Regal Recruit Tickets and 3,200 coins; Lv. 11–15 give 2–4 Regal tickets and 3,400–4,200 coins (+200 per level); Lv. 16–20 give 4–5 Regal tickets and 4,500–5,700 coins (+300 per level).',
+    ],
+    rewards: ['Recruit Tickets (Regal from Lv. 10)', 'Alliance Coins (1,800 at Lv. 1 to 5,700 at Lv. 20)', 'Damage rewards: 5★, 4★ and 1★ Hero Shards, 150K Food, 150K Wood, 30K Stone, Iron'],
+    tips: ['Kill the highest level your alliance can clear in time: Lv. 20 gives over 3x the coins of Lv. 1.', 'Coordinate the 71-hour cooldown so the strongest rally leaders are free on gate days.'],
+    confidence: 'verified',
   }),
   ev({ name: 'Resource Supply', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
   ev({ name: 'Holystone Upgrades', category: C('Weekly'), cadence: 'Monday to Sunday (seen in Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], summary: 'Week-long daily event in the Event Center.', rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'How often it returns, its rules and rewards are not recorded yet.'], confidence: 'verified' }),
@@ -198,6 +209,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 7; // 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 8; // 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
