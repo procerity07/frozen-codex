@@ -8,7 +8,7 @@ import { getHero } from '@/db/repo';
 import { bondGroups, curios, events } from '@/data/seed';
 import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
-import { combatRoleLabel, isFieldVerified } from '@/lib/heroData';
+import { combatRoleLabel, isFieldVerified, skillsCheckedInGame } from '@/lib/heroData';
 import { MyHeroCard } from '@/components/domain/MyHeroCard';
 import { HeroPortrait } from '@/components/domain/HeroPortrait';
 
@@ -16,6 +16,7 @@ const ROLE_COLORS: Record<CombatRole, string> = { Damage: palette.danger, Suppor
 
 /** Small marker for a section whose content no source has confirmed. */
 function Unverified({ hero, field }: { hero: Hero; field: HeroAuditField }) {
+  if ((field === 'marchSkills' || field === 'match3Skill') && !skillsCheckedInGame(hero)) return <Badge label="Not checked in-game" color={palette.warning} />;
   return isFieldVerified(hero, field) ? null : <Badge label="Not verified" color={palette.textMuted} />;
 }
 
@@ -80,6 +81,13 @@ export default function HeroDetail() {
           <Badge label={roleLabel} color={ROLE_COLORS[roleLabel]} />
         )}
       </Card>
+
+      {!skillsCheckedInGame(hero) ? (
+        <Card style={{ marginTop: space.md }} accent={palette.warning}>
+          <Text style={[type.body, { fontWeight: '600' }]}>Skills not checked in-game yet</Text>
+          <Text style={[type.caption, { marginTop: 2 }]}>This hero's troop and hero skills come from the wiki or older data and may be wrong. Screenshots of the Troop Skill and Hero Skill tabs will fix them.</Text>
+        </Card>
+      ) : null}
 
       {hero.marchSkills.length ? (
         <>

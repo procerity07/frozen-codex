@@ -50,6 +50,7 @@ export default function RemindersScreen() {
     <Screen>
       <Stack.Screen options={{ title: 'My reminders' }} />
       <Text style={type.bodySecondary}>Make your own notifications for anything: shop resets, alliance help, a farm castle, an event time. Game time is UTC; local time follows your phone.</Text>
+      <Text style={[type.caption, { marginTop: space.sm }]}>Not getting reminders? In Android Settings → Apps → Frozen Codex → Battery, choose Unrestricted. Some phones (e.g. Samsung, Xiaomi) block notifications from apps they put to sleep.</Text>
 
       {draft ? (
         <Card style={{ marginTop: space.md }}>

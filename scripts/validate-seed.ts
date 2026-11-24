@@ -1,3 +1,4 @@
+import { skillsCheckedInGame } from '../src/lib/heroData';
 import { outpostAreas } from '../src/lib/hive';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
@@ -369,5 +370,12 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(JSON.stringify(pack.packs) === JSON.stringify(packContent()), 'data pack is up to date (run npm run pack)');
   const parsed = parseManifest(pack);
   ok(parsed.packs.shops!.length === seed.shops.length && parsed.packs.sophia!.length === seed.sophiaQuestions.length, 'data pack parses, including shops');
+}
+
+// Heroes whose skills came from in-game screenshots are recognised (unchecked ones get a warning)
+{
+  const checked = seed.heroes.filter(skillsCheckedInGame).map((h) => h.id);
+  ok(['tania', 'boyd', 'edith', 'sirona', 'claudia', 'gina'].every((id) => checked.includes(id)) && checked.length >= 28, 'in-game checked heroes detected');
+  ok(seed.heroes.some((h) => !skillsCheckedInGame(h)), 'unchecked heroes flagged');
 }
 

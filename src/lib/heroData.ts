@@ -54,3 +54,8 @@ export function isFieldVerified(h: Hero, field: HeroAuditField): boolean {
 export function combatRoleLabel(h: Pick<Hero, 'combatRole'>): CombatRole | 'Not verified' {
   return isCombatRole(h.combatRole) ? h.combatRole : 'Not verified';
 }
+
+/** True when this hero's troop/hero skills were taken from in-game screenshots (not the wiki or older data). */
+export function skillsCheckedInGame(hero: Pick<Hero, 'marchSkills' | 'match3Skill'>): boolean {
+  return hero.marchSkills.some((s) => /in-game/i.test(s.description)) || /in-game/i.test(hero.match3Skill?.description ?? '');
+}
