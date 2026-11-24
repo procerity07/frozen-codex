@@ -4,6 +4,7 @@ import { parseManifest } from './ota-parse';
 
 export { parseManifest };
 import { getDb } from './client';
+import { sophiaQuestions } from '@/data/seed';
 import { getMeta, setMeta } from './repo';
 import { mergePackEvents, mergePackHeroes, upsertGiftCodes, upsertSophia } from './seed';
 
@@ -29,7 +30,9 @@ export async function applyManifest(manifest: DataManifest): Promise<SyncResult[
     heroResult = await mergePackHeroes(db, heroes);
     eventResult = await mergePackEvents(db, events);
     await upsertGiftCodes(db, giftCodes, 'ota');
-    await upsertSophia(db, sophia, 'ota');
+    // Online questions can add to the bundled list but never replace a bundled (real in-game) question.
+    const bundledIds = new Set(sophiaQuestions.map((q) => q.id));
+    await upsertSophia(db, sophia.filter((q) => !bundledIds.has(q.id)), 'ota');
   });
   await setMeta('ota_version', String(manifest.version));
   await setMeta('ota_synced_at', new Date().toISOString());

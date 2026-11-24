@@ -15,7 +15,7 @@ export interface AllianceTime {
 }
 
 /** Events whose start time each alliance decides. */
-export const ALLIANCE_TIMED_EVENTS = ['infernal-gate', 'undead-scourge', 'alliance-trial', 'alliance-party', 'shadow-expedition'] as const;
+export const ALLIANCE_TIMED_EVENTS = ['infernal-gate', 'undead-scourge', 'alliance-trial', 'alliance-party', 'shadow-expedition', 'fort-contest', 'alliance-defense'] as const;
 export const isAllianceTimed = (eventId: string) => (ALLIANCE_TIMED_EVENTS as readonly string[]).includes(eventId);
 
 const DAY_MS = 86_400_000;

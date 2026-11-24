@@ -3,8 +3,8 @@ import type { SophiaQuestion } from '@/types/game';
 type Row = [SophiaQuestion['category'], string, string, string?];
 
 /**
- * Sophia's Test lookup bank. Game-mechanics questions are answered from this codex;
- * add new in-game questions through the OTA data pack ("sophia" pack) as they appear.
+ * Sophia's Test lookup bank: only real in-game test questions. Add new ones as they appear in-game
+ * (here or through the OTA data pack's "sophia" pack).
  */
 /** Real in-game Sophia's Test questions and answers, from the community wiki's Sophia's Test page (checked 2026-11-23). */
 const wikiRows: Row[] = [
@@ -146,105 +146,7 @@ const wikiRows: Row[] = [
   ['General', 'Why does the Earth appear blue from outer space?', 'Scattering of light'],
 ];
 
-/** Extra game-mechanics questions written for this codex (not confirmed as in-game test questions). */
-const codexRows: Row[] = [
-  ['Combat', 'Which element does Fire have an advantage against?', 'Nature', 'element counter'],
-  ['Combat', 'Which element does Nature have an advantage against?', 'Ice', 'element counter'],
-  ['Combat', 'Which element does Ice have an advantage against?', 'Fire', 'element counter'],
-  ['Combat', 'Which elements counter each other mutually?', 'Light and Dark', 'element'],
-  ['Combat', 'How many elements are there in Puzzles & Chaos?', '5 (Fire, Ice, Nature, Light, Dark)', 'element'],
-  ['Combat', 'Which troop type has an advantage over Archers?', 'Infantry', 'troop triangle'],
-  ['Combat', 'Which troop type has an advantage over Cavalry?', 'Archer', 'troop triangle'],
-  ['Combat', 'Which troop type has an advantage over Infantry?', 'Cavalry', 'troop triangle'],
-  ['Combat', 'Which hero types exist besides Infantry, Cavalry and Archer?', 'All-round and Civil', 'unit type'],
-  ['Buildings', 'At what Institute level are troop Formations unlocked?', 'Level 28', 'formation institute'],
-  ['Buildings', 'Which building level unlocks Curios?', 'Weapon Forge Lv. 20', 'curio forge'],
-  ['Buildings', 'Which Weapon Forge levels unlock Totems?', 'Lv. 16 to 31 (Sets I–V)', 'totem forge'],
-  ['Buildings', 'Which Weapon Forge levels unlock Holystones?', 'Lv. 25 to 31 (Sets I–IV)', 'holystone forge'],
-  ['Buildings', 'At what building level do Glory Levels unlock?', 'Level 15', 'glory'],
-  ['Buildings', 'What item is required for building Glory Levels?', 'Marks of Glory', 'glory'],
-  ['Buildings', 'What is the maximum Citadel level?', '40', 'citadel'],
-  ['Buildings', 'How many chapters does the Mesdi Portal have?', '24', 'mesdi portal'],
-  ['Buildings', 'What does the Medical Tent hold?', 'Wounded troops (first buffer before the Sanctuary)', 'hospital'],
-  ['Buildings', 'Which building revives troops with Holy Light?', 'Sanctuary', 'sanctuary'],
-  ['Buildings', 'What is the Alliance Hospital capacity?', '100,000 troops', 'alliance hospital'],
-  ['Heroes', 'Which Dragon level unlocks Draconic Stones?', 'Dragon Lv. 30', 'draconic dragon'],
-  ['Heroes', 'Which Dragon level unlocks the Nature Draconic Stone?', 'Dragon Lv. 40', 'draconic'],
-  ['Heroes', 'Which Dragon level unlocks the Wild Draconic Stone?', 'Dragon Lv. 50', 'draconic'],
-  ['Heroes', 'What is the first Hero Bond title?', 'Stranger', 'bond'],
-  ['Heroes', 'What is the Hero Bond title at Lv. 80+?', 'Confidant', 'bond'],
-  ['Heroes', 'Which hero increases troop capacity just by being owned?', 'Saya', 'civil passive'],
-  ['Heroes', 'Which heroes reduce construction resource cost?', 'William and Chloe', 'civil'],
-  ['Heroes', 'Where is Anastasia primarily obtained?', 'Astrology', 'source'],
-  ['Heroes', 'Where are Guan Yu shards obtained?', 'Recruit Trial (Monthly Trial)', 'source'],
-  ['Heroes', 'What is Guan Yu’s exclusive curio?', 'Azure Dragon Blade', 'curio'],
-  ['Heroes', 'Which heroes are in the Lucky Flip pool?', 'Basilong, Edmund, Aurora', 'lucky flip'],
-  ['Heroes', "Which heroes are in Glory's Gift Roulette?", 'Kanye, Selantia, Dimina', 'roulette'],
-  ['Heroes', 'Which heroes can be earned from Strike Out?', 'Edith and Kujo Mamoru', 'strike out'],
-  ['Heroes', 'Which hero is earned from Royal Arms Race?', 'Lylia', 'royal arms race'],
-  ['Heroes', 'Which hero is earned from Alliance Duel?', 'Oskir', 'alliance duel'],
-  ['Heroes', 'Which hero is earned from Personal Activity?', 'Rodriguez', 'personal activity'],
-  ['Heroes', 'Which hero is earned from Shadow Expedition?', 'Ogremire', 'shadow expedition'],
-  ['Events', 'What reward does Ace Lord Phase 6 give?', 'Radiant Hero Choice Card', 'ace lord'],
-  ['Events', 'How many points is Ace Lord Phase 6?', '600,000', 'ace lord'],
-  ['Events', 'What is the Ace Lord Day 1 theme?', 'Hero Upgrade', 'ace lord day'],
-  ['Events', 'What is the Ace Lord Day 5 theme?', 'Draconic Stone & Refinement Crest', 'ace lord day'],
-  ['Events', 'What is the Alliance Duel Day 1 theme?', 'Rune & Holystone', 'alliance duel'],
-  ['Events', 'What happens on Alliance Duel Days 6–7?', 'Duel Moment — kill troops', 'alliance duel'],
-  ['Events', 'What is the Arms Race Day 6–7 theme?', 'Consume Diamond', 'arms race'],
-  ['Events', 'When does Conquest of Lords start?', 'Saturday 10:00 UTC, lasting 24 hours', 'col'],
-  ['Events', 'How long must the Hall of Might be held for an automatic win?', '8 consecutive hours', 'col hall of might'],
-  ['Events', 'How often do Spire cannons fire in Conquest of Lords?', 'Every 10 minutes (1% garrison loss)', 'col spire'],
-  ['Events', 'What is the personal score target in Conquest of Lords?', '12,000 points', 'col'],
-  ['Events', 'What is the Diamond Mine gathering cap per Lord in Realm Expedition?', '8,000', 'realm expedition'],
-  ['Events', 'How many points is a T1 foreign kill in Realm Expedition?', '0', 'realm expedition'],
-  ['Events', 'How many points is a T12 foreign kill in Realm Expedition?', '100', 'realm expedition'],
-  ['Events', 'How many points is 1 Fire Crystal in Scorching Front?', '1 point', 'scorching front'],
-  ['Events', 'How many free teleports are there in Scorching Front?', '3', 'scorching front'],
-  ['Events', 'How many waves are in Undead Scourge?', '20', 'undead'],
-  ['Events', 'Does the Arcane Barrier block Undead attacks?', 'No', 'undead barrier'],
-  ['Events', 'How long must an Oblivion War structure be occupied?', '3 minutes', 'oblivion war'],
-  ['Events', 'Which unit spawns from the Oblivion Pyramid?', 'Titan Colossus', 'oblivion war'],
-  ['Events', 'What is the Infernal Gate personal cooldown?', '71 hours', 'infernal gate'],
-  ['Events', 'How long is the Fort Contest battle phase?', '2 hours', 'fort contest'],
-  ['Events', 'How long a continuous hold wins Fort Contest?', '30 minutes', 'fort contest'],
-  ['Events', 'Minimum Citadel level for Lich Attack?', 'Level 6', 'lich'],
-  ['Events', 'Do you lose soldiers in Lich Attack?', 'No — zero soldier losses', 'lich'],
-  ['Events', 'How many questions are in Sophia’s Test?', '15', 'sophia'],
-  ['Events', 'How long do you have per question in Sophia’s Test?', '30 seconds', 'sophia'],
-  ['Events', 'On which days does Sophia’s Test run?', 'Monday, Thursday and Saturday', 'sophia'],
-  ['Events', 'How much Lucky Pt does each Lucky Flip card flip add?', '+0.02%', 'lucky flip'],
-  ['Events', 'How many points is 1 Stamina in Strike Out?', '600', 'strike out'],
-  ['Events', 'How much AP does one Visiting Boss attack cost?', '20 AP', 'ap event'],
-  ['Events', 'From which round does the Elemental Seal boss use skills?', 'Round 11', 'elemental seal'],
-  ['Events', 'Is the Elemental Seal boss immune to stun?', 'Yes — immune to stun and silence', 'elemental seal'],
-  ['Economy', 'Do Divination Crystals expire?', 'Yes', 'expire'],
-  ['Economy', 'Do Lucky Coins expire?', 'No', 'expire'],
-  ['Economy', 'Do Ice Picks expire?', 'No', 'expire'],
-  ['Economy', 'Do Timeless Scrolls expire?', 'No', 'expire'],
-  ['Economy', 'What do unused Ashen Lands Scrolls turn into?', 'Timeless Heroes Recruitment Scrolls', 'salvage'],
-  ['Economy', 'What is the Instant Output cooldown?', '12 hours', 'instant output'],
-  ['Economy', 'Which VIP level gives a free Talent switch?', 'VIP 9', 'vip'],
-  ['Economy', 'Which VIP level unlocks the Quick Queue?', 'VIP 1', 'vip'],
-  ['Alliance', 'Minimum members for Alliance Showdown?', '20', 'showdown'],
-  ['Alliance', 'Minimum Citadel level for Alliance Showdown?', '15', 'showdown'],
-  ['Alliance', 'Which leagues exist in Alliance Showdown?', 'Novice, Adept, Master, Legend', 'showdown'],
-  ['Alliance', 'Who can trigger Undead Scourge?', 'The alliance Leader or a Diplomat', 'undead'],
-  ['General', 'Who publishes Puzzles & Chaos?', '37GAMES', 'publisher'],
-  ['General', 'At what UTC time does the daily reset happen?', '00:00 UTC', 'reset'],
-  // Added 2026-11-23 from the community wiki (Sophia's Test, Weapon Forge, Hero Bond, Events pages)
-  ['Events', 'Which rank allows you to view the clear-stage lineups?', 'Personal Extreme Challenge', 'rank lineups extreme challenge'],
-  ['Buildings', 'At which level is Totem unlocked in Weapon Forge?', 'Lv. 16', 'totem weapon forge'],
-  ['Buildings', 'At which Weapon Forge level do Runes unlock?', 'Lv. 8 (Troop Runes at Lv. 15)', 'rune weapon forge'],
-  ['Heroes', 'What is the maximum Hero Bond level?', '95', 'bond level max'],
-  ['Heroes', 'How much EXP does a level V Bond Gift give?', '10,000 (50,000 to a same-element hero)', 'bond gift exp'],
-  ['Events', 'On which days does the Royal Arms Race run?', 'Thursday to Sunday', 'royal arms race days'],
-  ['Events', 'How long must you hold an Oblivion War stronghold to control it?', '3 minutes', 'oblivion war stronghold'],
-  ['Events', 'How many Lucky Coins guarantee the Lucky Flip Grand Prize?', '50', 'lucky flip coins grand prize'],
-  ['Events', 'How many points is a T10 foreign kill in Realm Expedition?', '45', 'realm expedition t10'],
-];
-
-const rows: Row[] = [...wikiRows, ...codexRows];
+const rows: Row[] = wikiRows;
 
 export const sophiaQuestions: SophiaQuestion[] = rows.map(([category, question, answer, kw], i) => ({
   id: `sq${String(i + 1).padStart(3, '0')}`,

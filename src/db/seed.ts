@@ -137,6 +137,10 @@ export async function seedDatabase(db: SQLiteDatabase) {
   await db.withTransactionAsync(async () => {
     await upsertHeroes(db, await bundledHeroesToSeed(db), 'seed');
     await upsertEvents(db, await bundledEventsToSeed(db), 'seed');
+    // Sophia's Test holds only real in-game questions: drop everything (including older made-up rows,
+    // from this app or an online pack) and reload the bundled list.
+    await db.runAsync('DELETE FROM sophia');
+    await db.runAsync('DELETE FROM sophia_fts');
     await upsertSophia(db, sophiaQuestions, 'seed');
     await upsertGiftCodes(db, giftCodes, 'seed');
     await db.runAsync("INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_version', ?)", String(SEED_VERSION));
