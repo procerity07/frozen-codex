@@ -310,9 +310,9 @@ const baseHeroes: Hero[] = [
     notes: 'Light Cavalry option for Elemental Seal requirements.', confidence: 'estimate',
   }),
   hero({
-    name: 'Apan', title: 'Wind Rider', element: 'Ice', rarity: 5, unit: 'Infantry', role: 'Infantry DPS',
-    march: [['Gale Charge', 'Cavalry ATK and march speed up.']],
-    m3: { name: 'Cyclone', desc: 'Nature damage to a column and pushes enemy mana back.', charge: 'Medium', pattern: 'Column', effects: ['Mana down'] },
+    name: 'Apan', title: 'Wind Rider', element: 'Ice', rarity: 5, unit: 'Infantry', role: 'Counterattack tank',
+    march: [...militaryTrio('Infantry')],
+    m3: { name: 'Peace of Mind', desc: 'For 4 rounds, whenever he or adjacent allies are attacked he counterattacks with 125% of the damage received (Rage Regen: Medium). Perseverance: restores 5% HP to him and adjacent allies each round for 4 rounds. Virtuous Commitment: his DEF against Nature enemies +46% for 4 rounds (cannot be dispelled). Silver Lining: takes 50% less damage when HP is below 60% (cannot be dispelled). Unbending (unlocks at 6★): Parry +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Self + adjacent', effects: ['Counterattack', 'Heal over time', 'DEF up', 'Damage reduction', 'Parry'] },
     sources: ['Arms Race Ace Card'], bonds: ['Octet Wanderers'],
     notes: 'Arms Race Ace Card option from realm day 1.',
   }),
@@ -362,8 +362,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Echo', title: 'Whisper of the Void', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Resonance', 'Archer ATK up; repeats a portion of skill damage.']],
-    m3: { name: 'Reverb', desc: 'Dark damage to a column, echoing 50% damage next turn.', charge: 'Medium', pattern: 'Column', effects: ['Delayed hit'] },
+    march: [],
+    civil: [
+      { name: 'Infantry ATK (Passive)', description: 'In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+      { name: 'Cavalry ATK (Passive)', description: 'In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+      { name: 'Archer ATK (Passive)', description: 'In-game, applies while you own her. 5★: +24% at +2 up to +150% at +8; 6★: +75% at +5 up to +200% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 24, 36, 48, 60, 75, 90, 150], '6': [null, null, null, null, null, 75, 90, 120, 200] } },
+    ],
+    m3: { name: 'Wrath of Storm', desc: 'Deals 440% damage to the target (Rage Regen: Medium). Raging Wind: steals the target\'s HP restoration for 3 rounds (cannot be dispelled). Cleansing Air: dispels all buffs on enemies. Wind of Tranquility: Ice allies +10% Crit Rate for 4 rounds (cannot be dispelled). Combat Mastery (unlocks at 6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Single target', effects: ['Heal steal', 'Dispel', 'Crit Rate up', 'Crit'] },
     sources: ['Feast of Destiny / Wonder House', 'Oblivion War Shop'],
     notes: 'Divination Crystals expire — spend all of them before Feast of Destiny / Wonder House ends.',
   }),
@@ -545,7 +553,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 43; // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 44; // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

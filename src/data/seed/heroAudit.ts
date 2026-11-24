@@ -179,7 +179,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "bondGroups"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Infantry", "https://puzzles-chaos.fandom.com/wiki/Hero_Bond"],
-    notes: ["Wiki: 5-star Ice Infantry (app previously: Nature Cavalry). Bond corrected: Octet Wanderers.", "Unconfirmed acquisition sources: Arms Race Ace Card."],
+    notes: ["In-game (2026-11-24, Apan 6★ +8): Ice Infantry confirmed; troop skill 500%; Infantry HP/DEF/ATK use the standard 5★/6★ table (250% at 6★ +8); hero skills Peace of Mind (counterattack 125%), Perseverance, Virtuous Commitment, Silver Lining, Unbending (6★). The unsourced Gale Charge / Cyclone skills were replaced.", "Wiki: 5-star Ice Infantry (app previously: Nature Cavalry). Bond corrected: Octet Wanderers.", "Unconfirmed acquisition sources: Arms Race Ace Card."],
   },
   "patty": {
     checkedOn: '2026-11-23',
@@ -209,7 +209,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Echo"],
-    notes: ["Wiki: 5-star Ice Civil (app previously: Dark Archer). Not in Sanguine Serenade on the Hero Bond page; removed from that group.", "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."],
+    notes: ["In-game (2026-11-24, Echo 6★ +8): Ice Civil confirmed; troop skill 500%; Infantry/Cavalry/Archer ATK (Passive, while owned) 5★ 24–150%, 6★ 75/90/120/200%; hero skills Wrath of Storm (440%), Raging Wind, Cleansing Air, Wind of Tranquility, Combat Mastery (6★). The unsourced Resonance / Reverb skills were replaced.", "Wiki: 5-star Ice Civil (app previously: Dark Archer). Not in Sanguine Serenade on the Hero Bond page; removed from that group.", "Unconfirmed acquisition sources: Feast of Destiny / Wonder House, Oblivion War Shop."],
   },
   "ogremire": {
     checkedOn: '2026-11-23',
