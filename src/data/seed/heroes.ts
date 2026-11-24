@@ -318,8 +318,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Patty', title: 'Sweet Saboteur', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Sugar Rush', 'Archer ATK up; attack speed up in the first round.']],
-    m3: { name: 'Candy Bomb', desc: 'Fire damage to a 3x3 area and stuns the center target.', charge: 'Medium', pattern: '3x3', effects: ['Stun'] },
+    march: [],
+    civil: [
+      { name: 'Resource Gather Speed', description: 'In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5% at +5 up to +100% at +8.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%',
+        tiers: { '5': [null, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 56, 100] } },
+      { name: 'Rally ATK', description: 'In-game. 5★: +20% at +2 up to +113% at +8; 6★: +66.5% at +5 up to +150% at +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 20, 31.5, 42.5, 53, 66.5, 80, 113], '6': [null, null, null, null, null, 66.5, 85, 100, 150] } },
+      { name: 'Troop Capacity', description: 'In-game. 5★: +3,200 at +2 up to +18,750 at +8; 6★: +10,000 at +5 up to +25,000 at +8.', requirement: 'Active while owned (in-game)', stat: 'troopCap', unit: 'flat',
+        tiers: { '5': [null, null, 3200, 4800, 6400, 8000, 10000, 12000, 18750], '6': [null, null, null, null, null, 10000, 12500, 15000, 25000] } },
+    ],
+    m3: { name: "Queen's Might", desc: "Prevents the target from restoring Rage for 4 rounds (Rage Regen: Medium). Brilliance of Life: restores 26% HP for all allies. Golden Code: at battle start, Light allies restore 5% Rage per round for 6 rounds. Desert Protection: all allies immune to new debuffs for 2 rounds (cannot be dispelled). Iron Will (unlocks at 6★): Crit Res. +30%. Values as shown in-game at 6★ +8.", charge: 'Medium', pattern: 'Single target', effects: ['Rage block', 'Heal', 'Rage up', 'Debuff immunity', 'Crit Res.'] },
     sources: ['Arms Race Ace Card'],
     notes: 'Arms Race Ace Card option once realm age exceeds 12 weeks.',
   }),
@@ -537,7 +545,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 41; // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 42; // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

@@ -185,7 +185,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Patty"],
-    notes: ["Wiki: 5-star Light Civil (app previously: Fire Archer).", "Unconfirmed acquisition sources: Arms Race Ace Card."],
+    notes: ["In-game (2026-11-24, Patty 6★ +8): Light Civil confirmed; troop skill 500%; Resource Gather Speed, Rally ATK and Troop Capacity tables for 5★ and 6★, all active while owned; hero skills Queen's Might, Brilliance of Life, Golden Code, Desert Protection, Iron Will (6★). The unsourced Sugar Rush / Candy Bomb skills were replaced.", "Wiki: 5-star Light Civil (app previously: Fire Archer).", "Unconfirmed acquisition sources: Arms Race Ace Card."],
   },
   "angelita": {
     checkedOn: '2026-11-23',
