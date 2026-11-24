@@ -51,7 +51,7 @@ export default function CitadelPlanner() {
             <Text style={type.caption}>From My Heroes</Text>
             {buildBonuses.map((x) => (
               <Text key={`${x.heroId}-${x.skill}`} style={type.bodySecondary}>
-                {x.hero}: {x.skill} {x.active && x.value !== null ? `+${x.value}%` : `(${x.note.toLowerCase()})`}
+                {x.hero}: {x.skill} {x.active && x.value !== null ? (x.unit === 'flat' ? `${x.value < 0 ? '−' : '+'}${fmtFull(Math.abs(x.value))} per upgrade` : `${x.value < 0 ? '' : '+'}${x.value}%`) : `(${x.note.toLowerCase()})`}
               </Text>
             ))}
             {knownSpeed ? (

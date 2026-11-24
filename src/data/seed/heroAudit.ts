@@ -281,7 +281,7 @@ export const heroAudit: Record<string, HeroAudit> = {
     checkedOn: '2026-11-23',
     verified: ["name", "element", "unitType", "rarity", "civilSkills"],
     sourceUrls: ["https://puzzles-chaos.fandom.com/wiki/Heroes", "https://puzzles-chaos.fandom.com/wiki/Civil", "https://puzzles-chaos.fandom.com/wiki/Chloe"],
-    notes: ["Wiki: 3-star Dark Civil; Hero Plaza, Superb Hero Covenant (app previously: 4-star Light). Civil skills from the wiki: Construction Stone Cost Reduction, Construction Iron Cost Reduction (values not verified).", "Civil skills corrected to the wiki Civil table: Free Speedup Time, Construction Stone Cost, Construction Iron Cost (values not verified).", "Unconfirmed acquisition sources: Hero Recruitment."],
+    notes: ["In-game (2026-11-24, Chloe at +3): 3★ Dark Civil confirmed; troop skill 200%; Free Speedup Time 4/6/8/10 min, Construction Stone Cost −40k to −100k (Lv. 31), Construction Iron Cost −20k to −50k (Lv. 71), +2 to +5; hero skills Blight, Bloodthirsty Touch (Lv. 11), Elemental Resonance (Lv. 31). The unsourced Ration Drop heal was replaced.", "Wiki: 3-star Dark Civil; Hero Plaza, Superb Hero Covenant (app previously: 4-star Light). Civil skills from the wiki: Construction Stone Cost Reduction, Construction Iron Cost Reduction (values not verified).", "Civil skills corrected to the wiki Civil table: Free Speedup Time, Construction Stone Cost, Construction Iron Cost (values not verified).", "Unconfirmed acquisition sources: Hero Recruitment."],
   },
   "elsa": {
     checkedOn: '2026-11-23',

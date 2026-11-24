@@ -464,13 +464,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Chloe', title: 'Quartermaster', element: 'Dark', rarity: 3, unit: 'Civil', role: 'Construction',
-    march: [],
+    march: [['Troop skill', 'Deals damage equal to 200% of troop ATK to the enemy (at +3, in-game).']],
     civil: [
-      { name: 'Free Speedup Time', description: 'Adds free speedup time. Value not verified.', requirement: 'Unlock level not verified' },
-      { name: 'Construction Stone Cost', description: 'Reduces the stone cost of construction. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildCost' },
-      { name: 'Construction Iron Cost', description: 'Reduces the iron cost of construction. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildCost' },
+      { name: 'Free Speedup Time', description: 'In-game. 3★: 4 min at +2, 6 at +3, 8 at +4, 10 at +5.', requirement: 'Active while owned (in-game)', unit: 'min',
+        tiers: { '3': [null, null, 4, 6, 8, 10] } },
+      { name: 'Construction Stone Cost', description: 'In-game. 3★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 stone per construction.', requirement: 'Unlocks at level 31 (in-game)', stat: 'buildCost', unit: 'flat',
+        tiers: { '3': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Construction Iron Cost', description: 'In-game. 3★: −20,000 at +2, −30,000 at +3, −40,000 at +4, −50,000 at +5 iron per construction.', requirement: 'Unlocks at level 71 (in-game)', stat: 'buildCost', unit: 'flat',
+        tiers: { '3': [null, null, -20000, -30000, -40000, -50000] } },
     ],
-    m3: { name: 'Ration Drop', desc: 'Heals one ally.', charge: 'Fast', pattern: 'Single ally', effects: ['Heal'] },
+    m3: { name: 'Blight', desc: 'Deals 316% damage to the target (Rage Regen: Medium). Bloodthirsty Touch (unlocks Lv. 11): converts 70% of the damage dealt into HP. Elemental Resonance (unlocks Lv. 31): ATK and Crit +10%. Values as shown in-game at +3.', charge: 'Medium', pattern: 'Single target', effects: ['Lifesteal', 'ATK up', 'Crit'] },
     sources: ['Hero Plaza', 'Superb Hero Covenant', 'Hero Recruitment'],
     notes: 'Stacks with William — both cost reductions are additive.',
   }),
@@ -526,6 +529,6 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 34; // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 35; // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 export const heroes: Hero[] = [...baseHeroes, ...lowStarHeroes, ...addedHighStarHeroes].map((h) => ({ ...h, audit: heroAudit[h.id] ?? h.audit, revision: HERO_DATA_REVISION }));
