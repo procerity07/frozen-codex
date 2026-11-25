@@ -8,7 +8,7 @@ import { getHero } from '@/db/repo';
 import { bondGroups, events } from '@/data/seed';
 import { CurioCard } from '@/components/domain/CurioCard';
 import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
-import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, CollapsibleSection, TroopEmblem } from '@/components/ui';
+import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, CollapsibleSection, MoreText, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified, skillsCheckedInGame } from '@/lib/heroData';
 import { MyHeroCard } from '@/components/domain/MyHeroCard';
 import { HeroPortrait } from '@/components/domain/HeroPortrait';
@@ -27,7 +27,7 @@ function Match3Section({ hero, m3 }: { hero: Hero; m3: Match3Skill }) {
       <CollapsibleSection title="Match-3 tactical skill" icon={Sparkles} right={<Unverified hero={hero} field="match3Skill" />}>
       <Card accent={elementColors[hero.element]}>
         <Text style={type.heading}>{m3.name}</Text>
-        <Text style={[type.bodySecondary, { marginTop: 4 }]}>{m3.description}</Text>
+        <MoreText text={m3.description} style={[type.bodySecondary, { marginTop: 4 }]} />
         <Row style={{ marginTop: space.md, flexWrap: 'wrap' }}>
           {m3.charge ? <Badge label={`Charge: ${m3.charge}`} color={palette.cyan} /> : null}
           <Badge label={m3.pattern} />
@@ -97,7 +97,7 @@ export default function HeroDetail() {
           {hero.marchSkills.map((sk) => (
             <Card key={sk.name} style={{ marginBottom: space.sm }}>
               <Text style={type.heading}>{sk.name}</Text>
-              <Text style={[type.bodySecondary, { marginTop: 4 }]}>{sk.description}</Text>
+              <MoreText text={sk.description} style={[type.bodySecondary, { marginTop: 4 }]} />
             </Card>
           ))}
           </CollapsibleSection>
@@ -113,7 +113,7 @@ export default function HeroDetail() {
                 <Text style={[type.heading, { flex: 1 }]}>{sk.name}</Text>
                 {sk.value ? <Text style={[type.number, { color: palette.gold }]}>{sk.value < 0 ? '' : '+'}{sk.value}%</Text> : null}
               </Row>
-              <Text style={[type.bodySecondary, { marginTop: 4 }]}>{sk.description}</Text>
+              <MoreText text={sk.description} style={[type.bodySecondary, { marginTop: 4 }]} />
               <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{sk.requirement}</Text>
             </Card>
           ))}

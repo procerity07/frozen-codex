@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { Bell, BellOff, Coins, Gift, Lightbulb, ScrollText } from 'lucide-react-native';
 import type { GameEvent } from '@/types/game';
 import { getEvent } from '@/db/repo';
 import { cycleDays, eventCurrencies, heroes } from '@/data/seed';
 import { palette, space, type } from '@/theme';
-import { Badge, Button, Card, Chip, ChipRow, ConfidenceNote, EmptyState, Row, Screen, SectionHeader } from '@/components/ui';
+import { Badge, Button, Card, Chip, ChipRow, CollapsibleSection, ConfidenceNote, EmptyState, Row, Screen, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { utcToLocalLabel } from '@/lib/time';
 import { cancelEventAlarm, ensurePermission, scheduleAllianceEventAlarm, scheduleEventAlarm } from '@/services/notifications';
 import { isAllianceTimed } from '@/lib/allianceTimes';
 import { AllianceTimeCard } from '@/components/domain/AllianceTimeCard';
 
+/** Rules shown before "Show all". */
+const RULES_SHOWN = 4;
+
 export default function EventDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [ev, setEv] = useState<GameEvent | null | undefined>(undefined);
+  const [allRules, setAllRules] = useState(false);
   const alarmOn = useAppStore((s) => !!s.alarms[String(id)]);
   const setAlarm = useAppStore((s) => s.setAlarm);
   const lead = useAppStore((s) => s.alarmLeadMinutes);
@@ -51,6 +55,7 @@ export default function EventDetail() {
         </Row>
         <Text style={[type.body, { marginTop: space.md }]}>{ev.summary}</Text>
         <Text style={[type.caption, { marginTop: space.sm }]}>{ev.cadence}</Text>
+        {ev.rewards.length ? <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{`Rewards: ${ev.rewards.slice(0, 3).join(' · ')}${ev.rewards.length > 3 ? ' …' : ''}`}</Text> : null}
         {ev.days.length ? (
           <>
             <View style={{ marginTop: space.md, gap: 4 }}>
@@ -88,21 +93,27 @@ export default function EventDetail() {
         </>
       ) : null}
 
-      <SectionHeader title="Rules" icon={ScrollText} />
-      <Card>{ev.rules.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 6 }]}>{'•'} {r}</Text>)}</Card>
+      <SectionHeader title="Rules" icon={ScrollText} subtitle={ev.rules.length > RULES_SHOWN ? `${ev.rules.length} rules` : undefined} />
+      <Card>
+        {(allRules ? ev.rules : ev.rules.slice(0, RULES_SHOWN)).map((r, i) => <Text key={i} style={[type.body, { marginBottom: 6 }]}>{'•'} {r}</Text>)}
+        {ev.rules.length > RULES_SHOWN ? (
+          <Pressable onPress={() => setAllRules(!allRules)} accessibilityRole="button"><Text style={[type.caption, { color: palette.cyan }]}>{allRules ? 'Show fewer' : `Show all ${ev.rules.length} rules`}</Text></Pressable>
+        ) : null}
+      </Card>
 
-      {ev.rewards.length ? (<><SectionHeader title="Key rewards" icon={Gift} /><Card>{ev.rewards.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{'•'} {r}</Text>)}</Card></>) : null}
-      {ev.tips.length ? (<><SectionHeader title="Optimization tips" icon={Lightbulb} /><Card accent={palette.gold}>{ev.tips.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{r}</Text>)}</Card></>) : null}
+      {ev.rewards.length ? (<CollapsibleSection title="Key rewards" icon={Gift} initiallyOpen={false}><Card>{ev.rewards.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{'•'} {r}</Text>)}</Card></CollapsibleSection>) : null}
+      {ev.tips.length ? (<CollapsibleSection title="Tips" icon={Lightbulb} initiallyOpen={false}><Card accent={palette.gold}>{ev.tips.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{r}</Text>)}</Card></CollapsibleSection>) : null}
 
       {currencies.length ? (
         <>
-          <SectionHeader title="Event currencies" icon={Coins} />
+          <CollapsibleSection title="Event currencies" icon={Coins} initiallyOpen={false}>
           {currencies.map((c) => (
             <Card key={c.id} style={{ marginBottom: space.sm, padding: space.md }} accent={c.expires ? palette.danger : palette.success}>
               <Row style={{ justifyContent: 'space-between' }}><Text style={type.heading}>{c.name}</Text><Badge label={c.expires ? 'Expires' : 'Keeps'} color={c.expires ? palette.danger : palette.success} /></Row>
               <Text style={type.bodySecondary}>{c.guidance}</Text>
             </Card>
           ))}
+          </CollapsibleSection>
         </>
       ) : null}
 

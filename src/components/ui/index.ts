@@ -6,3 +6,4 @@ export * from './Table';
 export * from './ProgressRing';
 export * from './Screen';
 export * from './CollapsibleSection';
+export * from './MoreText';
