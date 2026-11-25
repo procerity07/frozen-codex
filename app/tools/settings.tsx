@@ -15,6 +15,7 @@ import { SEED_VERSION } from '@/data/seed';
 import { checkForAppUpdate, CURRENT_VERSION, type UpdateCheck } from '@/services/appUpdate';
 import { openDownload } from '@/components/domain/UpdateBanner';
 import { hasWhatsNew, WhatsNewSheet } from '@/components/domain/Dashboard';
+import { FeedbackCard } from '@/components/domain/FeedbackCard';
 
 const LEADS = [5, 10, 15, 30, 60];
 
@@ -70,6 +71,8 @@ export default function SettingsScreen() {
         {hasWhatsNew() ? <View style={{ marginTop: space.sm }}><Button icon={Sparkles} variant="ghost" label={`What's new in v${CURRENT_VERSION}`} onPress={() => setNotesOpen(true)} /></View> : null}
       </Card>
       <WhatsNewSheet open={notesOpen} onClose={() => setNotesOpen(false)} />
+
+      <FeedbackCard />
 
       <SectionHeader title="Hero portraits" />
       <Card>
