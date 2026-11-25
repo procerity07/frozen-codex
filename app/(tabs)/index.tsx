@@ -20,7 +20,7 @@ const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: 
   { label: 'Gift Code Vault', sub: 'Copy & redeem', icon: Gift, href: '/tools/gift-codes', color: palette.gold },
   { label: 'Bag Hoard', sub: 'Event points', icon: Calculator, href: '/tools/bag', color: elementColors.Dark },
   { label: 'Citadel Planner', sub: 'Deficit & time', icon: Castle, href: '/tools/citadel', color: palette.success },
-  { label: 'Sanctuary Guard', sub: 'Casualty sim', icon: HeartPulse, href: '/tools/casualty', color: palette.danger },
+  { label: 'Troop Training', sub: 'Cost & Sanctuary', icon: HeartPulse, href: '/tools/casualty', color: palette.danger },
   { label: 'War Room', sub: 'CoL · RE · Mail', icon: Swords, href: '/tools/war-room', color: troopColors.Cavalry },
   { label: 'My Reminders', sub: 'Your own alarms', icon: Bell, href: '/tools/reminders', color: palette.gold },
   { label: 'Hive Planner', sub: 'Alliance layout', icon: LayoutGrid, href: '/tools/hive', color: palette.success },

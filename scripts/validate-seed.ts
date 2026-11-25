@@ -1,3 +1,4 @@
+import { affordable, trainingCost } from '../src/lib/training';
 import { formatDuration as fmtDur } from '../src/lib/time';
 import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
@@ -405,4 +406,12 @@ ok(seed.heroes.every((h) => h.marchSkills[0]?.name === 'Troop skill' && h.marchS
 }
 
 ok(fmtDur(5 * 3600_000 + 12 * 60_000 + 9_000) === '05:12:09' && fmtDur(2 * 86_400_000 + 3 * 3600_000 + 12 * 60_000 + 9_000) === '2d 03h 12m 09s', 'countdowns of 24h+ show days');
+
+// Troop training calculator
+{
+  const per = { food: 100, wood: 100, stone: 20, iron: 5, seconds: 10 };
+  const r = trainingCost({ count: 1000, perTroop: per, speedPct: 100, costCutPct: 20, capacity: 300 }, 10);
+  ok(r.food === 80000 && r.iron === 4000 && r.seconds === 5000 && r.batches === 4 && r.power === 60000, 'training cost, speed, batches and power');
+  ok(affordable({ food: 800, wood: 10000, stone: 10000, iron: 10000 }, per, 20) === 10, 'troops affordable limited by the scarcest resource');
+}
 
