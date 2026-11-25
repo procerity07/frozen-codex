@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router, type Href } from 'expo-router';
-import { Bell, Brain, LayoutGrid, Calculator, Castle, Check, Gift, HeartPulse, Hourglass, Plus, Swords, Timer, Trash } from 'lucide-react-native';
+import { Bell, Brain, LayoutGrid, Calculator, Castle, Check, Gift, HeartPulse, Hourglass, Plus, Swords, Timer, Trash, User } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import { checklistTemplate, events, royalArmsRace } from '@/data/seed';
 import { elementColors, palette, radius, space, tint, troopColors, type } from '@/theme';
@@ -16,6 +16,7 @@ import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
 import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
+  { label: 'My Profile', sub: 'Heroes · bonuses · citadel', icon: User, href: '/tools/profile', color: palette.cyan },
   { label: "Sophia's Test", sub: '30-second lookup', icon: Brain, href: '/tools/sophia', color: palette.cyan },
   { label: 'Gift Code Vault', sub: 'Copy & redeem', icon: Gift, href: '/tools/gift-codes', color: palette.gold },
   { label: 'Bag Hoard', sub: 'Event points', icon: Calculator, href: '/tools/bag', color: elementColors.Dark },
