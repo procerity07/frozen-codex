@@ -127,6 +127,16 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const c35 = planCitadel(seed.citadelLevels, 34, 35, {}, { civilSpeedPct: 185.4, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_600_000, stone: 700_000, iron: 350_000 } });
   ok(Math.floor(c35.totals.food / 1e6) === 354 && Math.floor(c35.totals.wood / 1e6) === 143 && Math.floor(c35.totals.stone / 1e5) === 422 && Math.abs(c35.netSeconds - 2_807_638) < 2, 'Citadel 34->35 matches the in-game screen');
   ok(seed.citadelLevels.find((l) => l.level === 35)!.requires.some((r) => r.building === 'Dragon Lair' && r.level === 34), 'Citadel 35 needs Dragon Lair 34 (in-game)');
+  // In-game check: Citadel 35 -> 36 (no builder gear) needs 23.6M iron, 500 Glory Codex, 22.0K Ancient Tomes, 1,000 Gold Statues
+  // and Wall, War Hall and Institute 35; with -5% and the -3.1M food cut it shows 371M food, 150M wood, 44.3M stone, 22.1M iron.
+  const c36 = seed.citadelLevels.find((l) => l.level === 36)!;
+  ok(Math.floor(c36.cost.iron / 1e5) === 236 && c36.cost.gloryCodex === 500 && c36.cost.ancientTome === 22_000 && c36.cost.goldStatue === 1_000, 'Citadel 36 costs match the in-game screen');
+  ok(['Wall', 'War Hall', 'Institute'].every((b) => c36.requires.some((r) => r.building === b && r.level === 35)), 'Citadel 36 needs Wall, War Hall and Institute 35 (in-game)');
+  const p36 = planCitadel(seed.citadelLevels, 35, 36, {}, { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_600_000, stone: 700_000, iron: 350_000 } });
+  ok(Math.floor(p36.totals.food / 1e6) === 371 && Math.floor(p36.totals.wood / 1e6) === 150 && Math.floor(p36.totals.stone / 1e5) === 443 && Math.floor(p36.totals.iron / 1e5) === 221, 'Citadel 35->36 with cuts matches the in-game screen');
+  // In-game check: Citadel 32 -> 33 with the same cuts = 354M food, 106M wood, 42.2M stone, 21.0M iron; Wall and Archery Camp 32.
+  const p33 = planCitadel(seed.citadelLevels, 32, 33, {}, { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_600_000, stone: 700_000, iron: 350_000 } });
+  ok(Math.floor(p33.totals.food / 1e6) === 354 && Math.floor(p33.totals.wood / 1e6) === 106 && Math.floor(p33.totals.stone / 1e5) === 422 && Math.floor(p33.totals.iron / 1e5) === 210, 'Citadel 32->33 matches the in-game screen');
   ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_801_000 && seed.citadelLevels.find((l) => l.level === 40)!.cost.goldStatue === 10_400, 'citadel 40 iron and Gold Statues (wiki)');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
