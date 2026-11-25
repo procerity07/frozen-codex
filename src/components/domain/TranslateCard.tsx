@@ -1,10 +1,10 @@
-import { useSyncExternalStore } from 'react';
-import { Text, View } from 'react-native';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import { Alert, Text, View } from 'react-native';
 import { Languages } from 'lucide-react-native';
-import { Card, Chip, SectionHeader } from '@/components/ui';
+import { Button, Card, Chip, Row, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { palette, space, type } from '@/theme';
-import { TRANSLATE_LANGUAGES, clearTranslationCache, deviceLanguage, getStatus, subscribe, translateAvailable } from '@/i18n/autoTranslate';
+import { TRANSLATE_LANGUAGES, clearTranslationCache, deleteLanguage, deviceLanguage, downloadedLanguages, getStatus, subscribe, translateAvailable } from '@/i18n/autoTranslate';
 
 const STATUS_TEXT = {
   off: 'Showing English.',
@@ -19,6 +19,21 @@ export function TranslateCard() {
   const setMode = useAppStore((s) => s.setTranslateMode);
   const status = useSyncExternalStore((l) => subscribe(l), getStatus);
   const phone = deviceLanguage();
+  const [downloaded, setDownloaded] = useState<string[]>([]);
+  const refresh = () => { downloadedLanguages().then(setDownloaded).catch(() => undefined); };
+  useEffect(refresh, [status]);
+  const nameOf = (tag: string) => TRANSLATE_LANGUAGES.find((l) => l.tag === tag)?.name ?? tag;
+  const activeTag = mode === 'off' ? null : mode === 'auto' ? phone : mode;
+  const remove = (tag: string) => {
+    Alert.alert(`Delete ${nameOf(tag)}?`, 'Frees about 30 MB. You can download it again any time by picking the language.', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Delete', style: 'destructive', onPress: async () => {
+        if (activeTag === tag) setMode('off');
+        await deleteLanguage(tag);
+        refresh();
+      } },
+    ]);
+  };
   const phoneName = TRANSLATE_LANGUAGES.find((l) => l.tag === phone)?.name ?? (phone === 'en' ? 'English' : phone);
 
   return (
@@ -41,6 +56,18 @@ export function TranslateCard() {
         <Text style={[type.caption, { marginTop: space.xs }]}>
           Machine translation can be imperfect. Hero names, codes and numbers stay as they are in the game.
         </Text>
+        {downloaded.length ? (
+          <View style={{ marginTop: space.md }}>
+            <Text style={type.heading}>Downloaded languages</Text>
+            {downloaded.map((tag) => (
+              <Row key={tag} style={{ justifyContent: 'space-between', marginTop: space.xs }}>
+                <Text style={type.body} noTranslate>{`${nameOf(tag)}${tag === activeTag ? ' (in use)' : ''}`}</Text>
+                <Button compact variant="ghost" label="Delete" onPress={() => remove(tag)} />
+              </Row>
+            ))}
+            <Text style={[type.caption, { marginTop: 4 }]}>Deleting the language in use switches the app back to English.</Text>
+          </View>
+        ) : null}
         {status === 'ready' ? (
           <Text style={[type.caption, { marginTop: space.xs, color: palette.cyan }]} onPress={() => clearTranslationCache()}>
             Clear saved translations

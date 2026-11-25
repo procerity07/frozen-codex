@@ -12,6 +12,8 @@ interface MlTranslateNative {
   isSupported(tag: string): boolean;
   ensureModel(tag: string, wifiOnly: boolean): Promise<boolean>;
   translate(texts: string[], tag: string): Promise<string[]>;
+  downloadedModels?(): Promise<string[]>;
+  deleteModel?(tag: string): Promise<boolean>;
 }
 
 const native = Platform.OS === 'android' ? requireOptionalNativeModule<MlTranslateNative>('MlTranslate') : null;
@@ -179,4 +181,23 @@ export async function clearTranslationCache(): Promise<void> {
   await AsyncStorage.multiRemove(keys).catch(() => {});
   cache = new Map();
   emit();
+}
+
+/** Languages whose translator file is stored on the phone. */
+export async function downloadedLanguages(): Promise<string[]> {
+  try {
+    return (await native?.downloadedModels?.()) ?? [];
+  } catch {
+    return [];
+  }
+}
+
+/** Deletes a downloaded language and its saved translations. Switch away from it first. */
+export async function deleteLanguage(tag: string): Promise<boolean> {
+  await AsyncStorage.removeItem(cacheKey(tag)).catch(() => {});
+  try {
+    return (await native?.deleteModel?.(tag)) ?? false;
+  } catch {
+    return false;
+  }
 }
