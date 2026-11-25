@@ -48,7 +48,7 @@ export default function HivePlanner() {
     return (
       <Screen>
         <Stack.Screen options={{ title: 'Hive Planner' }} />
-        <Text style={type.bodySecondary}>Plan where every alliance member's castle goes around the fort. The plan is made of map tiles: castles, the Fort and the Gate cover 2×2 tiles, outposts 1 tile. Set one tile's coordinates and every castle shows its own X:Y for teleporting.</Text>
+        <Text style={type.bodySecondary}>Plan where every alliance member's castle goes around the fort. The plan is made of map tiles: castles and the Gate cover 2×2 tiles, the Fort 3×3, outposts 1 tile. Set one tile's coordinates and every castle shows its own X:Y for teleporting.</Text>
         <View style={{ marginTop: space.md, gap: space.sm }}>
           <Button icon={Plus} label="New hive plan" onPress={create} />
           <Button icon={Download} variant="secondary" label="Import a shared plan" onPress={() => setPanel('import')} />

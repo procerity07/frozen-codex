@@ -331,7 +331,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(describeDays([]) === 'Every day' && describeDays([5, 6]) === 'Weekends' && describeDays([0, 2]) === 'Mon, Wed', 'reminder day labels');
 }
 
-// Hive planner (tiles: castles/fort/gate 2x2, outposts 1x1)
+// Hive planner (tiles: castles and gate 2x2, fort 3x3, outposts 1x1)
 {
   let h = newHive('t', 'Test', 24, 24);
   h = { ...h, ref: { col: 0, row: 22, x: 252, y: 506 } };
@@ -339,6 +339,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(coordsOf({ ...h, yDown: false }, 0, 20).y === 508, 'tile coords with Y going up');
   h = putPiece(h, { kind: 'member', col: 4, row: 6, name: '  Crisa ' })!;
   ok(!!h && h.pieces.some((p) => p.name === 'Crisa' && p.size === 2), 'member castle is 2x2');
+  ok(h.pieces.some((p) => p.kind === 'fort' && p.size === 3) && putPiece(h, { kind: 'member', col: 12, row: 12, name: 'InFort' }) === null, 'fort is 3x3');
   ok(putPiece(h, { kind: 'member', col: 5, row: 7, name: 'Overlap' }) === null && putPiece(h, { kind: 'member', col: 23, row: 0, name: 'Edge' }) === null, 'overlaps and off-plan placements rejected');
   ok(!!putPiece(h, { kind: 'outpost', col: 6, row: 6 }) && pieceAt(h, 5, 7)?.name === 'Crisa', 'outpost fits in a single tile next to a castle');
   h = { ...h, members: parseMembers('Crisa\nSemiX, ~-Ice-~\ncrisa') };
@@ -348,11 +349,13 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(back.pieces.find((p) => p.name === 'Crisa')?.col === 4 && back.pieces.find((p) => p.name === 'FarmA')?.color === 'green' && back.legend.green === 'Farms' && back.ref.x === 252 && back.members.length === 3 && back.pieces.filter((p) => p.kind === 'fort').length === 1, 'hive share code round-trips');
   ok(resize(h, 5, 5).pieces.every((p) => p.col + p.size <= 5) && resize(h, 99, 1).cols === 60 && resize(h, 1, 1).rows === 2, 'hive resize clamps and drops pieces outside');
   ok(normalizeLegend({ gold: 'R4 / R5', red: 'My leaders' }).gold === 'Alliance member' && normalizeLegend({ red: 'My leaders' }).red === 'My leaders', 'old default labels upgrade; custom labels kept');
-  const op = outpostAreas(putPiece(h, { kind: 'outpost', col: 10, row: 10 })!)[0]!;
-  ok(op.col0 === 6 && op.col1 === 15 && op.row0 === 6 && op.row1 === 15, 'outpost territory: 10x10 tiles around the outpost');
+  const op = outpostAreas(putPiece(h, { kind: 'outpost', col: 16, row: 16 })!)[0]!;
+  ok(op.col0 === 12 && op.col1 === 21 && op.row0 === 12 && op.row1 === 21, 'outpost territory: 10x10 tiles around the outpost');
   // First-version plans (one square = one castle) convert to tiles.
   const v1 = migrateHive({ id: 'old', name: 'Old', cols: 2, rows: 2, cells: [{ kind: 'member', name: 'A', color: 'gold' }, { kind: 'marker' }, { kind: 'fort' }, { kind: 'blocked' }], ref: { col: 0, row: 1, x: 252, y: 506 }, yDown: true, members: [], legend: {} });
-  ok(v1.cols === 4 && v1.pieces.find((p) => p.name === 'A')?.size === 2 && v1.pieces.find((p) => p.kind === 'outpost')?.col === 2 && v1.pieces.filter((p) => p.kind === 'blocked').length === 4 && v1.ref.row === 2 && coordsOf(v1, 0, 0).y === 504, 'first-version plans convert to tiles with the same coordinates');
+  ok(v1.cols === 5 && v1.pieces.find((p) => p.name === 'A')?.size === 2 && v1.pieces.find((p) => p.kind === 'outpost')?.col === 2 && v1.pieces.find((p) => p.kind === 'fort')?.size === 3 && v1.ref.row === 2 && coordsOf(v1, 0, 0).y === 504, 'first-version plans convert to tiles with the same coordinates (old Fort kept as 3x3)');
+  const oldFort = migrateHive({ v: 2, id: 'f', name: 'F', cols: 24, rows: 24, pieces: [{ kind: 'fort', col: 11, row: 11 }, { kind: 'member', col: 13, row: 11, name: 'Next' }], ref: { col: 0, row: 0, x: 0, y: 0 } });
+  ok(oldFort.pieces.some((p) => p.kind === 'fort' && p.size === 3) && oldFort.pieces.some((p) => p.name === 'Next'), 'saved 2x2 Fort becomes 3x3 without losing castles');
   const fromV1 = importCode('FCHIVE1:' + JSON.stringify({ n: 'X', c: 2, r: 1, g: 'mF', m: { 0: 'Bob' }, ref: { col: 0, row: 0, x: 10, y: 10 } }), 'z');
   ok(fromV1.pieces.find((p) => p.name === 'Bob')?.col === 0 && fromV1.pieces.find((p) => p.kind === 'fort')?.col === 2, 'old share codes still import');
   let threw = false; try { importCode('hello', 'x'); } catch { threw = true; }

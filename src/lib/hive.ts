@@ -31,7 +31,7 @@ export interface Hive {
 export const KIND_LABELS: Record<PieceKind, string> = {
   member: 'Member castle', fort: 'Fort', gate: 'Gate', gather: 'Alliance Gather', outpost: 'Outpost', blocked: 'Blocked',
 };
-export const KIND_SIZE: Record<PieceKind, number> = { member: 2, fort: 2, gate: 2, gather: 2, outpost: 1, blocked: 1 };
+export const KIND_SIZE: Record<PieceKind, number> = { member: 2, fort: 3, gate: 2, gather: 2, outpost: 1, blocked: 1 };
 
 /** Order shown in the picker: Alliance member, Farm, Alliance building first. */
 export const HIVE_COLORS: HiveColor[] = ['gold', 'green', 'blue', 'red', 'orange', 'purple', 'pink', 'grey'];
@@ -60,7 +60,7 @@ export const pieceId = () => `p${Date.now().toString(36)}${(seq++).toString(36)}
 export function newHive(id: string, name = 'Main hive', cols = 24, rows = 24): Hive {
   const c = clamp(cols, 2, MAX_SIDE);
   const r = clamp(rows, 2, MAX_SIDE);
-  const fort: HivePiece = { id: pieceId(), kind: 'fort', col: Math.floor(c / 2) - 1, row: Math.floor(r / 2) - 1, size: 2, color: 'blue' };
+  const fort: HivePiece = { id: pieceId(), kind: 'fort', col: Math.floor((c - 3) / 2), row: Math.floor((r - 3) / 2), size: 3, color: 'blue' };
   return { v: 2, id, name, cols: c, rows: r, pieces: [fort], ref: { col: 0, row: r - 2, x: 0, y: 0 }, yDown: true, members: [], legend: { ...DEFAULT_LEGEND } };
 }
 
@@ -151,6 +151,21 @@ export function normalizeLegend(raw: unknown): Record<HiveColor, string> {
 }
 
 /** Brings any saved or imported plan (including first-version square plans) to the tile format. */
+/**
+ * Places a piece from an older plan. The Fort grew from 2×2 to 3×3, so an old Fort that no longer
+ * fits is nudged up/left by a tile, or the plan grows by one tile, instead of being lost.
+ */
+function placeOld(out: Hive, p: Partial<HivePiece> & { kind: PieceKind; col: number; row: number }): Hive {
+  const direct = putPiece(out, p);
+  if (direct || p.kind !== 'fort') return direct ?? out;
+  for (const [dc, dr] of [[-1, -1], [-1, 0], [0, -1]] as const) {
+    const n = putPiece(out, { ...p, col: p.col + dc, row: p.row + dr });
+    if (n) return n;
+  }
+  const grown: Hive = { ...out, cols: Math.min(MAX_SIDE, out.cols + 1), rows: Math.min(MAX_SIDE, out.rows + 1) };
+  return putPiece(grown, p) ?? out;
+}
+
 export function migrateHive(raw: unknown): Hive {
   const h = (typeof raw === 'object' && raw ? raw : {}) as Record<string, unknown>;
   const id = typeof h.id === 'string' ? h.id : pieceId();
@@ -171,7 +186,7 @@ export function migrateHive(raw: unknown): Hive {
       const row = Math.floor(i / cols) * 2;
       const color = isColor(c.color) ? c.color : undefined;
       const kind = c.kind === 'marker' ? 'outpost' : c.kind;
-      const add = (p: Partial<HivePiece> & { kind: PieceKind; col: number; row: number }) => { const n = putPiece(out, p); if (n) out = n; };
+      const add = (p: Partial<HivePiece> & { kind: PieceKind; col: number; row: number }) => { out = placeOld(out, p); };
       if (kind === 'member' && typeof c.name === 'string') add({ kind: 'member', col, row, name: c.name, color });
       else if (kind === 'fort' || kind === 'gate' || kind === 'gather' || kind === 'outpost') add({ kind, col, row, color });
       else if (kind === 'blocked') for (const [dc, dr] of [[0, 0], [1, 0], [0, 1], [1, 1]] as const) add({ kind: 'blocked', col: col + dc, row: row + dr });
@@ -182,11 +197,12 @@ export function migrateHive(raw: unknown): Hive {
   const cols = clamp(Number(h.cols ?? 24), 2, MAX_SIDE);
   const rows = clamp(Number(h.rows ?? 24), 2, MAX_SIDE);
   let out: Hive = { ...base, cols, rows, pieces: [], ref: { col: clamp(Number(ref.col), 0, cols - 1), row: clamp(Number(ref.row), 0, rows - 1), ...refXY } };
-  for (const p of Array.isArray(h.pieces) ? h.pieces : []) {
-    const q = (typeof p === 'object' && p ? p : {}) as Record<string, unknown>;
+  const list = (Array.isArray(h.pieces) ? h.pieces : []).map((p) => (typeof p === 'object' && p ? p : {}) as Record<string, unknown>);
+  // Forts last, so a grown Fort only moves around pieces that are already placed.
+  list.sort((a, b) => Number(a.kind === 'fort') - Number(b.kind === 'fort'));
+  for (const q of list) {
     if (!isKind(q.kind)) continue;
-    const next = putPiece(out, { id: typeof q.id === 'string' ? q.id : undefined, kind: q.kind, col: Number(q.col), row: Number(q.row), name: typeof q.name === 'string' ? q.name : undefined, color: isColor(q.color) ? q.color : undefined });
-    if (next) out = next;
+    out = placeOld(out, { id: typeof q.id === 'string' ? q.id : undefined, kind: q.kind, col: Number(q.col), row: Number(q.row), name: typeof q.name === 'string' ? q.name : undefined, color: isColor(q.color) ? q.color : undefined });
   }
   return out;
 }

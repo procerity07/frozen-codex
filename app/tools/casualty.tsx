@@ -28,14 +28,13 @@ function SanctuaryCalc() {
   const sancCap = v.sancCap || v.tentCap || 0;
   const r = simulateCasualties({
     incoming: v.incoming ?? 0, medicalTentCap: v.tentCap ?? 0, medicalTentUsed: v.tentUsed ?? 0, sanctuaryCap: sancCap, sanctuaryUsed: v.sancUsed ?? 0,
-    allianceHospitalCap: v.allianceCap ?? 0, permadeathRate: 0,
+    allianceHospitalCap: 0, permadeathRate: 0,
   });
   const total = Math.max(1, v.incoming ?? 0);
   const hasInput = (v.incoming ?? 0) > 0;
   const stages = [
     { label: 'Medical Tent', sub: 'T1 buffer · heal with resources', n: r.medicalTent, color: palette.cyan },
     { label: 'Sanctuary', sub: 'Free revival with Holy Light', n: r.sanctuary, color: palette.success },
-    { label: 'Alliance Hospital', sub: 'Not verified in-game; leave 0 if your game has none', n: r.allianceHospital, color: palette.gold },
     { label: 'Permanent death', sub: 'Overflow beyond every buffer (battles can also kill some troops outright)', n: r.dead, color: palette.danger },
   ];
 
@@ -46,7 +45,6 @@ function SanctuaryCalc() {
         <NumberField label="Troops that will fall (wounded + dead)" value={v.incoming ?? 0} onChange={(n) => upd('incoming', n)} />
         <Row style={{ marginTop: space.sm }}><NumberField label="Medical Tent capacity" value={v.tentCap ?? 0} onChange={(n) => upd('tentCap', n)} /><NumberField label="Already wounded" value={v.tentUsed ?? 0} onChange={(n) => upd('tentUsed', n)} /></Row>
         <Row style={{ marginTop: space.sm }}><NumberField label={v.sancCap ? 'Sanctuary capacity' : 'Sanctuary capacity (= tent)'} value={v.sancCap ?? 0} onChange={(n) => upd('sancCap', n)} /><NumberField label="Already in Sanctuary" value={v.sancUsed ?? 0} onChange={(n) => upd('sancUsed', n)} /></Row>
-        <View style={{ marginTop: space.sm }}><NumberField label="Alliance Hospital space (not verified)" value={v.allianceCap ?? 0} onChange={(n) => upd('allianceCap', n)} /></View>
       </Card>
 
       <SectionHeader title="Where your troops end up" />
