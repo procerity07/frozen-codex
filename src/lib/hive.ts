@@ -4,7 +4,7 @@
  * outposts and blocked spots cover 1 tile. Coordinates step 1 per tile.
  */
 
-export type PieceKind = 'member' | 'fort' | 'gate' | 'gather' | 'outpost' | 'blocked';
+export type PieceKind = 'member' | 'fort' | 'gate' | 'gather' | 'warehouse' | 'hospital' | 'outpost' | 'blocked';
 export type HiveColor = 'gold' | 'red' | 'orange' | 'purple' | 'green' | 'blue' | 'pink' | 'grey';
 
 export interface HivePiece { id: string; kind: PieceKind; col: number; row: number; size: number; name?: string; color?: HiveColor }
@@ -29,9 +29,9 @@ export interface Hive {
 }
 
 export const KIND_LABELS: Record<PieceKind, string> = {
-  member: 'Member castle', fort: 'Fort', gate: 'Gate', gather: 'Alliance Gather', outpost: 'Outpost', blocked: 'Blocked',
+  member: 'Member castle', fort: 'Fort', gate: 'Gate', gather: 'Alliance Gather', warehouse: 'Alliance Warehouse', hospital: 'Alliance Hospital', outpost: 'Outpost', blocked: 'Blocked',
 };
-export const KIND_SIZE: Record<PieceKind, number> = { member: 2, fort: 3, gate: 2, gather: 2, outpost: 1, blocked: 1 };
+export const KIND_SIZE: Record<PieceKind, number> = { member: 2, fort: 3, gate: 2, gather: 2, warehouse: 2, hospital: 2, outpost: 1, blocked: 1 };
 
 /** Order shown in the picker: Alliance member, Farm, Alliance building first. */
 export const HIVE_COLORS: HiveColor[] = ['gold', 'green', 'blue', 'red', 'orange', 'purple', 'pink', 'grey'];
@@ -209,7 +209,7 @@ export function migrateHive(raw: unknown): Hive {
 
 const PREFIX2 = 'FCHIVE2:';
 const PREFIX1 = 'FCHIVE1:';
-const CODE: Record<PieceKind, string> = { member: 'm', fort: 'F', gate: 'G', gather: 'A', outpost: 'T', blocked: 'X' };
+const CODE: Record<PieceKind, string> = { member: 'm', fort: 'F', gate: 'G', gather: 'A', warehouse: 'W', hospital: 'H', outpost: 'T', blocked: 'X' };
 const FROM_CODE = Object.fromEntries(Object.entries(CODE).map(([k, v]) => [v, k])) as Record<string, PieceKind>;
 
 /** Text code to share a plan in chat; paste it into Import on another phone. */

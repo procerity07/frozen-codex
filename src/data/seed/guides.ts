@@ -34,7 +34,7 @@ export const guides: Guide[] = [
   {
     id: 'sanctuary', title: 'Sanctuary Cycling', summary: 'Never let troops die permanently.',
     sections: [
-      { heading: 'Order of protection', points: ['Medical Tent holds wounded first.', 'Overflow goes to the Sanctuary, revived free with Holy Light.', 'Anything beyond that is permanent death.'] },
+      { heading: 'Order of protection', points: ['Medical Tent holds wounded first.', 'Overflow goes to the Sanctuary, revived free with Holy Light.', 'The Alliance Hospital takes wounded beyond your Hospital; healing there costs Alliance Kudos Coins.', 'Anything beyond that is permanent death.'] },
       { heading: 'Cycling', points: ['Heal the Medical Tent before every fight so the Sanctuary stays empty.', 'Revive Sanctuary troops daily with free Holy Light.'] },
     ],
   },
