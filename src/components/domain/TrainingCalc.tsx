@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Switch, Text, View } from 'react-native';
 import { heroes } from '@/data/seed';
 import { palette, space, type } from '@/theme';
 import { Card, Chip, ChipRow, NumberField, Row, SectionHeader, Segmented, Stat } from '@/components/ui';
@@ -11,6 +11,9 @@ import { affordable, RESOURCES, TIER_CAMP_LEVEL, TIER_POWER, TROOP_TIERS, traini
 
 const TYPES: readonly TroopType[] = ['Infantry', 'Cavalry', 'Archer'];
 const LABEL: Record<(typeof RESOURCES)[number], string> = { food: 'Food', wood: 'Wood', stone: 'Stone', iron: 'Iron' };
+/** Military Talent "Cost Down": training and healing resource cost −25% for 60 min (24 h cooldown). */
+const COST_DOWN_PCT = 25;
+const AMOUNTS = [1000, 10000, 50000, 100000, 500000];
 const blankCost: TroopCost = { food: 0, wood: 0, stone: 0, iron: 0, seconds: 0 };
 
 /** Resources, time and power to train troops, from per-troop costs you enter once (saved per tier). */
@@ -30,8 +33,11 @@ export function TrainingCalc() {
   // Owned-hero bonuses the app knows about (Fiona, Carvell, Schubert…): shown as a hint, not added automatically.
   const heroSpeed = civilBonuses(heroes, roster).filter((b) => b.stat === 'trainSpeed' && b.active && b.value !== null).reduce((t, b) => t + b.value!, 0);
 
-  const r = trainingCost({ count: s.count ?? 0, perTroop: per, speedPct: s.speedPct ?? 0, costCutPct: s.costCutPct ?? 0, capacity: s.capacity ?? 0 }, tier);
-  const canAfford = affordable({ food: s.haveFood, wood: s.haveWood, stone: s.haveStone, iron: s.haveIron }, per, s.costCutPct ?? 0);
+  const costDown = (s.costDown ?? 0) > 0;
+  // Cost reductions are added together (assumed; the in-game stacking rule is not verified).
+  const totalCut = Math.min(100, (s.costCutPct ?? 0) + (costDown ? COST_DOWN_PCT : 0));
+  const r = trainingCost({ count: s.count ?? 0, perTroop: per, speedPct: s.speedPct ?? 0, costCutPct: totalCut, capacity: s.capacity ?? 0 }, tier);
+  const canAfford = affordable({ food: s.haveFood, wood: s.haveWood, stone: s.haveStone, iron: s.haveIron }, per, totalCut);
   const filled = RESOURCES.some((k) => per[k] > 0);
 
   return (
@@ -45,6 +51,7 @@ export function TrainingCalc() {
 
       <SectionHeader title="Cost of ONE troop (before bonuses)" subtitle="From the training screen in-game" />
       <Card>
+        <Text style={[type.caption, { marginBottom: space.sm, color: palette.warning }]}>Enter the cost and time for 1 troop with no speed or cost boosts active, so they are not counted twice.</Text>
         <Row>{(['food', 'wood'] as const).map((k) => <NumberField key={k} label={LABEL[k]} value={per[k]} onChange={(v) => setPer(k, v)} />)}</Row>
         <Row style={{ marginTop: space.sm }}>{(['stone', 'iron'] as const).map((k) => <NumberField key={k} label={LABEL[k]} value={per[k]} onChange={(v) => setPer(k, v)} />)}</Row>
         <View style={{ marginTop: space.sm }}><NumberField label="Training time per troop (seconds)" value={per.seconds} onChange={(v) => setPer('seconds', v)} suffix="s" /></View>
@@ -53,10 +60,20 @@ export function TrainingCalc() {
       <SectionHeader title="Your bonuses" />
       <Card>
         <NumberField label="Troops to train" value={s.count ?? 0} onChange={(v) => set('count', v)} />
+        <ChipRow>{AMOUNTS.map((a) => <Chip key={a} label={fmtFull(a)} active={s.count === a} onPress={() => set('count', a)} />)}</ChipRow>
         <Row style={{ marginTop: space.sm }}>
           <NumberField label="Training speed bonus" value={s.speedPct ?? 0} onChange={(v) => set('speedPct', v)} suffix="%" />
           <NumberField label="Training cost reduction" value={s.costCutPct ?? 0} onChange={(v) => set('costCutPct', Math.min(100, v))} suffix="%" />
         </Row>
+        <Pressable onPress={() => set('costDown', costDown ? 0 : 1)} style={{ marginTop: space.sm }}>
+          <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={type.body}>Cost Down talent active (−{COST_DOWN_PCT}%)</Text>
+              <Text style={type.caption}>Military talent: training and healing cost −25% for 60 min, 24 h cooldown. Added to your cost reduction above.</Text>
+            </View>
+            <Switch value={costDown} onValueChange={(on) => set('costDown', on ? 1 : 0)} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
+          </Row>
+        </Pressable>
         <View style={{ marginTop: space.sm }}><NumberField label="Training capacity (troops per batch)" value={s.capacity ?? 0} onChange={(v) => set('capacity', v)} /></View>
         <Text style={[type.caption, { marginTop: space.sm }]}>
           Use the totals from your Lord stats (research, VIP, buffs and heroes). {heroSpeed ? `Your owned heroes add +${heroSpeed}% training speed (already part of your in-game total).` : 'Fiona, Carvell and Schubert add training speed; Fiona also cuts training cost; Lucia adds capacity.'}
@@ -74,6 +91,7 @@ export function TrainingCalc() {
               <Stat label="Training time" value={per.seconds ? formatDuration(r.seconds * 1000) : '—'} color={palette.cyan} />
               <Stat label="Power gained" value={fmtFull(r.power)} color={palette.gold} align="right" />
             </Row>
+            {totalCut ? <Text style={[type.caption, { marginTop: space.sm }]}>Includes −{totalCut}% cost{costDown ? ' (with Cost Down)' : ''}.</Text> : null}
             {r.batches ? <Text style={[type.caption, { marginTop: space.sm }]}>{r.batches} batch{r.batches > 1 ? 'es' : ''} at your training capacity.</Text> : null}
           </>
         )}
