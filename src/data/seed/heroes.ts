@@ -401,8 +401,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Ogremire', title: 'Swamp Tyrant', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Bog Hide', 'Infantry HP up significantly.']],
-    m3: { name: 'Mire Slam', desc: 'Nature damage to a 3x3 area and slows mana gain.', charge: 'Slow', pattern: '3x3', effects: ['Mana slow'] },
+    march: [],
+    civil: [
+      { name: 'Scramble Troop HP', description: 'In-game: troop HP bonus in Scramble / contest fights, active once unlocked while you own him. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Scramble Troop DEF', description: 'In-game: troop DEF bonus in Scramble / contest fights, active once unlocked while you own him. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Scramble Troop ATK', description: 'In-game: troop ATK bonus in Scramble / contest fights, active once unlocked while you own him. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+    ],
+    m3: { name: 'Savage Strike', desc: 'Deals 280% damage to the target and nearby enemies (Rage Regen: Fast). Biting Frost: Freeze damage to the target and adjacent enemies for 3 rounds. Icebound Power: stops HP regen of the target and adjacent enemies for 3 rounds. Ancestral Spirit: self-detonates on death, reducing all enemies\' Rage by 15%. Unbending (6★): Parry +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['Freeze damage', 'Heal block', 'Rage down', 'Parry'] },
     sources: ['Shadow Expedition'],
     notes: 'Shadow Expedition reward shards.',
   }),
@@ -512,9 +520,9 @@ const baseHeroes: Hero[] = [
     notes: 'Lucky Flip pool.',
   }),
   hero({
-    name: 'Selantia', title: 'Moon Priestess', element: 'Ice', rarity: 5, unit: 'Infantry', role: 'Support',
-    march: [['Moonlit Rite', 'All troop ATK up slightly.']],
-    m3: { name: 'Eclipse', desc: 'Dark damage to all enemies and lowers their DEF.', charge: 'Slow', pattern: 'All enemies', effects: ['DEF down'] },
+    name: 'Selantia', title: 'Moon Priestess', element: 'Ice', rarity: 5, unit: 'Infantry', role: 'Board-clear damage',
+    march: [['Infantry ATK', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350% (+30% at +1). Applies when she joins troop battle (in-game).'], ['Cavalry ATK', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350% (+30% at +1). Applies when she joins troop battle (in-game).'], ['Troop DEF', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350% (+30% at +1). Applies when she joins troop battle (in-game). Applies to all troops.']],
+    m3: { name: 'Dark Descends', desc: 'Eliminates 1 random row and 1 random column of pieces, each piece dealing 220% damage (no Rage gained from this), and the defender deals 255% area damage (Rage Regen: Medium). Lunar Brilliance: the cleared pieces do not raise enemy Rage. Crescent Blessing (passive): a chance to turn a piece into a bomb when using a skill. Power of Obliteration (Lv. 71): on death clears all pieces, each dealing 80% damage (once per battle). Unbending (6★): Parry +30%. Values as shown in-game at 5★ +1.', charge: 'Medium', pattern: 'Row + column', effects: ['Board clear', 'Bomb', 'Parry'] },
     sources: ["Glory's Gift Roulette"],
     notes: "Glory's Gift Roulette pool.",
   }),
@@ -605,7 +613,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 62; // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 63; // 63 = in-game Selantia and Ogremire // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
