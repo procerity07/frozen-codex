@@ -1,6 +1,8 @@
 package expo.modules.mltranslate
 
 import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.common.model.RemoteModelManager
+import com.google.mlkit.nl.translate.TranslateRemoteModel
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
@@ -55,6 +57,23 @@ class MlTranslateModule : Module() {
           .addOnSuccessListener { r -> synchronized(lock) { out[i] = r; left--; if (left == 0) promise.resolve(out.map { it ?: "" }) } }
           .addOnFailureListener { synchronized(lock) { out[i] = t; left--; if (left == 0) promise.resolve(out.map { it ?: "" }) } }
       }
+    }
+
+    /** Language codes whose translator file is on the phone (English is built in and not listed). */
+    AsyncFunction("downloadedModels") { promise: Promise ->
+      RemoteModelManager.getInstance().getDownloadedModels(TranslateRemoteModel::class.java)
+        .addOnSuccessListener { models -> promise.resolve(models.map { it.language }.filter { it != TranslateLanguage.ENGLISH }) }
+        .addOnFailureListener { e -> promise.reject("ERR_MODELS", e.message ?: "Could not list languages", e) }
+    }
+
+    /** Deletes one downloaded language file. */
+    AsyncFunction("deleteModel") { tag: String, promise: Promise ->
+      val lang = TranslateLanguage.fromLanguageTag(tag)
+      if (lang == null || lang == TranslateLanguage.ENGLISH) { promise.resolve(false); return@AsyncFunction }
+      clients.remove(lang)?.close()
+      RemoteModelManager.getInstance().deleteDownloadedModel(TranslateRemoteModel.Builder(lang).build())
+        .addOnSuccessListener { promise.resolve(true) }
+        .addOnFailureListener { e -> promise.reject("ERR_DELETE", e.message ?: "Could not delete", e) }
     }
 
     OnDestroy { clients.values.forEach { it.close() }; clients.clear() }
