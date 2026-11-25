@@ -4,6 +4,7 @@ import { router, Stack } from 'expo-router';
 import Constants from 'expo-constants';
 import { Database, Download, RefreshCw, Smartphone, Sparkles, Upload } from 'lucide-react-native';
 import { palette, space, type } from '@/theme';
+import { TranslateCard } from '@/components/domain/TranslateCard';
 import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
 import { dbStats, getMeta } from '@/db/repo';
@@ -73,6 +74,8 @@ export default function SettingsScreen() {
       <WhatsNewSheet open={notesOpen} onClose={() => setNotesOpen(false)} />
 
       <FeedbackCard />
+
+      <TranslateCard />
 
       <SectionHeader title="Hero portraits" />
       <Card>

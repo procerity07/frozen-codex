@@ -1,0 +1,6 @@
+{
+  "name": "ml-translate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "On-device translation (Google ML Kit) so the app follows the phone's language (Frozen Codex local module)."
+}
