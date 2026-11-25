@@ -42,6 +42,8 @@ export interface AppState {
   hives: Hive[];
   /** Start times your alliance chose, by event id. */
   allianceTimes: Record<string, AllianceTime>;
+  /** 'auto' = follow the phone's language, 'off' = English, or a language code. */
+  translateMode: string;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -75,6 +77,7 @@ export interface AppState {
   saveHive: (h: Hive) => void;
   removeHive: (id: string) => void;
   setAllianceTime: (eventId: string, at: AllianceTime | null) => void;
+  setTranslateMode: (m: string) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -104,6 +107,7 @@ export const defaultState: PersistedState = {
   reminders: [],
   hives: [],
   allianceTimes: {},
+  translateMode: 'auto',
 };
 
 export const useAppStore = create<AppState>()(
@@ -111,6 +115,7 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       ...defaultState,
       setTroopFocus: (troopFocus) => set({ troopFocus }),
+      setTranslateMode: (translateMode) => set({ translateMode }),
       setRealm: (r) => set({ realm: { ...get().realm, ...r } }),
       addCastle: (name) => set({ castles: [...get().castles, { id: `farm-${Date.now().toString(36)}`, name: name.trim() || `Farm ${get().castles.length}`, kind: 'farm' }] }),
       removeCastle: (id) => set({ castles: get().castles.filter((c) => c.id !== id || c.kind === 'main') }),

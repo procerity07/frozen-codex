@@ -10,6 +10,8 @@ import { getDb } from '@/db/client';
 import { useAppStore } from '@/store/useAppStore';
 import { palette, space, type } from '@/theme';
 import { Button } from '@/components/ui';
+import { listHeroes } from '@/db/repo';
+import { configureTranslation, protectTerms } from '@/i18n/autoTranslate';
 
 SplashScreen.preventAutoHideAsync().catch(() => undefined);
 if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental?.(true);
@@ -25,6 +27,16 @@ export default function RootLayout() {
       .catch((e: unknown) => { setError(e instanceof Error ? e.message : String(e)); setState('error'); })
       .finally(() => { SplashScreen.hideAsync().catch(() => undefined); });
   };
+
+  const translateMode = useAppStore((s) => s.translateMode);
+  useEffect(() => {
+    if (state !== 'ready') return;
+    configureTranslation(translateMode).catch(() => undefined);
+  }, [state, translateMode]);
+  useEffect(() => {
+    if (state !== 'ready') return;
+    listHeroes().then((hs) => protectTerms(hs.map((h) => h.name))).catch(() => undefined);
+  }, [state]);
 
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(palette.bg).catch(() => undefined);
