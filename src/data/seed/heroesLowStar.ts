@@ -342,6 +342,46 @@ export const lowStarHeroes: Hero[] = [
  */
 export const addedHighStarHeroes: Hero[] = [
   {
+    ...lowStar({ name: "Tamamo Mae", element: 'Dark', rarity: 6, unit: 'All-round', sources: ['Battle Pass'],
+      march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
+      m3: { name: "Soul Blast", description: "Deals 650% damage to the target enemy. Hellfire Incineration (unlocks Lv.11): Enhanced Active Skill: Attacks the enemy with Fox Fire, dealing damage equal to 10% of target's max HP, capped at 100% of own ATK. Curse Emblem (unlocks Lv.31): Enhanced Active Skill: Reduces the target's Rage Gain Speed by 50% for 4 rounds. (Undispellable) Resurrection (unlocks Lv.71): Passive: Revives immediately upon death in battle, restoring 100% HP and Rage upon revival. Combat Mastery (unlocks 7\u2605): Increases Crit by 30%. (Chance to deal double damage when dealing damage). Rage Regen: Fast. (wiki; matches in-game, player-confirmed)", charge: 'Fast', pattern: 'See description', effects: [] },
+      notes: ["From the wiki hero page (player-confirmed accurate, 2026-11-25)."] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to a share of troop ATK (wiki).' },
+      { name: 'Troop HP', description: "6\u2605: 28.5/42.75/57/85/128/170/220/280/350% from Hero0 to +8; 7\u2605: 220/320/400/500% from +5 to +8. Applies when she joins troop battle (wiki)." },
+      { name: 'Troop DEF', description: "6\u2605: 28.5/42.75/57/85/128/170/220/280/350% from Hero0 to +8; 7\u2605: 220/320/400/500% from +5 to +8. Applies when she joins troop battle (wiki). Unlocks at Lv. 31." },
+      { name: 'Troop ATK', description: "6\u2605: 28.5/42.75/57/85/128/170/220/280/350% from Hero0 to +8; 7\u2605: 220/320/400/500% from +5 to +8. Applies when she joins troop battle (wiki). Unlocks at Lv. 131." },
+    ],
+  },
+  lowStar({ name: "Zumera", element: 'Dark', rarity: 6, unit: 'Civil', sources: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: "Wiki, applies to all troops while you own her. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Active while owned (wiki)', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+      { name: 'Troop DEF (Passive)', description: "Wiki, applies to all troops while you own her. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Unlocks at level 31', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+      { name: 'Troop ATK (Passive)', description: "Wiki, applies to all troops while you own her. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Unlocks at level 131', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+    ],
+    m3: { name: "Soul Devour", description: "Deals 640% damage to the target enemy. Evil Curse (unlocks Lv.11): Enhanced Active Skill: Inflicts Disrupted on the target for 3 rounds. When using Rage Skill (consuming Rage), the disrupted target will perform a special attack on a random ally. Foul Corruption (unlocks Lv.31): Enhanced Active Skill: Extends the duration of the Disrupted effect by 1 round. Demon Lord Lineage (unlocks Lv.71): Enhanced Active Skill: The Disrupted effect cannot be dispelled. Iron Will (unlocks 7\u2605): Increases Crit Res. by 30%. (Chance to take normal damage when receiving a critical hit). Rage Regen: Medium. (wiki; matches in-game, player-confirmed)", charge: 'Medium', pattern: 'See description', effects: [] },
+    notes: ["From the wiki hero page (player-confirmed accurate, 2026-11-25); how to obtain not listed."] }),
+  lowStar({ name: "Herukab", element: 'Light', rarity: 6, unit: 'Civil', sources: ['Battle Pass'],
+    civil: [
+      { name: 'Troop HP (Passive)', description: "Wiki, applies to all troops while you own him. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Active while owned (wiki)', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+      { name: 'Troop DEF (Passive)', description: "Wiki, applies to all troops while you own him. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Unlocks at level 31', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+      { name: 'Troop ATK (Passive)', description: "Wiki, applies to all troops while you own him. 6\u2605: 10.5/15.5/21/31/41/64/82/120/200% from Hero0 to +8; 7\u2605: 80/102.5/150/250% from +5 to +8.", requirement: 'Unlocks at level 131', unit: '%', tiers: {"6": [10.5, 15.5, 21.0, 31.0, 41.0, 64.0, 82.0, 120.0, 200.0], "7": [null, null, null, null, null, 80.0, 102.5, 150.0, 250.0]} },
+    ],
+    m3: { name: "Golden Tempest", description: "Deals 264% damage to all enemies. Radiant Light (unlocks Lv.11): Enhanced Active Skill: Reduces all enemies' Hit by 34% Divine Might (unlocks Lv.31): Enhanced Active Skill: Reduces all enemies' ATK by 35% Multistrike (unlocks Lv.71): Enhanced Active Skill: Attacks ass enemies once more, dealing equal damage. Combat Mastery (unlocks 7\u2605): Increases Crit by 30%. (Chance to deal double damage when dealing damage) Rage Regen: Medium. (wiki; matches in-game, player-confirmed)", charge: 'Medium', pattern: 'See description', effects: [] },
+    notes: ["From the wiki hero page (player-confirmed accurate, 2026-11-25)."] }),
+  {
+    ...lowStar({ name: "Velosa", element: 'Nature', rarity: 5, unit: 'Infantry', sources: ['Royal Arms Race'],
+      march: ['Troop skill', 'Infantry ATK', 'Archer ATK', 'Troop DEF'],
+      m3: { name: "Spiritual Revelation", description: "Grants all allies +100% ATK for 5 rounds. Each subsequent use reduces the effect by 20%, to a minimum of +60% ATK. Withering Plague (unlocks Lv.11): Enhanced Active Skill: Reduces enemies' Heal Rate by 50% for 5 rounds. This effect cannot be dispelled. Calamity (unlocks Lv.31): Enhanced Active Skill: Dispels all buffs on enemies. Nature's Shelter (unlocks Lv.71): Enhanced Active Skill: Grants the caster +35% Dodge for 3 rounds. Unbending (unlocks 6\u2605): Increase Parry by 30%. (Chance to reduce received damage when attacked). Rage Regen: Fast. (wiki; matches in-game, player-confirmed)", charge: 'Fast', pattern: 'See description', effects: [] },
+      notes: ["From the wiki hero page (player-confirmed accurate, 2026-11-25)."] }),
+    marchSkills: [
+      { name: 'Troop skill', description: 'Deals damage equal to a share of troop ATK (wiki).' },
+      { name: 'Infantry ATK', description: "5\u2605: 20/30/40/60/90/120/150/200/250% from Hero0 to +8; 6\u2605: 150/220/280/350% from +5 to +8. Applies when she joins troop battle (wiki)." },
+      { name: 'Archer ATK', description: "5\u2605: 20/30/40/60/90/120/150/200/250% from Hero0 to +8; 6\u2605: 150/220/280/350% from +5 to +8. Applies when she joins troop battle (wiki). Unlocks at Lv. 31." },
+      { name: 'Troop DEF', description: "5\u2605: 20/30/40/60/90/120/150/200/250% from Hero0 to +8; 6\u2605: 150/220/280/350% from +5 to +8. Applies when she joins troop battle (wiki). Unlocks at Lv. 131." },
+    ],
+  },
+  {
     ...lowStar({ name: 'Carrion', element: 'Dark', rarity: 6, unit: 'Infantry', sources: [],
       march: ['Infantry ATK', 'Cavalry ATK', 'Troop DEF', 'Troop HP'],
       m3: { name: 'Ruthless Strike', description: 'Deals 420% damage to the target and adjacent enemies (Rage Regen: Medium). Souls to the Sword: summons a Soul Guardian (10% of his ATK and HP, up to 3). Ominous Touch: Soul Guardian attacks may dispel one buff from the target. Savagery: ATK +5% per round, up to 80%. Combat Mastery (7★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Summon', 'Dispel', 'ATK up', 'Crit'] },

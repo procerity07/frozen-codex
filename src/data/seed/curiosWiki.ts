@@ -83,7 +83,7 @@ export const curioLegion: { enhancement: number; stars: number; pct: number }[] 
 ];
 
 /** Crafting: 30% chance of an exclusive curio from a Common Craft, 70% Code of Light (wiki). */
-export const CODE_OF_LIGHT = { id: 'code-of-light', name: 'Code of Light', note: 'Fits any hero. Gives the same Legion and Hero Attributes as other curios. Any extra Code of Light bonus is not on the wiki.' };
+export const CODE_OF_LIGHT = { id: 'code-of-light', name: 'Code of Light', note: 'Fits any hero. Gives only the Legion and Hero Attributes every curio has; no exclusive attributes (player-confirmed).' };
 
 export const heroCurios: HeroCurio[] = [
   {
