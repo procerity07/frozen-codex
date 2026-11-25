@@ -214,8 +214,8 @@ const baseEvents: GameEvent[] = [
     rewards: ['Realm ranking chests', 'Diamonds'],
   }),
   ev({
-    name: 'Scorching Front', category: C('Cross-Realm War'), cadence: 'Weekly, Saturday to Sunday', cycleWeek: W('Both'), days: ['Sat', 'Sun'],
-    summary: 'Volcano battle for Fire Crystals; runs Saturday and Sunday (ends Monday 00:00 UTC).',
+    name: 'Scorching Front', category: C('Cross-Realm War'), cadence: 'Weekly, Saturday to Monday', cycleWeek: W('Both'), days: ['Sat', 'Sun', 'Mon'],
+    summary: 'Volcano battle for Fire Crystals; runs Saturday to Monday 24:00 UTC.',
     rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', '1 Fire Crystal = 1 point.', '3 free teleports, then scaling diamond cost.', 'Goblin Rocket and Shield map pickups; central supply chests.', 'Realm Hospital fully heals for free after the event.'],
     rewards: ['Ranking chests'],
   }),
@@ -264,6 +264,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 16; // 16 = in-game Event Schedule: Royal Arms Race Thu–Sat, Oblivion War Wed–Sat, Scorching Front Sat–Sun; // 15 = Oblivion War full in-game rules, slots, points and leagues; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 16; // 16 = in-game Event Schedule: Royal Arms Race Thu–Sat, Oblivion War Wed–Sat; // 15 = Oblivion War full in-game rules, slots, points and leagues; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));

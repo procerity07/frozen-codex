@@ -1,6 +1,6 @@
 {
-  "version": 52,
-  "publishedAt": "2026-11-25T22:37:28.297Z",
+  "version": 53,
+  "publishedAt": "2026-11-25T22:38:24.969Z",
   "packs": {
     "heroes": [
       {
@@ -9894,7 +9894,7 @@
       },
       {
         "startUtc": "00:00",
-        "durationHours": 48,
+        "durationHours": 72,
         "featuredHeroes": [],
         "currencies": [],
         "tips": [],
@@ -9904,13 +9904,14 @@
         "confidence": "community",
         "name": "Scorching Front",
         "category": "Cross-Realm War",
-        "cadence": "Weekly, Saturday to Sunday",
+        "cadence": "Weekly, Saturday to Monday",
         "cycleWeek": "Both",
         "days": [
           "Sat",
-          "Sun"
+          "Sun",
+          "Mon"
         ],
-        "summary": "Volcano battle for Fire Crystals; runs Saturday and Sunday (ends Monday 00:00 UTC).",
+        "summary": "Volcano battle for Fire Crystals; runs Saturday to Monday 24:00 UTC.",
         "rules": [
           "Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).",
           "1 Fire Crystal = 1 point.",

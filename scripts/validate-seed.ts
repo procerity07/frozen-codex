@@ -256,7 +256,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok((await bundledEventsToSeed(edb as unknown as SQLiteDatabase)).length === seed.events.length, 'stale pack events superseded on re-seed');
   await seedDatabase(edb as unknown as SQLiteDatabase);
   const rar = JSON.parse((edb.raw.prepare("SELECT data FROM events WHERE id = 'royal-arms-race'").get() as { data: string }).data);
-  ok(rar.days.join() === 'Thu,Fri,Sat,Sun', 'existing install receives corrected Royal Arms Race');
+  ok(rar.days.join() === 'Thu,Fri,Sat', 'existing install receives corrected Royal Arms Race');
 
   // The published pack must parse and agree with the bundled data revisions.
   const livePack = parseManifest(JSON.parse(readFileSync(join(__dirname, '..', 'data-pack', 'manifest.json'), 'utf8')));
