@@ -6,7 +6,7 @@ export const cycleDays: CycleEventDays[] = [
     days: [
       { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Recruit items: Timeless Scroll 20,000 · Deluxe Recruit Ticket 10,000', 'Hero shards: 5★ Omni 30,000 · 4★ Omni 10,000 · 3★ Omni 3,000 · 2★ Hero Shard 750', 'Bond Gifts: T1 75 · T2 375 · T3 750 · T4 9,375 · T5 18,750', 'Mythic Hero Choice Cards, Realm Cards and Hero Plaza exchanges give 0'] },
       { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['+5 points per 1 power from Construction (in-game)', '+5 points per 1 power from Research (in-game)'] },
-      { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['Stamina spent', 'AP spent', 'Resources gathered'] },
+      { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['+600 per 1 Stamina used (in-game)', '+400 per 1 AP used', '+2 per 20 Food or 20 Wood, 4 Stone or 1 Iron gathered; +1 per 10 Sapphire', '+20,000 per Lucky Star Coin obtained'] },
       { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups', 'Troops trained'] },
       { day: 5, weekday: 'Fri', theme: 'Draconic Stone (Draconic Stone & Refinement Crest)', scoring: ['Draconic Stone EXP', 'Refinement Crests'] },
       { day: 6, weekday: 'Sat', theme: 'Supreme Power (Obtain Essences)', scoring: ['Gear/Rune/Totem/Holystone Essences', 'Spinels', 'Crystals'] },
@@ -48,6 +48,7 @@ export const royalArmsRace: RoyalArmsRaceSlot[] = [
 
 /**
  * Ace Lord Day 1 (Heroes Assemble) phases — confirmed from in-game screenshots (2026-11-23).
+ * Day 3 (Daily Activity) also uses the same thresholds and rewards (in-game, 2026-11-25).
  * Day 2 (Path to Development) uses the same point thresholds; its phases 1–4 give 6x 60m speedups (in-game, 2026-11-24).
  * Wiki: Days 2–4 share the 600,000 top phase; Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000.
  */
@@ -56,7 +57,7 @@ export const aceLordPhases: PhaseReward[] = [
   { phase: 2, points: 30000, reward: '3x 60m Speedup, 8x 60m Training Speedup, 150,000 Food, 150,000 Wood' },
   { phase: 3, points: 60000, reward: '3x 60m Speedup, 8x 60m Research Speedup, 150,000 Food, 150,000 Wood' },
   { phase: 4, points: 120000, reward: '3x 60m Speedup, 8x 60m Building Speedup, 150,000 Food, 150,000 Wood' },
-  { phase: 5, points: 300000, reward: '400-Diamond chest, 3x 60m Speedup, 1x 30% boost, 150,000 Food, 150,000 Wood' },
+  { phase: 5, points: 300000, reward: '300-Diamond chest (in-game Day 3; earlier note said 400), 3x 60m Speedup, 1x 30% boost, 150,000 Food, 150,000 Wood' },
   { phase: 6, points: 600000, reward: '2x Hero Choice Card, 3x 60m Speedup, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
 ];
 
