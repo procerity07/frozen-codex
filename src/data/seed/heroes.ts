@@ -319,9 +319,9 @@ const baseHeroes: Hero[] = [
     notes: 'Anti-heal is valuable in Arena against Fiona/Edith teams.', confidence: 'estimate',
   }),
   hero({
-    name: 'Sirius', title: 'Dog Star', element: 'Fire', rarity: 6, unit: 'Archer', role: 'Archer DPS',
-    march: [['Brightest Star', 'Archer ATK up; crit rate up at night-time battles.']],
-    m3: { name: 'Stellar Lance', desc: 'Light damage to a single target, high crit.', charge: 'Fast', pattern: 'Single target', effects: ['Crit'] },
+    name: 'Sirius', title: 'Dog Star', element: 'Fire', rarity: 6, unit: 'Archer', role: 'AoE damage and guards',
+    march: [['Archer ATK', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).'], ['Infantry ATK', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).'], ['Troop DEF', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.'], ['Troop HP', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.']],
+    m3: { name: 'Aether Surge', desc: 'Deals 400% damage to all enemies (Rage Regen: Medium). Sovereign\'s Majesty: all allies +24% Rage recovery for 5 rounds. Royal Guard: adds a Royal Guard to himself and adjacent allies (10% of his ATK and HP, up to 3). Vigilance: guards raise the target\'s DEF by 10%. Unbending (7★): Parry +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'All enemies', effects: ['Rage up', 'Summon', 'DEF up', 'Parry'] },
     sources: ['Battle Pass Event'],
     notes: 'Single-target nuker for bosses.', confidence: 'estimate',
   }),
@@ -340,9 +340,9 @@ const baseHeroes: Hero[] = [
     notes: 'Seasonal duo; decent Ice filler.', confidence: 'estimate',
   }),
   hero({
-    name: 'Leora', title: 'Lionheart', element: 'Light', rarity: 6, unit: 'Cavalry', role: 'Cavalry DPS',
-    march: [['Pride', 'Infantry ATK up; damage up per surviving ally.']],
-    m3: { name: 'Roar of Dawn', desc: 'Light damage to a row and raises ally ATK.', charge: 'Medium', pattern: 'Row', effects: ['ATK up'] },
+    name: 'Leora', title: 'Lionheart', element: 'Light', rarity: 6, unit: 'Cavalry', role: 'Healer and guards',
+    march: [['Cavalry ATK', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).'], ['Archer ATK', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).'], ['Troop DEF', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.'], ['Troop HP', '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.']],
+    m3: { name: 'Revival Lux', desc: 'Restores 54% HP to all allies (Rage Regen: Medium). Baptism of Lux: dispels all enemy buffs. Elf Guardian: summons an Elf Guardian for all allies (10% of her ATK and HP, up to 3). Blessed Prayer: guardians give the target +10% Heal bonus. Iron Will (7★): Crit Res. +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'All allies', effects: ['Heal', 'Dispel', 'Summon', 'Heal Bonus', 'Crit Res.'] },
     sources: ['Hero Plaza'],
     notes: 'Light Cavalry option for Elemental Seal requirements.', confidence: 'estimate',
   }),
@@ -626,7 +626,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 68; // 68 = Moleg element confirmed // 67 = in-game Khaos; new hero Moleg // 66 = in-game Maxim // 65 = new hero Estelle // 64 = new hero Violette // 63 = in-game Selantia and Ogremire // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 69; // 69 = in-game Sirius, Leora; new hero Carrion // 68 = Moleg element confirmed // 67 = in-game Khaos; new hero Moleg // 66 = in-game Maxim // 65 = new hero Estelle // 64 = new hero Violette // 63 = in-game Selantia and Ogremire // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

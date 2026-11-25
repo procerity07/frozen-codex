@@ -341,6 +341,13 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
+  {
+    ...lowStar({ name: 'Carrion', element: 'Dark', rarity: 6, unit: 'Infantry', sources: [],
+      march: ['Infantry ATK', 'Cavalry ATK', 'Troop DEF', 'Troop HP'],
+      m3: { name: 'Ruthless Strike', description: 'Deals 420% damage to the target and adjacent enemies (Rage Regen: Medium). Souls to the Sword: summons a Soul Guardian (10% of his ATK and HP, up to 3). Ominous Touch: Soul Guardian attacks may dispel one buff from the target. Savagery: ATK +5% per round, up to 80%. Combat Mastery (7★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Summon', 'Dispel', 'ATK up', 'Crit'] },
+      notes: ['In-game (2026-11-25, 6★ +8, S3): 6★ Dark Infantry; Infantry ATK, Cavalry ATK, Troop DEF and Troop HP +500% at 7★ +8 (6★ table 57–350%). How to obtain him is not verified.'] }),
+    marchSkills: [{ name: 'Infantry ATK', description: '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).' }, { name: 'Cavalry ATK', description: '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game).' }, { name: 'Troop DEF', description: '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.' }, { name: 'Troop HP', description: '6★ +2 to +8: 57/85/128/170/220/280/350%; 7★ +5 to +8: 220/320/400/500%. Applies when the hero joins troop battle (in-game). Applies to all troops.' }],
+  },
   lowStar({ name: 'Moleg', element: 'Fire', rarity: 5, unit: 'Civil', sources: [],
     civil: [
       { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at +8 (5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
