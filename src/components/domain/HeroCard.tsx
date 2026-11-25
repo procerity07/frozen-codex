@@ -19,18 +19,20 @@ function HeroCardImpl({ hero, focus, onPress, owned }: { hero: Hero; focus: Troo
       <HeroPortrait hero={hero} size={48} stars={owned?.stars} />
       <View style={{ flex: 1, gap: 3 }}>
         <View style={st.nameRow}>
-          <Text style={type.heading} numberOfLines={1}>{hero.name}</Text>
-          <TroopEmblem type={hero.unitType} size={16} />
+          <View style={st.emblem}><TroopEmblem type={hero.unitType} size={16} /></View>
+          <Text style={[type.heading, { flexShrink: 1 }]} numberOfLines={1}>{hero.name}</Text>
         </View>
         <RarityStars rarity={owned?.stars ?? hero.rarity} size={10} />
         <Text style={type.caption} numberOfLines={1}>{hero.element} · {hero.unitType}</Text>
       </View>
-      {owned ? (
-        <View style={{ alignItems: 'flex-end', gap: 4 }}>
-          <Badge label="Owned" color={palette.success} />
-          <Text style={type.numberSmall}>{enhancementLabel(owned.enhancement)} · Lv {owned.level}</Text>
-        </View>
-      ) : null}
+      <View style={st.ownedCol}>
+        {owned ? (
+          <>
+            <Badge label="Owned" color={palette.success} />
+            <Text style={type.numberSmall} numberOfLines={1}>{enhancementLabel(owned.enhancement)} · Lv {owned.level}</Text>
+          </>
+        ) : null}
+      </View>
     </Pressable>
   );
 }
@@ -40,4 +42,6 @@ export const HeroCard = memo(HeroCardImpl);
 const st = StyleSheet.create({
   card: { flexDirection: 'row', alignItems: 'center', gap: space.md, backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderRadius: radius.lg, padding: space.md, marginBottom: space.sm },
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  emblem: { width: 18, alignItems: 'center' },
+  ownedCol: { width: 96, alignItems: 'flex-end', gap: 4 },
 });

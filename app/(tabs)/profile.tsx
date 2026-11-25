@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Castle, Pencil, Settings, Shield, Sparkles, User } from 'lucide-react-native';
 import { MarchCard } from '@/components/domain/MarchCard';
 import { MyStatsCard } from '@/components/domain/MyStatsCard';
-import { Badge, Card, Row, Screen, SectionHeader, Stat, haptic } from '@/components/ui';
+import { Badge, Card, CollapsibleSection, Row, Screen, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
 import { civilBonuses, clampEntry, enhancementLabel, type CivilBonus } from '@/lib/roster';
 import { skillsCheckedInGame } from '@/lib/heroData';
@@ -60,7 +60,7 @@ export default function ProfileScreen() {
         <Text style={[type.body, { color: palette.cyan }]}>Settings</Text>
       </Pressable>
 
-      <SectionHeader title="Account" icon={User} right={<Pressable onPress={() => router.push('/tools/settings')}><Pencil size={16} color={palette.cyan} /></Pressable>} />
+      <CollapsibleSection title="Account" icon={User} right={<Pressable onPress={() => router.push('/tools/settings')} hitSlop={8}><Pencil size={16} color={palette.cyan} /></Pressable>}>
       <Card>
         <Row style={{ justifyContent: 'space-between', flexWrap: 'wrap' }} gap={space.lg}>
           <Stat label="Lord" value={s.realm.lordName || '—'} />
@@ -70,8 +70,9 @@ export default function ProfileScreen() {
         </Row>
         {s.castles.length > 1 ? <Text style={[type.caption, { marginTop: space.sm }]}>{s.castles.map((c) => c.name).join(' · ')}</Text> : null}
       </Card>
+      </CollapsibleSection>
 
-      <SectionHeader title="Citadel" icon={Castle} right={<Pressable onPress={() => router.push('/tools/citadel')}><Pencil size={16} color={palette.cyan} /></Pressable>} />
+      <CollapsibleSection title="Citadel" icon={Castle} right={<Pressable onPress={() => router.push('/tools/citadel')} hitSlop={8}><Pencil size={16} color={palette.cyan} /></Pressable>}>
       <Card>
         <Row style={{ justifyContent: 'space-between', flexWrap: 'wrap' }} gap={space.lg}>
           <Stat label="Citadel level" value={String(s.citadel.from)} color={palette.success} />
@@ -81,10 +82,11 @@ export default function ProfileScreen() {
         </Row>
         <Text style={[type.caption, { marginTop: space.sm }]}>From the Citadel Planner. Change them there.</Text>
       </Card>
+      </CollapsibleSection>
 
       <MarchCard heroes={heroes} roster={s.roster} />
 
-      <SectionHeader title="Heroes" icon={Shield} subtitle={`${owned.length} in My Roster`} />
+      <CollapsibleSection title="Heroes in My Roster" icon={Shield} subtitle={`${owned.length} heroes`} right={<Badge label={String(owned.length)} color={palette.gold} />} initiallyOpen={false}>
       {owned.length === 0 ? (
         <Card><Text style={type.bodySecondary}>No heroes yet. Open a hero and tap "I own this hero" to add them with their stars and level.</Text></Card>
       ) : (
@@ -96,17 +98,18 @@ export default function ProfileScreen() {
               <Pressable key={h.id} onPress={() => { haptic(); router.push(`/hero/${h.id}`); }}>
                 <Row style={{ justifyContent: 'space-between' }}>
                   <Text style={[type.body, { color: elementColors[h.element] ?? palette.text, flex: 1 }]} noTranslate>{h.name}</Text>
-                  <Text style={type.caption} noTranslate>{`${e.stars}★ · Lv ${e.level} · ${enhancementLabel(e.enhancement)} · Bond ${e.bond}`}</Text>
+                  <Text style={type.caption} noTranslate>{`${e.stars}★ · Lv ${e.level} · ${enhancementLabel(e.enhancement)}${h.rarity >= 5 ? ` · Bond ${e.bond}` : ''}`}</Text>
                 </Row>
               </Pressable>
             ))}
           </View>
         </Card>
       )}
+      </CollapsibleSection>
 
       <MyStatsCard />
 
-      <SectionHeader title="Total hero bonuses" icon={Sparkles} subtitle="Civil (city) skills of your heroes added together. Tap a line to see where it comes from." />
+      <CollapsibleSection title="Total hero bonuses" icon={Sparkles} subtitle="Civil (city) skills of your heroes added together. Tap a line to see where it comes from." initiallyOpen={false}>
       {groups.length === 0 ? (
         <Card><Text style={type.bodySecondary}>Add heroes to My Roster to see your totals.</Text></Card>
       ) : groups.map((g) => (
@@ -136,6 +139,7 @@ export default function ProfileScreen() {
           </Card>
         </Pressable>
       ))}
+      </CollapsibleSection>
 
     </Screen>
   );

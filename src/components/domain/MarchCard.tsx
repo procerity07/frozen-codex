@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { Swords } from 'lucide-react-native';
-import { Card, Chip, Row, SectionHeader, haptic } from '@/components/ui';
+import { Card, Chip, Row, CollapsibleSection, haptic } from '@/components/ui';
 import { MARCH_TYPES, recommendMarch, type MarchMode, type MarchType } from '@/lib/march';
 import type { RosterEntry } from '@/lib/roster';
 import { useAppStore } from '@/store/useAppStore';
@@ -19,7 +19,7 @@ export function MarchCard({ heroes, roster }: { heroes: Hero[]; roster: Record<s
 
   return (
     <>
-      <SectionHeader title="Recommended march" icon={Swords} subtitle="Built from your heroes in My Roster. Civil heroes are never used." />
+      <CollapsibleSection title="Recommended march" icon={Swords} subtitle="Built from your heroes in My Roster. Civil heroes are never used.">
       <Card>
         <Row style={{ flexWrap: 'wrap' }}>
           {MARCH_TYPES.map((t) => <Chip key={t} label={t} active={troop === t} onPress={() => setTroop(t)} />)}
@@ -57,6 +57,7 @@ export function MarchCard({ heroes, roster }: { heroes: Hero[]; roster: Record<s
         {plan.notes.map((n) => <Text key={n} style={[type.caption, { marginTop: space.sm, color: palette.gold }]}>{n}</Text>)}
         <Text style={[type.caption, { marginTop: space.sm }]}>Ranked by enhancement first (+5 gives the 500% troop skill, so a 3★ +5 beats a 5★ +2), then by unlocked skills that boost {troop} ({troop} ATK counts far more than general Troop ATK), then stars and level.</Text>
       </Card>
+      </CollapsibleSection>
     </>
   );
 }

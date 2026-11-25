@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
-import { Bell, BellOff, Brain, Calculator, Search, Swords } from 'lucide-react-native';
+import { Bell, BellOff, Brain, Calculator, ChevronDown, ChevronRight, Search, Swords } from 'lucide-react-native';
 import type { EventCategory, GameEvent } from '@/types/game';
 import { listEvents } from '@/db/repo';
 import { eventCurrencies, events as seedEvents, royalArmsRace } from '@/data/seed';
@@ -40,6 +40,7 @@ function CalendarView() {
   const r = useAppStore((s) => s.rotationAnchorWeek);
   const days = useMemo(() => twoWeekCalendar(utcWeekStart(now), seedEvents, { aceLordAnchorWeek: a, rotationAnchorWeek: r }), [now, a, r]);
   const todayKey = now.toISOString().slice(0, 10);
+  const [toggled, setToggled] = useState<Record<string, boolean>>({});
   return (
     <Screen>
       <Text style={[type.caption, { marginBottom: space.sm }]}>Times in UTC · your device is {localOffsetLabel(now)}</Text>
@@ -53,10 +54,17 @@ function CalendarView() {
               <SectionHeader title={`${d.cycle} Week`} subtitle={`Rotation week ${d.rotation} of 4 · ${d.cycle === 'Ace Lord' ? 'Conquest of Lords Saturday' : 'Realm Expedition Saturday'}`} />
             ) : null}
             <Card style={[{ marginBottom: space.sm, padding: space.md }, isToday && { borderColor: palette.cyan }]}>
-              <Row style={{ justifyContent: 'space-between' }}>
-                <Text style={type.heading}>{WEEKDAYS[i % 7]} · {key.slice(5)}</Text>
-                {isToday ? <Badge label="Today" color={palette.cyan} /> : null}
-              </Row>
+              <Pressable accessibilityRole="button" accessibilityState={{ expanded: toggled[key] ?? isToday }} onPress={() => setToggled({ ...toggled, [key]: !(toggled[key] ?? isToday) })}>
+                <Row style={{ justifyContent: 'space-between' }}>
+                  <Text style={type.heading}>{WEEKDAYS[i % 7]} · {key.slice(5)}</Text>
+                  <Row gap={8}>
+                    {isToday ? <Badge label="Today" color={palette.cyan} /> : null}
+                    {(toggled[key] ?? isToday) ? null : <Text style={type.caption}>{`${d.events.filter((e) => e.category !== 'Core Cycle').length} events`}</Text>}
+                    {(toggled[key] ?? isToday) ? <ChevronDown size={18} color={palette.textSecondary} /> : <ChevronRight size={18} color={palette.textSecondary} />}
+                  </Row>
+                </Row>
+              </Pressable>
+              {(toggled[key] ?? isToday) ? <>
               {d.themes.map((t) => <Text key={t.label} style={[type.bodySecondary, { marginTop: 2 }]}><Text style={{ color: palette.gold }}>{t.label}:</Text> {t.theme}</Text>)}
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: space.sm }}>
                 {d.events.filter((e) => e.category !== 'Core Cycle').map((e) => (
@@ -65,6 +73,7 @@ function CalendarView() {
                   </Pressable>
                 ))}
               </View>
+              </> : null}
             </Card>
           </View>
         );
@@ -140,21 +149,30 @@ function Registry() {
 function Planner() {
   const plan = useMemo(doubleDipPlan, []);
   const now = useNow(60_000);
+  const todayWd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getUTCDay()] ?? 'Mon';
+  const [openDays, setOpenDays] = useState<Record<string, boolean>>({});
   return (
     <Screen>
       <SectionHeader title="Ace Lord week planner" subtitle="Daily theme, side events and Royal Arms Race" />
       {plan.map((d) => (
         <Card key={d.weekday} style={{ marginBottom: space.sm, padding: space.md }} accent={d.shared.length ? palette.success : undefined}>
-          <Row style={{ justifyContent: 'space-between' }}>
-            <Text style={type.heading}>{d.weekday}</Text>
-            {d.shared.length ? <Badge label="Double-dip" color={palette.success} /> : null}
-          </Row>
+          <Pressable accessibilityRole="button" onPress={() => setOpenDays({ ...openDays, [d.weekday]: !(openDays[d.weekday] ?? d.weekday.startsWith(todayWd)) })}>
+            <Row style={{ justifyContent: 'space-between' }}>
+              <Text style={type.heading}>{d.weekday}</Text>
+              <Row gap={8}>
+                {d.shared.length ? <Badge label="Double-dip" color={palette.success} /> : null}
+                {(openDays[d.weekday] ?? d.weekday.startsWith(todayWd)) ? <ChevronDown size={18} color={palette.textSecondary} /> : <ChevronRight size={18} color={palette.textSecondary} />}
+              </Row>
+            </Row>
+          </Pressable>
+          {(openDays[d.weekday] ?? d.weekday.startsWith(todayWd)) ? <>
           <Row style={{ marginTop: space.sm, alignItems: 'flex-start' }}>
             <View style={{ flex: 1 }}><Text style={[type.caption, { color: palette.gold }]}>Ace Lord</Text><Text style={type.body}>{d.aceLord}</Text></View>
             <View style={{ flex: 1 }}><Text style={[type.caption, { color: palette.cyan }]}>Daily event</Text><Text style={type.body}>{d.allianceDuel}</Text></View>
           </Row>
           {d.royal.length ? <Text style={[type.caption, { marginTop: space.sm }]}>Royal Arms Race: {d.royal.map((r) => `${r.utc} ${r.theme}`).join(' · ')}</Text> : null}
           <Text style={[type.bodySecondary, { marginTop: space.sm }]}>{d.advice}</Text>
+          </> : null}
         </Card>
       ))}
       <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sun · local ${localOffsetLabel(now)}`} />

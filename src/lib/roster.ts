@@ -15,6 +15,8 @@ export interface RosterEntry {
 }
 
 export const BOND_MAX = 95;
+/** Only 5★ and 6★ heroes have bonds. */
+export const hasBonds = (hero: Pick<Hero, 'rarity'>) => hero.rarity >= 5;
 
 const clampInt = (n: unknown, lo: number, hi: number, fallback: number) => {
   const v = typeof n === 'number' && Number.isFinite(n) ? Math.round(n) : fallback;
@@ -26,7 +28,7 @@ export const levelCap = (stars: number) => LEVEL_CAP_BY_STARS[stars] ?? null;
 export const maxEnhancement = (stars: number) => (stars < 5 ? MAX_ENHANCEMENT_BELOW_5_STARS : MAX_ENHANCEMENT);
 
 export function newEntry(hero: Pick<Hero, 'rarity'>): RosterEntry {
-  return { stars: hero.rarity, level: 1, enhancement: 0, bond: 1 };
+  return { stars: hero.rarity, level: 0, enhancement: 0, bond: 0 };
 }
 
 /** Makes any saved or imported entry valid for this hero (protects against bad backups or old data). */
@@ -35,9 +37,9 @@ export function clampEntry(hero: Pick<Hero, 'rarity'>, raw: Partial<RosterEntry>
   const cap = levelCap(stars) ?? ABSOLUTE_MAX_LEVEL;
   return {
     stars,
-    level: clampInt(raw?.level, 1, cap, 1),
+    level: clampInt(raw?.level, 0, cap, 0),
     enhancement: clampInt(raw?.enhancement, 0, maxEnhancement(stars), 0),
-    bond: clampInt(raw?.bond, 1, BOND_MAX, 1),
+    bond: hasBonds(hero) ? clampInt(raw?.bond, 0, BOND_MAX, 0) : 0,
   };
 }
 

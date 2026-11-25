@@ -288,7 +288,8 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(shardsBetween(0, 8) === 1040 && shardsBetween(-1, 8) === 1050 && shardsBetween(4, 5) === 75, 'enhancement shard costs (total 1,050)');
   ok(clampEntry(baron, { stars: 6, level: 999, enhancement: 8, bond: 200 }).stars === 2 && clampEntry(gina, { enhancement: 8 }).enhancement === 5, 'stars and below-5★ enhancement clamped');
   ok(clampEntry(saya, { stars: 5, level: 999 }).level === 400 && clampEntry(saya, { stars: 6, level: 999 }).level === 400 && maxStars(saya) === 6, '5★ heroes reach Lv. 400 without 6★; 5★ can reach 6★');
-  ok(clampEntry(saya, { level: Number.NaN, bond: -3 } as never).level === 1 && clampEntry(saya, undefined).bond === 1, 'bad saved values fall back safely');
+  ok(clampEntry(saya, { level: Number.NaN, bond: -3 } as never).level === 0 && clampEntry(saya, undefined).bond === 0, 'bad saved values fall back safely (level and bond start empty)');
+  ok(clampEntry(gina, { stars: 4, level: 50, enhancement: 3, bond: 40 }).bond === 0 && clampEntry(saya, { stars: 5, level: 50, enhancement: 3, bond: 40 }).bond === 40, 'only 5- and 6-star heroes keep a bond level');
   ok(promotionStatus(saya, { stars: 5, level: 310, enhancement: 5, bond: 1 }).eligible && !promotionStatus(saya, { stars: 5, level: 309, enhancement: 5, bond: 1 }).eligible && !promotionStatus(gina, newEntry(gina)).possible, 'promotion rule Lv. 310 + 5');
   ok(bondCapForEnhancement(0) === 5 && bondCapForEnhancement(5) === 55 && bondCapForEnhancement(7) === 86 && bondCapForEnhancement(8) === null && requiredEnhancementForBond(56) === 6, 'bond enhancement gates');
   ok(specialtyUnlocked({ stars: 6, level: 350, enhancement: 8, bond: 1 }) && !specialtyUnlocked({ stars: 6, level: 349, enhancement: 8, bond: 1 }), 'specialty at +8 and Lv. 350');

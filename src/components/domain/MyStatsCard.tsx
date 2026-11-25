@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, TextInput, Text, View } from 'react-native';
 import { BarChart3 } from 'lucide-react-native';
-import { Button, Card, Row, SectionHeader } from '@/components/ui';
+import { Button, Card, Row, CollapsibleSection } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { palette, radius, space, type } from '@/theme';
 
@@ -148,7 +148,7 @@ export function MyStatsCard() {
 
   return (
     <>
-      <SectionHeader title="My overall stats" icon={BarChart3} subtitle="Everything together, as in Lord Details" />
+      <CollapsibleSection title="My overall stats" icon={BarChart3} subtitle="Everything together, as in Lord Details" initiallyOpen={false}>
       <Card>
         <Text style={type.caption}>
           The same totals as the game's Lord Details screen (tap your avatar → Lord Details), built from everything: gear, runes, totems, research, heroes, dragon and more. Copy in the ones you want; tap a section to fold it.
@@ -187,6 +187,7 @@ export function MyStatsCard() {
           </>
         )}
       </Card>
+      </CollapsibleSection>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { palette, space, type } from '@/theme';
 import { Badge, Button, Card, NumberField, Row, SectionHeader, Stepper } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import {
-  BOND_MAX, bondCapForEnhancement, clampEntry, enhancementLabel, levelCap, maxEnhancement, maxStars, newEntry,
+  BOND_MAX, bondCapForEnhancement, hasBonds, clampEntry, enhancementLabel, levelCap, maxEnhancement, maxStars, newEntry,
   nextSkillUnlock, promotionStatus, requiredEnhancementForBond, shardsBetween, specialtyUnlocked, type RosterEntry,
 } from '@/lib/roster';
 import { PROMOTION, SPECIALTY } from '@/data/seed/heroProgression';
@@ -22,7 +22,7 @@ export function MyHeroCard({ hero }: { hero: Hero }) {
       <>
         <SectionHeader title="My hero" icon={BookmarkPlus} />
         <Card>
-          <Text style={type.bodySecondary}>Add this hero to your Roster to track stars, level, enhancement and bond.</Text>
+          <Text style={type.bodySecondary}>Add this hero to your Roster to track stars, level and enhancement{hasBonds(hero) ? ' and bond' : ''}.</Text>
           <View style={{ marginTop: space.md }}>
             <Button icon={BookmarkPlus} label="I own this hero" onPress={() => setEntry(hero.id, newEntry(hero))} />
           </View>
@@ -51,7 +51,7 @@ export function MyHeroCard({ hero }: { hero: Hero }) {
         </Row>
         <Row style={{ marginTop: space.sm }}>
           <NumberField label={cap ? `Level (max ${cap})` : 'Level'} value={e.level} onChange={(level) => update({ level })} />
-          <Stepper label="Bond level" value={e.bond} min={1} max={BOND_MAX} onChange={(bond) => update({ bond })} />
+          {hasBonds(hero) ? <NumberField label={`Bond level (1–${BOND_MAX})`} value={e.bond} onChange={(bond) => update({ bond })} /> : null}
         </Row>
 
         <View style={{ marginTop: space.md, gap: 6 }}>
@@ -72,7 +72,7 @@ export function MyHeroCard({ hero }: { hero: Hero }) {
             <Hint label="Hero Specialty" value={specialtyUnlocked(e) ? 'Unlocked' : `Unlocks at +${SPECIALTY.enhancement} and Lv. ${SPECIALTY.level}`} color={specialtyUnlocked(e) ? palette.success : undefined} />
           ) : null}
           {nextUnlock ? <Hint label="Next skill unlock" value={`Lv. ${nextUnlock.level}: ${nextUnlock.what}`} /> : null}
-          {bondBlocked ? (
+          {!hasBonds(hero) ? null : bondBlocked ? (
             <Hint label="Bond" value={`Bond Lv. ${e.bond} needs ${enhancementLabel(bondNeeds!)} enhancement`} color={palette.danger} />
           ) : (
             <Hint label="Bond" value={bondCap === null ? 'Enhancement gate above Lv. 86 not listed by the wiki' : `${enhancementLabel(e.enhancement)} allows bond up to Lv. ${bondCap}`} />
