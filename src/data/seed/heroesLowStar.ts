@@ -128,8 +128,26 @@ export const lowStarHeroes: Hero[] = [
       { name: 'Cavalry ATK', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
     ],
   },
-  lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
-  lowStar({ name: 'Axel', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
+  {
+    ...lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'],
+      m3: { name: 'Chilling Icicle', description: 'Deals 144% damage to the target (Rage Regen: Slow). Snow Wolf\'s Blood (unlocks Lv. 11): also hits 3 random enemies. Frosty Heart (unlocks Lv. 31): ATK +10% and Rage Regen +5%. Values as shown in-game at +4.', charge: 'Slow', pattern: 'Single target + 3 random', effects: ['ATK up', 'Rage up'] },
+      notes: ['In-game (2026-11-25, Ada at +4): 3★ Ice Infantry confirmed; Infantry HP/DEF/ATK 10/15/20/25% (+2 to +5), DEF Lv. 31, ATK Lv. 71; three hero skills.'] }),
+    marchSkills: [
+      { name: 'Infantry HP', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game).' },
+      { name: 'Infantry DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Infantry ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
+  {
+    ...lowStar({ name: 'Axel', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'],
+      civil: [{ name: 'Food Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } }],
+      m3: { name: 'Thunder of Retribution', description: 'Deals 174% damage to the target and adjacent enemies and raises all allies\' ATK by 10% (Rage Regen: Medium). People of the Storm (unlocks Lv. 11): grants 10% Rage to him and adjacent allies. Warrior\'s Lineage (unlocks Lv. 31): DEF +10% and Rage Regen +5%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['ATK up', 'Rage up', 'DEF up'] },
+      notes: ['In-game (2026-11-25, Axel at +5): 3★ Ice Infantry confirmed; Food Gather Speed 12–30% (owned); Infantry DEF (Lv. 31) and ATK (Lv. 71) 10–25%; three hero skills.'] }),
+    marchSkills: [
+      { name: 'Infantry DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Infantry ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Andre', element: 'Ice', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'],
       civil: [{ name: 'Food Output', description: 'In-game. 4★: +30% at +1, +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '4': [null, 30, 40, 60, 80, 100] } }],
