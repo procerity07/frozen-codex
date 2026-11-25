@@ -69,8 +69,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Maxim', title: 'Iron Vanguard', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Ironclad Advance', 'Infantry ATK and DEF up; scales with number of Infantry in the march.'], ['Unbroken Line', 'Reduces damage from Archers to Infantry.']],
-    m3: { name: 'Molten Bastion', desc: 'Fire damage to a column and raises team DEF.', charge: 'Medium', pattern: 'Column', effects: ['DEF up'] },
+    march: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at 6★ +8 (same table as other all-troop passives: 5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at 6★ +8 (same table as other all-troop passives: 5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at 6★ +8 (same table as other all-troop passives: 5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: 'Surprise Egg', desc: 'Deals 350% damage to the target and nearby units and transforms them for 3 rounds (Rage skill). Shrewd Mind: immune to Silence and action-restricting debuffs. Transforming Magic Box: restores 5% HP and raises DEF by 5% each round, up to 80% (cannot be dispelled). Lucky Card: gains 50% Rage at battle start. Values as shown in-game at +8 (four hero skills shown).', pattern: 'Target + nearby', effects: ['Transform', 'Control immunity', 'Heal over time', 'DEF up', 'Rage up'] },
     sources: ['Astrology'],
     notes: 'Civil hero: skills apply by owning the hero.',
   }),
@@ -613,7 +621,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 65; // 65 = new hero Estelle // 64 = new hero Violette // 63 = in-game Selantia and Ogremire // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 66; // 66 = in-game Maxim // 65 = new hero Estelle // 64 = new hero Violette // 63 = in-game Selantia and Ogremire // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
