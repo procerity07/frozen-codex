@@ -15,7 +15,19 @@ export function todayEventRows(events: GameEvent[], now: Date, anchors: Anchors,
   const rows: TodayRow[] = [];
   const seen = new Set<string>();
   const add = (ev: GameEvent, start: Date, allianceTime: boolean) => {
-    const end = new Date(start.getTime() + Math.max(0.25, ev.durationHours || 1) * 3_600_000);
+    let end = new Date(start.getTime() + Math.max(0.25, ev.durationHours || 1) * 3_600_000);
+    // Multi-day events: the run ends at the end of the last consecutive day it is on, not "today + full length".
+    if (!allianceTime && (ev.durationHours || 0) >= 24) {
+      let d = 0;
+      const toSunday = 6 - (new Date(dayStart).getUTCDay() + 6) % 7;
+      while (d < toSunday && eventsOn([ev], new Date(dayStart + (d + 1) * DAY + DAY / 2), anchors).length) d++;
+      let back = 0;
+      // Runs don't cross the weekly reset (Monday 00:00 UTC).
+      const weekday = (new Date(dayStart).getUTCDay() + 6) % 7; // Mon = 0
+      while (back < weekday && eventsOn([ev], new Date(dayStart - (back + 1) * DAY + DAY / 2), anchors).length) back++;
+      const runEnd = dayStart - back * DAY + ev.durationHours * 3_600_000;
+      end = new Date(Math.min(dayStart + (d + 1) * DAY, Math.max(runEnd, dayStart + DAY)));
+    }
     const status: TodayStatus = now < start ? 'upcoming' : now < end ? 'live' : 'ended';
     rows.push({ ev, start, end, status, allianceTime });
     seen.add(ev.id);
