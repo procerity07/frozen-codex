@@ -341,6 +341,14 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
+  lowStar({ name: 'Estelle', element: 'Dark', rarity: 5, unit: 'Civil', sources: [],
+    civil: [
+      { name: 'Safe Resources', description: 'In-game. 5★: +2.4% at +2 up to +15% at +8; 6★: +7.5/9.6/11.2/20% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 2.4, 3.6, 4.8, 6, 7.5, 9, 15], '6': [null, null, null, null, null, 7.5, 9.6, 11.2, 20] } },
+      { name: 'Iron Output', description: 'In-game. 5★: +40% at +2 up to +250% at +8; 6★: +125/160/200/300% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '5': [null, null, 40, 60, 80, 100, 125, 150, 250], '6': [null, null, null, null, null, 125, 160, 200, 300] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +16% at +2 up to +80% at +8; 6★: +50/70/85/150% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 16, 24, 32, 40, 50, 65, 80], '6': [null, null, null, null, null, 50, 70, 85, 150] } },
+    ],
+    m3: { name: 'Soul Reaping', description: 'Deals 220% damage to all enemies (Rage Regen: Fast). Demon Suppression: all enemies ATK −34% for 4 rounds. Power of Fear: Lv. 2 Poison on all enemies for 4 rounds. Ruthless: ATK +15% and Crit +15%. Target Weakness (6★): Break +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'All enemies', effects: ['ATK down', 'Poison', 'ATK up', 'Crit', 'Break'] },
+    notes: ['In-game (2026-11-25, 6★ +8, S1): 5★ Dark Civil; Safe Resources, Iron Output and Troop ATK (Passive) tables. How to obtain her is not verified.'] }),
   lowStar({ name: 'Violette', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Timeless Recruitment'],
     civil: [
       { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
