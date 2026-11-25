@@ -76,8 +76,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Guan Yu', title: 'Saint of War', element: 'Nature', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Green Dragon Crescent', 'Cavalry ATK up; extra damage against Infantry.'], ['Righteous Valor', 'Cavalry HP up and reduces enemy counterattack.']],
-    m3: { name: 'Azure Dragon Sweep', desc: 'Nature damage in a wide cone and stuns the target for 1 turn.', charge: 'Medium', pattern: 'Cone (3x3)', effects: ['Stun'] },
+    march: [],
+    civil: [
+      { name: 'Infantry HP (Passive)', description: 'In-game, active once unlocked while you own him. 5★: +25.6% at +2 up to +188% at +8; 6★: +80/102.4/150/250% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 25.6, 38.4, 51.2, 64, 80, 102.4, 188], '6': [null, null, null, null, null, 80, 102.4, 150, 250] } },
+      { name: 'Archer DEF (Passive)', description: 'In-game, active once unlocked while you own him. 5★: +25.6% at +2 up to +188% at +8; 6★: +80/102.4/150/250% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 25.6, 38.4, 51.2, 64, 80, 102.4, 188], '6': [null, null, null, null, null, 80, 102.4, 150, 250] } },
+      { name: 'Cavalry ATK (Passive)', description: 'In-game, active once unlocked while you own him. 5★: +25.6% at +2 up to +188% at +8; 6★: +80/102.4/150/250% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 25.6, 38.4, 51.2, 64, 80, 102.4, 188], '6': [null, null, null, null, null, 80, 102.4, 150, 250] } },
+    ],
+    m3: { name: 'Rising Slash', desc: 'Deals 530% damage to the target (Rage Regen: Medium). Cheering Drums: Nature allies +10% Rage Regen at battle start (cannot be dispelled). Martial Saint: ATK +5% per round, up to 80% (cannot be dispelled). Dragon Soul Power: guaranteed Crit when the target is below 50% HP. Target Weakness (6★): Break +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Single target', effects: ['Rage up', 'ATK up', 'Crit', 'Break'] },
     sources: ['Recruit Trial'], curio: 'Azure Dragon Blade',
     notes: 'Recruit Trial probability pool also contains the Azure Dragon Blade Scroll (his exclusive curio).',
   }),
@@ -115,9 +123,9 @@ const baseHeroes: Hero[] = [
     notes: 'Lucky Star Coins do not expire — bank them for her banner.',
   }),
   hero({
-    name: 'Kanye', title: 'Beat of War', element: 'Fire', rarity: 5, unit: 'Archer', role: 'Archer DPS',
-    march: [['Drumline Charge', 'Cavalry ATK up; first 3 rounds deal extra damage.']],
-    m3: { name: 'Bass Drop', desc: 'Fire damage to a 3x3 area and burns for 2 turns.', charge: 'Medium', pattern: '3x3', effects: ['Burn'] },
+    name: 'Kanye', title: 'Beat of War', element: 'Fire', rarity: 5, unit: 'Archer', role: 'Archer and Infantry damage',
+    march: [['Archer ATK', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350%. Applies when he joins troop battle (in-game).'], ['Infantry ATK', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350%. Applies when he joins troop battle (in-game).'], ['Troop DEF', '5★ +2 to +8: 40/60/90/120/150/200/250%; 6★ +5 to +8: 150/220/280/350%. Applies when he joins troop battle (in-game). Applies to all troops.']],
+    m3: { name: 'Arrow of Scorch', desc: 'Eliminates 2 random columns of pieces, each piece dealing 300% damage (no Rage gained from this), and the defender deals 300% area damage (Rage Regen: Medium). Incineration: pieces eliminated by this skill do not raise enemy Rage. Primal Fire (passive): a chance each round to turn a random piece into a bomb. Flaming Shield: shield for 3 rounds; when it ends, 20% of the damage taken by allied heroes is dealt to all enemies. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: '2 columns', effects: ['Board clear', 'Bomb', 'Shield', 'Damage reflect', 'Crit'] },
     sources: ["Glory's Gift Roulette"],
     notes: 'Strong burn damage in Elemental Seal when Fire is a required element.',
   }),
@@ -581,7 +589,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 59; // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 60; // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):

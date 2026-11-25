@@ -115,7 +115,7 @@ export const lowStarHeroes: Hero[] = [
   {
     ...lowStar({ name: 'Tooka', element: 'Fire', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza', 'Epic Hero Covenant', 'Royal Shop'], march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
       m3: { name: 'Warlord of Hellfire', description: 'Deals 149% damage to all enemies (Rage Regen: Slow). Dread Howl: enemies ATK −28% for 5 rounds. Retaliation: ATK +15% and Crit +8%. Commander-in-chief (unlocks Lv. 71): all allies ATK +34% for 5 rounds. Values as shown in-game at +2.', charge: 'Slow', pattern: 'All enemies', effects: ['ATK down', 'ATK up', 'Crit'] },
-      notes: ['In-game (2026-11-23, Tooka at +2): 4★ Fire Infantry confirmed; troop skill 150% of troop ATK; Troop HP/DEF/ATK 6.4/9.6/12.8/16% (+2 to +5), Troop ATK unlocks at Lv. 131; four hero skills.', 'Separate "Infernal Tooka" variant on the Civil page is not included.'] }),
+      notes: ['In-game (2026-11-23, Tooka at +2): 4★ Fire Infantry confirmed; troop skill 150% of troop ATK; Troop HP/DEF/ATK 6.4/9.6/12.8/16% (+2 to +5), Troop ATK unlocks at Lv. 131; four hero skills.'] }),
     marchSkills: [
       { name: 'Troop skill', description: 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).' },
       { name: 'Troop HP', description: '4★: +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when he joins troop battle (in-game).' },
@@ -341,6 +341,14 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
+  lowStar({ name: 'Infernal Tooka', element: 'Fire', rarity: 5, unit: 'Civil', sources: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: 'Power Strike', description: 'Deals 530% damage to the enemy (Rage Regen: Fast). Lava Blast: also deals 25% of ATK as True Damage. Seal: the target receives 100% less healing for 4 rounds. Demon King\'s Body: immune to Rage reduction. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Single target', effects: ['True damage', 'Heal block', 'Rage-reduction immunity', 'Crit'] },
+    notes: ['A separate hero from the 4★ Tooka.', 'In-game (2026-11-25, 6★ +8, S2): 5★ Fire Civil; Troop HP/DEF/ATK (Passive) all troops; four hero skills plus Combat Mastery. How to obtain him is not verified.'] }),
   {
     ...lowStar({ name: 'Sodoma', element: 'Nature', rarity: 5, unit: 'Cavalry', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial'],
       march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
