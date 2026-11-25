@@ -438,7 +438,7 @@ const baseHeroes: Hero[] = [
     name: 'Basilong', title: 'Dragonkin', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
     march: [],
     civil: [
-      { name: 'First civil skill (name not captured)', description: 'In-game: +35% at 6★ +8. Name and full table not captured yet.', requirement: 'Active from obtaining the hero (in-game rule)', unit: '%', tiers: { '6': [null, null, null, null, null, null, null, null, 35] } },
+      { name: 'Civil skill (+35% at 6★ +8)', description: 'In-game: +35% at 6★ +8; name not captured yet (the same value as Medical Tent Capacity, so it may be that).', requirement: 'Active from obtaining the hero (in-game rule)', unit: '%', tiers: { '6': [null, null, null, null, null, null, null, null, 35] } },
       { name: 'Heal Stone Cost', description: 'In-game. 5★: −8% at +2, −12/−16/−20/−25/−30% to −32% at +8; 6★: −25/−30/−33/−36% from +5 to +8.', requirement: 'Unlocks at level 31', unit: '%',
         tiers: { '5': [null, null, -8, -12, -16, -20, -25, -30, -32], '6': [null, null, null, null, null, -25, -30, -33, -36] } },
       { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +16% at +2 up to +80% at +8; 6★: +50/70/85/150% from +5 to +8.', requirement: 'Unlocks at level 131', unit: '%',
@@ -450,12 +450,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Edmund', title: 'Gilded Knight', element: 'Light', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Gilded Charge', 'Cavalry HP and ATK up.']],
+    march: [],
     civil: [
-      { name: 'Food Output', description: 'Increases food output. Value not verified.', requirement: 'Unlock level not verified' },
-      { name: 'Medical Tent Speed', description: 'Increases Medical Tent speed. Value not verified.', requirement: 'Unlock level not verified' },
+      { name: 'Food Output', description: 'In-game. 5★: +9.6% at +2 up to +38% at +8; 6★: +30/38.4/40/50% from +5 to +8.', requirement: 'Active from obtaining the hero (in-game rule)', stat: 'resourceOutput', unit: '%',
+        tiers: { '5': [null, null, 9.6, 14.4, 19.2, 24, 30, 36, 38], '6': [null, null, null, null, null, 30, 38.4, 40, 50] } },
+      { name: 'Medical Tent Healing Speed', description: 'In-game. 5★: +12% at +2 up to +75% at +8; 6★: +37.5/48/60/100% from +5 to +8.', requirement: 'Unlocks at level 31', stat: 'healSpeed', unit: '%',
+        tiers: { '5': [null, null, 12, 18, 24, 30, 37.5, 45, 75], '6': [null, null, null, null, null, 37.5, 48, 60, 100] } },
+      { name: 'Medical Tent Capacity', description: 'In-game. 5★: +6% at +2 up to +26% at +8; 6★: +18.75/24/28/35% from +5 to +8.', requirement: 'Unlocks at level 131', unit: '%',
+        tiers: { '5': [null, null, 6, 9, 12, 15, 18.75, 22.5, 26], '6': [null, null, null, null, null, 18.75, 24, 28, 35] } },
     ],
-    m3: { name: 'Gleam', desc: 'Light damage to a row and blinds (accuracy down).', charge: 'Medium', pattern: 'Row', effects: ['Blind'] },
+    m3: { name: 'Hammer of Retribution', desc: 'Deals 300% damage to the target and adjacent enemies and drains 25% of their Rage (Rage Regen: Fast). Sacred Purification: dispels all debuffs on allies and all buffs on enemies. Steadfast Faith: immune to Stun and Paralysis until revived. Resurgence of Light: at battle start Light allies get Wedjat Eye, a 50% chance to revive on death at the cost of 10% HP. Target Weakness (6★): Break +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['Rage down', 'Dispel', 'Stun immunity', 'Revive', 'Break'] },
     sources: ['Lucky Flip'], bonds: ['Rhapsody of Genesis'],
     notes: 'Lucky Flip pool.',
   }),
@@ -568,7 +572,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 56; // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 57; // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
