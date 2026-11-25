@@ -436,8 +436,15 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Basilong', title: 'Dragonkin', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Scale Armor', 'Infantry ATK and DEF up.']],
-    m3: { name: 'Dragon Breath', desc: 'Fire damage to a cone and burns.', charge: 'Medium', pattern: 'Cone', effects: ['Burn'] },
+    march: [],
+    civil: [
+      { name: 'First civil skill (name not captured)', description: 'In-game: +35% at 6★ +8. Name and full table not captured yet.', requirement: 'Active from obtaining the hero (in-game rule)', unit: '%', tiers: { '6': [null, null, null, null, null, null, null, null, 35] } },
+      { name: 'Heal Stone Cost', description: 'In-game. 5★: −8% at +2, −12/−16/−20/−25/−30% to −32% at +8; 6★: −25/−30/−33/−36% from +5 to +8.', requirement: 'Unlocks at level 31', unit: '%',
+        tiers: { '5': [null, null, -8, -12, -16, -20, -25, -30, -32], '6': [null, null, null, null, null, -25, -30, -33, -36] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +16% at +2 up to +80% at +8; 6★: +50/70/85/150% from +5 to +8.', requirement: 'Unlocks at level 131', unit: '%',
+        tiers: { '5': [null, null, 16, 24, 32, 40, 50, 65, 80], '6': [null, null, null, null, null, 50, 70, 85, 150] } },
+    ],
+    m3: { name: 'Soul Blast', desc: 'Deals 290% damage to the target and adjacent enemies (Rage Regen: Medium). Soul Drainer: gains 30% Rage when an enemy dies. Void Realm: all allies immune to Burn and Poison for 3 rounds. Chilling Breath: Ice allies gain 20% Rage at battle start. Unbending (6★): Parry +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Rage up', 'Burn/Poison immunity', 'Parry'] },
     sources: ['Lucky Flip'],
     notes: 'Lucky Coins do not expire — save them across Lucky Flip runs.',
   }),
@@ -561,7 +568,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 55; // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 56; // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
