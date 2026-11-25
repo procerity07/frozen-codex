@@ -195,8 +195,8 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Valerius', title: 'Crimson Warden', element: 'Nature', rarity: 5, unit: 'All-round', role: 'All-troop DPS',
-    march: [['Blood Oath', 'Infantry ATK up; heals a portion of damage dealt.']],
-    m3: { name: 'Crimson Cleave', desc: 'Fire damage to a row with lifesteal.', charge: 'Medium', pattern: 'Row', effects: ['Lifesteal'] },
+    march: [['Troop HP', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when he joins troop battle (in-game).'], ['Troop DEF', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when he joins troop battle (in-game).'], ['Troop ATK', '5★ +2 to +8: 18.4/27.6/36.8/46/57.6/73.7/135.3%; 6★ +5 to +8: 57.6/73.7/108/180%. Applies to all troops when he joins troop battle (in-game).']],
+    m3: { name: 'Holy Verdict', desc: 'Deals 320% damage to the target and adjacent enemies (Rage Regen: Fast). Dazzling Light: target Hit Rate −40% for 4 rounds. Nourishment of Light: converts 30% of damage dealt into HP. Power of Radiance: Nature allies +10% Crit Rate for 4 rounds from battle start (cannot be dispelled). Unbending (6★): Parry +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['Hit down', 'Lifesteal', 'Crit Rate up', 'Parry'] },
     sources: ['Astrology'],
     notes: 'Astrology rate-up hero.',
   }),
@@ -438,8 +438,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Sea Goddess', title: 'Mother of Waves', element: 'Nature', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Abyssal Pressure', 'Lowers enemy march speed and Archer DEF.']],
-    m3: { name: 'Maelstrom', desc: 'Ice damage to a 3x3 area and freezes for 2 turns.', charge: 'Slow', pattern: '3x3', effects: ['Freeze'] },
+    march: [],
+    civil: [
+      { name: 'Rally HP', description: 'In-game: rally troop HP bonus, active once unlocked while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Rally DEF', description: 'In-game: rally troop DEF bonus, active once unlocked while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+      { name: 'Rally ATK', description: 'In-game: rally troop ATK bonus, active once unlocked while you own her. 5★: +30% at +2 up to +169% at +8; 6★: +95/120/135/225% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 30, 45, 60, 75, 95, 110, 169], '6': [null, null, null, null, null, 95, 120, 135, 225] } },
+    ],
+    m3: { name: 'Springing', desc: 'Deals 260% damage to the target and adjacent enemies with a chance to Stun them for 2 rounds (Rage Regen: Medium). Water Erosion: target and adjacent enemies ATK −30% for 4 rounds. Divinity: she and adjacent allies gain debuff immunity for 3 rounds. Purification: gains 30% Rage at battle start. Target Weakness (6★): Break +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Stun', 'ATK down', 'Debuff immunity', 'Rage up', 'Break'] },
     sources: ['Stamina Event', 'Timeless Recruitment'],
     notes: 'Freeze is ignored by Elemental Seal bosses from Round 11+.',
   }),
@@ -597,7 +605,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 61; // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 62; // 62 = in-game Sea Goddess and Valerius // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
