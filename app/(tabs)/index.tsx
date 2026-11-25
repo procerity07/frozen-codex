@@ -14,6 +14,7 @@ import { scheduleCooldown, ensurePermission } from '@/services/notifications';
 import { UpdateBanner } from '@/components/domain/UpdateBanner';
 import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
 import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
+import { TodayEvents } from '@/components/domain/TodayEvents';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
   { label: 'Gift Code Vault', sub: 'Copy & redeem', icon: Gift, href: '/tools/gift-codes', color: palette.gold },
@@ -55,6 +56,8 @@ export default function HomeScreen() {
         </View>
       </Card>
 
+      <TodayEvents now={now} />
+
       <SectionHeader title="Quick tools" />
       <View style={st.grid}>
         {TOOLS.map((t) => (
@@ -66,10 +69,6 @@ export default function HomeScreen() {
         ))}
       </View>
 
-      <SectionHeader title="Live today" subtitle={`${weekday} · ${todayEvents.length} events`} right={<Button compact variant="secondary" label="Calendar" onPress={() => router.push('/events')} />} />
-      <ChipRow>
-        {todayEvents.map((e) => <Chip key={e.id} label={e.name} onPress={() => router.push(`/event/${e.id}`)} />)}
-      </ChipRow>
 
       <SectionHeader title="At a glance" />
       <Dashboard now={now} />

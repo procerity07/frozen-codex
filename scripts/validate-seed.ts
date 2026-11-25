@@ -3,6 +3,7 @@ import { formatDuration as fmtDur } from '../src/lib/time';
 import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
 import { recommendMarch } from '../src/lib/march';
+import { todayEventRows } from '../src/lib/todayEvents';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
@@ -414,6 +415,10 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const planned = cleanAllianceTime({ time: '19:00', zone: 'utc', anchorWeek: anchorFor(tue, 'A'), date: planDay, dateTime: '20:30' })!;
   const ps = upcomingStarts(gate, planned, tue, a0, 7).map((d) => d.toISOString().slice(0, 16));
   ok(ps.includes(`${planDay}T20:30`), 'planned date and time is scheduled');
+  const rowsT = todayEventRows(seed.events, new Date(Date.UTC(2026, 10, 24, 20, 0)), a0, { 'infernal-gate': cleanAllianceTime({ time: '19:30', zone: 'utc', anchorWeek: 0 })! });
+  const gateRow = rowsT.find((r) => r.ev.id === 'infernal-gate');
+  const order = { live: 0, upcoming: 1, ended: 2 } as const;
+  ok(!!gateRow && gateRow.allianceTime && gateRow.start.toISOString().slice(11, 16) === '19:30' && rowsT.every((r, i) => i === 0 || order[rowsT[i - 1]!.status] <= order[r.status]), "today's events: alliance time used; live first, then upcoming, then ended");
   ok(cleanAllianceTime({ time: '25:00', zone: 'utc', anchorWeek: 0 }) === null && !cleanAllianceTime({ time: '19:00', altTime: '19:00', zone: 'utc', anchorWeek: 0 })!.altTime, 'alliance time validation');
 }
 
