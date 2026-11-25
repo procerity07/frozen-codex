@@ -29,18 +29,18 @@ export const bondGifts: BondGift[] = [
 export const bondGroups: BondGroup[] = [
   {
     id: 'sanguine-serenade', name: 'Sanguine Serenade', members: ['norris', 'eris', 'carvell', 'edith', 'setemos'],
-    verified: true, bonusesVerified: false,
-    bonuses: [{ level: 0, effect: 'Favorability rewards boost Archer, Cavalry and Infantry stats (levels and values not verified)' }],
+    verified: true, bonusesVerified: true,
+    bonuses: [{ level: 40, effect: '3 heroes at favorability Lv. 40: Archer ATK +20%, Cavalry DEF +20%, Infantry HP +20%' }, { level: 70, effect: '4 heroes at Lv. 70: Archer ATK +30%, Cavalry DEF +30%, Infantry HP +30%' }, { level: 99, effect: '5 heroes at Lv. 99: Archer ATK +50%, Cavalry DEF +50%, Infantry HP +50%' }],
   },
   {
     id: 'octet-wanderers', name: 'Octet Wanderers', members: ['fiona', 'tania', 'apan', 'sodoma', 'sirona'],
-    verified: true, bonusesVerified: false,
-    bonuses: [{ level: 40, effect: 'Cavalry ATK (value not verified)' }, { level: 70, effect: 'Infantry DEF (value not verified)' }, { level: 99, effect: 'Archer HP (value not verified)' }],
+    verified: true, bonusesVerified: true,
+    bonuses: [{ level: 40, effect: '3 heroes at favorability Lv. 40: Cavalry ATK +20%, Infantry DEF +20%, Archer HP +20%' }, { level: 70, effect: '4 heroes at Lv. 70: Cavalry ATK +30%, Infantry DEF +30%, Archer HP +30%' }, { level: 99, effect: '5 heroes at Lv. 99: Cavalry ATK +50%, Infantry DEF +50%, Archer HP +50%' }],
   },
   {
     id: 'rhapsody-of-genesis', name: 'Rhapsody of Genesis', members: ['edmund', 'rodriguez', 'kujo-mamoru', 'freya', 'saya'],
-    verified: true, bonusesVerified: false,
-    bonuses: [{ level: 10, effect: 'Members DEF +3%' }, { level: 30, effect: 'Members skill damage +4%' }, { level: 60, effect: 'Legion ATK/DEF/HP +1%' }],
+    verified: true, bonusesVerified: true,
+    bonuses: [{ level: 40, effect: '3 heroes at favorability Lv. 40: Infantry ATK +20%, Archer DEF +20%, Cavalry HP +20%' }, { level: 70, effect: '4 heroes at Lv. 70: Infantry ATK +30%, Archer DEF +30%, Cavalry HP +30%' }, { level: 99, effect: '5 heroes at Lv. 99: Infantry ATK +50%, Archer DEF +50%, Cavalry HP +50%' }],
   },
   {
     id: 'tidal-court', name: 'Tidal Court', members: ['neptune', 'kaira', 'sea-goddess', 'kaios'], verified: false, bonusesVerified: false,

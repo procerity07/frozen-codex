@@ -14,7 +14,8 @@ export interface RosterEntry {
   bond: number;
 }
 
-export const BOND_MAX = 95;
+/** Bond (favorability) goes to at least Lv. 99 (in-game bond goals). */
+export const BOND_MAX = 99;
 /** Only 5★ and 6★ heroes have bonds. */
 export const hasBonds = (hero: Pick<Hero, 'rarity'>) => hero.rarity >= 5;
 
