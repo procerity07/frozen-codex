@@ -349,6 +349,8 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(!adv.picks.some((p) => p.hero.id === civil.id) && !recommendMarch(seed.heroes, r, 'Infantry', 'beginner').picks.some((p) => p.hero.id === civil.id), 'civil heroes are never in a march');
   const lowSel = recommendMarch(seed.heroes, { ...r, [H('Selantia').id]: e(5, 20, 5) }, 'Cavalry', 'advanced');
   ok(lowSel.picks.find((p) => p.role !== 'core')?.hero.name === 'Freya', 'hybrid skill below its unlock level does not count; all-troop ATK hero is next');
+  const sodomaVs = recommendMarch(seed.heroes, { [H('Sodoma').id]: e(5, 140, 5), [H('Tania').id]: e(5, 140, 5) }, 'Cavalry', 'beginner').picks;
+  ok(sodomaVs[0]?.hero.name === 'Tania' && sodomaVs[1]?.hero.name === 'Sodoma', 'Cavalry ATK hero ranks above all-troop Sodoma at the same enhancement; Sodoma still used');
   const beg = recommendMarch(seed.heroes, r, 'Cavalry', 'beginner');
   ok(beg.picks.filter((p) => p.hero.unitType === 'Cavalry').length === 5, 'beginner march: five of the chosen type');
   const three = seed.heroes.find((h) => h.rarity === 3 && h.unitType === 'Archer')!;

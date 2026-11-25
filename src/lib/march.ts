@@ -9,6 +9,8 @@
  * - Advanced: four of the chosen type + one off-type. In Monster Dens only four same-type troop skills
  *   activate, so the fifth slot goes to a "hybrid" (another type whose unlocked skill buffs the chosen type,
  *   e.g. Selantia: Infantry with Cavalry ATK), else to a general Troop ATK buffer (Sodoma, Freya, …).
+ * - Type-specific ATK beats general Troop ATK (Tania 250% Cavalry ATK vs Sodoma 125% Troop ATK at 6★ +8),
+ *   so all-troop heroes like Sodoma only take a core slot when no better type-focused hero is available.
  * - A buff skill only counts once the hero's level has reached its unlock level.
  */
 import type { Hero } from '@/types/game';
@@ -51,11 +53,13 @@ export interface MarchPick {
 
 const isMilitary = (h: Hero) => h.unitType !== 'Civil';
 
-function score(p: { entry: RosterEntry; mainPct: number; helps: Buff[] }): number {
-  const atk = p.helps.filter((b) => b.stat === 'ATK').length;
-  const other = p.helps.length - atk;
-  // Enhancement (main skill) first, then buffs for the chosen type, then stars and level as tie-breakers.
-  return p.mainPct * 1000 + atk * 60 + other * 30 + p.entry.stars * 5 + p.entry.level / 100;
+function score(p: { entry: RosterEntry; mainPct: number; helps: Buff[] }, type: MarchType): number {
+  // Type-specific ATK (e.g. Cavalry ATK, up to 250–350% at 6★ +8) is worth far more than general Troop ATK
+  // (e.g. Sodoma 125% at 6★ +8), so it gets the biggest weight after enhancement.
+  const w = (b: Buff) => (b.target === type ? (b.stat === 'ATK' ? 100 : 30) : b.stat === 'ATK' ? 40 : 15);
+  const buffs = p.helps.reduce((t, b) => t + w(b), 0);
+  // Enhancement (main troop skill) first, then buffs for the chosen type, then stars and level as tie-breakers.
+  return p.mainPct * 1000 + buffs + p.entry.stars * 5 + p.entry.level / 100;
 }
 
 export interface MarchPlan { type: MarchType; mode: MarchMode; picks: MarchPick[]; notes: string[] }
@@ -68,11 +72,11 @@ export function recommendMarch(heroes: Hero[], roster: Record<string, RosterEntr
     return { hero: h, entry, mainPct: mainSkillPct(entry.enhancement), helps, buffs };
   });
 
-  const core = owned.filter((o) => o.hero.unitType === type).sort((a, b) => score(b) - score(a));
+  const core = owned.filter((o) => o.hero.unitType === type).sort((a, b) => score(b, type) - score(a, type));
   const others = owned.filter((o) => o.hero.unitType !== type);
-  const hybrids = others.filter((o) => o.helps.some((b) => b.target === type && b.stat === 'ATK')).sort((a, b) => score(b) - score(a));
-  const buffers = others.filter((o) => !hybrids.includes(o) && o.helps.some((b) => b.target === 'Troop' && b.stat === 'ATK')).sort((a, b) => score(b) - score(a));
-  const rest = others.filter((o) => !hybrids.includes(o) && !buffers.includes(o)).sort((a, b) => score(b) - score(a));
+  const hybrids = others.filter((o) => o.helps.some((b) => b.target === type && b.stat === 'ATK')).sort((a, b) => score(b, type) - score(a, type));
+  const buffers = others.filter((o) => !hybrids.includes(o) && o.helps.some((b) => b.target === 'Troop' && b.stat === 'ATK')).sort((a, b) => score(b, type) - score(a, type));
+  const rest = others.filter((o) => !hybrids.includes(o) && !buffers.includes(o)).sort((a, b) => score(b, type) - score(a, type));
 
   const why = (o: typeof owned[number], role: MarchPick['role']): string => {
     const base = `${o.entry.stars}★ ${enhancementLabel(o.entry.enhancement)} · Lv ${o.entry.level} · troop skill ${o.mainPct}%`;

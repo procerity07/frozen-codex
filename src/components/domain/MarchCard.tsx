@@ -55,7 +55,7 @@ export function MarchCard({ heroes, roster }: { heroes: Hero[]; roster: Record<s
           </View>
         )}
         {plan.notes.map((n) => <Text key={n} style={[type.caption, { marginTop: space.sm, color: palette.gold }]}>{n}</Text>)}
-        <Text style={[type.caption, { marginTop: space.sm }]}>Ranked by enhancement first (+5 gives the 500% troop skill, so a 3★ +5 beats a 5★ +2), then by unlocked skills that boost {troop}, then stars and level.</Text>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Ranked by enhancement first (+5 gives the 500% troop skill, so a 3★ +5 beats a 5★ +2), then by unlocked skills that boost {troop} ({troop} ATK counts far more than general Troop ATK), then stars and level.</Text>
       </Card>
     </>
   );
