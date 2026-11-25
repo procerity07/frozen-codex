@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft, ArrowRight, Bell, Check, Crown, Search } from 'lucide-react-native';
 import { palette, space, type } from '@/theme';
 import { Button, Card, Field, NumberField, Row, Segmented } from '@/components/ui';
-import { useAppStore } from '@/store/useAppStore';
+import { defaultState, useAppStore } from '@/store/useAppStore';
 import { ensurePermission, scheduleDailyReset } from '@/services/notifications';
 import type { TroopFocus } from '@/types/game';
 import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
@@ -22,6 +22,8 @@ export default function Onboarding() {
   const [step, setStep] = useState(0);
   const now = new Date();
   const [reminder, setReminder] = useState(!!s.alarms['daily-reset']);
+  // Starts empty for new players so they type their own level; returning players see theirs.
+  const [citadelText, setCitadelText] = useState(s.citadel.from !== defaultState.citadel.from ? String(s.citadel.from) : '');
 
   const finish = () => {
     s.setOnboarded(true);
@@ -76,10 +78,16 @@ export default function Onboarding() {
             <Card>
               <Text style={type.heading}>Citadel level</Text>
               <View style={{ marginTop: space.sm }}>
-                <NumberField label={`Current Citadel (1–${CITADEL_MAX})`} value={s.citadel.from} onChange={(n) => {
-                  const from = Math.min(CITADEL_MAX, Math.max(1, n || 1));
-                  s.setCitadel({ from, to: Math.max(from, Math.min(CITADEL_MAX, s.citadel.to)) });
-                }} />
+                <Field label={`Current Citadel (1–${CITADEL_MAX})`} value={citadelText} keyboardType="number-pad" placeholder="e.g. 25" maxLength={2}
+                  onChangeText={(t) => {
+                    const clean = t.replace(/[^0-9]/g, '');
+                    setCitadelText(clean);
+                    const n = Number(clean);
+                    if (clean && n >= 1) {
+                      const from = Math.min(CITADEL_MAX, n);
+                      s.setCitadel({ from, to: Math.max(from, Math.min(CITADEL_MAX, s.citadel.to)) });
+                    }
+                  }} />
               </View>
               <Text style={[type.caption, { marginTop: space.sm }]}>Pre-fills the Citadel upgrade calculator.</Text>
             </Card>
