@@ -415,3 +415,20 @@ ok(fmtDur(5 * 3600_000 + 12 * 60_000 + 9_000) === '05:12:09' && fmtDur(2 * 86_40
   ok(affordable({ food: 800, wood: 10000, stone: 10000, iron: 10000 }, per, 20) === 10, 'troops affordable limited by the scarcest resource');
 }
 
+// Citadel planner: every level 1-40, boosts on/off, flat cuts
+{
+  const nb = { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 0 };
+  for (let from = 1; from < 40; from++) {
+    const pl = planCitadel(seed.citadelLevels, from, from + 1, {}, nb);
+    ok(pl.levels.length === 1 && pl.levels[0]!.level === from + 1, `Citadel ${from} -> ${from + 1} plans one level`);
+  }
+  const full = planCitadel(seed.citadelLevels, 1, 40, {}, nb);
+  ok(full.levels.length === 39 && full.totals.food > 0, 'Citadel 1 -> 40 covers every level');
+  const cut = planCitadel(seed.citadelLevels, 20, 21, {}, { ...nb, costReductionPct: 10, flatCut: { food: 1000 } });
+  const base = planCitadel(seed.citadelLevels, 20, 21, {}, nb);
+  ok(cut.totals.food === Math.max(0, Math.round(base.totals.food * 0.9) - 1000), 'percentage then flat cut per upgrade');
+  const offd = planCitadel(seed.citadelLevels, 20, 21, {}, { ...nb, costReductionPct: 10, off: { costReductionPct: true } });
+  ok(offd.totals.food === base.totals.food, 'switched-off boosts are ignored');
+  ok(planCitadel(seed.citadelLevels, 1, 2, {}, { ...nb, builderGearPct: 100 }).speed === 2, 'speed boosts add up');
+}
+

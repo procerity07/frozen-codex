@@ -80,7 +80,13 @@ export function simulateCasualties(i: CasualtyInput): CasualtyResult {
 export type ResourceKey = keyof ResourceCost;
 export const RESOURCE_KEYS: ResourceKey[] = ['food', 'wood', 'stone', 'iron', 'ancientTome', 'astronomyTome', 'gloryCodex', 'goldStatue'];
 
-export interface BuildBonuses { civilSpeedPct: number; builderGearPct: number; vipPct: number; institutePct: number; costReductionPct: number }
+export interface BuildBonuses {
+  civilSpeedPct: number; builderGearPct: number; vipPct: number; institutePct: number; costReductionPct: number;
+  /** Flat amount taken off each upgrade's cost (e.g. William, Chloe), per resource. */
+  flatCut?: Partial<Record<'food' | 'wood' | 'stone' | 'iron', number>>;
+  /** Boosts switched off are ignored without losing their value. */
+  off?: Partial<Record<'civilSpeedPct' | 'builderGearPct' | 'vipPct' | 'institutePct' | 'costReductionPct' | 'flatCut', boolean>>;
+}
 
 export interface CitadelPlan {
   levels: CitadelLevel[];
@@ -90,18 +96,27 @@ export interface CitadelPlan {
   netSeconds: number;
   /** Levels in the range whose build time is unknown (excluded from the time totals). */
   unknownTimeLevels: number[];
+  /** Combined speed multiplier (1 = no bonus). */
+  speed: number;
 }
 
 export function planCitadel(all: CitadelLevel[], from: number, to: number, owned: Partial<Record<ResourceKey, number>>, b: BuildBonuses): CitadelPlan {
   const levels = all.filter((l) => l.level > from && l.level <= to);
-  const costMult = Math.max(0, 1 - b.costReductionPct / 100);
+  const on = (k: keyof NonNullable<BuildBonuses['off']>) => !b.off?.[k];
+  const pct = (k: 'civilSpeedPct' | 'builderGearPct' | 'vipPct' | 'institutePct' | 'costReductionPct') => (on(k) ? Math.max(0, b[k] || 0) : 0);
+  const costMult = Math.max(0, 1 - Math.min(100, pct('costReductionPct')) / 100);
   const totals = Object.fromEntries(RESOURCE_KEYS.map((k) => [k, 0])) as Record<ResourceKey, number>;
-  for (const l of levels) for (const k of RESOURCE_KEYS) totals[k] += Math.round((l.cost[k] ?? 0) * costMult);
+  for (const l of levels) for (const k of RESOURCE_KEYS) {
+    const base = l.cost[k] ?? 0;
+    if (!base) continue;
+    const flat = on('flatCut') ? Math.max(0, (b.flatCut as Record<string, number> | undefined)?.[k] ?? 0) : 0;
+    totals[k] += Math.max(0, Math.round(base * costMult) - flat);
+  }
   const deficit = Object.fromEntries(RESOURCE_KEYS.map((k) => [k, Math.max(0, totals[k] - (owned[k] ?? 0))])) as Record<ResourceKey, number>;
   const baseSeconds = levels.reduce((s, l) => s + (l.baseSeconds ?? 0), 0);
   const unknownTimeLevels = levels.filter((l) => l.baseSeconds === null).map((l) => l.level);
-  const speed = 1 + (b.civilSpeedPct + b.builderGearPct + b.vipPct + b.institutePct) / 100;
-  return { levels, totals, deficit, baseSeconds, netSeconds: baseSeconds / speed, unknownTimeLevels };
+  const speed = 1 + (pct('civilSpeedPct') + pct('builderGearPct') + pct('vipPct') + pct('institutePct')) / 100;
+  return { levels, totals, deficit, baseSeconds, netSeconds: baseSeconds / speed, unknownTimeLevels, speed };
 }
 
 /** Recursively expands the prerequisite tree for a Citadel level (one hop per building, using Citadel rows). */

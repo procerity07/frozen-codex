@@ -85,7 +85,7 @@ export default function Onboarding() {
                     const n = Number(clean);
                     if (clean && n >= 1) {
                       const from = Math.min(CITADEL_MAX, n);
-                      s.setCitadel({ from, to: Math.max(from, Math.min(CITADEL_MAX, s.citadel.to)) });
+                      s.setCitadel({ from, to: s.citadel.to > from ? Math.min(CITADEL_MAX, s.citadel.to) : Math.min(CITADEL_MAX, from + 1) });
                     }
                   }} />
               </View>
