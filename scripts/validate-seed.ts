@@ -404,6 +404,12 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(upcomingStarts(gate, alt, tue, a0, 14).slice(0, 4).map((d) => d.toISOString().slice(11, 16)).join() === '19:00,19:00,21:00,21:00', 'alternating times across two weeks');
   const thisWeekB = cleanAllianceTime({ time: '19:00', altTime: '21:00', zone: 'utc', anchorWeek: anchorFor(tue, 'B') })!;
   ok(timeForWeek(thisWeekB, tue) === '21:00', 'choose which time applies this week');
+  const ownDays = cleanAllianceTime({ time: '19:00', zone: 'utc', anchorWeek: 0, days: ['Wed', 'Sat'] })!;
+  ok(upcomingStarts(gate, ownDays, tue, a0, 7).map((d) => d.getUTCDay()).join() === '3,6', 'alliance can choose its own days');
+  const planDay = new Date(tue.getTime() + 2 * 864e5).toISOString().slice(0, 10);
+  const planned = cleanAllianceTime({ time: '19:00', zone: 'utc', anchorWeek: anchorFor(tue, 'A'), date: planDay, dateTime: '20:30' })!;
+  const ps = upcomingStarts(gate, planned, tue, a0, 7).map((d) => d.toISOString().slice(0, 16));
+  ok(ps.includes(`${planDay}T20:30`), 'planned date and time is scheduled');
   ok(cleanAllianceTime({ time: '25:00', zone: 'utc', anchorWeek: 0 }) === null && !cleanAllianceTime({ time: '19:00', altTime: '19:00', zone: 'utc', anchorWeek: 0 })!.altTime, 'alliance time validation');
 }
 
