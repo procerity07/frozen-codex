@@ -115,9 +115,13 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(cas30.dead === 30 && cas30.medicalTent === 70, 'CoL 30% permadeath');
   const plan = planCitadel(seed.citadelLevels, 10, 12, { food: 1e12 }, { civilSpeedPct: 0, builderGearPct: 0, vipPct: 0, institutePct: 100, costReductionPct: 0 });
   ok(plan.levels.length === 2 && plan.deficit.food === 0 && plan.deficit.wood > 0 && Math.abs(plan.netSeconds - plan.baseSeconds / 2) < 1e-6, 'citadel plan');
-  ok(plan.unknownTimeLevels.join() === '11' && plan.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'unknown build time excluded from totals');
+  ok(plan.unknownTimeLevels.length === 0 && plan.baseSeconds === 57_447 + 89_459, 'every level 11-12 has a build time (wiki)');
+  ok(seed.citadelLevels.every((l) => l.baseSeconds !== null), 'all 40 Citadel levels have build times');
   const c12 = seed.citadelLevels.find((l) => l.level === 12)!;
-  ok(c12.cost.food === 1_140_000 && c12.cost.stone === 25_400 && c12.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'citadel 12 values');
+  ok(c12.cost.food === 1_136_000 && c12.cost.stone === 25_300 && c12.baseSeconds === 89_459, 'citadel 12 values (wiki)');
+  // In-game check: Citadel 26 -> 27 with -5% and flat -3.1M food / -300k iron, +40% speed = 104M food, 5.60M iron, 15d 05:16:05.
+  const c27 = planCitadel(seed.citadelLevels, 26, 27, {}, { civilSpeedPct: 40, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_500_000, stone: 660_000, iron: 300_000 } });
+  ok(Math.floor(c27.totals.food / 1e6) === 104 && Math.floor(c27.totals.iron / 1e4) === 560 && Math.floor(c27.totals.wood / 1e5) === 200 && Math.abs(c27.netSeconds - 1_314_965) < 2, 'Citadel 26->27 matches the in-game screen');
   ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_801_000 && seed.citadelLevels.find((l) => l.level === 40)!.cost.goldStatue === 10_400, 'citadel 40 iron and Gold Statues (wiki)');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
