@@ -27,7 +27,9 @@ export function AllianceTimeCard({ ev }: { ev: GameEvent }) {
   const [alt, setAlt] = useState(saved?.altTime ?? '');
   const [alternate, setAlternate] = useState(!!saved?.altTime);
   const [zone, setZone] = useState<AllianceTime['zone']>(saved?.zone ?? 'utc');
-  const [days, setDays] = useState<Weekday[]>(saved?.days ?? ev.days);
+  // Oblivion War: sign-up Wed–Thu, the battle (your slot) is Friday.
+  const defaultDays: Weekday[] = ev.id === 'oblivion-war' ? ['Fri'] : ev.days;
+  const [days, setDays] = useState<Weekday[]>(saved?.days ?? defaultDays);
   const [date, setDate] = useState<string>(saved?.date ?? '');
   const [dateTime, setDateTime] = useState(saved?.dateTime ?? '');
   const [slot, setSlot] = useState<'A' | 'B'>(saved ? currentSlot(saved, now) : 'A');
@@ -62,7 +64,7 @@ export function AllianceTimeCard({ ev }: { ev: GameEvent }) {
           {next ? <Text style={[type.numberSmall, { marginTop: 4, color: palette.cyan }]}>Next: {fmtLocal(next)} your time · in {formatDuration(next.getTime() - now.getTime())}</Text> : null}
           <Row style={{ marginTop: space.sm }}>
             <View style={{ flex: 1 }}><Button compact variant="secondary" label="Change" onPress={() => setEditing(true)} /></View>
-            <View style={{ flex: 1 }}><Button compact variant="ghost" label="Remove" onPress={() => { s.setAllianceTime(ev.id, null); setTime(''); setAlt(''); setAlternate(false); setDays(ev.days); setDate(''); setDateTime(''); setEditing(true); }} /></View>
+            <View style={{ flex: 1 }}><Button compact variant="ghost" label="Remove" onPress={() => { s.setAllianceTime(ev.id, null); setTime(''); setAlt(''); setAlternate(false); setDays(defaultDays); setDate(''); setDateTime(''); setEditing(true); }} /></View>
           </Row>
         </>
       ) : (

@@ -120,7 +120,28 @@ const baseEvents: GameEvent[] = [
   ev({
     name: 'Oblivion War', category: C('Alliance'), cadence: 'Weekly AvA: registration Wednesday–Thursday, battle Friday', cycleWeek: W('Both'), days: ['Wed', 'Thu', 'Fri'],
     summary: 'Registration opens Wednesday; the battle itself is on Friday. AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.',
-    rules: ['Registration opens on Wednesday (sign up Wednesday–Thursday).', 'The actual battle takes place on Friday.', 'Schedule confirmed in-game (week of 23 Nov 2026); the exact Friday battle time was not shown.', 'Sign-up needs at least 10 members with Citadel Lv. 18+.', 'Occupy a structure for 3 minutes to control it; control earns Time Points.', 'Wounded go to the Battlefield Hospital and return when you leave the battlefield.', 'The alliance with more Time Points wins; both sides get rewards.', 'Oblivion Pyramid spawns the Titan Colossus.'], rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
+    rules: [
+      'Registration opens on Wednesday (sign up Wednesday–Thursday); the battle is on Friday.',
+      'Battle slots (1 hour, UTC): 01:00, 12:00, 15:00, 19:00 or 21:00. The Leader, Recruiter or Diplomat picks one and can change it until sign-up ends. Matching can move you to another slot (you get a mail).',
+      'Sign-up needs at least 10 members with Citadel Lv. 18+. Members who join or leave between sign-up and the end of the round cannot take part.',
+      'To take part your Citadel must be Lv. 18+. If you leave the battlefield you keep your points but cannot re-enter; your fallen troops recover.',
+      'Preparation: no teleporting or attacking; view the map and mark points for your members.',
+      'Phase 1: Camps and Magic Altars can be contested. Phase 2: Ancient Ruins, Temple of Life and Gate of Demise. Phase 3: the Titan Colossus moves from the Oblivion Pyramid to the Gate of Demise on a random route.',
+      'Hold a stronghold for 3 minutes to control it. First control gives points to members inside; then control points every second. Part of the alliance points is sealed in the stronghold.',
+      'If you lose a stronghold, its sealed points drop as Pharaoh\'s Stone or Oasis Stone nearby. Anyone can pick them up with a March Queue; points only count when the march returns.',
+      'Exit: strongholds become protected, uncollected stones vanish, sealed points go to the controlling alliance. The side with more Time Points wins.',
+      'Points (Alliance / Personal) — Titan Colossus through Gate of Demise 15,000 / 4,000, through other strongholds 9,000 / 3,000.',
+      'Gate of Demise: first control 6,000 / 1,800, then 20 / 6 per second.',
+      'Ancient Ruins (Troop ATK for your alliance): first control 3,000 / 1,500, then 10 / 5 per second.',
+      'Temple of Life (Healing Speed for your alliance): first control 3,000 / 1,500.',
+      'Camp: first control 1,200 / 1,200, then 4 / 4 per second. Magic Altar: same points, plus 5 teleports on first control and 1 more per minute held.',
+      'Wounded go to the Battlefield Hospital and return when you leave. Attacking enemy castles gives no resources.',
+      'League grade by Time Prestige (Titan Colossi · teleports): Rookie 0 (2 · ∞), Apprentice I 500 (2 · ∞), Apprentice II 1,000 (2 · ∞), Veteran I 1,500 (2 · ∞), Veteran II 2,200 (3 · 90), Elite I 2,800 (3 · 80), Elite II 3,600 (3 · 60), Pro I 4,500 (4 · 60), Pro II 5,500 (4 · 40), Legend 7,000 (5 · 40). New alliances start at Rookie.',
+      'Endorsement: for 24 hours after sign-up ends, back one other alliance per time slot (up to 1,000 Diamonds each, 3 attempts). Backers of the winner share the loser\'s prize pool, up to 5× their Diamonds.',
+      'Rewards depend on the result; claim them on the event page afterwards. All members with battlefield points get the alliance reward; personal rewards need enough personal points. With no opponent, every member gets the alliance reward.',
+      'Time Coins are spent in the Time Shop.',
+    ],
+    rewards: ['Oblivion War Shop currency', 'Echo shards via shop'], featuredHeroes: ['echo', 'khaos'],
   }),
   ev({
     name: 'Strike Out', category: C('Alliance'), cadence: 'Every weekend Sat–Sun', cycleWeek: W('Both'), days: ['Sat', 'Sun'],
@@ -243,6 +264,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 14; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 15; // 15 = Oblivion War full in-game rules, slots, points and leagues; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
