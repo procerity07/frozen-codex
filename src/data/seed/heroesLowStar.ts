@@ -76,7 +76,16 @@ const PLAZA_SUPERB: AcquisitionSource[] = ['Hero Plaza', 'Superb Hero Covenant']
 
 export const lowStarHeroes: Hero[] = [
   // ------------------------------ Fire ------------------------------
-  lowStar({ name: 'Baron', element: 'Fire', rarity: 2, unit: 'Archer', sources: ['Hero Plaza'], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Output')] }),
+  {
+    ...lowStar({ name: 'Baron', element: 'Fire', rarity: 2, unit: 'Archer', sources: ['Hero Plaza'], march: ['Archer DEF', 'Archer ATK'],
+      civil: [{ name: 'Wood Output', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } }],
+      m3: { name: 'Sundry Slashes', description: 'Deals 275% damage to the target (Rage Regen: Medium). Dauntless Courage (unlocks Lv. 11): ATK and DEF +8%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'Single target', effects: ['ATK up', 'DEF up'] },
+      notes: ['In-game (2026-11-25, Baron at +5): 2★ Fire Archer confirmed; Wood Output 4–10% (owned); Archer DEF (Lv. 11) and ATK (Lv. 31) 4–10%; two hero skills (2nd at Lv. 11).'] }),
+    marchSkills: [
+      { name: 'Archer DEF', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 11.' },
+      { name: 'Archer ATK', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+    ],
+  },
   lowStar({ name: 'Lucia', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Monsters', 'Monster Dens'], pages: [PLAZA],
     civil: [civil('Training Capacity'), civil('Research Stone Cost'), civil('Research Iron Cost')], notes: ['Sold for 50 points in the Hero Plaza point shop.'] }),
   lowStar({ name: 'Tulios', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza'], pages: [PLAZA],
@@ -109,7 +118,16 @@ export const lowStarHeroes: Hero[] = [
     ],
   },
   // ------------------------------ Ice ------------------------------
-  lowStar({ name: 'Sophia', element: 'Ice', rarity: 2, unit: 'Cavalry', sources: ['Hero Plaza'], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Output')] }),
+  {
+    ...lowStar({ name: 'Sophia', element: 'Ice', rarity: 2, unit: 'Cavalry', sources: ['Hero Plaza'], march: ['Cavalry DEF', 'Cavalry ATK'],
+      civil: [{ name: 'Stone Output', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } }],
+      m3: { name: 'Aqua Blessing', description: 'All allies DEF +30% and ATK +24% (Rage Regen: Medium). Mighty Torrent (unlocks Lv. 11): DEF +10% and Crit +6%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'All allies', effects: ['DEF up', 'ATK up', 'Crit'] },
+      notes: ['In-game (2026-11-25, Sophia at +5): 2★ Ice Cavalry confirmed; Stone Output 4–10% (owned); Cavalry DEF (Lv. 11) and ATK (Lv. 31) 4–10%; two hero skills (2nd at Lv. 11).'] }),
+    marchSkills: [
+      { name: 'Cavalry DEF', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 11.' },
+      { name: 'Cavalry ATK', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+    ],
+  },
   lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
   lowStar({ name: 'Axel', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
   {
@@ -145,7 +163,16 @@ export const lowStarHeroes: Hero[] = [
     ],
   },
   // ------------------------------ Nature ------------------------------
-  lowStar({ name: 'Luke', element: 'Nature', rarity: 2, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
+  {
+    ...lowStar({ name: 'Luke', element: 'Nature', rarity: 2, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Infantry DEF', 'Infantry ATK'],
+      civil: [{ name: 'Food Output', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } }],
+      m3: { name: 'Blast Fruit', description: 'Deals 120% damage to 3 random enemies (Rage Regen: Medium). Camouflage (unlocks Lv. 11): ATK and DEF +8%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'Random x3', effects: ['ATK up', 'DEF up'] },
+      notes: ['In-game (2026-11-25, Luke at +5): 2★ Nature Infantry confirmed; Food Output 4–10% (owned); Infantry DEF (Lv. 11) and ATK (Lv. 31) 4–10%; two hero skills (2nd at Lv. 11).'] }),
+    marchSkills: [
+      { name: 'Infantry DEF', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 11.' },
+      { name: 'Infantry ATK', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+    ],
+  },
   lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA],
     march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
   lowStar({ name: 'Roger', element: 'Nature', rarity: 3, unit: 'Archer', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Gather Speed')] }),
@@ -205,11 +232,11 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Penny', element: 'Light', rarity: 2, unit: 'Civil', sources: ['Hero Plaza'],
     civil: [
       { name: 'Hunt March Speed', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } },
-      { name: 'Research Food Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 food per research.', requirement: 'Unlock level not verified', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
-      { name: 'Research Wood Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 wood per research.', requirement: 'Unlock level not verified', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Research Food Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 food per research.', requirement: 'Unlocks at level 11', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Research Wood Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 wood per research.', requirement: 'Unlocks at level 31', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
     ],
     m3: { name: 'Group Insurance', description: 'Evens out damage taken among her and adjacent allies for 3 rounds (Rage Regen: Slow). United Front: DEF +8% and Rage Regen +5%. 2★ heroes have two hero skills.', charge: 'Slow', pattern: 'Self + adjacent', effects: ['Damage sharing', 'DEF up', 'Rage up'] },
-    notes: ['In-game (2026-11-25, Penny at +5): 2★ Light Civil confirmed; Hunt March Speed 4–10%, Research Food and Wood Cost −40k to −100k (+2 to +5); two hero skills. Unlock levels of the 2nd and 3rd civil skills not shown (all unlocked at +5).'] }),
+    notes: ['In-game (2026-11-25, Penny at +5): 2★ Light Civil confirmed; Hunt March Speed 4–10%, Research Food and Wood Cost −40k to −100k (+2 to +5); two hero skills. 2★ rule: 2nd skill Lv. 11, 3rd Lv. 31.'] }),
   {
     ...lowStar({ name: 'Aemon', element: 'Light', rarity: 3, unit: 'Archer', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Troop skill', 'Archer HP', 'Archer DEF', 'Archer ATK'],
       m3: { name: 'Dawn Break', description: 'Deals 316% damage to the target (Rage Regen: Fast). Light Cone (unlocks Lv. 11): target Hit −32% for 4 rounds. Blessed Light (unlocks Lv. 31): ATK +10% and Crit +5%. Values as shown in-game at +2.', charge: 'Fast', pattern: 'Single target', effects: ['Hit down', 'ATK up', 'Crit'] },

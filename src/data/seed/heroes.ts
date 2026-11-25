@@ -486,11 +486,11 @@ const baseHeroes: Hero[] = [
     name: 'William', title: 'Master Builder', element: 'Dark', rarity: 2, unit: 'Civil', role: 'Construction',
     march: [],
     civil: [
-      { name: 'Iron Output', description: 'Increases iron output. Value not verified.', requirement: 'Unlock level not verified', stat: 'resourceOutput' },
-      { name: 'Construction Food Cost', description: 'Reduces the food cost of construction. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildCost' },
-      { name: 'Construction Wood Cost', description: 'Reduces the wood cost of construction. Value not verified.', requirement: 'Unlock level not verified', stat: 'buildCost' },
+      { name: 'Iron Output', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } },
+      { name: 'Construction Food Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 food per construction.', requirement: 'Unlocks at level 11', stat: 'buildCost', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Construction Wood Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 wood per construction.', requirement: 'Unlocks at level 31', stat: 'buildCost', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
     ],
-    m3: { name: 'Scaffold', desc: 'Small Nature damage to a row.', charge: 'Fast', pattern: 'Row', effects: [] },
+    m3: { name: 'Spinning Axe', desc: 'Deals 138% damage to all enemies (Rage Regen: Medium). Raging Slash (unlocks Lv. 11): ATK and DEF +8%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'All enemies', effects: ['ATK up', 'DEF up'] },
     sources: ['Hero Plaza', 'Starter / Campaign'],
     notes: 'Own-only construction cost reduction. Enhance before big Citadel pushes.',
   }),
@@ -561,7 +561,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 51; // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 52; // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
@@ -578,7 +578,7 @@ const withMainTroopSkill = (h: Hero): Hero => ({ ...h, marchSkills: [MAIN_TROOP_
  * the first, plus a 5th at 6★ (5★ heroes) or 7★ (6★ heroes); 4★ heroes have four, 3★ heroes three.
  * Levels already stated for a skill are kept; the remaining slots are filled in order.
  */
-const TROOP_SLOTS: Record<number, (number | null)[]> = { 3: [null, 31, 71], 4: [null, 31, 131], 5: [null, 31, 131], 6: [null, 31, 131] };
+const TROOP_SLOTS: Record<number, (number | null)[]> = { 2: [null, 11, 31], 3: [null, 31, 71], 4: [null, 31, 131], 5: [null, 31, 131], 6: [null, 31, 131] };
 const HERO_SKILL_UNLOCKS: Record<number, string> = {
   3: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31.',
   4: 'Unlocks: 1st skill on obtaining the hero, 2nd at Lv. 11, 3rd at Lv. 31, 4th at Lv. 71.',
