@@ -289,8 +289,16 @@ export const lowStarHeroes: Hero[] = [
       { name: 'Archer ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 71.' },
     ],
   },
-  lowStar({ name: 'Hannah', element: 'Light', rarity: 3, unit: 'Cavalry', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
-    m3: { name: 'Valiant Throw', description: 'Deals 208% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
+  {
+    ...lowStar({ name: 'Hannah', element: 'Light', rarity: 3, unit: 'Cavalry', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
+      m3: { name: 'Valiant Throw', description: 'Deals 208% damage to the target and adjacent enemies (Rage Regen: Medium). Sparkling Flash (unlocks Lv. 11): when hit, she and adjacent allies counterattack for 125% of damage taken for 4 rounds. Follower of Light (unlocks Lv. 31): ATK +10% and Rage Regen +6%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Counterattack', 'ATK up', 'Rage up'] },
+      notes: ['In-game (2026-11-25, Hannah at +5): 3★ Light Cavalry confirmed; Cavalry HP/DEF/ATK 10/15/20/25% (+2 to +5); three hero skills.'] }),
+    marchSkills: [
+      { name: 'Cavalry HP', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when she joins troop battle (in-game).' },
+      { name: 'Cavalry DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when she joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Cavalry ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when she joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Christina', element: 'Light', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Troop skill', 'Cavalry DEF', 'Cavalry ATK'],
       civil: [{ name: 'Stone Output', description: 'In-game. 4★: +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%',
