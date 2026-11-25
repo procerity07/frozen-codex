@@ -392,8 +392,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Neptune', title: 'Lord of Tides', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Tidal Force', 'Archer ATK up.']],
-    m3: { name: 'Trident Wave', desc: 'Ice damage to all enemies.', charge: 'Slow', pattern: 'All enemies', effects: ['AoE'] },
+    march: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: "Neptune's Wrath", desc: 'Deals 450% damage to the target (Rage Regen: Fast). Dark Tide: target and adjacent enemies Rage Regen −24% for 6 rounds. Hidden Reef: Ice members ATK and DEF +5% for 6 rounds from battle start. Warm Current: all members ATK +10% for 6 rounds from battle start. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Single target', effects: ['Rage down', 'ATK up', 'DEF up', 'Crit'] },
     sources: ['Stamina Event', 'Timeless Recruitment'],
     notes: 'Stamina Event drops expire.',
   }),
@@ -573,7 +581,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 58; // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 59; // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
