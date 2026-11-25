@@ -203,7 +203,13 @@ export const lowStarHeroes: Hero[] = [
   },
   // ------------------------------ Light ------------------------------
   lowStar({ name: 'Penny', element: 'Light', rarity: 2, unit: 'Civil', sources: ['Hero Plaza'],
-    civil: [civil('Hunt March Speed'), civil('Research Food Cost'), civil('Research Wood Cost')] }),
+    civil: [
+      { name: 'Hunt March Speed', description: 'In-game. 2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '2': [null, null, 4, 6, 8, 10] } },
+      { name: 'Research Food Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 food per research.', requirement: 'Unlock level not verified', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Research Wood Cost', description: 'In-game. 2★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 wood per research.', requirement: 'Unlock level not verified', unit: 'flat', tiers: { '2': [null, null, -40000, -60000, -80000, -100000] } },
+    ],
+    m3: { name: 'Group Insurance', description: 'Evens out damage taken among her and adjacent allies for 3 rounds (Rage Regen: Slow). United Front: DEF +8% and Rage Regen +5%. 2★ heroes have two hero skills.', charge: 'Slow', pattern: 'Self + adjacent', effects: ['Damage sharing', 'DEF up', 'Rage up'] },
+    notes: ['In-game (2026-11-25, Penny at +5): 2★ Light Civil confirmed; Hunt March Speed 4–10%, Research Food and Wood Cost −40k to −100k (+2 to +5); two hero skills. Unlock levels of the 2nd and 3rd civil skills not shown (all unlocked at +5).'] }),
   {
     ...lowStar({ name: 'Aemon', element: 'Light', rarity: 3, unit: 'Archer', sources: PLAZA_SUPERB, pages: [PLAZA], march: ['Troop skill', 'Archer HP', 'Archer DEF', 'Archer ATK'],
       m3: { name: 'Dawn Break', description: 'Deals 316% damage to the target (Rage Regen: Fast). Light Cone (unlocks Lv. 11): target Hit −32% for 4 rounds. Blessed Light (unlocks Lv. 31): ATK +10% and Crit +5%. Values as shown in-game at +2.', charge: 'Fast', pattern: 'Single target', effects: ['Hit down', 'ATK up', 'Crit'] },
