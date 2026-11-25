@@ -10,7 +10,7 @@ import { weekIndex } from '@/lib/time';
 import type { BuildBonuses, ResourceKey } from '@/lib/calculators';
 import type { CurioQuality } from '@/types/game';
 
-export interface CurioChoice { kind: 'exclusive' | 'light'; quality: CurioQuality; stars: number; enhancement: number }
+export interface CurioChoice { kind: 'exclusive' | 'light'; quality: CurioQuality; stars: number; enhancement: number; /** Owned and equipped on this hero (needs hero Lv. 211+). */ equipped?: boolean }
 
 export interface Castle { id: string; name: string; kind: 'main' | 'farm' }
 
