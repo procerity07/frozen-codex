@@ -112,7 +112,16 @@ export const lowStarHeroes: Hero[] = [
   lowStar({ name: 'Sophia', element: 'Ice', rarity: 2, unit: 'Cavalry', sources: ['Hero Plaza'], march: ['Cavalry DEF', 'Cavalry ATK'], civil: [civil('Stone Output')] }),
   lowStar({ name: 'Ada', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry HP', 'Infantry DEF', 'Infantry ATK'] }),
   lowStar({ name: 'Axel', element: 'Ice', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
-  lowStar({ name: 'Andre', element: 'Ice', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
+  {
+    ...lowStar({ name: 'Andre', element: 'Ice', rarity: 4, unit: 'Infantry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'],
+      civil: [{ name: 'Food Output', description: 'In-game. 4★: +30% at +1, +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%', tiers: { '4': [null, 30, 40, 60, 80, 100] } }],
+      m3: { name: 'Stellar Frost', description: 'Deals 149% damage to all enemies (Rage Regen: Medium). Cold Erosion (unlocks Lv. 11): drains 20% of enemies\' Rage. Glacial Warrior (unlocks Lv. 31): ATK, DEF and Heal Bonus +10%. Frosty Haze (unlocks Lv. 71): enemies\' Hit −20%. Values as shown in-game at +1.', charge: 'Medium', pattern: 'All enemies', effects: ['Rage down', 'ATK up', 'DEF up', 'Hit down'] },
+      notes: ['In-game (2026-11-25, Andre at +1): 4★ Ice Infantry confirmed; Food Output 30–100% (owned); Infantry DEF (Lv. 31) and ATK (Lv. 131) 15/20/30/40/50%; four hero skills.'] }),
+    marchSkills: [
+      { name: 'Infantry DEF', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Infantry ATK', description: '4★: +15% at +1, +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Odell', element: 'Ice', rarity: 4, unit: 'Civil', sources: ['Epic Hero Covenant', 'Monsters', 'Monster Dens'],
       march: ['Troop skill'],
@@ -125,7 +134,16 @@ export const lowStarHeroes: Hero[] = [
       notes: ['Monsters Lv. 10+ and Monster dens Lv. 8–9 per the wiki.', 'In-game (2026-11-23, Odell at +2): 4★ Ice Civil confirmed; troop skill 150% of troop ATK; civil skill tables (+2 to +5); four hero skills.'] }),
     marchSkills: [{ name: 'Troop skill', description: 'Deals damage equal to 150% of troop ATK to the enemy (at +2, in-game).' }],
   },
-  lowStar({ name: 'Viola', element: 'Ice', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'], notes: ['Element confirmed by the in-game hero card (wiki only implies it by table position).'] }),
+  {
+    ...lowStar({ name: 'Viola', element: 'Ice', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Troop HP', 'Troop DEF', 'Troop ATK'],
+      m3: { name: 'Frost Arrow', description: 'Deals 210% damage to the target and an adjacent enemy (Rage Regen: Medium). Ruthlessness (unlocks Lv. 11): dispels the target\'s buffs. Marksmanship (unlocks Lv. 31): ATK and Crit +10%. Family Honor (unlocks Lv. 71): allies\' Hit +5%. Values as shown in-game at +1.', charge: 'Medium', pattern: 'Target + 1 adjacent', effects: ['Dispel', 'ATK up', 'Crit', 'Hit up'] },
+      notes: ['In-game (2026-11-25, Viola at +1): 4★ Ice Infantry confirmed; Troop HP/DEF/ATK (all troops) 4.8–16%, DEF Lv. 31, ATK Lv. 131; four hero skills.'] }),
+    marchSkills: [
+      { name: 'Troop HP', description: '4★: +4.8% at +1, +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when she joins troop battle (in-game).' },
+      { name: 'Troop DEF', description: '4★: +4.8% at +1, +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Troop ATK', description: '4★: +4.8% at +1, +6.4% at +2, +9.6% at +3, +12.8% at +4, +16% at +5. Applies to all troops when she joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   // ------------------------------ Nature ------------------------------
   lowStar({ name: 'Luke', element: 'Nature', rarity: 2, unit: 'Infantry', sources: ['Hero Plaza'], march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Output')] }),
   lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA],
