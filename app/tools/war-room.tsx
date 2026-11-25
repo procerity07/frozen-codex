@@ -14,7 +14,7 @@ const VIEWS = ['Compare', 'CoL Calc', 'RE Points', 'Mail'] as const;
 const WARS = [
   {
     name: 'Conquest of Lords', color: palette.gold, rows: [
-      ['When', 'Sat 12:00 → Sun 10:00 UTC · Ace Lord Week'], ['Win', 'Hall of Might 8h straight, else longest hold'], ['Hazards', 'Spire cannon every 10 min: 1% garrison loss'],
+      ['When', 'Sat 12:00 → Sun 10:00 UTC · Ace Lord Week'], ['Win', 'Hall of Might 6h straight, else longest hold'], ['Hazards', 'An enemy-held Spire keeps hitting your Hall: some defenders die outright'],
       ['Safety', 'Enchanted Woodland immunity'], ['Deaths', '30% structure losses are permanent'], ['Score', '1M lost = 400 · 1M killed = 100 · target 12k'],
     ],
   },
