@@ -76,7 +76,7 @@ const baseEvents: GameEvent[] = [
     };
     return ev({
       name: name!, category: C('Core Cycle'), cadence: 'Inside Arms Race / Ace Lord cycles', cycleWeek: W('Both'), days: [], summary: summary!,
-      rules: ['Runs as a sub-tracker during the matching day of the parent cycle.'], tips: ['Use the Bag Hoard calculator to time your dump with the parent day.'],
+      rules: ['Runs as a sub-tracker during the matching day of the parent cycle.'], tips: ['Use the Event Points Calculator to time your dump with the parent day.'],
       ...known[name!],
       ...extra[name!],
     });
@@ -88,7 +88,7 @@ const baseEvents: GameEvent[] = [
     summary: 'Three themed windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC), Thursday to Sunday.',
     rules: ['Each window draws a random theme from a fixed set for that time of day.', '00:00–07:55: Curio, Gear & Totem, Hero Upgrade, Rune & Holystone, Train/Build/Research Speedup.', '08:00–15:55: Curio, Draconic Stone, Obtain Treasure, Research, Stamina/AP, Troop Training Power.', '16:00–23:55: Build & Build Speedup, Building/Research/Training Power, Curio, Diamond Consumption, Military & Civil Dragon Pts.', 'The wiki Royal Arms Race page says Thu–Sun; its Events grid shows Thursday only.'],
     rewards: ['Lylia shards'], featuredHeroes: ['lylia'],
-    tips: ['Double-dip: a window that matches the Ace Lord day theme scores in both events.'],
+    tips: ['Counts for 2 events: a window that matches the Ace Lord day theme scores in both events.'],
   }),
   ev({ name: 'Ancient Prologue Arms Race', category: C('Weekly'), cadence: 'Bi-weekly Thu (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Thu'], summary: 'Single-day race for Dragon EXP and Dragon Stones.', rules: ['Dragon EXP items and Dragon Stone usage score.'], rewards: ['Dragon EXP', 'Dragon Stones'] }),
   ev({ name: 'Forbidden Treasures Arms Race', category: C('Weekly'), cadence: 'Bi-weekly Wed (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Wed'], summary: 'Gear enhancement race paired with Arms Race Day 3.', rules: ['Gear Essence spent scores; overlaps Arms Race Day 3.'], rewards: ['Gear Essence', 'Gear Energy Spinels'] }),

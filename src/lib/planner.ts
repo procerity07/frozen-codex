@@ -54,10 +54,10 @@ export function doubleDipPlan(): DoubleDipRow[] {
     const shared = [...alTags].filter((t) => sideTags.has(t));
     const royalShared = royal.filter((r) => [...tagsFor(r.theme)].some((t) => alTags.has(t) || sideTags.has(t)));
     let advice: string;
-    if (shared.length) advice = `Double-dip: ${shared.join(', ')} items score in both Ace Lord and ${sideTheme} today.`;
+    if (shared.length) advice = `Counts for 2 events: ${shared.join(', ')} items score in both Ace Lord and ${sideTheme} today.`;
     else if (side) advice = `Spend ${al.theme} items for Ace Lord; ${sideTheme} runs alongside today.`;
     else advice = `Spend ${al.theme} items for Ace Lord.`;
-    if (royalShared.length) advice += ` Possible double-dip if Royal Arms Race draws: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
+    if (royalShared.length) advice += ` May also count for Royal Arms Race if Royal Arms Race draws: ${royalShared.map((r) => `${r.theme} (${r.utc} UTC)`).join('; ')}.`;
     return { weekday, aceLord: al.theme, allianceDuel: sideTheme, royal, shared, advice };
   });
 }

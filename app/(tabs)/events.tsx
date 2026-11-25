@@ -14,22 +14,22 @@ import { twoWeekCalendar } from '@/lib/schedule';
 import { doubleDipPlan } from '@/lib/planner';
 import { cancelEventAlarm, ensurePermission, scheduleEventAlarm } from '@/services/notifications';
 
-const VIEWS = ['Calendar', 'Registry', 'Planner', 'Expiry'] as const;
+const VIEWS = ['Schedule', 'All Events', 'Item Expiry'] as const;
 const CATS: EventCategory[] = ['Core Cycle', 'Weekly', 'Alliance', 'Cross-Realm War', 'Mini-Game', 'Recruitment & Seasonal'];
 
 export default function EventsScreen() {
-  const [view, setView] = useState<(typeof VIEWS)[number]>('Calendar');
+  const [view, setView] = useState<(typeof VIEWS)[number]>('Schedule');
   return (
     <View style={{ flex: 1, backgroundColor: palette.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, gap: space.sm }}>
         <Segmented options={VIEWS} value={view} onChange={setView} />
         <Row>
           <View style={{ flex: 1 }}><Button compact variant="secondary" icon={Brain} label="Sophia" onPress={() => router.push('/tools/sophia')} /></View>
-          <View style={{ flex: 1 }}><Button compact variant="secondary" icon={Calculator} label="Bag Hoard" onPress={() => router.push('/tools/bag')} /></View>
-          <View style={{ flex: 1 }}><Button compact variant="secondary" icon={Swords} label="War Room" onPress={() => router.push('/tools/war-room')} /></View>
+          <View style={{ flex: 1 }}><Button compact variant="secondary" icon={Calculator} label="Event Points" onPress={() => router.push('/tools/bag')} /></View>
+          <View style={{ flex: 1 }}><Button compact variant="secondary" icon={Swords} label="Battle Guides" onPress={() => router.push('/tools/war-room')} /></View>
         </Row>
       </View>
-      {view === 'Calendar' ? <CalendarView /> : view === 'Registry' ? <Registry /> : view === 'Planner' ? <Planner /> : <ExpiryMatrix />}
+      {view === 'Schedule' ? <CalendarView /> : view === 'All Events' ? <Registry /> : <ExpiryMatrix />}
     </View>
   );
 }
@@ -78,6 +78,7 @@ function CalendarView() {
           </View>
         );
       })}
+      <PlannerSections />
     </Screen>
   );
 }
@@ -146,13 +147,13 @@ function Registry() {
   );
 }
 
-function Planner() {
+function PlannerSections() {
   const plan = useMemo(doubleDipPlan, []);
   const now = useNow(60_000);
   const todayWd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getUTCDay()] ?? 'Mon';
   const [openDays, setOpenDays] = useState<Record<string, boolean>>({});
   return (
-    <Screen>
+    <>
       <SectionHeader title="Ace Lord week planner" subtitle="Daily theme, side events and Royal Arms Race" />
       {plan.map((d) => (
         <Card key={d.weekday} style={{ marginBottom: space.sm, padding: space.md }} accent={d.shared.length ? palette.success : undefined}>
@@ -160,7 +161,7 @@ function Planner() {
             <Row style={{ justifyContent: 'space-between' }}>
               <Text style={type.heading}>{d.weekday}</Text>
               <Row gap={8}>
-                {d.shared.length ? <Badge label="Double-dip" color={palette.success} /> : null}
+                {d.shared.length ? <Badge label="Counts for 2 events" color={palette.success} /> : null}
                 {(openDays[d.weekday] ?? d.weekday.startsWith(todayWd)) ? <ChevronDown size={18} color={palette.textSecondary} /> : <ChevronRight size={18} color={palette.textSecondary} />}
               </Row>
             </Row>
@@ -186,7 +187,7 @@ function Planner() {
           <Text style={[type.bodySecondary, { marginTop: 2 }]}>Random each day from: {s.themes.join(' · ')}</Text>
         </Card>
       ))}
-    </Screen>
+    </>
   );
 }
 

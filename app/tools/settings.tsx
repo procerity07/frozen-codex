@@ -98,7 +98,7 @@ export default function SettingsScreen() {
           <Field label="Server" value={s.realm.server} onChangeText={(v) => s.setRealm({ server: v })} />
           <Field label="Lord name" value={s.realm.lordName} onChangeText={(v) => s.setRealm({ lordName: v })} autoCapitalize="none" />
         </Row>
-        <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Bag Hoard calculator shows.</Text>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Event Points Calculator shows.</Text>
       </Card>
       <View style={{ marginTop: space.sm }}>
         <Button icon={Sparkles} variant="secondary" label="Run first-time setup again" onPress={() => { s.setOnboarded(false); router.replace('/onboarding'); }} />

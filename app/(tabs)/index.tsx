@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router, type Href } from 'expo-router';
-import { Bell, Brain, LayoutGrid, Calculator, Castle, Check, Gift, HeartPulse, Hourglass, Plus, Swords, Timer, Trash } from 'lucide-react-native';
+import { Bell, Check, Gift, Hourglass, Plus, Timer, Trash } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import { checklistTemplate, events, royalArmsRace } from '@/data/seed';
-import { elementColors, palette, radius, space, tint, troopColors, type } from '@/theme';
+import { palette, radius, space, tint, type } from '@/theme';
 import { Badge, Button, Card, Chip, ChipRow, Field, IconButton, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { useNow } from '@/store/useNow';
@@ -16,14 +16,8 @@ import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
 import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
-  { label: "Sophia's Test", sub: '30-second lookup', icon: Brain, href: '/tools/sophia', color: palette.cyan },
   { label: 'Gift Code Vault', sub: 'Copy & redeem', icon: Gift, href: '/tools/gift-codes', color: palette.gold },
-  { label: 'Bag Hoard', sub: 'Event points', icon: Calculator, href: '/tools/bag', color: elementColors.Dark },
-  { label: 'Citadel Planner', sub: 'Deficit & time', icon: Castle, href: '/tools/citadel', color: palette.success },
-  { label: 'Troop Training', sub: 'Cost & Sanctuary', icon: HeartPulse, href: '/tools/casualty', color: palette.danger },
-  { label: 'War Room', sub: 'CoL · RE · Mail', icon: Swords, href: '/tools/war-room', color: troopColors.Cavalry },
   { label: 'My Reminders', sub: 'Your own alarms', icon: Bell, href: '/tools/reminders', color: palette.gold },
-  { label: 'Hive Planner', sub: 'Alliance layout', icon: LayoutGrid, href: '/tools/hive', color: palette.success },
 ];
 
 export default function HomeScreen() {

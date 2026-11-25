@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router } from 'expo-router';
-import { Castle, Pencil, Settings, Shield, Sparkles, User } from 'lucide-react-native';
+import { Castle, Pencil, Settings, Shield, Sparkles, User, LayoutGrid } from 'lucide-react-native';
 import { MarchCard } from '@/components/domain/MarchCard';
 import { MyStatsCard } from '@/components/domain/MyStatsCard';
-import { Badge, Card, CollapsibleSection, Row, Screen, Stat, haptic } from '@/components/ui';
+import { Badge, Button, Card, CollapsibleSection, Row, Screen, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
 import { civilBonuses, clampEntry, enhancementLabel, type CivilBonus } from '@/lib/roster';
 import { skillsCheckedInGame } from '@/lib/heroData';
@@ -85,6 +85,13 @@ export default function ProfileScreen() {
       </CollapsibleSection>
 
       <MarchCard heroes={heroes} roster={s.roster} />
+
+      <CollapsibleSection title="Alliance" icon={LayoutGrid} initiallyOpen={false}>
+        <Card>
+          <Text style={type.bodySecondary}>Plan where every member's castle goes around the Fort.</Text>
+          <View style={{ marginTop: space.sm }}><Button icon={LayoutGrid} label="Open Hive Planner" onPress={() => router.push('/tools/hive')} /></View>
+        </Card>
+      </CollapsibleSection>
 
       <CollapsibleSection title="Heroes in My Roster" icon={Shield} subtitle={`${owned.length} heroes`} right={<Badge label={String(owned.length)} color={palette.gold} />} initiallyOpen={false}>
       {owned.length === 0 ? (

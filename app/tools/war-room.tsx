@@ -36,7 +36,7 @@ export default function WarRoom() {
   const [view, setView] = useState<(typeof VIEWS)[number]>('Compare');
   return (
     <Screen sticky={<View style={{ paddingHorizontal: space.lg, paddingTop: space.md, backgroundColor: palette.bg }}><Segmented options={VIEWS} value={view} onChange={setView} /></View>}>
-      <Stack.Screen options={{ title: 'War Room' }} />
+      <Stack.Screen options={{ title: 'Battle Event Guides' }} />
       <Card style={{ marginBottom: space.md }}>
         <Text style={type.heading}>Alliance Hive Planner</Text>
         <Text style={[type.caption, { marginTop: 2 }]}>Plan where every member's castle goes around the fort, with teleport coordinates for each spot.</Text>

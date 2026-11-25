@@ -8,7 +8,7 @@ import { getHero } from '@/db/repo';
 import { bondGroups, events } from '@/data/seed';
 import { CurioCard } from '@/components/domain/CurioCard';
 import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
-import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
+import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, CollapsibleSection, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified, skillsCheckedInGame } from '@/lib/heroData';
 import { MyHeroCard } from '@/components/domain/MyHeroCard';
 import { HeroPortrait } from '@/components/domain/HeroPortrait';
@@ -24,7 +24,7 @@ function Unverified({ hero, field }: { hero: Hero; field: HeroAuditField }) {
 function Match3Section({ hero, m3 }: { hero: Hero; m3: Match3Skill }) {
   return (
     <>
-      <SectionHeader title="Match-3 tactical skill" icon={Sparkles} right={<Unverified hero={hero} field="match3Skill" />} />
+      <CollapsibleSection title="Match-3 tactical skill" icon={Sparkles} right={<Unverified hero={hero} field="match3Skill" />}>
       <Card accent={elementColors[hero.element]}>
         <Text style={type.heading}>{m3.name}</Text>
         <Text style={[type.bodySecondary, { marginTop: 4 }]}>{m3.description}</Text>
@@ -34,6 +34,7 @@ function Match3Section({ hero, m3 }: { hero: Hero; m3: Match3Skill }) {
           {m3.effects.map((e) => <Badge key={e} label={e} color={palette.gold} />)}
         </Row>
       </Card>
+      </CollapsibleSection>
     </>
   );
 }
@@ -73,7 +74,7 @@ export default function HeroDetail() {
 
       <MyHeroCard hero={hero} />
 
-      <SectionHeader title="Combat role" icon={Crosshair} />
+      <CollapsibleSection title="Combat role" icon={Crosshair}>
       <Card style={{ padding: space.md }}>
         {roleLabel === 'Not verified' ? (
           <Text style={[type.bodySecondary, { color: palette.textMuted }]}>Not verified</Text>
@@ -81,6 +82,7 @@ export default function HeroDetail() {
           <Badge label={roleLabel} color={ROLE_COLORS[roleLabel]} />
         )}
       </Card>
+      </CollapsibleSection>
 
       {!skillsCheckedInGame(hero) ? (
         <Card style={{ marginTop: space.md }} accent={palette.warning}>
@@ -91,19 +93,20 @@ export default function HeroDetail() {
 
       {hero.marchSkills.length ? (
         <>
-          <SectionHeader title="March military skills" subtitle="Active when the hero leads or joins a march" icon={Swords} right={<Unverified hero={hero} field="marchSkills" />} />
+          <CollapsibleSection title="March military skills" subtitle="Active when the hero leads or joins a march" icon={Swords} right={<Unverified hero={hero} field="marchSkills" />}>
           {hero.marchSkills.map((sk) => (
             <Card key={sk.name} style={{ marginBottom: space.sm }}>
               <Text style={type.heading}>{sk.name}</Text>
               <Text style={[type.bodySecondary, { marginTop: 4 }]}>{sk.description}</Text>
             </Card>
           ))}
+          </CollapsibleSection>
         </>
       ) : null}
 
       {hero.civilSkills.length ? (
         <>
-          <SectionHeader title="Passive civil skills" subtitle="Own-only — active without marching" icon={Shield} right={<Unverified hero={hero} field="civilSkills" />} />
+          <CollapsibleSection title="Passive civil skills" subtitle="Own-only — active without marching" icon={Shield} right={<Unverified hero={hero} field="civilSkills" />}>
           {hero.civilSkills.map((sk) => (
             <Card key={sk.name} style={{ marginBottom: space.sm }} accent={palette.gold}>
               <Row style={{ justifyContent: 'space-between' }}>
@@ -114,20 +117,22 @@ export default function HeroDetail() {
               <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{sk.requirement}</Text>
             </Card>
           ))}
+          </CollapsibleSection>
         </>
       ) : null}
 
       {hero.match3Skill ? <Match3Section hero={hero} m3={hero.match3Skill} /> : null}
 
-      <SectionHeader title="Acquisition" icon={Gem} right={<Unverified hero={hero} field="sources" />} />
+      <CollapsibleSection title="How to get" icon={Gem} right={<Unverified hero={hero} field="sources" />}>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.sm }}>
         {hero.sources.map((s) => <Badge key={s} label={s} color={palette.text} />)}
       </View>
       {featuredIn.length ? (
         <ChipRow>{featuredIn.map((e) => <Chip key={e.id} label={e.name} onPress={() => router.push(`/event/${e.id}`)} />)}</ChipRow>
       ) : null}
+      </CollapsibleSection>
 
-      <SectionHeader title="Bonds & curio" icon={Users} />
+      <CollapsibleSection title="Bonds & curio" icon={Users}>
       {groups.map((g) => (
         <Card key={g.id} style={{ marginBottom: space.sm }}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -138,17 +143,19 @@ export default function HeroDetail() {
         </Card>
       ))}
       <CurioCard hero={hero} />
+      </CollapsibleSection>
 
       {hero.notes ? (
         <>
-          <SectionHeader title="Notes" right={<Unverified hero={hero} field="notes" />} />
+          <CollapsibleSection title="Notes" right={<Unverified hero={hero} field="notes" />} initiallyOpen={false}>
           <Card><Text style={type.body}>{hero.notes}</Text></Card>
+          </CollapsibleSection>
         </>
       ) : null}
 
       {hero.audit ? (
         <>
-          <SectionHeader title="Data check" subtitle={`Checked ${hero.audit.checkedOn} · sections marked Not verified are unconfirmed`} icon={ClipboardCheck} />
+          <CollapsibleSection title="Data check" subtitle={`Checked ${hero.audit.checkedOn} · sections marked Not verified are unconfirmed`} icon={ClipboardCheck} initiallyOpen={false}>
           <Card>
             {hero.audit.notes.map((n, i) => <Text key={i} style={[type.bodySecondary, { marginBottom: 6 }]}>{n}</Text>)}
             {hero.audit.sourceUrls.map((u) => (
@@ -157,6 +164,7 @@ export default function HeroDetail() {
               </Pressable>
             ))}
           </Card>
+          </CollapsibleSection>
         </>
       ) : null}
     </Screen>

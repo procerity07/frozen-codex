@@ -1,6 +1,6 @@
 {
-  "version": 49,
-  "publishedAt": "2026-11-25T15:31:27.140Z",
+  "version": 50,
+  "publishedAt": "2026-11-25T17:00:46.418Z",
   "packs": {
     "heroes": [
       {
@@ -8902,7 +8902,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -8924,7 +8924,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -8946,7 +8946,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -8968,7 +8968,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -8990,7 +8990,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -9012,7 +9012,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -9073,7 +9073,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -9098,7 +9098,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -9120,7 +9120,7 @@
         "featuredHeroes": [],
         "currencies": [],
         "tips": [
-          "Use the Bag Hoard calculator to time your dump with the parent day."
+          "Use the Event Points Calculator to time your dump with the parent day."
         ],
         "rewards": [],
         "confidence": "community",
@@ -9144,7 +9144,7 @@
         ],
         "currencies": [],
         "tips": [
-          "Double-dip: a window that matches the Ace Lord day theme scores in both events."
+          "Counts for 2 events: a window that matches the Ace Lord day theme scores in both events."
         ],
         "rewards": [
           "Lylia shards"

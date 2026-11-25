@@ -32,7 +32,7 @@ export default function BagHoard() {
 
   return (
     <Screen sticky={<View style={{ backgroundColor: palette.bg }}><ChipRow>{DAY_KEYS.map((k) => <Chip key={k} label={k} active={k === day} onPress={() => setDay(k)} color={k.startsWith('AL') ? palette.gold : k.startsWith('AR') ? palette.cyan : elementColors.Dark} />)}</ChipRow></View>}>
-      <Stack.Screen options={{ title: 'Bag Hoard Calculator' }} />
+      <Stack.Screen options={{ title: 'Event Points Calculator' }} />
       <Card>
         <Text style={type.caption}>{bagDayLabels[day]}</Text>
         <Row style={{ marginTop: space.sm, justifyContent: 'space-between' }}>
