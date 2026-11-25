@@ -1,6 +1,6 @@
 {
-  "version": 66,
-  "publishedAt": "2026-11-25T23:00:10.360Z",
+  "version": 67,
+  "publishedAt": "2026-11-25T23:00:24.665Z",
   "packs": {
     "heroes": [
       {
@@ -9876,7 +9876,7 @@
           "Diamond grade differs from Starter at: 300 points 300× gold orb; 2,000 1,800 Diamonds; 5,000 50 chests; 7,000 1,800 Diamonds; 8,000 4 red cards; 9,000 4 red cards; 10,000 5 gold puzzle pieces; 12,000 5 gold puzzle pieces + 1 purple frame.",
           "Realm Reward (Diamond tab): every Realm you conquer gives an extra set of chests. Dauntless Leader's Trophy: 10 gold puzzle pieces, 10,000 Diamonds, 5 gold medallions, 1 frame, 150 chests, 1,600 books, 1 blue chest, 70× 60-min speedups. Valiant General's Trophy: 6 gold puzzle pieces, 7,000 Diamonds, 1 frame, 75 chests, 800 books, 20 each of 150K Food, 150K Wood, 30K Stone and 7,500 Iron, 45× 60-min speedups.",
           "Realm Reward, Platinum tab: Dauntless Leader's 8 puzzle pieces, 10,000 Diamonds, 4 gold medallions, 1 frame, 150 chests, 800 books, 1 blue chest, 70× speedups · Valiant General's 4 pieces, 7,000 Diamonds, 1 frame, 75 chests, 400 books, 20 of each resource pack, 45× speedups · Loyal Warrior's / Valiancy Spoil 2 pieces, 3,000 Diamonds, 40 chests, 200 books, 20 of each resource pack, 25× speedups.",
-          "Realm Reward, Bronze and Silver tabs (same, no puzzle pieces): Dauntless Leader's 10,000 Diamonds, 1 frame, 150 chests, 20 of each resource pack, 70× speedups · Valiant General's 7,000 Diamonds, 1 frame, 75 chests, 20 of each resource pack, 45× speedups · Loyal Warrior's / Valiancy Spoil 3,000 Diamonds, 40 chests, 20 of each resource pack, 25× speedups. Starter tab not recorded.",
+          "Realm Reward, Starter, Bronze and Silver tabs (all the same, no puzzle pieces): Dauntless Leader's 10,000 Diamonds, 1 frame, 150 chests, 20 of each resource pack, 70× speedups · Valiant General's 7,000 Diamonds, 1 frame, 75 chests, 20 of each resource pack, 45× speedups · Loyal Warrior's / Valiancy Spoil 3,000 Diamonds, 40 chests, 20 of each resource pack, 25× speedups.",
           "Realm Reward, Gold tab: Dauntless Leader's 5 puzzle pieces, 10,000 Diamonds, 1 frame, 150 chests, 20 of each resource pack, 70× speedups · Valiant General's 2 pieces, 7,000 Diamonds, 1 frame, 75 chests, 20 of each resource pack, 45× speedups · Loyal Warrior's / Valiancy Spoil 1 piece, 3,000 Diamonds, 40 chests, 20 of each resource pack, 25× speedups (no books, medallions or blue chest).",
           "Loyal Warrior's Trophy and Valiancy Spoil (same contents): 4 gold puzzle pieces, 3,000 Diamonds, 40 chests, 400 books, 20 each of 150K Food, 150K Wood, 30K Stone and 7,500 Iron, 25× 60-min speedups.",
           "Groups by server launch time: Beginner, Intermediate and Advanced. Rounds 1–2 are in the Beginner Zone; from round 3 you are matched within your group. Beginner ranks: Beginner, Bronze, Silver, Gold. Intermediate adds Platinum, Diamond, Mythic. Advanced comes after time in Intermediate.",
