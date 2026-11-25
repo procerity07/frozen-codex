@@ -438,7 +438,8 @@ const baseHeroes: Hero[] = [
     name: 'Basilong', title: 'Dragonkin', element: 'Ice', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
     march: [],
     civil: [
-      { name: 'Civil skill (+35% at 6★ +8)', description: 'In-game: +35% at 6★ +8; name not captured yet (the same value as Medical Tent Capacity, so it may be that).', requirement: 'Active from obtaining the hero (in-game rule)', unit: '%', tiers: { '6': [null, null, null, null, null, null, null, null, 35] } },
+      { name: 'Medical Tent Capacity', description: 'In-game. 5★: +6% at +2 up to +26% at +8; 6★: +18.75/24/28/35% from +5 to +8.', requirement: 'Active from obtaining the hero (in-game rule)', unit: '%',
+        tiers: { '5': [null, null, 6, 9, 12, 15, 18.75, 22.5, 26], '6': [null, null, null, null, null, 18.75, 24, 28, 35] } },
       { name: 'Heal Stone Cost', description: 'In-game. 5★: −8% at +2, −12/−16/−20/−25/−30% to −32% at +8; 6★: −25/−30/−33/−36% from +5 to +8.', requirement: 'Unlocks at level 31', unit: '%',
         tiers: { '5': [null, null, -8, -12, -16, -20, -25, -30, -32], '6': [null, null, null, null, null, -25, -30, -33, -36] } },
       { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +16% at +2 up to +80% at +8; 6★: +50/70/85/150% from +5 to +8.', requirement: 'Unlocks at level 131', unit: '%',
@@ -486,9 +487,9 @@ const baseHeroes: Hero[] = [
     notes: "Glory's Gift Roulette pool.",
   }),
   hero({
-    name: 'Eric', title: 'Sword Saint', element: 'Dark', rarity: 5, unit: 'Infantry', role: 'Infantry DPS',
-    march: [['Blade Dance', 'Infantry ATK up; crit chance up.']],
-    m3: { name: 'Thousand Cuts', desc: 'Nature damage to a single target 5 times.', charge: 'Medium', pattern: 'Single x5', effects: ['Multi-hit'] },
+    name: 'Eric', title: 'Sword Saint', element: 'Dark', rarity: 5, unit: 'Infantry', role: 'AoE damage and team ATK',
+    march: [...militaryTrio('Troop', ALL_TROOP_5STAR_MILITARY)],
+    m3: { name: 'Stygian Nova', desc: 'Deals 220% damage to all enemies (Rage Regen: Medium). Soul Drainer: converts 30% of damage dealt into HP. Full Control: a chance to raise allies\' ATK by 100% for 2 rounds (cannot be dispelled). Darkest Hour: Dark allies restore 5% Rage per round for 6 rounds from battle start. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Medium', pattern: 'All enemies', effects: ['Lifesteal', 'ATK up', 'Rage up', 'Crit'] },
     sources: ['Lucky Spin', 'Timeless Recruitment'],
     notes: 'Lucky Spin pool on newer realms.',
   }),
@@ -572,7 +573,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 57; // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 58; // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
