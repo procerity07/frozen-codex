@@ -5,7 +5,8 @@ import * as WebBrowser from 'expo-web-browser';
 import { ClipboardCheck, Crosshair, Gem, Shield, Sparkles, Swords, Users } from 'lucide-react-native';
 import type { CombatRole, Hero, HeroAuditField, Match3Skill } from '@/types/game';
 import { getHero } from '@/db/repo';
-import { bondGroups, curios, events } from '@/data/seed';
+import { bondGroups, events } from '@/data/seed';
+import { CurioCard } from '@/components/domain/CurioCard';
 import { elementColors, palette, rarityColors, rarityLabels, space, tint, type } from '@/theme';
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, SectionHeader, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified, skillsCheckedInGame } from '@/lib/heroData';
@@ -46,7 +47,6 @@ export default function HeroDetail() {
   if (!hero) return <Screen><Stack.Screen options={{ title: 'Not found' }} /><EmptyState title="Hero not found" /></Screen>;
 
   const rc = rarityColors[hero.rarity];
-  const curio = curios.find((c) => c.heroId === hero.id);
   const groups = bondGroups.filter((g) => g.members.includes(hero.id));
   const featuredIn = events.filter((e) => e.featuredHeroes.includes(hero.id));
   const roleLabel = combatRoleLabel(hero);
@@ -127,7 +127,7 @@ export default function HeroDetail() {
         <ChipRow>{featuredIn.map((e) => <Chip key={e.id} label={e.name} onPress={() => router.push(`/event/${e.id}`)} />)}</ChipRow>
       ) : null}
 
-      {groups.length || curio ? <SectionHeader title="Bonds & curio" icon={Users} /> : null}
+      <SectionHeader title="Bonds & curio" icon={Users} />
       {groups.map((g) => (
         <Card key={g.id} style={{ marginBottom: space.sm }}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -137,17 +137,7 @@ export default function HeroDetail() {
           {g.bonuses.map((b, i) => <Text key={i} style={type.bodySecondary}>{b.level > 0 ? `Lv. ${b.level}: ` : ''}{b.effect}</Text>)}
         </Card>
       ))}
-      {curio ? (
-        <Card accent={palette.gold}>
-          <Row style={{ justifyContent: 'space-between' }}>
-            <Text style={[type.heading, { flex: 1 }]}>{curio.name}</Text>
-            {curio.verified === false ? <Badge label="Not verified" color={palette.textMuted} /> : null}
-          </Row>
-          <Text style={type.bodySecondary}>{curio.legionPassive}</Text>
-          <Text style={type.bodySecondary}>{curio.heroAttribute}</Text>
-          {curio.exclusivePassive ? <Text style={[type.bodySecondary, { color: palette.gold }]}>{curio.exclusivePassive}</Text> : null}
-        </Card>
-      ) : null}
+      <CurioCard hero={hero} />
 
       {hero.notes ? (
         <>

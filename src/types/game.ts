@@ -174,6 +174,19 @@ export interface Curio {
   verified?: boolean;
 }
 
+export type CurioQuality = 'Common' | 'Uncommon' | 'Superb' | 'Epic' | 'Legendary';
+
+/** A hero's exclusive curio (wiki). */
+export interface HeroCurio {
+  id: string;
+  name: string;
+  heroName: string;
+  heroId: string;
+  image: string | null;
+  /** Exclusive Attributes (passive). Each needs the hero at an enhancement level; values per quality, Common → Legendary (null = not available). */
+  exclusive: { name: string; heroEnhancement: number; unit: '%' | 'flat'; values: (number | null)[] }[];
+}
+
 /* ------------------------------- Events ------------------------------- */
 
 export type EventCategory =

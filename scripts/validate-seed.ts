@@ -47,7 +47,9 @@ ok(seed.heroes.length >= 40, `expected >= 40 heroes, got ${seed.heroes.length}`)
 for (const r of [2, 3, 4, 5, 6] as const) if (r >= 4) ok(seed.heroes.some((h) => h.rarity === r), `no ${r}-star hero`);
 for (const e of seed.events) for (const h of e.featuredHeroes) ok(heroIds.has(h), `event ${e.id} features unknown hero ${h}`);
 for (const g of seed.bondGroups) for (const m of g.members) ok(heroIds.has(m), `bond group ${g.id} has unknown member ${m}`);
-for (const c of seed.curios) if (c.heroId) ok(heroIds.has(c.heroId), `curio ${c.id} unknown hero`);
+ok(seed.heroCurios.length === 61 && seed.heroCurios.every((c) => c.exclusive.length >= 4 && c.exclusive.every((a) => a.values.length === 5)), 'all 61 wiki curios have exclusive attributes for 5 qualities');
+{ const ic = seed.heroCurios.find((c) => c.name === 'Iron Claw')!; ok(ic.heroId === 'boyd' && ic.exclusive[2]!.name === 'Cavalry ATK' && ic.exclusive[2]!.values.join() === '4,20,80,200,200' && ic.exclusive[3]!.values[3] === null && ic.exclusive[3]!.values[4] === 20 && ic.exclusive[3]!.heroEnhancement === 6, 'Iron Claw (Boyd) values match the wiki'); }
+ok(seed.curioLegion.find((r) => r.enhancement === 1 && r.stars === 7)!.pct === 31, 'curio legion attribute table');
 for (const c of seed.eventCurrencies) ok(eventIds.has(c.eventId), `currency ${c.id} unknown event ${c.eventId}`);
 for (const c of seed.cycleDays) ok(eventIds.has(c.eventId), `cycle days unknown event ${c.eventId}`);
 for (const b of seed.bagItems) for (const k of Object.keys(b.points)) ok(k in seed.bagDayLabels, `bag item ${b.id} unknown day ${k}`);

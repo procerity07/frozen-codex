@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Search } from 'lucide-react-native';
 import type { Element, Hero, Rarity, UnitType } from '@/types/game';
 import { listHeroes } from '@/db/repo';
-import { bondGifts, bondGroups, bondLevels, curioStarCosts, curios, heroes as seedHeroes, troopTriangle } from '@/data/seed';
+import { bondGifts, bondGroups, bondLevels, curioStarCosts, heroCurios, heroes as seedHeroes, troopTriangle } from '@/data/seed';
 import { elementColors, palette, rarityColors, space, troopColors, type } from '@/theme';
 import { Badge, Card, Chip, ChipRow, ElementEmblem, EmptyState, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table, TroopEmblem } from '@/components/ui';
 import { HeroCard } from '@/components/domain/HeroCard';
@@ -293,20 +293,21 @@ function Curios() {
         highlight={(r) => r.star > from && r.star <= to}
       />
       <SectionHeader title="Curio encyclopedia" />
-      {curios.map((k) => (
-        <Card key={k.id} style={{ marginBottom: space.sm }}>
-          <Row style={{ justifyContent: 'space-between' }}>
-            <Text style={type.heading}>{k.name}</Text>
-            <Row gap={6}>
-              {k.verified === false ? <Badge label="Not verified" color={palette.textMuted} /> : null}
-              {k.heroId ? <Badge label={seedHeroes.find((h) => h.id === k.heroId)?.name ?? k.heroId} color={palette.gold} /> : <Badge label="Universal" />}
+      <Text style={[type.caption, { marginBottom: space.sm }]}>Exclusive curios from the community wiki (matches the game). Legendary values shown; open a hero for every quality.</Text>
+      {heroCurios.map((k) => {
+        const owner = seedHeroes.find((h) => h.id === k.heroId);
+        return (
+          <Card key={k.id} style={{ marginBottom: space.sm }}>
+            <Row style={{ justifyContent: 'space-between' }}>
+              <Text style={[type.heading, { flex: 1 }]} noTranslate>{k.name}</Text>
+              <Badge label={owner?.name ?? k.heroName} color={palette.gold} />
             </Row>
-          </Row>
-          <Text style={[type.bodySecondary, { marginTop: 4 }]}>Legion passive: {k.legionPassive}</Text>
-          <Text style={type.bodySecondary}>Hero attribute: {k.heroAttribute}</Text>
-          {k.exclusivePassive ? <Text style={[type.bodySecondary, { color: palette.gold }]}>Exclusive: {k.exclusivePassive}</Text> : null}
-        </Card>
-      ))}
+            <Text style={[type.bodySecondary, { marginTop: 4 }]} noTranslate>
+              {k.exclusive.map((a) => `${a.name} +${a.values[4] ?? '—'}${a.unit === '%' ? '%' : ''}`).join(' · ')}
+            </Text>
+          </Card>
+        );
+      })}
     </Screen>
   );
 }

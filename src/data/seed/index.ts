@@ -1,11 +1,12 @@
 export { heroes, HERO_DATA_REVISION } from './heroes';
 export { heroAudit } from './heroAudit';
-export { bondGifts, bondGroups, bondLevels, curioStarCosts, curios, elementWheel, troopTriangle } from './heroSystems';
+export { bondGifts, bondGroups, bondLevels, curioStarCosts, elementWheel, troopTriangle } from './heroSystems';
 export { events, EVENT_DATA_REVISION } from './events';
 export { aceCards, aceLordPhases, armsRacePhases, bagDayLabels, bagItems, cycleDays, eventCurrencies, radiantCards, royalArmsRace } from './cycles';
 export { giftCodes, GIFT_CODE_URL } from './codes';
 export { sophiaQuestions } from './sophia';
 export * from './progression';
+export * from './curiosWiki';
 export { shops } from './shops';
 export { checklistTemplate, guides } from './guides';
 

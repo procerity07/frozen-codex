@@ -1,4 +1,4 @@
-import type { BondGift, BondGroup, BondLevel, CurioStarCost, Curio } from '@/types/game';
+import type { BondGift, BondGroup, BondLevel, CurioStarCost } from '@/types/game';
 
 /**
  * Hero Bond levels 1–95 (community wiki Hero Bond page): Lv. 1 needs 1,000 EXP and Lv. 95 needs 330,000.
@@ -64,17 +64,6 @@ export const curioStarCosts: CurioStarCost[] = [
   { star: 8, spinel: 10000, crystal: 500, unlocks: 'Not verified' },
 ];
 
-export const curios: Curio[] = [
-  // Verified association and attribute types (wiki Guan Yu and Curio pages); per-level values beyond those quoted are not verified.
-  { id: 'azure-dragon-blade', name: 'Azure Dragon Blade', heroId: 'guan-yu', verified: true, legionPassive: 'Troop DEF, Troop HP and Troop ATK — up to +100% each at Legendary', heroAttribute: 'Not verified', exclusivePassive: 'Extra Troop ATK, up to +150% at the top tier' },
-  { id: 'wings-of-icarus', name: 'Wings of Icarus', heroId: 'saya', verified: true, legionPassive: 'Troop DEF and Troop HP (values not verified)', heroAttribute: 'Not verified', exclusivePassive: 'Troop capacity — needs Saya at +4, and +6 for the second Legendary bonus' },
-  // Not found in any source checked.
-  { id: 'riftbreaker-lance', name: 'Riftbreaker Lance', heroId: 'khaos', verified: false, legionPassive: 'Cavalry Lethality +2% to +8%', heroAttribute: 'Khaos ATK +5% to +20%', exclusivePassive: 'Abyssal Collapse ignores 20% DEF' },
-  { id: 'rimecrown-sceptre', name: 'Rimecrown Sceptre', heroId: 'anastasia', verified: false, legionPassive: 'Infantry DEF +2% to +8%', heroAttribute: 'Anastasia HP +5% to +20%', exclusivePassive: 'Glacial Coronation shield +30%' },
-  { id: 'ember-codex', name: 'Ember Codex', verified: false, legionPassive: 'Archer ATK +2% to +8%', heroAttribute: 'Fire heroes ATK +3% to +12%' },
-  { id: 'warden-horn', name: "Warden's Horn", verified: false, legionPassive: 'Troop HP +1% to +5%', heroAttribute: 'All heroes HP +3% to +12%' },
-  { id: 'frost-compass', name: 'Frost Compass', verified: false, legionPassive: 'March speed +2% to +8%', heroAttribute: 'Ice heroes mana gain +2% to +8%' },
-];
 
 export const elementWheel = {
   cycle: ['Fire', 'Nature', 'Ice'] as const,

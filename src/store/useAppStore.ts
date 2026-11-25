@@ -8,6 +8,9 @@ import type { Hive } from '@/lib/hive';
 import type { AllianceTime } from '@/lib/allianceTimes';
 import { weekIndex } from '@/lib/time';
 import type { BuildBonuses, ResourceKey } from '@/lib/calculators';
+import type { CurioQuality } from '@/types/game';
+
+export interface CurioChoice { kind: 'exclusive' | 'light'; quality: CurioQuality; stars: number; enhancement: number }
 
 export interface Castle { id: string; name: string; kind: 'main' | 'farm' }
 
@@ -46,6 +49,8 @@ export interface AppState {
   translateMode: string;
   /** Totals the player copied from the in-game Lord Details screen (passive stats). */
   myStats: Record<string, number>;
+  /** Curio set up per hero: exclusive or Code of Light, quality, ascension stars and enhancement. */
+  curioChoice: Record<string, CurioChoice>;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -81,6 +86,7 @@ export interface AppState {
   setAllianceTime: (eventId: string, at: AllianceTime | null) => void;
   setTranslateMode: (m: string) => void;
   setMyStat: (key: string, value: number) => void;
+  setCurioChoice: (heroId: string, c: CurioChoice) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -112,6 +118,7 @@ export const defaultState: PersistedState = {
   allianceTimes: {},
   translateMode: 'auto',
   myStats: {},
+  curioChoice: {},
 };
 
 export const useAppStore = create<AppState>()(
@@ -120,6 +127,7 @@ export const useAppStore = create<AppState>()(
       ...defaultState,
       setTroopFocus: (troopFocus) => set({ troopFocus }),
       setTranslateMode: (translateMode) => set({ translateMode }),
+      setCurioChoice: (heroId, c) => set({ curioChoice: { ...get().curioChoice, [heroId]: c } }),
       setMyStat: (key, value) => set({ myStats: { ...get().myStats, [key]: value } }),
       setRealm: (r) => set({ realm: { ...get().realm, ...r } }),
       addCastle: (name) => set({ castles: [...get().castles, { id: `farm-${Date.now().toString(36)}`, name: name.trim() || `Farm ${get().castles.length}`, kind: 'farm' }] }),
