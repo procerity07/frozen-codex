@@ -348,7 +348,7 @@ export const addedHighStarHeroes: Hero[] = [
       { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
     ],
     m3: { name: 'Power Strike', description: 'Deals 530% damage to the enemy (Rage Regen: Fast). Lava Blast: also deals 25% of ATK as True Damage. Seal: the target receives 100% less healing for 4 rounds. Demon King\'s Body: immune to Rage reduction. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Single target', effects: ['True damage', 'Heal block', 'Rage-reduction immunity', 'Crit'] },
-    notes: ['A separate hero from the 4★ Tooka.', 'In-game (2026-11-25, 6★ +8, S2): 5★ Fire Civil; Troop HP/DEF/ATK (Passive) all troops; four hero skills plus Combat Mastery. How to obtain him is not verified.'] }),
+    notes: ['A separate hero from the 4★ Tooka.', 'Obtained from Abyssal Expeditions and Contract Quests (player-confirmed).', 'In-game (2026-11-25, 6★ +8, S2): 5★ Fire Civil; Troop HP/DEF/ATK (Passive) all troops; four hero skills plus Combat Mastery.'] }),
   {
     ...lowStar({ name: 'Sodoma', element: 'Nature', rarity: 5, unit: 'Cavalry', sources: ['Hero Plaza', 'Mythic Hero Covenant', 'Timeless Recruitment', 'Recruit Trial'],
       march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],

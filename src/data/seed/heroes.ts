@@ -202,8 +202,16 @@ const baseHeroes: Hero[] = [
   }),
   hero({
     name: 'Tala', title: 'Wildheart', element: 'Nature', rarity: 5, unit: 'Civil', role: 'Civil — passive skills',
-    march: [['Hunter Instinct', 'Archer ATK up; crit chance vs Cavalry.']],
-    m3: { name: 'Thornstorm', desc: 'Nature damage to a column and poisons for 3 turns.', charge: 'Fast', pattern: 'Column', effects: ['Poison'] },
+    march: [],
+    civil: [
+      { name: 'Safe Resources', description: 'In-game. 5★: +2.4% at +2 up to +15% at +8; 6★: +7.5/9.6/11.2/20% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 2.4, 3.6, 4.8, 6, 7.5, 9, 15], '6': [null, null, null, null, null, 7.5, 9.6, 11.2, 20] } },
+      { name: 'Iron Output', description: 'In-game. 5★: +40% at +2 up to +250% at +8; 6★: +125/160/200/300% from +5 to +8.', requirement: 'Active while owned (in-game)', stat: 'resourceOutput', unit: '%',
+        tiers: { '5': [null, null, 40, 60, 80, 100, 125, 150, 250], '6': [null, null, null, null, null, 125, 160, 200, 300] } },
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops once unlocked. 5★: +16% at +2 up to +80% at +8; 6★: +50/70/85/150% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%',
+        tiers: { '5': [null, null, 16, 24, 32, 40, 50, 65, 80], '6': [null, null, null, null, null, 50, 70, 85, 150] } },
+    ],
+    m3: { name: 'Green Embrace', desc: "Deals 200% damage to an enemy and fully restores a random ally's Rage (Rage Regen: Slow). Willbreaker: restores 10% Rage for a random ally each round for 3 rounds. Vitalize: fully restores a random ally's Rage when she dies. Landscape: all allies +10% ATK at battle start (cannot be dispelled). Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.", charge: 'Slow', pattern: 'Single target', effects: ['Rage up', 'ATK up', 'Crit'] },
     sources: ['Astrology'],
     notes: 'Fast-charging poison makes her a reliable Elemental Seal Nature pick.',
   }),
@@ -589,7 +597,7 @@ const baseHeroes: Hero[] = [
  * revision 29 = in-game Wallace skills; revision 30 = in-game Cassandra skills;
  * revision 31 = in-game Claudia skills.
  */
-export const HERO_DATA_REVISION = 60; // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
+export const HERO_DATA_REVISION = 61; // 61 = in-game Tala; Infernal Tooka sources // 60 = in-game Kanye, Guan Yu, Infernal Tooka // 59 = in-game Neptune // 58 = in-game Eric; Basilong Medical Tent Capacity // 57 = in-game Edmund; Basilong 1st skill = Medical Tent Capacity // 56 = in-game Basilong // 55 = in-game Hannah // 54 = in-game Gerolin, Roger and Lucia // 53 = in-game Ada and Axel // 52 = in-game 2★ heroes (William, Baron, Luke, Sophia, Penny) and 2★ unlock rule // 51 = in-game Penny skills // 50 = in-game Andre and Viola skills // 49 = in-game Capos skills // 48 = in-game Schubert skills // 47 = unlock rules for 3★, 4★ and 6★ heroes // 46 = 5★ unlock levels (31/131 troop, 11/31/71/6★ hero skills) // 45 = in-game Monica skills // 44 = in-game Apan and Echo skills // 43 = in-game Anastasia skills // 42 = in-game Patty skills // 41 = Kaios 6★ +8 check // 40 = in-game Kaira skills // 39 = Elsa Hero0 values and Iron Output unlock level // 38 = in-game Tulios skills // 37 = shared main troop skill table (max 500% at +5) // 36 = in-game Aemon skills // 35 = in-game Chloe skills // 34 = in-game Rodriguez skills // 33 = in-game Hanzo skills // 32 = in-game Freya skills
 
 /**
  * Every hero's main troop skill follows the same table (confirmed by the player across many heroes):
