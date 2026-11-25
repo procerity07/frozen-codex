@@ -122,6 +122,11 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   // In-game check: Citadel 26 -> 27 with -5% and flat -3.1M food / -300k iron, +40% speed = 104M food, 5.60M iron, 15d 05:16:05.
   const c27 = planCitadel(seed.citadelLevels, 26, 27, {}, { civilSpeedPct: 40, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_500_000, stone: 660_000, iron: 300_000 } });
   ok(Math.floor(c27.totals.food / 1e6) === 104 && Math.floor(c27.totals.iron / 1e4) === 560 && Math.floor(c27.totals.wood / 1e5) === 200 && Math.abs(c27.netSeconds - 1_314_965) < 2, 'Citadel 26->27 matches the in-game screen');
+  // In-game check: Citadel 34 -> 35 with -5% and flat -3.1M food / -1.6M wood / -700k stone / -350k iron, +185.4% speed
+  // = 354M food, 143M wood, 42.2M stone, 1,200 Astronomy Tomes, 32d 11:53:58; needs Wall, Wishing Pool and Dragon Lair 34.
+  const c35 = planCitadel(seed.citadelLevels, 34, 35, {}, { civilSpeedPct: 185.4, builderGearPct: 0, vipPct: 0, institutePct: 0, costReductionPct: 5, flatCut: { food: 3_100_000, wood: 1_600_000, stone: 700_000, iron: 350_000 } });
+  ok(Math.floor(c35.totals.food / 1e6) === 354 && Math.floor(c35.totals.wood / 1e6) === 143 && Math.floor(c35.totals.stone / 1e5) === 422 && Math.abs(c35.netSeconds - 2_807_638) < 2, 'Citadel 34->35 matches the in-game screen');
+  ok(seed.citadelLevels.find((l) => l.level === 35)!.requires.some((r) => r.building === 'Dragon Lair' && r.level === 34), 'Citadel 35 needs Dragon Lair 34 (in-game)');
   ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_801_000 && seed.citadelLevels.find((l) => l.level === 40)!.cost.goldStatue === 10_400, 'citadel 40 iron and Gold Statues (wiki)');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
