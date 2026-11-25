@@ -94,7 +94,7 @@ const baseEvents: GameEvent[] = [
   ev({ name: 'Forbidden Treasures Arms Race', category: C('Weekly'), cadence: 'Bi-weekly Wed (Arms Race Week)', cycleWeek: W('Arms Race'), days: ['Wed'], summary: 'Gear enhancement race paired with Arms Race Day 3.', rules: ['Gear Essence spent scores; overlaps Arms Race Day 3.'], rewards: ['Gear Essence', 'Gear Energy Spinels'] }),
   ev({ name: 'Army Expansion', category: C('Weekly'), cadence: 'Weekly Thursday', cycleWeek: W('Both'), days: ['Thu'], summary: 'Troop training milestones.', rules: ['Points per troop trained, scaled by tier.'], rewards: ['Dragon EXP', 'Training speedups'], tips: ['Pre-queue a long training batch Wednesday night and finish it Thursday with speedups.'] }),
   ev({
-    name: 'Elemental Seal I / II / III', category: C('Weekly'), cadence: 'Weekly Thu–Sat', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'],
+    name: 'Elemental Seal I / II / III', category: C('Weekly'), cadence: 'Weekly: I on Thu, II on Fri, III on Sat (one day each)', cycleWeek: W('Both'), days: ['Thu', 'Fri', 'Sat'], durationHours: 24,
     summary: 'Boss challenge requiring specific elements and minimum star levels.',
     rules: ['Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).', 'Elemental Seal I runs Thursday and II runs Friday (00:00–24:00 UTC); III follows on Saturday (not visible in that week view).', 'Deploy the required element(s) at or above the stated star level.', 'Boss uses skills from Round 11+ and is immune to stun and silence.', 'Only your highest single run counts for Top 50 rank.', 'Elemental Seal I phase 1 is 125 points.'],
     rewards: ['Diamond chest', '5,000 Dragon EXP', 'Dragon Civil Pts and Dragon Military Pts', '1★ Gear Essence (Seal I) / 1★ Rune Essence (Seal II)', 'Gear Essence'], tips: ['Bring DoT (poison/burn) and multi-hit heroes — crowd control does nothing.'],
@@ -202,7 +202,7 @@ const baseEvents: GameEvent[] = [
 
   // ---------------- D. Cross-realm war ----------------
   ev({
-    name: 'Conquest of Lords', category: C('Cross-Realm War'), cadence: 'Bi-weekly Saturday (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Sat'], startUtc: '10:00', durationHours: 24,
+    name: 'Conquest of Lords', category: C('Cross-Realm War'), cadence: 'Bi-weekly, Saturday 12:00 to Sunday 10:00 UTC (Ace Lord Week)', cycleWeek: W('Ace Lord'), days: ['Sat'], startUtc: '12:00', durationHours: 22,
     summary: 'Cross-realm war for the Hall of Might and 4 Spires.',
     rules: ['8-hour consecutive hold of the Hall of Might auto-wins; otherwise longest occupation.', 'Spire cannons fire every 10 minutes for 1% garrison loss.', 'Enchanted Woodland boundary grants protection.', '30% of structure garrison losses become permanent deaths.', '12,000 personal score target.', 'Trophy Grades and a 9-Realm League.', 'Realm points: 100 per Realm colonized; 25 if never colonized and colonizing no one; 0 if colonized.', 'Ties are broken by Realms colonized, then by which Realm was colonized less.'],
     rewards: ['Trophy Grade chests', 'League rewards'],
@@ -264,6 +264,6 @@ const baseEvents: GameEvent[] = [
  * corrections replace older online-pack rows on re-seed. Revision 1 = 2026-11-23 community-wiki check;
  * revision 2 = in-game Ace Lord Day 1 screenshots; revision 3 = in-game Event Schedule (week of 23 Nov 2026).
  */
-export const EVENT_DATA_REVISION = 16; // 16 = in-game Event Schedule: Royal Arms Race Thu–Sat, Oblivion War Wed–Sat; // 15 = Oblivion War full in-game rules, slots, points and leagues; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
+export const EVENT_DATA_REVISION = 17; // 17 = Conquest of Lords Sat 12:00–Sun 10:00 (in-game); // 16 = in-game Event Schedule: Royal Arms Race Thu–Sat, Oblivion War Wed–Sat; // 15 = Oblivion War full in-game rules, slots, points and leagues; // 14 = Ace Lord Day 3 points and phase rewards; // 13 = Infernal Gate damage reward tiers; // 12 = Alliance Duel removed from the schedule; 11 = Oblivion War registration Wed, battle Fri; 10 = Shadow Expedition in-game rules; 9 = Wonder House in-game rules; 8 = Infernal Gate in-game rules and kill rewards; 5 = Elemental Seal reward names; 6 = Undead Scourge preview rewards; 7 = Curio point table and Ace Lord Day 2 (in-game)
 
 export const events: GameEvent[] = baseEvents.map((e) => ({ ...e, revision: EVENT_DATA_REVISION }));
