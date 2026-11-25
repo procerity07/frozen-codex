@@ -31,18 +31,18 @@ export function SkillValues({ grid, entry, unit = '%', lockedAt }: { grid: TierG
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: space.xs }}>
           <View style={{ borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm }}>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={[type.caption, cell, { width: 34 }]}> </Text>
-              {cols.map((c) => <Text key={c} style={[type.caption, cell]}>{LABELS[c]}</Text>)}
+              <Text style={[type.caption, cell, { width: 40 }]}> </Text>
+              {cols.map((c) => <Text key={c} style={[type.caption, cell, { color: palette.text, fontWeight: '700' }]}>{LABELS[c]}</Text>)}
             </View>
             {rows.map((st) => (
               <View key={st} style={{ flexDirection: 'row', borderTopWidth: 1, borderTopColor: palette.border }}>
-                <Text style={[type.caption, cell, { width: 34, color: palette.gold }]}>{st === '*' ? 'All' : `${st}★`}</Text>
+                <Text style={[type.caption, cell, { width: 40, color: palette.gold, fontWeight: '700' }]}>{st === '*' ? 'All' : `${st} ★`}</Text>
                 {cols.map((c) => {
                   const v = grid[st]![c];
                   const here = !!entry && c === entry.enhancement && (st === String(entry.stars) || (st === '*'));
                   return (
                     <Text key={c} noTranslate style={[type.caption, cell, { color: v == null ? palette.textMuted : palette.text }, here && { backgroundColor: palette.cyanLine, color: palette.text, fontWeight: '700' }]}>
-                      {v == null ? '—' : `${v.toLocaleString('en-US', { maximumFractionDigits: 2 })}${u}`}
+                      {v == null ? '-' : `${fmt(v)}${u}`}
                     </Text>
                   );
                 })}
@@ -55,4 +55,4 @@ export function SkillValues({ grid, entry, unit = '%', lockedAt }: { grid: TierG
   );
 }
 
-const cell = { width: 58, textAlign: 'center' as const, paddingVertical: 4 };
+const cell = { width: 60, textAlign: 'center' as const, paddingVertical: 6, borderLeftWidth: 1, borderLeftColor: palette.border };
