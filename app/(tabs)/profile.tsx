@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { Castle, Pencil, Settings, Shield, Sparkles, User } from 'lucide-react-native';
+import { MyStatsCard } from '@/components/domain/MyStatsCard';
 import { Badge, Card, Row, Screen, SectionHeader, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
 import { civilBonuses, clampEntry, enhancementLabel, type CivilBonus } from '@/lib/roster';
@@ -100,6 +101,8 @@ export default function ProfileScreen() {
         </Card>
       )}
 
+      <MyStatsCard />
+
       <SectionHeader title="Total hero bonuses" icon={Sparkles} subtitle="Civil (city) skills of your heroes added together. Tap a line to see where it comes from." />
       {groups.length === 0 ? (
         <Card><Text style={type.bodySecondary}>Add heroes to My Roster to see your totals.</Text></Card>
@@ -131,12 +134,6 @@ export default function ProfileScreen() {
         </Pressable>
       ))}
 
-      <SectionHeader title="Other bonuses" />
-      <Card>
-        <Text style={type.bodySecondary}>
-          Dragon, environment, research and gear bonuses aren't in the app yet. They'll be added here once they are checked in-game.
-        </Text>
-      </Card>
     </Screen>
   );
 }

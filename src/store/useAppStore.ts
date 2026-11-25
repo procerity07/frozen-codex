@@ -44,6 +44,8 @@ export interface AppState {
   allianceTimes: Record<string, AllianceTime>;
   /** 'auto' = follow the phone's language, 'off' = English, or a language code. */
   translateMode: string;
+  /** Totals the player copied from the in-game Lord Details screen (passive stats). */
+  myStats: Record<string, number>;
 
   setTroopFocus: (f: TroopFocus) => void;
   setRealm: (r: Partial<AppState['realm']>) => void;
@@ -78,6 +80,7 @@ export interface AppState {
   removeHive: (id: string) => void;
   setAllianceTime: (eventId: string, at: AllianceTime | null) => void;
   setTranslateMode: (m: string) => void;
+  setMyStat: (key: string, value: number) => void;
 }
 
 export type PersistedState = Omit<AppState, { [K in keyof AppState]: AppState[K] extends (...a: never[]) => unknown ? K : never }[keyof AppState]>;
@@ -108,6 +111,7 @@ export const defaultState: PersistedState = {
   hives: [],
   allianceTimes: {},
   translateMode: 'auto',
+  myStats: {},
 };
 
 export const useAppStore = create<AppState>()(
@@ -116,6 +120,7 @@ export const useAppStore = create<AppState>()(
       ...defaultState,
       setTroopFocus: (troopFocus) => set({ troopFocus }),
       setTranslateMode: (translateMode) => set({ translateMode }),
+      setMyStat: (key, value) => set({ myStats: { ...get().myStats, [key]: value } }),
       setRealm: (r) => set({ realm: { ...get().realm, ...r } }),
       addCastle: (name) => set({ castles: [...get().castles, { id: `farm-${Date.now().toString(36)}`, name: name.trim() || `Farm ${get().castles.length}`, kind: 'farm' }] }),
       removeCastle: (id) => set({ castles: get().castles.filter((c) => c.id !== id || c.kind === 'main') }),
