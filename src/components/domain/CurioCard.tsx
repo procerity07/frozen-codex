@@ -6,7 +6,8 @@ import { useAppStore, type CurioChoice } from '@/store/useAppStore';
 import { palette, space, type } from '@/theme';
 import type { Hero } from '@/types/game';
 
-const QUALITY_COLOR = { Common: '#9CA3AF', Uncommon: '#22C55E', Superb: '#3B82F6', Epic: '#A855F7', Legendary: '#F59E0B' } as const;
+// In-game quality colours: green, blue, purple, gold, red.
+const QUALITY_COLOR = { Common: '#22C55E', Uncommon: '#3B82F6', Superb: '#A855F7', Epic: '#F59E0B', Legendary: '#EF4444' } as const;
 const fmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
 const STAR_OPTIONS = [4, 5, 6, 7];
 
