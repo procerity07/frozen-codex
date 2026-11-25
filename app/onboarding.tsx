@@ -1,3 +1,4 @@
+import { TranslateCard } from '@/components/domain/TranslateCard';
 import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -58,6 +59,7 @@ export default function Onboarding() {
             <Text style={type.bodySecondary}>
               Your offline companion for Puzzles & Chaos: Frozen Castle. Three quick questions make the schedule, calculators and advice match your account. Everything can be changed later in Settings.
             </Text>
+            <TranslateCard />
             <Card>
               <Text style={type.heading}>Your realm</Text>
               <Row style={{ marginTop: space.sm }}>
