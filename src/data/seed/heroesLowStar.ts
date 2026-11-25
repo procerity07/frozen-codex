@@ -341,6 +341,14 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
+  lowStar({ name: 'Moleg', element: 'Fire', elementStated: false, rarity: 5, unit: 'Civil', sources: [],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at +8 (5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at +8 (5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops once unlocked while you own him; +125% at +8 (5★ 12.8–94%, 6★ 40/51.2/75/125%).', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: 'Flame Strike', description: 'Deals 350% damage to the target and adjacent enemies (Rage skill). Lava Corrosion: Armor Shatter on the target and adjacent enemies, DEF −5% for 4 rounds, a further −5% each time they take damage, stacking up to 7 times (cannot be dispelled). Resolute: immune to Rage reduction. Blast Heart: self-detonates on death for 200% damage to all enemies. Values as shown in-game at +8.', pattern: 'Target + adjacent', effects: ['DEF down', 'Rage-reduction immunity', 'Death explosion'] },
+    notes: ['In-game (2026-11-25, +8): 5★ Civil; Troop HP/DEF/ATK (Passive) +125% at +8, unlocking at Lv. 1 / 31 / 131; four hero skills. Element assumed Fire from the skill art (not shown). How to obtain him is not verified.'] }),
   lowStar({ name: 'Estelle', element: 'Dark', rarity: 5, unit: 'Civil', sources: [],
     civil: [
       { name: 'Safe Resources', description: 'In-game. 5★: +2.4% at +2 up to +15% at +8; 6★: +7.5/9.6/11.2/20% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 2.4, 3.6, 4.8, 6, 7.5, 9, 15], '6': [null, null, null, null, null, 7.5, 9.6, 11.2, 20] } },
