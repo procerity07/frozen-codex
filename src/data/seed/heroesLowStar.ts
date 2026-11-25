@@ -341,6 +341,14 @@ export const lowStarHeroes: Hero[] = [
  * unit type match both the wiki Heroes table and the in-game cards. Only wiki-listed skills are included.
  */
 export const addedHighStarHeroes: Hero[] = [
+  lowStar({ name: 'Violette', element: 'Dark', rarity: 5, unit: 'Civil', sources: ['Timeless Recruitment'],
+    civil: [
+      { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop DEF (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+      { name: 'Troop ATK (Passive)', description: 'In-game, applies to all troops while you own her. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
+    ],
+    m3: { name: 'Dream Treasury', description: 'Deals 350% damage to the target and adjacent units (Rage Regen: Fast). Transposition: steals buffs from the target and nearby units and gives them to random allies. Sleight of Hand: can also steal undispellable buffs. Spatial Barrier: immune to Silence. Combat Mastery (6★): Crit +30%. Values as shown in-game at 6★ +8.', charge: 'Fast', pattern: 'Target + adjacent', effects: ['Buff steal', 'Silence immunity', 'Crit'] },
+    notes: ['Obtained from Timeless Heroes Limited Recruitment (player-confirmed).', 'In-game (2026-11-25, 6★ +8, S2): 5★ Dark Civil; Troop HP/DEF/ATK (Passive) all troops.'] }),
   lowStar({ name: 'Infernal Tooka', element: 'Fire', rarity: 5, unit: 'Civil', sources: [],
     civil: [
       { name: 'Troop HP (Passive)', description: 'In-game, applies to all troops while you own him. 5★: +12.8% at +2 up to +94% at +8; 6★: +40/51.2/75/125% from +5 to +8.', requirement: 'Active while owned (in-game)', unit: '%', tiers: { '5': [null, null, 12.8, 19.2, 25.6, 32, 40, 51.2, 94], '6': [null, null, null, null, null, 40, 51.2, 75, 125] } },
