@@ -139,6 +139,8 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(Math.floor(p33.totals.food / 1e6) === 354 && Math.floor(p33.totals.wood / 1e6) === 106 && Math.floor(p33.totals.stone / 1e5) === 422 && Math.floor(p33.totals.iron / 1e5) === 210, 'Citadel 32->33 matches the in-game screen');
   ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_801_000 && seed.citadelLevels.find((l) => l.level === 40)!.cost.goldStatue === 10_400, 'citadel 40 iron and Gold Statues (wiki)');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
+  ok(seed.dragonExpToLevel[42] === 6_350_000, 'Dragon Lv. 42 EXP matches the in-game screen');
+  ok(seed.draconicStones.length === 8 && seed.draconicStones.every((d) => !/not verified/i.test(d.effect)), 'every Draconic Stone type has its stats');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
   ok(bondGiftPlan(seed.bondGifts, { 5: 1, 1: 100 }, 5050).shortfall === 0, 'bond gift plan');
   ok(curioCost(seed.curioStarCosts, 4, 6).spinel === 2500 && curioCost(seed.curioStarCosts, 4, 6).crystal === 100, 'curio cost');

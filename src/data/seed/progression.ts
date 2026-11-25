@@ -352,17 +352,28 @@ export const holystoneNotes = [
   'Unit bonus starts at level 3 and reaches +50% at levels 9–10.',
 ];
 
-// Wiki Draconic Stone page: six types at Dragon Lv. 30, Nature at 40, Wild at 50 (in-game: 8 slots, Wild still locked at Dragon Lv. 41). Effects per type are not verified.
+// Wiki Draconic Stone page (Stats table): six types at Dragon Lv. 30, Nature at 40, Wild at 50. In-game: 8 slots, Wild still locked at Dragon Lv. 41.
 export const draconicStones: DraconicStone[] = [
-  { name: 'Fiery', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Frost', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Hurricane', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Electric', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Meteor', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Hydro', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Nature', dragonLevel: 40, effect: 'Effect not verified', focus: 'All' },
-  { name: 'Wild', dragonLevel: 50, effect: 'Effect not verified', focus: 'All' },
+  { name: 'Fiery', dragonLevel: 30, effect: 'Cavalry ATK · Archer DEF · Troop HP', focus: 'Cavalry' },
+  { name: 'Frost', dragonLevel: 30, effect: 'Infantry ATK · Cavalry DEF · Troop HP', focus: 'Infantry' },
+  { name: 'Hurricane', dragonLevel: 30, effect: 'Infantry ATK · Archer HP · Troop DEF', focus: 'Infantry' },
+  { name: 'Lightning', dragonLevel: 30, effect: 'Archer ATK · Infantry DEF · Troop HP', focus: 'Archer' },
+  { name: 'Meteor', dragonLevel: 30, effect: 'Cavalry ATK · Infantry HP · Troop DEF', focus: 'Cavalry' },
+  { name: 'Hydro', dragonLevel: 30, effect: 'Archer ATK · Cavalry HP · Troop DEF', focus: 'Archer' },
+  { name: 'Nature', dragonLevel: 40, effect: 'Troop ATK · Troop DEF · Troop HP', focus: 'All' },
+  { name: 'Wild', dragonLevel: 50, effect: 'Troop ATK · Troop DEF · Troop HP', focus: 'All' },
 ];
+
+/** Dragon EXP needed to reach each level (wiki Dragon's Lair page; Lv. 42 = 6,350,000 confirmed in-game). */
+export const dragonExpToLevel: Record<number, number> = {
+  2: 1_000, 3: 1_500, 4: 1_500, 5: 2_000, 6: 3_000, 7: 3_500, 8: 4_500, 9: 6_000, 10: 8_500,
+  11: 10_000, 12: 14_500, 13: 18_000, 14: 23_300, 15: 30_000, 16: 38_600, 17: 49_400, 18: 62_900, 19: 79_900, 20: 102_000,
+  21: 128_000, 22: 160_000, 23: 200_000, 24: 249_000, 25: 309_000, 26: 381_000, 27: 469_000, 28: 574_000, 29: 700_000, 30: 851_000,
+  31: 1_030_000, 32: 1_250_000, 33: 1_490_000, 34: 1_780_000, 35: 2_120_000, 36: 2_510_000, 37: 2_960_000, 38: 3_480_000, 39: 4_070_000, 40: 4_740_000,
+  41: 5_500_000, 42: 6_350_000, 43: 7_310_000, 44: 8_370_000, 45: 9_540_000, 46: 10_900_000, 47: 12_300_000, 48: 13_800_000, 50: 17_200_000,
+  51: 19_100_000, 52: 21_100_000, 53: 23_200_000, 54: 25_400_000, 60: 39_700_000, 61: 42_100_000, 62: 50_000_000, 63: 60_000_000, 64: 70_000_000,
+  65: 80_000_000, 66: 90_000_000, 67: 100_000_000, 68: 110_000_000, 69: 120_000_000,
+};
 
 export const dragonLair: DragonLairRow[] = Array.from({ length: 40 }, (_, i) => {
   const level = i + 1;
