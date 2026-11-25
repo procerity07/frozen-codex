@@ -87,7 +87,13 @@ export const lowStarHeroes: Hero[] = [
     ],
   },
   lowStar({ name: 'Lucia', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Monsters', 'Monster Dens'], pages: [PLAZA],
-    civil: [civil('Training Capacity'), civil('Research Stone Cost'), civil('Research Iron Cost')], notes: ['Sold for 50 points in the Hero Plaza point shop.'] }),
+    civil: [
+      { name: 'Training Capacity', description: 'In-game. 3★: +200 at +2, +300 at +3, +400 at +4, +500 at +5 troops per training.', requirement: 'Active while owned (in-game)', unit: 'flat', tiers: { '3': [null, null, 200, 300, 400, 500] } },
+      { name: 'Research Stone Cost', description: 'In-game. 3★: −40,000 at +2, −60,000 at +3, −80,000 at +4, −100,000 at +5 stone per research.', requirement: 'Unlocks at level 31 (in-game)', unit: 'flat', tiers: { '3': [null, null, -40000, -60000, -80000, -100000] } },
+      { name: 'Research Iron Cost', description: 'In-game. 3★: −20,000 at +2, −30,000 at +3, −40,000 at +4, −50,000 at +5 iron per research.', requirement: 'Unlocks at level 71 (in-game)', unit: 'flat', tiers: { '3': [null, null, -20000, -30000, -40000, -50000] } },
+    ],
+    m3: { name: 'Fire Smash', description: 'Deals 316% damage to the target and Silences it for 4 rounds (Rage Regen: Medium). Leverage (unlocks Lv. 11): when hit, counterattacks for 125% of the damage taken for 4 rounds. Battle Mania (unlocks Lv. 31): ATK +10% and Heal Bonus +5%. Values as shown in-game at +2.', charge: 'Medium', pattern: 'Single target', effects: ['Silence', 'Counterattack', 'ATK up', 'Heal Bonus'] },
+    notes: ['Sold for 50 points in the Hero Plaza point shop.', 'In-game (2026-11-25, Lucia at +2): 3★ Fire Civil confirmed; Training Capacity +200 to +500, Research Stone Cost −40k to −100k (Lv. 31), Research Iron Cost −20k to −50k (Lv. 71); three hero skills.'] }),
   lowStar({ name: 'Tulios', element: 'Fire', rarity: 3, unit: 'Civil', sources: ['Hero Plaza'], pages: [PLAZA],
     civil: [
       { name: 'Iron Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } },
@@ -191,9 +197,26 @@ export const lowStarHeroes: Hero[] = [
       { name: 'Infantry ATK', description: '2★: +4% at +2, +6% at +3, +8% at +4, +10% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
     ],
   },
-  lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA],
-    march: ['Infantry DEF', 'Infantry ATK'], civil: [civil('Food Gather Speed')] }),
-  lowStar({ name: 'Roger', element: 'Nature', rarity: 3, unit: 'Archer', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'], civil: [civil('Wood Gather Speed')] }),
+  {
+    ...lowStar({ name: 'Gerolin', element: 'Nature', rarity: 3, unit: 'Infantry', sources: ['Hero Plaza', 'Superb Hero Covenant', 'Royal Shop', 'Arena Reward Chest'], pages: [PLAZA], march: ['Infantry DEF', 'Infantry ATK'],
+      civil: [{ name: 'Food Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } }],
+      m3: { name: 'Wicked Grenade', description: 'Deals 132% damage to all enemies (Rage Regen: Medium). Debilitating Smoke (unlocks Lv. 11): drains 16% of the target\'s Rage. Firepower (unlocks Lv. 31): DEF +15% and Heal Bonus +8%. Values as shown in-game at +5.', charge: 'Medium', pattern: 'All enemies', effects: ['Rage down', 'DEF up', 'Heal Bonus'] },
+      notes: ['In-game (2026-11-25): 3★ Nature Infantry confirmed; Food Gather Speed 12–30% (owned); Infantry DEF (Lv. 31) and ATK (Lv. 71) 10–25%; three hero skills.'] }),
+    marchSkills: [
+      { name: 'Infantry DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Infantry ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
+  {
+    ...lowStar({ name: 'Roger', element: 'Nature', rarity: 3, unit: 'Archer', sources: ['Hero Plaza'], pages: [PLAZA], march: ['Archer DEF', 'Archer ATK'],
+      civil: [{ name: 'Wood Gather Speed', description: 'In-game. 3★: +12% at +2, +18% at +3, +24% at +4, +30% at +5.', requirement: 'Active while owned (in-game)', stat: 'gatherSpeed', unit: '%', tiers: { '3': [null, null, 12, 18, 24, 30] } }],
+      m3: { name: 'Poisonous Swamp', description: 'Deals 174% damage to the target and adjacent enemies (Rage Regen: Medium). Grace of Forest (unlocks Lv. 11): all allies DEF +45%. Ranger\'s Blessing (unlocks Lv. 31): ATK and DEF +10%. Values as shown in-game at +3.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['DEF up', 'ATK up'] },
+      notes: ['In-game (2026-11-25): 3★ Nature Archer confirmed; Wood Gather Speed 12–30% (owned); Archer DEF (Lv. 31) and ATK (Lv. 71) 10–25%; three hero skills.'] }),
+    marchSkills: [
+      { name: 'Archer DEF', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Archer ATK', description: '3★: +10% at +2, +15% at +3, +20% at +4, +25% at +5. Applies when the hero joins troop battle (in-game). Unlocks at Lv. 71.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Cassandra', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Mesdi Portal'], march: ['Troop skill'],
       civil: [
