@@ -46,6 +46,7 @@ interface CitadelRow {
   ancientTome?: number; astronomyTome?: number; gloryCodex?: number; goldStatue?: number;
 }
 
+/** Levels 31–40: Ancient Tome, Astronomy Tome, Glory Codex and Gold Statue from the community wiki Citadel page (checked 2026-11-25); levels 36–40 food/wood/stone/iron also from the wiki (they replace 5%-per-level estimates). */
 const dhms = (d: number, h: number, m: number, s: number) => ((d * 24 + h) * 60 + m) * 60 + s;
 
 const citadelTable: Record<number, CitadelRow> = {
@@ -79,16 +80,16 @@ const citadelTable: Record<number, CitadelRow> = {
   28: { requires: [['Wall', 27], ['Infantry Camp', 27]], time: dhms(30, 21, 39, 12), food: 154_000_000, wood: 30_700_000, stone: 18_380_000, iron: 9_200_000 },
   29: { requires: [['Wall', 28], ['Vehicle Depot', 28]], time: dhms(37, 1, 30, 20), food: 207_000_000, wood: 41_400_000, stone: 24_800_000, iron: 12_400_000 },
   30: { requires: [['Wall', 29], ['Shooter Camp', 29]], time: dhms(46, 17, 7, 28), food: 279_000_000, wood: 55_800_000, stone: 33_600_000, iron: 16_750_000 },
-  31: { requires: [['Wall', 30], ['Infantry Camp', 30], ['Research Center', 30]], time: null, food: 377_000_000, wood: 75_300_000, stone: 45_200_000, iron: 22_600_000 },
-  32: { requires: [['Wall', 31], ['Cavalry Camp', 31]], time: null, food: 377_000_000, wood: 94_800_000, stone: 45_200_000, iron: 22_600_000 },
-  33: { requires: [['Wall', 32], ['Archery Camp', 32]], time: null, food: 377_000_000, wood: 114_300_000, stone: 45_200_000, iron: 22_600_000 },
-  34: { requires: [['Wall', 33], ['Vehicle Workshop', 33]], time: null, food: 377_000_000, wood: 133_800_000, stone: 45_200_000, iron: 22_600_000 },
-  35: { requires: [['Wall', 34], ['Wishing Pool', 34], ['Posthouse', 34]], time: null, food: 377_000_000, wood: 153_300_000, stone: 45_200_000, iron: 22_600_000 },
-  36: { requires: [['Institute', 35]], time: null, food: 395_850_000, wood: 160_965_000, stone: 47_460_000, iron: 23_730_000 },
-  37: { requires: [['Wall', 36], ['War Hall', 36], ['Institute', 36], ['Vehicle Workshop', 36]], time: null, food: 415_642_500, wood: 169_013_250, stone: 49_833_000, iron: 24_916_500 },
-  38: { requires: [['Wall', 37], ['War Hall', 37], ['Institute', 37], ['Infantry Camp', 37]], time: null, food: 436_424_625, wood: 177_463_912, stone: 52_324_650, iron: 26_162_325 },
-  39: { requires: [['Wall', 38], ['War Hall', 38], ['Institute', 38], ['Archery Camp', 38]], time: null, food: 458_245_856, wood: 186_337_107, stone: 54_940_882, iron: 27_470_441 },
-  40: { requires: [['Wall', 39], ['War Hall', 39], ['Institute', 39], ['Cavalry Camp', 39]], time: null, food: 481_158_148, wood: 195_653_962, stone: 57_687_926, iron: 28_843_963 },
+  31: { requires: [['Wall', 30], ['Infantry Camp', 30], ['Research Center', 30]], time: null, food: 377_000_000, wood: 75_300_000, stone: 45_200_000, iron: 22_600_000, ancientTome: 2_000, astronomyTome: 400 },
+  32: { requires: [['Wall', 31], ['Cavalry Camp', 31]], time: null, food: 377_000_000, wood: 94_800_000, stone: 45_200_000, iron: 22_600_000, ancientTome: 4_000, astronomyTome: 600 },
+  33: { requires: [['Wall', 32], ['Archery Camp', 32]], time: null, food: 377_000_000, wood: 114_300_000, stone: 45_200_000, iron: 22_600_000, ancientTome: 6_000, astronomyTome: 800 },
+  34: { requires: [['Wall', 33], ['Vehicle Workshop', 33]], time: null, food: 377_000_000, wood: 133_800_000, stone: 45_200_000, iron: 22_600_000, ancientTome: 8_000, astronomyTome: 1_000 },
+  35: { requires: [['Wall', 34], ['Wishing Pool', 34], ['Posthouse', 34]], time: null, food: 377_000_000, wood: 153_300_000, stone: 45_200_000, iron: 22_600_000, ancientTome: 10_000, astronomyTome: 1_200 },
+  36: { requires: [['Institute', 35]], time: null, food: 394_780_000, wood: 160_124_000, stone: 47_437_000, iron: 23_694_000, ancientTome: 22_000, astronomyTome: 1_200, gloryCodex: 500, goldStatue: 1_000 },
+  37: { requires: [['Wall', 36], ['War Hall', 36], ['Institute', 36], ['Vehicle Workshop', 36]], time: null, food: 414_519_000, wood: 168_130_000, stone: 49_809_000, iron: 24_879_000, ancientTome: 35_000, astronomyTome: 1_200, gloryCodex: 750, goldStatue: 2_500 },
+  38: { requires: [['Wall', 37], ['War Hall', 37], ['Institute', 37], ['Infantry Camp', 37]], time: null, food: 435_245_000, wood: 176_537_000, stone: 52_300_000, iron: 26_123_000, ancientTome: 40_000, astronomyTome: 1_200, gloryCodex: 1_000, goldStatue: 3_800 },
+  39: { requires: [['Wall', 38], ['War Hall', 38], ['Institute', 38], ['Archery Camp', 38]], time: null, food: 457_007_000, wood: 185_364_000, stone: 54_915_000, iron: 27_429_000, ancientTome: 50_000, astronomyTome: 1_200, gloryCodex: 1_250, goldStatue: 5_400 },
+  40: { requires: [['Wall', 39], ['War Hall', 39], ['Institute', 39], ['Cavalry Camp', 39]], time: null, food: 479_857_000, wood: 194_632_000, stone: 57_661_000, iron: 28_801_000, ancientTome: 75_000, astronomyTome: 1_200, gloryCodex: 1_500, goldStatue: 10_400 },
 };
 
 export const citadelLevels: CitadelLevel[] = Object.entries(citadelTable).map(([lv, r]) => ({

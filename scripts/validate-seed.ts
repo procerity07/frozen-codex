@@ -118,7 +118,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(plan.unknownTimeLevels.join() === '11' && plan.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'unknown build time excluded from totals');
   const c12 = seed.citadelLevels.find((l) => l.level === 12)!;
   ok(c12.cost.food === 1_140_000 && c12.cost.stone === 25_400 && c12.baseSeconds === ((1 * 24 + 8) * 60 + 31) * 60 + 30, 'citadel 12 values');
-  ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_843_963, 'citadel 40 iron');
+  ok(seed.citadelLevels.find((l) => l.level === 40)!.cost.iron === 28_801_000 && seed.citadelLevels.find((l) => l.level === 40)!.cost.goldStatue === 10_400, 'citadel 40 iron and Gold Statues (wiki)');
   ok(seed.citadelLevels.every((l, i) => l.level === i + 1), 'citadel levels ordered 1-40');
   ok(bondExpBetween(seed.bondLevels, 1, 2) === 1000, 'bond exp L1');
   ok(bondGiftPlan(seed.bondGifts, { 5: 1, 1: 100 }, 5050).shortfall === 0, 'bond gift plan');
