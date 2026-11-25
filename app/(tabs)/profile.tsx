@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { Stack, router } from 'expo-router';
+import { router } from 'expo-router';
 import { Castle, Pencil, Shield, Sparkles, User } from 'lucide-react-native';
 import { Badge, Card, Row, Screen, SectionHeader, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
@@ -52,7 +52,6 @@ export default function ProfileScreen() {
 
   return (
     <Screen>
-      <Stack.Screen options={{ title: 'My Profile' }} />
 
       <SectionHeader title="Account" icon={User} right={<Pressable onPress={() => router.push('/tools/settings')}><Pencil size={16} color={palette.cyan} /></Pressable>} />
       <Card>
