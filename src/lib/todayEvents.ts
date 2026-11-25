@@ -27,6 +27,9 @@ export function todayEventRows(events: GameEvent[], now: Date, anchors: Anchors,
       while (back < weekday && eventsOn([ev], new Date(dayStart - (back + 1) * DAY + DAY / 2), anchors).length) back++;
       const runEnd = dayStart - back * DAY + ev.durationHours * 3_600_000;
       end = new Date(Math.min(dayStart + (d + 1) * DAY, Math.max(runEnd, dayStart + DAY)));
+      // Ace Lord week events (Mon–Sun, 7 days) run until the following Monday's reset, like the game's
+      // "Ends in" timer (e.g. Holystone Upgrades on Thursday 22:25 UTC shows 4d 01:33).
+      if (ev.cycleWeek === 'Ace Lord' && ev.durationHours >= 168) end = new Date(dayStart + (d + 2) * DAY);
     }
     const status: TodayStatus = now < start ? 'upcoming' : now < end ? 'live' : 'ended';
     rows.push({ ev, start, end, status, allianceTime });
