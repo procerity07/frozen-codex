@@ -87,8 +87,16 @@ export const lowStarHeroes: Hero[] = [
     ],
     m3: { name: 'Penetrating Pike', description: 'Deals 174% damage to the target and adjacent enemies (Rage Regen: Medium). Charge of Honor (unlocks Lv. 11): depletes 16% Rage of the target and adjacent enemies. Spirit of Fighter (unlocks Lv. 31): DEF +10% and Rage Regen +5%. Values as shown in-game at +3.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['Rage down', 'DEF up', 'Rage up'] },
     notes: ['In-game (2026-11-24, Tulios at +3): 3★ Fire Civil confirmed; Iron Gather Speed, Hunt March Speed (Lv. 31) and Hunt ATK Bonus (Lv. 71) all 12/18/24/30% (+2 to +5), active while owned; three hero skills.'] }),
-  lowStar({ name: 'Capos', element: 'Fire', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
-    m3: { name: 'Override', description: 'Deals 235% damage to the target and adjacent enemies. Skill level for this value not stated.', pattern: 'Target + adjacent', effects: ['Damage'] } }),
+  {
+    ...lowStar({ name: 'Capos', element: 'Fire', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, pages: [PLAZA], march: ['Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
+      m3: { name: 'Override', description: 'Deals 196% damage to the target and adjacent enemies (Rage Regen: Medium). Explosion Fallout (unlocks Lv. 11): target and adjacent enemies ATK −28% for 5 rounds. Wild Alteration (unlocks Lv. 31): ATK +15% and Crit +8%. Battlefield Inspiration (unlocks Lv. 71): all allies gain 15% Rage. Values as shown in-game at +2.', charge: 'Medium', pattern: 'Target + adjacent', effects: ['ATK down', 'ATK up', 'Crit', 'Rage up'] },
+      notes: ['In-game (2026-11-25, Capos at +2): 4★ Fire Cavalry confirmed; Cavalry HP/DEF/ATK 20/30/40/50% (+2 to +5), DEF unlocks at Lv. 31 and ATK at Lv. 131; four hero skills (Override 196% at +2).'] }),
+    marchSkills: [
+      { name: 'Cavalry HP', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game).' },
+      { name: 'Cavalry DEF', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 31.' },
+      { name: 'Cavalry ATK', description: '4★: +20% at +2, +30% at +3, +40% at +4, +50% at +5. Applies when he joins troop battle (in-game). Unlocks at Lv. 131.' },
+    ],
+  },
   {
     ...lowStar({ name: 'Tooka', element: 'Fire', rarity: 4, unit: 'Infantry', sources: ['Hero Plaza', 'Epic Hero Covenant', 'Royal Shop'], march: ['Troop skill', 'Troop HP', 'Troop DEF', 'Troop ATK'],
       m3: { name: 'Warlord of Hellfire', description: 'Deals 149% damage to all enemies (Rage Regen: Slow). Dread Howl: enemies ATK −28% for 5 rounds. Retaliation: ATK +15% and Crit +8%. Commander-in-chief (unlocks Lv. 71): all allies ATK +34% for 5 rounds. Values as shown in-game at +2.', charge: 'Slow', pattern: 'All enemies', effects: ['ATK down', 'ATK up', 'Crit'] },
