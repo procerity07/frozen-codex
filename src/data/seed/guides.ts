@@ -122,6 +122,16 @@ export const guides: Guide[] = [
       { heading: 'Sources', points: ['Puzzles & Chaos wiki: Nursery Greenhouse (checked Nov 2026).'] },
     ],
   },
+  {
+    id: 'dragon', title: 'Dragon Lair & Draconic Stones', summary: 'What the dragon gives you and how to grow it (checked in-game).',
+    sections: [
+      { heading: 'What the dragon does', points: ["The dragon's level raises the limits of its Civil and Military passive skills.", 'Dragon EXP comes from items, killing monsters on the world map, and Feed.', 'Train gives Civil Points; Gift gives resources.', 'The Lair shows limited attempts (5) with a refill timer under Feed / Train / Gift.'] },
+      { heading: 'Military passive skills', points: ['Infantry, Archer, Cavalry and Vehicle ATK; Infantry, Archer, Cavalry and Vehicle HP; Troop DEF, Troop HP and Troop Capacity.', 'Troop ATK unlocks at Dragon Lv. 45 and Troop Dmg Up at Dragon Lv. 60.', 'Each skill goes up to level 30; the Breakthrough in the middle raises the limits.'] },
+      { heading: 'Civil passive skills', points: ['Gather Food, Wood, Stone, Iron and Gather Resource; Troop Load; Construction, Research and Training Speed; March Speed.', 'Rescue Units unlocks at Dragon Lv. 44 and Troop Dmg Taken Down at Dragon Lv. 55.', 'Each skill goes up to level 30.', 'See your totals under Attributes (Military and Civil tabs).'] },
+      { heading: 'Draconic Stones', points: ['Unlock at Dragon Lv. 30; Nature slot at Lv. 40, Wild slot at Lv. 50.', 'Five qualities: Common, Uncommon, Superb, Epic, Legendary. Higher quality = better stats.', 'Only equipped stones count. Each slot takes its own type, and you cannot equip two of the same type.', 'Upgrade or Ascend stones to raise them; upgraded or ascended stones can be reset to their starting state.'] },
+      { heading: 'Draconic Stone Refinement', points: ['Refinement Lv. 0 → 1 gives Troop ATK, DEF and HP +2% each.', 'It needs 6 equipped 4★ stones of Uncommon quality or better, plus 50 Refinement Crests.'] },
+    ],
+  },
 ];
 
 export const checklistTemplate: ChecklistTemplateItem[] = [

@@ -352,7 +352,7 @@ export const holystoneNotes = [
   'Unit bonus starts at level 3 and reaches +50% at levels 9–10.',
 ];
 
-// Wiki Draconic Stone page: six types at Dragon Lv. 30, Nature at 40, Wild at 50. Effects per type are not verified.
+// Wiki Draconic Stone page: six types at Dragon Lv. 30, Nature at 40, Wild at 50 (in-game: 8 slots, Wild still locked at Dragon Lv. 41). Effects per type are not verified.
 export const draconicStones: DraconicStone[] = [
   { name: 'Fiery', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
   { name: 'Frost', dragonLevel: 30, effect: 'Effect not verified', focus: 'All' },
