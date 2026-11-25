@@ -2,6 +2,7 @@ import { affordable, trainingCost } from '../src/lib/training';
 import { formatDuration as fmtDur } from '../src/lib/time';
 import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
+import { recommendMarch } from '../src/lib/march';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
@@ -283,7 +284,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   const saya = byId('saya'); const gina = byId('gina'); const baron = byId('baron');
   ok(shardsBetween(0, 8) === 1040 && shardsBetween(-1, 8) === 1050 && shardsBetween(4, 5) === 75, 'enhancement shard costs (total 1,050)');
   ok(clampEntry(baron, { stars: 6, level: 999, enhancement: 8, bond: 200 }).stars === 2 && clampEntry(gina, { enhancement: 8 }).enhancement === 5, 'stars and below-5★ enhancement clamped');
-  ok(clampEntry(saya, { stars: 5, level: 999 }).level === 310 && clampEntry(saya, { stars: 6, level: 999 }).level === 400 && maxStars(saya) === 6, 'level caps 310 / 400; 5★ can reach 6★');
+  ok(clampEntry(saya, { stars: 5, level: 999 }).level === 400 && clampEntry(saya, { stars: 6, level: 999 }).level === 400 && maxStars(saya) === 6, '5★ heroes reach Lv. 400 without 6★; 5★ can reach 6★');
   ok(clampEntry(saya, { level: Number.NaN, bond: -3 } as never).level === 1 && clampEntry(saya, undefined).bond === 1, 'bad saved values fall back safely');
   ok(promotionStatus(saya, { stars: 5, level: 310, enhancement: 5, bond: 1 }).eligible && !promotionStatus(saya, { stars: 5, level: 309, enhancement: 5, bond: 1 }).eligible && !promotionStatus(gina, newEntry(gina)).possible, 'promotion rule Lv. 310 + 5');
   ok(bondCapForEnhancement(0) === 5 && bondCapForEnhancement(5) === 55 && bondCapForEnhancement(7) === 86 && bondCapForEnhancement(8) === null && requiredEnhancementForBond(56) === 6, 'bond enhancement gates');
@@ -301,7 +302,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
 
   // Roster import/export
   const rf = parseRosterFile(JSON.parse(JSON.stringify(makeRosterFile({ tania: { stars: 5, level: 999, enhancement: 9, bond: 3 }, nobody: { stars: 5, level: 1, enhancement: 0, bond: 1 } }))), seed.heroes);
-  ok(rf.entries.tania!.level === 310 && rf.entries.tania!.enhancement === 8 && rf.skipped.join() === 'nobody', 'roster import clamps values and skips unknown heroes');
+  ok(rf.entries.tania!.level === 400 && rf.entries.tania!.enhancement === 8 && rf.skipped.join() === 'nobody', 'roster import clamps values and skips unknown heroes');
   ok(Object.keys(parseRosterFile({ app: 'frozen-codex', profile: { roster: { saya: { stars: 5, level: 210, enhancement: 1, bond: 10 } } } }, seed.heroes).entries).join() === 'saya', 'roster import reads full backups');
   assert.throws(() => parseRosterFile({ hello: 1 }, seed.heroes));
   ok(['sodoma', 'setemos', 'tutanhet', 'sirona', 'isabella'].every((id) => seed.heroes.some((h) => h.id === id)) && byId('isabella').rarity === 6, 'five added heroes present');
@@ -331,6 +332,29 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(weeklyTriggers({ ...base, days: [], time: '12:00', zone: 'utc' }, mon).length === 7 && weeklyTriggers({ ...base, days: [2, 4], time: '12:00', zone: 'utc' }, mon).length === 2, 'one weekly trigger per chosen day');
   ok(normalizeTime('7:05') === '07:05' && normalizeTime('24:00') === null && normalizeTime('ab') === null, 'reminder time validation');
   ok(describeDays([]) === 'Every day' && describeDays([5, 6]) === 'Weekends' && describeDays([0, 2]) === 'Mon, Wed', 'reminder day labels');
+}
+
+// Recommended march
+{
+  const H = (n: string) => seed.heroes.find((h) => h.name === n)!;
+  const e = (stars: number, level: number, enhancement: number) => ({ stars, level, enhancement, bond: 1 });
+  const civil = seed.heroes.find((h) => h.unitType === 'Civil')!;
+  const r: Record<string, ReturnType<typeof e>> = {
+    [H('Boyd').id]: e(5, 320, 6), [H('Tania').id]: e(5, 300, 5), [H('Ysera').id]: e(4, 200, 5), [H('Christina').id]: e(4, 200, 5),
+    [H('Selantia').id]: e(5, 150, 5), [H('Sodoma').id]: e(5, 140, 3), [H('Freya').id]: e(5, 140, 5), [civil.id]: e(5, 300, 8),
+  };
+  const adv = recommendMarch(seed.heroes, r, 'Cavalry', 'advanced');
+  ok(adv.picks.length === 5 && adv.picks.filter((p) => p.hero.unitType === 'Cavalry').length === 4 && adv.picks.some((p) => p.hero.name === 'Selantia' && p.role === 'hybrid'), 'advanced Cavalry march: 4 Cavalry + Selantia as hybrid');
+  ok(['Boyd', 'Tania', 'Ysera', 'Christina'].every((n) => adv.picks.some((p) => p.hero.name === n)) && !adv.picks.some((p) => p.hero.name === 'Sodoma'), 'advanced Cavalry core prefers +5 heroes over a 5-star +3');
+  ok(!adv.picks.some((p) => p.hero.id === civil.id) && !recommendMarch(seed.heroes, r, 'Infantry', 'beginner').picks.some((p) => p.hero.id === civil.id), 'civil heroes are never in a march');
+  const lowSel = recommendMarch(seed.heroes, { ...r, [H('Selantia').id]: e(5, 20, 5) }, 'Cavalry', 'advanced');
+  ok(lowSel.picks.find((p) => p.role !== 'core')?.hero.name === 'Freya', 'hybrid skill below its unlock level does not count; all-troop ATK hero is next');
+  const beg = recommendMarch(seed.heroes, r, 'Cavalry', 'beginner');
+  ok(beg.picks.filter((p) => p.hero.unitType === 'Cavalry').length === 5, 'beginner march: five of the chosen type');
+  const three = seed.heroes.find((h) => h.rarity === 3 && h.unitType === 'Archer')!;
+  const five = seed.heroes.find((h) => h.rarity === 5 && h.unitType === 'Archer' && h.id !== H('Freya').id)!;
+  const rank = recommendMarch(seed.heroes, { [three.id]: e(3, 100, 5), [five.id]: e(5, 100, 2) }, 'Archer', 'beginner').picks;
+  ok(rank[0]?.hero.id === three.id, 'a 3-star +5 ranks above a 5-star +2');
 }
 
 // Hive planner (tiles: castles and gate 2x2, fort 3x3, outposts 1x1)

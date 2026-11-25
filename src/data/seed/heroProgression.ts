@@ -9,8 +9,8 @@ export const HERO_PROGRESSION_SOURCES = [
   'https://puzzles-chaos.fandom.com/wiki/Hero_Specialty',
 ];
 
-/** Level cap by current star count. 2★ cap is not given by the source. */
-export const LEVEL_CAP_BY_STARS: Record<number, number | null> = { 2: null, 3: 130, 4: 210, 5: 310, 6: 400 };
+/** Level cap by current star count. 2★ cap is not given by the source. 5★ heroes reach Lv. 400 without 6★ (player-confirmed). */
+export const LEVEL_CAP_BY_STARS: Record<number, number | null> = { 2: null, 3: 130, 4: 210, 5: 400, 6: 400 };
 /** Highest level the app accepts when a cap is unknown. */
 export const ABSOLUTE_MAX_LEVEL = 400;
 

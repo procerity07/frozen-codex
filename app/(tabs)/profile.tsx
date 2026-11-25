@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { Castle, Pencil, Settings, Shield, Sparkles, User } from 'lucide-react-native';
+import { MarchCard } from '@/components/domain/MarchCard';
 import { MyStatsCard } from '@/components/domain/MyStatsCard';
 import { Badge, Card, Row, Screen, SectionHeader, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
@@ -80,6 +81,8 @@ export default function ProfileScreen() {
         </Row>
         <Text style={[type.caption, { marginTop: space.sm }]}>From the Citadel Planner. Change them there.</Text>
       </Card>
+
+      <MarchCard heroes={heroes} roster={s.roster} />
 
       <SectionHeader title="Heroes" icon={Shield} subtitle={`${owned.length} in My Roster`} />
       {owned.length === 0 ? (
