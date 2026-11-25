@@ -238,7 +238,7 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(seed.heroes.filter((h) => h.rarity <= 4).every((h) => h.audit && h.audit.sourceUrls.length >= 2 && h.combatRole === undefined), 'new heroes sourced; no invented roles');
   ok(seed.heroes.every((h) => h.match3Skill === undefined || typeof h.match3Skill.name === 'string'), 'match-3 optional and well-formed');
   ok(JSON.stringify(reKillPointsByTier) === JSON.stringify([0, 1, 2, 4, 6, 12, 18, 25, 30, 45, 80, 100]), 'RE kill points match wiki');
-  ok(seed.royalArmsRace.every((r) => r.themes.length >= 5) && seed.events.find((e) => e.id === 'royal-arms-race')!.days.join() === 'Thu,Fri,Sat,Sun', 'Royal Arms Race Thu–Sun with theme sets');
+  ok(seed.royalArmsRace.every((r) => r.themes.length >= 5) && seed.events.find((e) => e.id === 'royal-arms-race')!.days.join() === 'Thu,Fri,Sat', 'Royal Arms Race Thu–Sat (in-game Event Schedule) with theme sets');
   ok(seed.gloryBuildings.find((g) => g.building === 'Institute')!.stat === 'Infantry DEF' && seed.gloryBuildings.find((g) => g.building === 'Embassy')!.stat === 'Archer HP', 'Glory mapping matches wiki');
   ok(seed.totemSets.map((t) => t.forgeLevel).join() === '16,20,22,30,31', 'Totem set unlock levels');
   ok(seed.runeSets.length === 4, 'four rune types');

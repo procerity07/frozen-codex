@@ -1,6 +1,6 @@
 {
-  "version": 51,
-  "publishedAt": "2026-11-25T21:04:52.848Z",
+  "version": 52,
+  "publishedAt": "2026-11-25T22:37:28.297Z",
   "packs": {
     "heroes": [
       {
@@ -8816,7 +8816,7 @@
           "Day 7 Path of Eternity (build / research / training speedup)"
         ],
         "id": "ace-lord",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8851,7 +8851,7 @@
           "Ascending/salvaging runes gives 0 pts on Day 1 — only obtaining essences/spinels/crystals/scrolls scores."
         ],
         "id": "alliance-duel",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8894,7 +8894,7 @@
           "Day 6–7 Consume Diamond"
         ],
         "id": "arms-race",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8916,7 +8916,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "hero-upgrade-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8938,7 +8938,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "development-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8960,7 +8960,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "enhance-gear-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -8982,7 +8982,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "rune-and-holystone-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9004,7 +9004,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "dragon-points-and-totem-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9026,7 +9026,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "draconic-stone-and-glory-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9065,7 +9065,7 @@
           "Personal Rank rewards (Curio scroll cards): #1 30, #2 25, #3 20, Top 1% 15, Top 2% 12, Top 5% 10, Top 10% 8, Top 30% 6, Top 50% 4, Top 75% 3, Last 25% 2 (plus 10K Hero EXP potions and 60m speedups)."
         ],
         "id": "curio-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9090,7 +9090,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "consume-diamond-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9112,7 +9112,7 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "dragon-crystal",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9134,11 +9134,11 @@
           "Runs as a sub-tracker during the matching day of the parent cycle."
         ],
         "id": "royal-treasure",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
-        "durationHours": 96,
+        "durationHours": 72,
         "featuredHeroes": [
           "lylia"
         ],
@@ -9152,15 +9152,14 @@
         "confidence": "community",
         "name": "Royal Arms Race",
         "category": "Weekly",
-        "cadence": "Weekly Thu–Sun, 3 windows per day",
+        "cadence": "Weekly Thu–Sat, 3 windows per day (in-game schedule)",
         "cycleWeek": "Both",
         "days": [
           "Thu",
           "Fri",
-          "Sat",
-          "Sun"
+          "Sat"
         ],
-        "summary": "Three themed windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC), Thursday to Sunday.",
+        "summary": "Three themed windows per day (00:00–07:55, 08:00–15:55, 16:00–23:55 UTC), Thursday to Saturday.",
         "rules": [
           "Each window draws a random theme from a fixed set for that time of day.",
           "00:00–07:55: Curio, Gear & Totem, Hero Upgrade, Rune & Holystone, Train/Build/Research Speedup.",
@@ -9169,7 +9168,7 @@
           "The wiki Royal Arms Race page says Thu–Sun; its Events grid shows Thursday only."
         ],
         "id": "royal-arms-race",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9194,7 +9193,7 @@
           "Dragon EXP items and Dragon Stone usage score."
         ],
         "id": "ancient-prologue-arms-race",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9219,7 +9218,7 @@
           "Gear Essence spent scores; overlaps Arms Race Day 3."
         ],
         "id": "forbidden-treasures-arms-race",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9246,7 +9245,7 @@
           "Points per troop trained, scaled by tier."
         ],
         "id": "army-expansion",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9283,7 +9282,7 @@
           "Elemental Seal I phase 1 is 125 points."
         ],
         "id": "elemental-seal-i-ii-iii",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9311,7 +9310,7 @@
           "Top 50 damage ranking."
         ],
         "id": "lich-attack",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9337,7 +9336,7 @@
           "Daily quests and stamina use score."
         ],
         "id": "personal-activity",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9364,7 +9363,7 @@
           "Resources gathered from the map score."
         ],
         "id": "gather-resources",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9394,7 +9393,7 @@
           "Limited stock per item."
         ],
         "id": "diamond-redeem-shop",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9426,7 +9425,7 @@
           "Quests are shared — claim the ones you can complete."
         ],
         "id": "alliance-showdown",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9464,11 +9463,11 @@
           "Alliance Fortress Boss defence at the end."
         ],
         "id": "undead-scourge",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
-        "durationHours": 72,
+        "durationHours": 96,
         "featuredHeroes": [
           "echo",
           "khaos"
@@ -9482,12 +9481,13 @@
         "confidence": "community",
         "name": "Oblivion War",
         "category": "Alliance",
-        "cadence": "Weekly AvA: registration Wednesday–Thursday, battle Friday",
+        "cadence": "Weekly AvA Wed–Sat: registration Wednesday–Thursday, battle Friday",
         "cycleWeek": "Both",
         "days": [
           "Wed",
           "Thu",
-          "Fri"
+          "Fri",
+          "Sat"
         ],
         "summary": "Registration opens Wednesday; the battle itself is on Friday. AvA map: capture Gate of Demise, Ancient Ruins, Magic Altar, Temple of Life and Camps.",
         "rules": [
@@ -9512,7 +9512,7 @@
           "Time Coins are spent in the Time Shop."
         ],
         "id": "oblivion-war",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9546,7 +9546,7 @@
           "Personal ranking: top 100 members. Alliance ranking: top 50 in the local Battle Division."
         ],
         "id": "strike-out",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9575,7 +9575,7 @@
           "Wiki Events page: every other Saturday (app previously: every Saturday). The week parity is not known, so the calendar still shows every Saturday."
         ],
         "id": "fort-contest",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9612,7 +9612,7 @@
           "Damage rewards when the gate closes, by your total damage to the Emissary and Infernal Monsters (in-game; crystals by star, Alliance Coins, and \"Nx\" = N each of the 150K Food, 150K Wood, 30K Stone and 7,500 Iron packs): 1–2,000: 25 1★, 1,000 coins, 1x each resource pack; 2,001–5,000: 50 1★, 2,100 coins, 2x; 5,001–10,000: 75 1★, 3,200 coins, 3x; 10,001–15,000: 5 4★, 100 1★, 4,300 coins, 4x; 15,001–30,000: 8 4★, 150 1★, 5,400 coins, 5x; 30,001–60,000: 10 4★, 200 1★, 7,000 coins, 6x; 60,001–130,000: 15 4★, 250 1★, 10,000 coins, 7x; 130,001–300,000: 20 4★, 300 1★, 12,000 coins, 8x; 300,001–500,000: 26 4★, 350 1★, 14,000 coins, 9x; 500,001–700,000: 2 red-star, 35 4★, 400 1★, 16,000 coins, 10x; 700,001–900,000: 2 red-star, 42 4★, 450 1★, 18,000 coins, 12x; 900,001–1.15M: 3 red-star, 50 4★, 500 1★, 20,000 coins, 14x; 1.15M–1.6M: 3 red-star, 60 4★, 550 1★, 22,000 coins, 16x; 1.6M–2.45M: 4 red-star, 70 4★, 600 1★, 25,000 coins, 18x; 2.45M–3.5M: 4 red-star, 80 4★, 650 1★, 28,000 coins, 20x; 3.5M–4.15M: 5 red-star, 95 4★, 700 1★, 31,000 coins, 22x; 4.15M–5.64M: 5 red-star, 110 4★, 750 1★, 34,000 coins, 24x; 5.64M–7.38M: 6 red-star, 122 4★, 800 1★, 37,000 coins, 26x; 7.38M–12M: 6 red-star, 140 4★, 850 1★, 40,000 coins, 28x; 12M+: 8 red-star, 165 4★, 900 1★, 45,000 coins, 35x."
         ],
         "id": "infernal-gate",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9641,7 +9641,7 @@
           "How often it returns, its rules and rewards are not recorded yet."
         ],
         "id": "resource-supply",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9670,7 +9670,7 @@
           "How often it returns, its rules and rewards are not recorded yet."
         ],
         "id": "holystone-upgrades",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9696,7 +9696,7 @@
           "Each member contributes attempts."
         ],
         "id": "alliance-trial",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9727,7 +9727,7 @@
           "Join the party for points and shared rewards."
         ],
         "id": "alliance-party",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9751,7 +9751,7 @@
           "Reinforce weaker members."
         ],
         "id": "alliance-defense",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9805,7 +9805,7 @@
           "Points (current difficulty, in-game): outer-ring outposts (Forest of Life, Mushroom Jungle, Origin Outpost, Boneyard) give 2,880,000 Alliance and 2,880,000 Personal points each; inner-ring outposts (Gold Plains, Amethyst Pit, Lionheart Fort, Demon Sealing Altar, Ancient Ruins, Dawnlight Harbor, Demonlord Cave, Obsidian Fortress) have stronger enemies and give 3,456,000 Alliance and 3,456,000 Personal points each; the Evil Dragon King Castle has extremely strong enemies and gives 1,088,640 Alliance points and unlimited Personal points."
         ],
         "id": "shadow-expedition",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9830,7 +9830,7 @@
           "Deploy dragons to nodes; brackets resolve automatically."
         ],
         "id": "dragon-arena-clash",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "10:00",
@@ -9862,7 +9862,7 @@
           "Ties are broken by Realms colonized, then by which Realm was colonized less."
         ],
         "id": "conquest-of-lords",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "10:00",
@@ -9890,11 +9890,11 @@
           "Personal points also come from gathering in a foreign Realm."
         ],
         "id": "realm-expedition",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
-        "durationHours": 72,
+        "durationHours": 48,
         "featuredHeroes": [],
         "currencies": [],
         "tips": [],
@@ -9904,14 +9904,13 @@
         "confidence": "community",
         "name": "Scorching Front",
         "category": "Cross-Realm War",
-        "cadence": "Weekly, Saturday to Monday",
+        "cadence": "Weekly, Saturday to Sunday",
         "cycleWeek": "Both",
         "days": [
           "Sat",
-          "Sun",
-          "Mon"
+          "Sun"
         ],
-        "summary": "Volcano battle for Fire Crystals; runs Saturday to Monday 24:00 UTC.",
+        "summary": "Volcano battle for Fire Crystals; runs Saturday and Sunday (ends Monday 00:00 UTC).",
         "rules": [
           "Schedule confirmed from the in-game Event Schedule (week of 23 Nov 2026).",
           "1 Fire Crystal = 1 point.",
@@ -9920,7 +9919,7 @@
           "Realm Hospital fully heals for free after the event."
         ],
         "id": "scorching-front",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9953,7 +9952,7 @@
           "Alliance help button available."
         ],
         "id": "sophias-test",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -9989,7 +9988,7 @@
           "Unclaimed rewards reset the next day."
         ],
         "id": "lucky-flip",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10019,7 +10018,7 @@
           "Available on newer realms."
         ],
         "id": "lucky-spin",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10054,7 +10053,7 @@
           "Free spins reset every day."
         ],
         "id": "glorys-gift-roulette",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10082,7 +10081,7 @@
           "Ice Picks do NOT expire."
         ],
         "id": "tundra-ruins",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10115,7 +10114,7 @@
           "Divination Crystals EXPIRE."
         ],
         "id": "feast-of-destiny",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10161,7 +10160,7 @@
           "Example pool seen in-game: 5★ Hero Shards (10), 5★ choice chests, 40x 60m Speedups, a 2,000-Diamond chest."
         ],
         "id": "wonder-house",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10189,7 +10188,7 @@
           "Ancient Amulet, Frost Candlestick and Lava Lantern do NOT expire."
         ],
         "id": "pyramid-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10216,7 +10215,7 @@
           "Refresh, Remove and Return tools do NOT expire."
         ],
         "id": "arcane-puzzle",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10238,7 +10237,7 @@
           "Event-limited tools."
         ],
         "id": "dwarfs-treasury",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10260,7 +10259,7 @@
           "Paired with Ashen Lands Limited Recruitment."
         ],
         "id": "potion-hut",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10283,7 +10282,7 @@
           "Climb floors for escalating rewards."
         ],
         "id": "tower-of-gemini",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10317,7 +10316,7 @@
           "Summon Scrolls do NOT expire; sub-items salvage into Summon Scrolls."
         ],
         "id": "astrology",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10362,7 +10361,7 @@
           "Timeless Scrolls do NOT expire."
         ],
         "id": "timeless-heroes-limited-recruitment",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10386,7 +10385,7 @@
           "Unused scrolls salvage into Timeless Heroes Recruitment Scrolls."
         ],
         "id": "ashen-lands-limited-recruitment",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10417,7 +10416,7 @@
           "Trial Recruit Tickets do NOT expire."
         ],
         "id": "recruit-trial-monthly-trial",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10448,7 +10447,7 @@
           "Visiting items EXPIRE."
         ],
         "id": "ap-event-visiting-bosses",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10480,7 +10479,7 @@
           "Visiting drops EXPIRE."
         ],
         "id": "stamina-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10504,7 +10503,7 @@
           "Summon Scroll / Shadow Hourglass do NOT expire."
         ],
         "id": "stamina-summon-event",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10527,7 +10526,7 @@
           "Combine seasonal tokens for rewards."
         ],
         "id": "seasonal-combination-events",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10557,7 +10556,7 @@
           "Complete daily and weekly pass quests."
         ],
         "id": "battle-pass",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10587,7 +10586,7 @@
           "Spending thresholds unlock chests."
         ],
         "id": "top-up-rewards",
-        "revision": 15
+        "revision": 16
       },
       {
         "startUtc": "00:00",
@@ -10609,7 +10608,7 @@
           "Highest bids win limited items."
         ],
         "id": "auction-frenzy",
-        "revision": 15
+        "revision": 16
       }
     ],
     "giftCodes": [

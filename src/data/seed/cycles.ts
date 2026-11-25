@@ -39,7 +39,7 @@ export const cycleDays: CycleEventDays[] = [
   },
 ];
 
-/** Wiki (Royal Arms Race page): Thu–Sun, three slots per day; each slot draws a random theme from its set. */
+/** Royal Arms Race: Thu–Sat in the in-game Event Schedule (the wiki said Thu–Sun), three slots per day; each slot draws a random theme from its set. */
 export const royalArmsRace: RoyalArmsRaceSlot[] = [
   { slot: 1, utc: '00:00–07:55', themes: ['Curio', 'Gear & Totem', 'Hero Upgrade', 'Rune & Holystone', 'Train, Build & Research Speedup'] },
   { slot: 2, utc: '08:00–15:55', themes: ['Curio', 'Draconic Stone', 'Obtain Treasure', 'Research', 'Stamina/AP', 'Troop Training Power'] },

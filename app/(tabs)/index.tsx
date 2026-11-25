@@ -29,7 +29,7 @@ export default function HomeScreen() {
   const weekday = utcWeekday(now);
   const todayEvents = eventsOn(events, now, anchors).filter((e) => e.category !== 'Core Cycle');
   const slot = royalSlot(now);
-  const rar = ['Thu', 'Fri', 'Sat', 'Sun'].includes(weekday) ? royalArmsRace.find((r) => r.slot === slot) : undefined;
+  const rar = ['Thu', 'Fri', 'Sat'].includes(weekday) ? royalArmsRace.find((r) => r.slot === slot) : undefined;
 
   return (
     <Screen>

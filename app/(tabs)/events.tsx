@@ -176,7 +176,7 @@ function PlannerSections() {
           </> : null}
         </Card>
       ))}
-      <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sun · local ${localOffsetLabel(now)}`} />
+      <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sat · local ${localOffsetLabel(now)}`} />
       {royalArmsRace.map((s) => (
         <Card key={s.slot} style={{ marginBottom: space.sm, padding: space.md }}>
           <Row style={{ justifyContent: 'space-between' }}>

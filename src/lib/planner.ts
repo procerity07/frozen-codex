@@ -47,7 +47,7 @@ export function doubleDipPlan(): DoubleDipRow[] {
     // Daily mini-event on this weekday in Ace Lord weeks (e.g. Curio on Tuesday).
     const side = events.find((e) => e.category === 'Core Cycle' && e.id !== 'ace-lord' && e.id !== 'arms-race' && e.days.includes(weekday) && e.cycleWeek !== 'Arms Race');
     const sideTheme = side ? side.name.replace(' (Event)', '') : '—';
-    const royalDay = ['Thu', 'Fri', 'Sat', 'Sun'].includes(weekday);
+    const royalDay = ['Thu', 'Fri', 'Sat'].includes(weekday);
     const royal = royalDay ? royalArmsRace.flatMap((s) => s.themes.map((theme) => ({ utc: s.utc, theme }))) : [];
     const alTags = tagsFor(al.full);
     const sideTags = side ? tagsFor(`${side.name} ${side.summary}`) : new Set<string>();
