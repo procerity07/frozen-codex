@@ -77,6 +77,12 @@ export default function SettingsScreen() {
 
       <TranslateCard />
 
+      <Card style={{ marginTop: space.md }}>
+        <Text style={type.body}>App tour</Text>
+        <Text style={type.caption}>A quick look at what each tab does.</Text>
+        <View style={{ marginTop: space.sm }}><Button compact variant="secondary" label="Show the tour again" onPress={() => { s.setTourDone(false); router.navigate('/'); }} /></View>
+      </Card>
+
       <SectionHeader title="Hero portraits" />
       <Card>
         <Row style={{ justifyContent: 'space-between' }}>

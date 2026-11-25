@@ -4,12 +4,14 @@ import { BookOpen, CalendarDays, Crown, House, TrendingUp, User } from 'lucide-r
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommanderBar } from '@/components/domain/CommanderBar';
 import { palette } from '@/theme';
+import { AppTour } from '@/components/domain/AppTour';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
   const onboarded = useAppStore((st) => st.onboarded);
   if (!onboarded) return <Redirect href="/onboarding" />;
   return (
+    <>
     <Tabs
       screenOptions={{
         header: () => <CommanderBar />,
@@ -27,5 +29,7 @@ export default function TabLayout() {
       <Tabs.Screen name="guides" options={{ title: 'Guides', tabBarIcon: ({ color, size }) => <BookOpen color={color} size={size - 2} /> }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ color, size }) => <User color={color} size={size - 2} /> }} />
     </Tabs>
+    <AppTour />
+    </>
   );
 }

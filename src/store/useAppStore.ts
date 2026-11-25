@@ -39,6 +39,8 @@ export interface AppState {
   onboarded: boolean;
   /** Version whose "What's new" notes were last shown. */
   seenWhatsNew: string;
+  /** The 6-step tab tour was finished or skipped. */
+  tourDone: boolean;
   /** Reminders the user created. */
   reminders: Reminder[];
   /** Hive plans (alliance castle layouts). */
@@ -79,6 +81,7 @@ export interface AppState {
   setShowPortraits: (on: boolean) => void;
   setOnboarded: (on: boolean) => void;
   setSeenWhatsNew: (version: string) => void;
+  setTourDone: (done: boolean) => void;
   saveReminder: (r: Reminder) => void;
   removeReminder: (id: string) => void;
   saveHive: (h: Hive) => void;
@@ -113,6 +116,7 @@ export const defaultState: PersistedState = {
   showPortraits: true,
   onboarded: false,
   seenWhatsNew: '',
+  tourDone: false,
   reminders: [],
   hives: [],
   allianceTimes: {},
@@ -168,6 +172,7 @@ export const useAppStore = create<AppState>()(
       setShowPortraits: (showPortraits) => set({ showPortraits }),
       setOnboarded: (onboarded) => set({ onboarded }),
       setSeenWhatsNew: (seenWhatsNew) => set({ seenWhatsNew }),
+      setTourDone: (tourDone) => set({ tourDone }),
       saveReminder: (r) => set({ reminders: [...get().reminders.filter((x) => x.id !== r.id), r] }),
       removeReminder: (id) => set({ reminders: get().reminders.filter((x) => x.id !== id) }),
       saveHive: (h) => set({ hives: get().hives.some((x) => x.id === h.id) ? get().hives.map((x) => (x.id === h.id ? h : x)) : [...get().hives, h] }),
