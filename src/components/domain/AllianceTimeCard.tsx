@@ -14,6 +14,9 @@ const WEEK: Weekday[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const isoDay = (d: Date) => d.toISOString().slice(0, 10);
 const dayLabel = (iso: string) => { const d = new Date(`${iso}T12:00:00Z`); return `${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getUTCDay()]} ${d.getUTCDate()}`; };
 
+/** Oblivion War battle slots (UTC, 1 hour each), as offered in-game. */
+const OBLIVION_SLOTS = ['01:00', '12:00', '15:00', '19:00', '21:00'];
+
 const fmtLocal = (d: Date) => `${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()]} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 
 /** Lets players enter the start time their alliance chose, optionally alternating between two times week by week. */
@@ -66,6 +69,25 @@ export function AllianceTimeCard({ ev }: { ev: GameEvent }) {
             <View style={{ flex: 1 }}><Button compact variant="secondary" label="Change" onPress={() => setEditing(true)} /></View>
             <View style={{ flex: 1 }}><Button compact variant="ghost" label="Remove" onPress={() => { s.setAllianceTime(ev.id, null); setTime(''); setAlt(''); setAlternate(false); setDays(defaultDays); setDate(''); setDateTime(''); setEditing(true); }} /></View>
           </Row>
+        </>
+      ) : ev.id === 'oblivion-war' ? (
+        <>
+          <Text style={[type.caption, { marginTop: space.sm }]}>Pick the Friday battle slot your alliance signed up for (UTC, 1 hour).</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: space.xs }}>
+            {OBLIVION_SLOTS.map((t) => (
+              <Chip key={t} label={`${t}–${String(Number(t.slice(0, 2)) + 1).padStart(2, '0')}:00 UTC`} active={time === t} onPress={() => setTime(t)} />
+            ))}
+          </View>
+          {time ? <Text style={[type.caption, { marginTop: 4 }]}>{`Your time: ${fmtLocal(new Date(Date.UTC(2026, 0, 2, Number(time.slice(0, 2)), 0)))}`}</Text> : null}
+          <View style={{ marginTop: space.md }}>
+            <Button label="Save slot" onPress={() => {
+              if (!OBLIVION_SLOTS.includes(time)) { Alert.alert('Pick a slot', 'Choose one of the battle slots.'); return; }
+              const at = cleanAllianceTime({ time, zone: 'utc', anchorWeek: anchorFor(now, 'A'), days: ['Fri'] })!;
+              s.setAllianceTime(ev.id, at);
+              if (s.alarms[ev.id]) scheduleAllianceEventAlarm(ev, at, s.alarmLeadMinutes, anchors).catch(() => undefined);
+              setEditing(false);
+            }} />
+          </View>
         </>
       ) : (
         <>
