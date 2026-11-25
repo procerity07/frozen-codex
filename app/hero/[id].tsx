@@ -11,6 +11,11 @@ import { elementColors, palette, rarityColors, rarityLabels, space, tint, type }
 import { Badge, Card, Chip, ChipRow, ConfidenceNote, ElementEmblem, EmptyState, RarityStars, Row, Screen, CollapsibleSection, MoreText, TroopEmblem } from '@/components/ui';
 import { combatRoleLabel, isFieldVerified, skillsCheckedInGame } from '@/lib/heroData';
 import { MyHeroCard } from '@/components/domain/MyHeroCard';
+import { SkillValues } from '@/components/domain/SkillValues';
+import { cleanSourceNotes, withoutTierSentence } from '@/lib/text';
+import { gridFromTiers, parseTierText, type TierGrid } from '@/lib/tiers';
+import { clampEntry, type RosterEntry } from '@/lib/roster';
+import { useAppStore } from '@/store/useAppStore';
 import { HeroPortrait } from '@/components/domain/HeroPortrait';
 
 const ROLE_COLORS: Record<CombatRole, string> = { Damage: palette.danger, Support: palette.cyan, Healer: palette.success };
@@ -21,13 +26,27 @@ function Unverified({ hero, field }: { hero: Hero; field: HeroAuditField }) {
   return isFieldVerified(hero, field) ? null : <Badge label="Not verified" color={palette.textMuted} />;
 }
 
+/** Skill text without source remarks: current value + folded level grid when the numbers can be read, then the rest of the text. */
+function SkillBody({ text, entry, grid, unit, requirement }: { text: string; entry?: RosterEntry; grid?: TierGrid; unit?: string; requirement?: string }) {
+  const unlock = Number(/unlocks at (?:lv\.|level)\s*(\d+)/i.exec(`${text} ${requirement ?? ''}`)?.[1] ?? 0);
+  const g = grid && Object.keys(grid).length ? grid : parseTierText(text);
+  const clean = cleanSourceNotes(text);
+  const rest = g ? withoutTierSentence(clean) : clean;
+  return (
+    <>
+      {g ? <SkillValues grid={g} entry={entry} unit={unit ?? '%'} lockedAt={entry && unlock > entry.level ? unlock : undefined} /> : null}
+      {rest ? <MoreText text={rest} style={[type.bodySecondary, { marginTop: 4 }]} /> : null}
+    </>
+  );
+}
+
 function Match3Section({ hero, m3 }: { hero: Hero; m3: Match3Skill }) {
   return (
     <>
       <CollapsibleSection title="Match-3 tactical skill" icon={Sparkles} right={<Unverified hero={hero} field="match3Skill" />}>
       <Card accent={elementColors[hero.element]}>
         <Text style={type.heading}>{m3.name}</Text>
-        <MoreText text={m3.description} style={[type.bodySecondary, { marginTop: 4 }]} />
+        <MoreText text={cleanSourceNotes(m3.description)} style={[type.bodySecondary, { marginTop: 4 }]} />
         <Row style={{ marginTop: space.md, flexWrap: 'wrap' }}>
           {m3.charge ? <Badge label={`Charge: ${m3.charge}`} color={palette.cyan} /> : null}
           <Badge label={m3.pattern} />
@@ -43,9 +62,11 @@ export default function HeroDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [hero, setHero] = useState<Hero | null | undefined>(undefined);
   useEffect(() => { getHero(String(id)).then(setHero).catch(() => setHero(null)); }, [id]);
+  const rawEntry = useAppStore((st) => st.roster[String(id)]);
 
   if (hero === undefined) return <Screen><Stack.Screen options={{ title: '' }} /></Screen>;
   if (!hero) return <Screen><Stack.Screen options={{ title: 'Not found' }} /><EmptyState title="Hero not found" /></Screen>;
+  const entry = rawEntry ? clampEntry(hero, rawEntry) : undefined;
 
   const rc = rarityColors[hero.rarity];
   const groups = bondGroups.filter((g) => g.members.includes(hero.id));
@@ -97,7 +118,7 @@ export default function HeroDetail() {
           {hero.marchSkills.map((sk) => (
             <Card key={sk.name} style={{ marginBottom: space.sm }}>
               <Text style={type.heading}>{sk.name}</Text>
-              <MoreText text={sk.description} style={[type.bodySecondary, { marginTop: 4 }]} />
+              <SkillBody text={sk.description} entry={entry} />
             </Card>
           ))}
           </CollapsibleSection>
@@ -113,8 +134,8 @@ export default function HeroDetail() {
                 <Text style={[type.heading, { flex: 1 }]}>{sk.name}</Text>
                 {sk.value ? <Text style={[type.number, { color: palette.gold }]}>{sk.value < 0 ? '' : '+'}{sk.value}%</Text> : null}
               </Row>
-              <MoreText text={sk.description} style={[type.bodySecondary, { marginTop: 4 }]} />
-              <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{sk.requirement}</Text>
+              <SkillBody text={sk.description} entry={entry} grid={sk.tiers ? gridFromTiers(sk.tiers) : undefined} unit={sk.unit} requirement={sk.requirement} />
+              <Text style={[type.caption, { marginTop: 4, color: palette.gold }]}>{cleanSourceNotes(sk.requirement)}</Text>
             </Card>
           ))}
           </CollapsibleSection>
@@ -145,18 +166,12 @@ export default function HeroDetail() {
       <CurioCard hero={hero} />
       </CollapsibleSection>
 
-      {hero.notes ? (
-        <>
-          <CollapsibleSection title="Notes" right={<Unverified hero={hero} field="notes" />} initiallyOpen={false}>
-          <Card><Text style={type.body}>{hero.notes}</Text></Card>
-          </CollapsibleSection>
-        </>
-      ) : null}
 
       {hero.audit ? (
         <>
-          <CollapsibleSection title="Data check" subtitle={`Checked ${hero.audit.checkedOn} · sections marked Not verified are unconfirmed`} icon={ClipboardCheck} initiallyOpen={false}>
+          <CollapsibleSection title="Sources & notes" subtitle={`Where this data comes from · checked ${hero.audit.checkedOn}`} icon={ClipboardCheck} initiallyOpen={false}>
           <Card>
+            {hero.notes ? <Text style={[type.body, { marginBottom: 6 }]}>{hero.notes}</Text> : null}
             {hero.audit.notes.map((n, i) => <Text key={i} style={[type.bodySecondary, { marginBottom: 6 }]}>{n}</Text>)}
             {hero.audit.sourceUrls.map((u) => (
               <Pressable key={u} onPress={() => { WebBrowser.openBrowserAsync(u).catch(() => undefined); }} accessibilityRole="link" hitSlop={4}>

@@ -4,6 +4,8 @@ import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
 import { recommendMarch } from '../src/lib/march';
 import { todayEventRows } from '../src/lib/todayEvents';
+import { currentTier, parseTierText } from '../src/lib/tiers';
+import { cleanSourceNotes } from '../src/lib/text';
 import { packContent } from './pack-content';
 import { readFileSync as readPackFile } from 'node:fs';
 import { cycleForDate as tCycle, rotationWeek as tRotation, weekIndex as tWeekIndex } from '../src/lib/time';
@@ -337,6 +339,16 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(weeklyTriggers({ ...base, days: [], time: '12:00', zone: 'utc' }, mon).length === 7 && weeklyTriggers({ ...base, days: [2, 4], time: '12:00', zone: 'utc' }, mon).length === 2, 'one weekly trigger per chosen day');
   ok(normalizeTime('7:05') === '07:05' && normalizeTime('24:00') === null && normalizeTime('ab') === null, 'reminder time validation');
   ok(describeDays([]) === 'Every day' && describeDays([5, 6]) === 'Weekends' && describeDays([0, 2]) === 'Mon, Wed', 'reminder day labels');
+}
+
+// Skill value grids and source-note cleanup
+{
+  const sel = parseTierText(seed.heroes.find((h) => h.name === 'Selantia')!.marchSkills[1]!.description)!;
+  ok(currentTier(sel, 5, 1) === 30 && currentTier(sel, 5, 8) === 250 && currentTier(sel, 6, 8) === 350 && currentTier(sel, 6, 2) === null, 'skill grid: Selantia values by stars and enhancement');
+  ok(currentTier(parseTierText(seed.heroes[0]!.marchSkills[0]!.description)!, 5, 8) === 500, 'skill grid: main troop skill stays 500% at +8');
+  const withNumbers = seed.heroes.flatMap((h) => h.marchSkills).filter((m) => /\d\/\d|\d% at/.test(m.description));
+  ok(withNumbers.every((m) => parseTierText(m.description)), 'every skill with per-level numbers can be shown as a grid');
+  ok(cleanSourceNotes('In-game. +4% at +2 (in-game). Values as shown in-game at +5.') === '+4% at +2.', 'source notes removed from display text');
 }
 
 // Recommended march
