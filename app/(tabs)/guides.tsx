@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { router } from 'expo-router';
-import { Database, Settings } from 'lucide-react-native';
 import { guides } from '@/data/seed';
 import { useShops } from '@/services/content';
 import { palette, space, type, verdictColors } from '@/theme';
-import { Accordion, Badge, Button, Card, Chip, ChipRow, Row, Screen, SectionHeader, Segmented } from '@/components/ui';
+import { Accordion, Badge, Card, Chip, ChipRow, Row, Screen, SectionHeader, Segmented } from '@/components/ui';
 import type { Verdict } from '@/types/game';
 
-const VIEWS = ['Shops', 'Playbooks', 'Settings'] as const;
+const VIEWS = ['Shops', 'Playbooks'] as const;
 const ORDER: Verdict[] = ['Must Buy', 'Situational', 'Trap / Skip'];
 
 export default function GuidesScreen() {
@@ -18,7 +16,7 @@ export default function GuidesScreen() {
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md }}>
         <Segmented options={VIEWS} value={view} onChange={setView} />
       </View>
-      {view === 'Shops' ? <ShopAdvisor /> : view === 'Playbooks' ? <Playbooks /> : <SettingsEntry />}
+      {view === 'Shops' ? <ShopAdvisor /> : <Playbooks />}
     </View>
   );
 }
@@ -79,21 +77,6 @@ function Playbooks() {
           ))}
         </Accordion>
       ))}
-    </Screen>
-  );
-}
-
-function SettingsEntry() {
-  return (
-    <Screen>
-      <SectionHeader title="Settings & data" />
-      <Card>
-        <Text style={type.body}>Realm profile, alarm lead time, JSON backup/restore and remote database updates.</Text>
-        <View style={{ marginTop: space.md, gap: space.sm }}>
-          <Button icon={Settings} label="Open settings" onPress={() => router.push('/tools/settings')} />
-          <Button icon={Database} variant="secondary" label="Check for database updates" onPress={() => router.push('/tools/settings')} />
-        </View>
-      </Card>
     </Screen>
   );
 }

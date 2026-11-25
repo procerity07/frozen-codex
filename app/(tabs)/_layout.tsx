@@ -1,6 +1,6 @@
 import { Redirect, Tabs } from 'expo-router';
 import { useAppStore } from '@/store/useAppStore';
-import { BookOpen, CalendarDays, Castle, Crown, House } from 'lucide-react-native';
+import { BookOpen, CalendarDays, Castle, Crown, House, Settings } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommanderBar } from '@/components/domain/CommanderBar';
 import { palette } from '@/theme';
@@ -25,6 +25,7 @@ export default function TabLayout() {
       <Tabs.Screen name="events" options={{ title: 'Events', tabBarIcon: ({ color, size }) => <CalendarDays color={color} size={size - 2} /> }} />
       <Tabs.Screen name="progression" options={{ title: 'Citadel', tabBarIcon: ({ color, size }) => <Castle color={color} size={size - 2} /> }} />
       <Tabs.Screen name="guides" options={{ title: 'Guides', tabBarIcon: ({ color, size }) => <BookOpen color={color} size={size - 2} /> }} />
+      <Tabs.Screen name="settings" options={{ title: 'Settings', tabBarIcon: ({ color, size }) => <Settings color={color} size={size - 2} /> }} />
     </Tabs>
   );
 }
