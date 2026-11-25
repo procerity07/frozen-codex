@@ -157,7 +157,13 @@ export const lowStarHeroes: Hero[] = [
     ],
   },
   lowStar({ name: 'Schubert', element: 'Nature', rarity: 4, unit: 'Civil', sources: ['Combination Event'],
-    civil: [civil('Training Speed'), civil('Stone Output'), civil('Rally Size')] }),
+    civil: [
+      { name: 'Training Speed', description: 'In-game. 4★: +6% at +2, +9% at +3, +12% at +4, +15% at +5.', requirement: 'Unlock level not verified', stat: 'trainSpeed', unit: '%', tiers: { '4': [null, null, 6, 9, 12, 15] } },
+      { name: 'Stone Output', description: 'In-game. 4★: +40% at +2, +60% at +3, +80% at +4, +100% at +5.', requirement: 'Unlock level not verified', stat: 'resourceOutput', unit: '%', tiers: { '4': [null, null, 40, 60, 80, 100] } },
+      { name: 'Rally Size', description: 'In-game. 4★: +40,000 at +2, +60,000 at +3, +80,000 at +4, +100,000 at +5.', requirement: 'Unlock level not verified', unit: 'flat', tiers: { '4': [null, null, 40000, 60000, 80000, 100000] } },
+    ],
+    m3: { name: 'In the Spotlight', description: 'Deals 430% damage to the target (Rage Regen: Medium). Hat Trick: steals the target\'s buffs (not undispellable ones). Mystery Gift: transfers your debuffs to the enemy (not undispellable ones). Laser Focus: immune to Silence. Values as shown in-game at +5.', charge: 'Medium', pattern: 'Single target', effects: ['Buff steal', 'Debuff transfer', 'Silence immunity'] },
+    notes: ['In-game (2026-11-25, Schubert at +5): 4★ Nature Civil confirmed; Training Speed 6/9/12/15%, Stone Output 40/60/80/100%, Rally Size 40k/60k/80k/100k (+2 to +5), all "own the hero"; four hero skills.'] }),
   {
     ...lowStar({ name: 'Ysera', element: 'Nature', rarity: 4, unit: 'Cavalry', sources: PLAZA_EPIC, march: ['Troop skill', 'Cavalry HP', 'Cavalry DEF', 'Cavalry ATK'],
       m3: { name: 'Vine Strike', description: 'Deals 186% damage to all enemies (Rage Regen: Medium). Guardian\'s Light: all allies +34% ATK for 5 rounds. Entangle: all enemies DEF −44% for 5 rounds. Nourish: all allies +24% Rage recovery for 5 rounds. Values as shown in-game at +4.', charge: 'Medium', pattern: 'All enemies', effects: ['ATK up', 'DEF down', 'Rage up'] },
