@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router } from 'expo-router';
-import { Castle, Pencil, Shield, Sparkles, User } from 'lucide-react-native';
+import { Castle, Pencil, Settings, Shield, Sparkles, User } from 'lucide-react-native';
 import { Badge, Card, Row, Screen, SectionHeader, Stat, haptic } from '@/components/ui';
 import { listHeroes } from '@/db/repo';
 import { civilBonuses, clampEntry, enhancementLabel, type CivilBonus } from '@/lib/roster';
@@ -52,6 +52,11 @@ export default function ProfileScreen() {
 
   return (
     <Screen>
+      <Pressable onPress={() => { haptic(); router.push('/tools/settings'); }} accessibilityRole="button"
+        style={({ pressed }) => [{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space.sm, padding: space.md, borderRadius: 12, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.surface }, pressed && { opacity: 0.7 }]}>
+        <Settings size={18} color={palette.cyan} />
+        <Text style={[type.body, { color: palette.cyan }]}>Settings</Text>
+      </Pressable>
 
       <SectionHeader title="Account" icon={User} right={<Pressable onPress={() => router.push('/tools/settings')}><Pencil size={16} color={palette.cyan} /></Pressable>} />
       <Card>
