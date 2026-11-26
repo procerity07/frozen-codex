@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { router } from 'expo-router';
-import { Calculator, HeartPulse } from 'lucide-react-native';
+import { Calculator, Feather, Gem, HeartPulse, Shield, Sparkles } from 'lucide-react-native';
 import type { TroopFocus, UpgradeCostRow } from '@/types/game';
 import {
   buildings, citadelLevels, dragonExpItems, dragonLair, draconicStones, gearSlots, gearStages, gloryBuildings, holystoneNotes, holystoneSets, runeExtras, runeSets,
@@ -27,7 +27,14 @@ export default function ProgressionScreen() {
         <Row style={{ marginTop: space.xs }}><TroopEmblem type={focus} size={16} /><Text style={type.caption}>Highlighting upgrades for {focus} mains</Text></Row>
       ) : null}
       {view === 'Citadel & Buildings' && <><MyProgressCard /><CitadelView /></>}
-      {view === 'Equipment' && <><GearView focus={focus} /><RunesView focus={focus} /><TotemsView focus={focus} /><HolystonesView /></>}
+      {view === 'Equipment' && (
+        <>
+          <CollapsibleSection title="Gear" icon={Shield} initiallyOpen={false}><GearView focus={focus} /></CollapsibleSection>
+          <CollapsibleSection title="Runes" icon={Gem} initiallyOpen={false}><RunesView focus={focus} /></CollapsibleSection>
+          <CollapsibleSection title="Totems" icon={Feather} initiallyOpen={false}><TotemsView focus={focus} /></CollapsibleSection>
+          <CollapsibleSection title="Holystones" icon={Sparkles} initiallyOpen={false}><HolystonesView /></CollapsibleSection>
+        </>
+      )}
       {view === 'Dragon & Glory' && <><DragonView focus={focus} /><GloryView focus={focus} /></>}
     </Screen>
   );
