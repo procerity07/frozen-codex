@@ -7,7 +7,7 @@ export const cycleDays: CycleEventDays[] = [
       { day: 1, weekday: 'Mon', theme: 'Heroes Assemble (Hero Upgrade)', scoring: ['Recruit items: Timeless Scroll 20,000 · Deluxe Recruit Ticket 10,000', 'Hero shards: 5★ Omni 30,000 · 4★ Omni 10,000 · 3★ Omni 3,000 · 2★ Hero Shard 750', 'Bond Gifts: T1 75 · T2 375 · T3 750 · T4 9,375 · T5 18,750', 'Mythic Hero Choice Cards, Realm Cards and Hero Plaza exchanges give 0'] },
       { day: 2, weekday: 'Tue', theme: 'Path to Development (Build & Research)', scoring: ['+5 points per 1 power from Construction (in-game)', '+5 points per 1 power from Research (in-game)'] },
       { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['+600 per 1 Stamina used (in-game)', '+400 per 1 AP used', '+2 per 20 Food or 20 Wood, 4 Stone or 1 Iron gathered; +1 per 10 Sapphire', '+20,000 per Lucky Star Coin obtained'] },
-      { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups', 'Troops trained'] },
+      { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups (in-game)', 'Lucky Star Coins obtained (in-game)', 'Daily rank: 100,000+ points needed; top 3 / top 1% get 10× 20K-food items, 60 Dragon Military + 60 Dragon Civil 500-pt items, 10× 60m speedups, 10 chests; top 5% 8 / 30 / 30 / 8 / 8', 'Total rank (all 7 days): 500,000+ points needed; top 3 and top 0.5% get a hero puzzle piece, 80 Hero Choice Cards, a frame, 15,000-Diamond chest, 8× 25K Iron, 50× 60m; top 1% 60 cards; top 3% 40 cards + 8,000 Diamonds; top 5% 30 + 6,000; top 10% 15 + 5,000; top 20% 10 + 4,000; top 30% 8 + 3,500'] },
       { day: 5, weekday: 'Fri', theme: 'Draconic Stone (Draconic Stone & Refinement Crest)', scoring: ['Draconic Stone EXP', 'Refinement Crests'] },
       { day: 6, weekday: 'Sat', theme: 'Supreme Power (Obtain Essences)', scoring: ['Gear/Rune/Totem/Holystone Essences', 'Spinels', 'Crystals'] },
       { day: 7, weekday: 'Sun', theme: 'Path of Eternity (Build / Research / Training Speedup)', scoring: ['All speedups'] },
@@ -49,6 +49,7 @@ export const royalArmsRace: RoyalArmsRaceSlot[] = [
 /**
  * Ace Lord Day 1 (Heroes Assemble) phases — confirmed from in-game screenshots (2026-11-23).
  * Day 3 (Daily Activity) also uses the same thresholds and rewards (in-game, 2026-11-25).
+ * Day 4 (Training Master): same thresholds; phases 1–4 give 6x 60m speedups + 150K Food + 150K Wood, phase 5 a 200-Diamond chest + 30% boost, phase 6 2 Hero Choice Cards + 500-Diamond chest + 30% boost + 30,000 Stone + Iron (in-game, 2026-11-26).
  * Day 2 (Path to Development) uses the same point thresholds; its phases 1–4 give 6x 60m speedups (in-game, 2026-11-24).
  * Wiki: Days 2–4 share the 600,000 top phase; Day 6 tops out at 800,000 and Day 7 runs 30,000 to 1,200,000.
  */
