@@ -36,7 +36,7 @@ export function MyHeroCard({ hero }: { hero: Hero }) {
   const cap = levelCap(e.stars);
   const maxEnh = maxEnhancement(e.stars);
   const promo = promotionStatus(hero, e);
-  const nextUnlock = nextSkillUnlock(e.level);
+  const nextUnlock = nextSkillUnlock(e.level, hero.rarity);
   const bondCap = bondCapForEnhancement(e.enhancement);
   const bondNeeds = requiredEnhancementForBond(e.bond);
   const bondBlocked = bondNeeds !== null && e.enhancement < bondNeeds;

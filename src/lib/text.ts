@@ -14,14 +14,15 @@ export function cleanSourceNotes(text: string): string {
   return text
     .replace(/\s*\((?:wiki|in-game|player-confirmed)[^)]*\)/gi, '')
     .replace(/\s*Values (?:as )?shown in-game[^.]*\./gi, '')
-    .replace(/^(?:In-game|Wiki)[.,]\s*/i, '')
+    .replace(/^(?:In-game|Wiki)[.,:]\s*/i, '')
     .replace(/\s*\(?(?:checked|confirmed) in-game[^.)]*\)?\.?/gi, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
 }
 
-/** Drops the first sentence when it only lists the per-level numbers (shown in the grid instead). */
+/** Drops every sentence that only lists per-level numbers (they are shown in the level table instead). */
 export function withoutTierSentence(text: string): string {
-  const first = firstSentence(text, 10_000);
-  return /★|at Hero0|at \+\d/.test(first) && /\d%/.test(first) ? text.trim().slice(first.length).trim() : text;
+  const parts = text.trim().split(/(?<!\b(?:Lv|e\.g|i\.e|vs|No))(?<=[.!?])\s+/);
+  const isLevels = (p: string) => /(\bat (?:Hero0|\+\d)|★|\d-star|from (?:Hero0|\+\d) to \+\d|\+\d to \+\d)/i.test(p) && /\d/.test(p);
+  return parts.filter((p) => !isLevels(p)).join(' ').trim();
 }

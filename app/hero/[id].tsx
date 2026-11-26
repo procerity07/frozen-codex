@@ -95,15 +95,6 @@ export default function HeroDetail() {
 
       <MyHeroCard hero={hero} />
 
-      <CollapsibleSection title="Combat role" icon={Crosshair}>
-      <Card style={{ padding: space.md }}>
-        {roleLabel === 'Not verified' ? (
-          <Text style={[type.bodySecondary, { color: palette.textMuted }]}>Not verified</Text>
-        ) : (
-          <Badge label={roleLabel} color={ROLE_COLORS[roleLabel]} />
-        )}
-      </Card>
-      </CollapsibleSection>
 
       {!skillsCheckedInGame(hero) ? (
         <Card style={{ marginTop: space.md }} accent={palette.warning}>
@@ -153,6 +144,7 @@ export default function HeroDetail() {
       ) : null}
       </CollapsibleSection>
 
+      {hero.rarity >= 5 ? (
       <CollapsibleSection title="Bonds & curio" icon={Users}>
       {groups.map((g) => (
         <Card key={g.id} style={{ marginBottom: space.sm }}>
@@ -165,6 +157,7 @@ export default function HeroDetail() {
       ))}
       <CurioCard hero={hero} />
       </CollapsibleSection>
+      ) : null}
 
 
       {hero.audit ? (

@@ -6,7 +6,7 @@ import type { Element, Hero, Rarity, UnitType } from '@/types/game';
 import { listHeroes } from '@/db/repo';
 import { bondGifts, bondGroups, bondLevels, curioStarCosts, heroCurios, heroes as seedHeroes, troopTriangle } from '@/data/seed';
 import { elementColors, palette, rarityColors, space, troopColors, type } from '@/theme';
-import { Badge, Card, Chip, ChipRow, ElementEmblem, EmptyState, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table, TroopEmblem } from '@/components/ui';
+import { Badge, Card, Chip, ChipRow, CollapsibleSection, ElementEmblem, EmptyState, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table, TroopEmblem } from '@/components/ui';
 import { HeroCard } from '@/components/domain/HeroCard';
 import { ElementWheel, TroopTriangle } from '@/components/domain/CounterVisualizers';
 import { useAppStore } from '@/store/useAppStore';
@@ -134,7 +134,7 @@ function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
         </>
       ) : null}
 
-      <SectionHeader title="Civil bonuses from your heroes" subtitle={troopCap ? `Known troop capacity: +${fmtFull(troopCap)}` : 'Own-only skills, active without marching'} />
+      <CollapsibleSection title="Civil bonuses from your heroes" subtitle={troopCap ? `Known troop capacity: +${fmtFull(troopCap)}` : 'Own-only skills, active without marching'} right={<Badge label={String(bonuses.length)} color={palette.gold} />} initiallyOpen={false}>
       {bonuses.length ? (
         <Card style={{ paddingVertical: space.sm }}>
           {bonuses.map((b, i) => (
@@ -150,6 +150,7 @@ function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
       ) : (
         <Card><Text style={type.bodySecondary}>None of your heroes have civil skills yet.</Text></Card>
       )}
+      </CollapsibleSection>
 
       <SectionHeader title="Your heroes" subtitle="Tap a hero to update stars, level, enhancement and bond" />
       {owned.map((h) => (

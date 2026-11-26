@@ -77,8 +77,15 @@ export function promotionStatus(hero: Pick<Hero, 'rarity'>, e: RosterEntry): Pro
 
 export const specialtyUnlocked = (e: RosterEntry) => e.enhancement >= SPECIALTY.enhancement && e.level >= SPECIALTY.level;
 
-export function nextSkillUnlock(level: number) {
-  return SKILL_UNLOCK_LEVELS.find((s) => s.level > level) ?? null;
+/** Skill unlock levels by the hero's base stars (player-confirmed rules). */
+const UNLOCKS_BY_RARITY: Record<number, { level: number; what: string }[]> = {
+  2: [{ level: 11, what: 'Second hero skill and second troop/civil skill' }, { level: 31, what: 'Third troop/civil skill' }],
+  3: [{ level: 11, what: 'Second hero skill' }, { level: 31, what: 'Third hero skill and second troop/civil skill' }, { level: 71, what: 'Third troop/civil skill' }],
+};
+
+export function nextSkillUnlock(level: number, rarity = 5) {
+  const list = UNLOCKS_BY_RARITY[rarity] ?? SKILL_UNLOCK_LEVELS;
+  return list.find((s) => s.level > level) ?? null;
 }
 
 /** Parses "Unlocks at level 131" style requirements; null when the unlock level is unknown. */
