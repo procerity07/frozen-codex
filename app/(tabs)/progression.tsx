@@ -10,29 +10,25 @@ import {
 import { palette, space, troopColors, type } from '@/theme';
 import { Accordion, Badge, Button, Card, Chip, ChipRow, CollapsibleSection, ConfidenceNote, NumberField, Row, Screen, SectionHeader, Stat, Table, TroopEmblem } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
-import { fmt, fmtFull } from '@/lib/calculators';
+import { fmt, fmtFull, planCitadel } from '@/lib/calculators';
 import { formatDurationShort } from '@/lib/time';
 
-const VIEWS = ['Citadel', 'Gear', 'Runes', 'Totems', 'Holystones', 'Dragon', 'Glory'] as const;
+const VIEWS = ['Citadel & Buildings', 'Equipment', 'Dragon & Glory'] as const;
 type View_ = (typeof VIEWS)[number];
 
 const relevant = (focus: TroopFocus, f: TroopFocus | string) => focus === 'All' || f === focus || f === 'All';
 
 export default function ProgressionScreen() {
-  const [view, setView] = useState<View_>('Citadel');
+  const [view, setView] = useState<View_>('Citadel & Buildings');
   const focus = useAppStore((s) => s.troopFocus);
   return (
     <Screen sticky={<View style={{ backgroundColor: palette.bg }}><Row style={{ marginTop: space.sm }}><View style={{ flex: 1 }}><Button compact variant="secondary" icon={Calculator} label="Citadel Planner" onPress={() => router.push('/tools/citadel')} /></View><View style={{ flex: 1 }}><Button compact variant="secondary" icon={HeartPulse} label="Troop Training" onPress={() => router.push('/tools/casualty')} /></View></Row><ChipRow>{VIEWS.map((v) => <Chip key={v} label={v} active={v === view} onPress={() => setView(v)} />)}</ChipRow></View>}>
       {focus !== 'All' ? (
         <Row style={{ marginTop: space.xs }}><TroopEmblem type={focus} size={16} /><Text style={type.caption}>Highlighting upgrades for {focus} mains</Text></Row>
       ) : null}
-      {view === 'Citadel' && <CitadelView />}
-      {view === 'Gear' && <GearView focus={focus} />}
-      {view === 'Runes' && <RunesView focus={focus} />}
-      {view === 'Totems' && <TotemsView focus={focus} />}
-      {view === 'Holystones' && <HolystonesView />}
-      {view === 'Dragon' && <DragonView focus={focus} />}
-      {view === 'Glory' && <GloryView focus={focus} />}
+      {view === 'Citadel & Buildings' && <><MyProgressCard /><CitadelView /></>}
+      {view === 'Equipment' && <><GearView focus={focus} /><RunesView focus={focus} /><TotemsView focus={focus} /><HolystonesView /></>}
+      {view === 'Dragon & Glory' && <><DragonView focus={focus} /><GloryView focus={focus} /></>}
     </Screen>
   );
 }
@@ -60,12 +56,47 @@ function CostTable({ rows }: { rows: UpgradeCostRow[] }) {
   );
 }
 
+/** Your Citadel level, the next upgrade's requirements and what you're short of (uses the Citadel Planner inputs). */
+function MyProgressCard() {
+  const c = useAppStore((s) => s.citadel);
+  const next = citadelLevels.find((l) => l.level === c.from + 1);
+  const plan = useMemo(() => (next ? planCitadel(citadelLevels, c.from, c.from + 1, c.owned, c.bonuses) : null), [c, next]);
+  const short = plan ? (Object.entries(plan.deficit) as [string, number][]).filter(([, v]) => v > 0) : [];
+  const label = (k: string) => k.replace(/([A-Z])/g, ' $1').replace(/^./, (x) => x.toUpperCase());
+  const haveOwned = Object.values(c.owned).some((v) => (v ?? 0) > 0);
+  return (
+    <Card style={{ marginTop: space.sm }} accent={palette.success}>
+      <Row style={{ justifyContent: 'space-between' }}>
+        <Stat label="Citadel" value={String(c.from)} color={palette.success} />
+        <Stat label="Goal" value={String(c.to)} />
+        <Button compact variant="secondary" label="Edit" onPress={() => router.push('/tools/citadel')} />
+      </Row>
+      {next && plan ? (
+        <>
+          <Text style={[type.heading, { marginTop: space.md }]}>{`Next: Citadel ${c.from} → ${next.level}`}</Text>
+          <Text style={type.body}>{next.requires.length ? `Needs ${next.requires.map((r) => `${r.building} ${r.level}`).join(', ')}` : 'No building requirements'}</Text>
+          <Text style={[type.caption, { marginTop: 4 }]}>{`Cost with your boosts: ${(Object.entries(plan.totals) as [string, number][]).filter(([, v]) => v > 0).map(([k, v]) => `${fmt(v)} ${label(k)}`).join(' · ')}`}</Text>
+          {plan.netSeconds ? <Text style={type.caption}>{`Build time: ${formatDurationShort(plan.netSeconds)}`}</Text> : null}
+          {haveOwned ? (
+            <Text style={[type.body, { marginTop: 4, color: short.length ? palette.warning : palette.success }]}>
+              {short.length ? `Short: ${short.map(([k, v]) => `${fmt(v)} ${label(k)}`).join(' · ')}` : 'You have everything for the next level.'}
+            </Text>
+          ) : <Text style={[type.caption, { marginTop: 4 }]}>Enter what you own in the Citadel Planner to see what you're short of.</Text>}
+        </>
+      ) : <Text style={[type.body, { marginTop: space.sm }]}>Citadel is at the top level.</Text>}
+    </Card>
+  );
+}
+
 function CitadelView() {
+  const myLevel = useAppStore((s) => s.citadel.from);
   return (
     <>
-      <CollapsibleSection title="Citadel Lv. 1–40" subtitle="Reverse dependency tree and costs" right={<Button compact icon={Calculator} label="Planner" onPress={() => router.push('/tools/citadel')} />}>
-      {citadelLevels.map((l) => (
-        <Accordion key={l.level} title={`Citadel ${l.level}`} subtitle={l.unlocks.length ? `Unlocks: ${l.unlocks.join(', ')}` : l.requires.map((r) => `${r.building} ${r.level}`).join(' · ') || 'Starting level'} accent={l.unlocks.length ? palette.gold : undefined}>
+      <CollapsibleSection title="Citadel Lv. 1–40" subtitle="Requirements and costs by level" right={<Button compact icon={Calculator} label="Planner" onPress={() => router.push('/tools/citadel')} />}>
+      {[1, 11, 21, 31].map((t) => (
+        <CollapsibleSection key={t} title={`Levels ${t}–${t + 9}`} initiallyOpen={myLevel + 1 >= t && myLevel + 1 <= t + 9}>
+      {citadelLevels.filter((l) => l.level >= t && l.level <= t + 9).map((l) => (
+        <Accordion key={l.level} title={`Citadel ${l.level}${l.level === myLevel + 1 ? '  · next' : l.level <= myLevel ? '  ✓' : ''}`} subtitle={l.unlocks.length ? `Unlocks: ${l.unlocks.join(', ')}` : l.requires.map((r) => `${r.building} ${r.level}`).join(' · ') || 'Starting level'} accent={l.unlocks.length ? palette.gold : undefined}>
           {l.requires.length ? (
             <>
               <Text style={[type.caption, { marginBottom: 4 }]}>Requires</Text>
@@ -77,6 +108,8 @@ function CitadelView() {
             {Object.entries(l.cost).filter(([, v]) => v).map(([k, v]) => <Stat key={k} label={k.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())} value={fmt(v as number)} />)}
           </View>
         </Accordion>
+      ))}
+        </CollapsibleSection>
       ))}
       <ConfidenceNote confidence="community" />
       </CollapsibleSection>
@@ -137,7 +170,7 @@ function RunesView({ focus }: { focus: TroopFocus }) {
   const rows = useMemo(() => upgradeTable('rune'), []);
   return (
     <>
-      <CollapsibleSection title="Rune types" subtitle="4 types · up to 6 sets of 4 runes · Weapon Forge Lv. 8">
+      <CollapsibleSection title="Rune types" subtitle="4 types · up to 6 sets of 4 runes · Weapon Forge Lv. 8" initiallyOpen={false}>
       {runeSets.map((r) => (
         <Card key={r.name} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, r.focus) ? 1 : 0.5 }} accent={relevant(focus, r.focus) && focus !== 'All' ? troopColors[r.focus] : undefined}>
           <Row style={{ justifyContent: 'space-between' }}>
@@ -163,7 +196,7 @@ function TotemsView({ focus }: { focus: TroopFocus }) {
   const col = focus === 'Infantry' ? 'bear' : focus === 'Archer' ? 'eagle' : focus === 'Cavalry' ? 'wolf' : null;
   return (
     <>
-      <CollapsibleSection title="Totem sets I–V" subtitle="Weapon Forge Lv. 16–31 · Bear (Inf) · Eagle (Arch) · Wolf (Cav)">
+      <CollapsibleSection title="Totem sets I–V" subtitle="Weapon Forge Lv. 16–31 · Bear (Inf) · Eagle (Arch) · Wolf (Cav)" initiallyOpen={false}>
       <Table
         rows={totemSets}
         columns={[
@@ -189,7 +222,7 @@ function HolystonesView() {
   const rows = useMemo(() => upgradeTable('holystone'), []);
   return (
     <>
-      <CollapsibleSection title="Holystone sets I–IV" subtitle="Weapon Forge Lv. 25–31 · unit + troop dual scaling">
+      <CollapsibleSection title="Holystone sets I–IV" subtitle="Weapon Forge Lv. 25–31 · unit + troop dual scaling" initiallyOpen={false}>
       <Table
         rows={holystoneSets}
         columns={[
@@ -252,7 +285,7 @@ function GloryView({ focus }: { focus: TroopFocus }) {
   const rows = [...gloryBuildings].sort((a, b) => Number(relevant(focus, b.focus) && b.focus !== 'All') - Number(relevant(focus, a.focus) && a.focus !== 'All'));
   return (
     <>
-      <CollapsibleSection title="Building Glory levels" subtitle="Unlock at building Lv. 15 · Marks of Glory">
+      <CollapsibleSection title="Building Glory levels" subtitle="Unlock at building Lv. 15 · Marks of Glory" initiallyOpen={false}>
       {rows.map((g) => (
         <Card key={g.building} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, g.focus) ? 1 : 0.5 }}>
           <Row style={{ justifyContent: 'space-between' }}>
