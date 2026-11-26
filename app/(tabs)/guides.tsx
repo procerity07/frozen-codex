@@ -67,8 +67,8 @@ function Playbooks() {
   return (
     <Screen>
       <SectionHeader title="Strategy playbooks" subtitle={`${guides.length} guides`} />
-      {guides.map((g, idx) => (
-        <Accordion key={g.id} title={g.title} subtitle={g.summary} initiallyOpen={idx === 0}>
+      {guides.map((g) => (
+        <Accordion key={g.id} title={g.title} subtitle={g.summary}>
           {g.sections.map((s) => (
             <View key={s.heading} style={{ marginBottom: space.md }}>
               <Text style={[type.heading, { color: palette.cyan, marginBottom: 4 }]}>{s.heading}</Text>

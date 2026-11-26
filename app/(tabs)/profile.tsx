@@ -54,11 +54,13 @@ export default function ProfileScreen() {
 
   return (
     <Screen>
-      <Pressable onPress={() => { haptic(); router.push('/tools/settings'); }} accessibilityRole="button"
-        style={({ pressed }) => [{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: space.sm, padding: space.md, borderRadius: 12, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.surface }, pressed && { opacity: 0.7 }]}>
-        <Settings size={18} color={palette.cyan} />
-        <Text style={[type.body, { color: palette.cyan }]}>Settings</Text>
-      </Pressable>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <Pressable onPress={() => { haptic(); router.push('/tools/settings'); }} accessibilityRole="button" accessibilityLabel="Settings" hitSlop={10}
+          style={({ pressed }) => [{ flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 6, paddingHorizontal: 10, borderRadius: 20, borderWidth: 1, borderColor: palette.border }, pressed && { opacity: 0.7 }]}>
+          <Settings size={16} color={palette.cyan} />
+          <Text style={[type.caption, { color: palette.cyan }]}>Settings</Text>
+        </Pressable>
+      </View>
 
       <CollapsibleSection title="Account" icon={User} right={<Pressable onPress={() => router.push('/tools/settings')} hitSlop={8}><Pencil size={16} color={palette.cyan} /></Pressable>}>
       <Card>

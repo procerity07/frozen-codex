@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Switch, Text, View } from 'react-native';
 import { router, Stack } from 'expo-router';
 import Constants from 'expo-constants';
-import { Database, Download, RefreshCw, Smartphone, Sparkles, Upload } from 'lucide-react-native';
+import { Bell, Database, Download, Languages, RefreshCw, Smartphone, Sparkles, Upload, User } from 'lucide-react-native';
 import { palette, space, type } from '@/theme';
 import { TranslateCard } from '@/components/domain/TranslateCard';
-import { Badge, Button, Card, Chip, ChipRow, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
+import { Badge, Button, Card, Chip, ChipRow, CollapsibleSection, Field, NumberField, Row, Screen, SectionHeader, Stat } from '@/components/ui';
 import { selectPersisted, useAppStore } from '@/store/useAppStore';
 import { dbStats, getMeta } from '@/db/repo';
 import { checkForUpdates, DEFAULT_MANIFEST_URL, type SyncResult } from '@/db/ota';
@@ -51,6 +51,67 @@ export default function SettingsScreen() {
   return (
     <Screen>
       <Stack.Screen options={{ title: 'Settings' }} />
+      <CollapsibleSection title="Account" icon={User} subtitle="Realm, lord name, first-time setup" initiallyOpen={false}>
+            <Card>
+        <Row>
+          <Field label="Realm #" value={s.realm.number} onChangeText={(v) => s.setRealm({ number: v })} keyboardType="numeric" placeholder="412" />
+          <NumberField label="Realm age (weeks)" value={s.realm.ageWeeks} onChange={(n) => s.setRealm({ ageWeeks: n })} />
+        </Row>
+        <Row style={{ marginTop: space.sm }}>
+          <Field label="Server" value={s.realm.server} onChangeText={(v) => s.setRealm({ server: v })} />
+          <Field label="Lord name" value={s.realm.lordName} onChangeText={(v) => s.setRealm({ lordName: v })} autoCapitalize="none" />
+        </Row>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Event Points Calculator shows.</Text>
+      </Card>
+      <View style={{ marginTop: space.sm }}>
+        <Button icon={Sparkles} variant="secondary" label="Run first-time setup again" onPress={() => { s.setOnboarded(false); router.replace('/onboarding'); }} />
+      </View>
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Alerts" icon={Bell} subtitle="Alarm lead time and exact alarms" initiallyOpen={false}>
+            <Text style={type.caption}>Lead time before event start</Text>
+      <ChipRow>{LEADS.map((m) => <Chip key={m} label={`${m} min`} active={s.alarmLeadMinutes === m} onPress={() => s.setAlarmLead(m)} />)}</ChipRow>
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={type.body}>Daily reset reminder</Text>
+            <Text style={type.caption}>{s.alarmLeadMinutes} min before 00:00 UTC</Text>
+          </View>
+          <Switch
+            value={resetAlarm}
+            trackColor={{ true: palette.cyan, false: palette.border }}
+            thumbColor={palette.text}
+            onValueChange={async (on) => {
+              if (on && !(await ensurePermission())) return;
+              await scheduleDailyReset(on, s.alarmLeadMinutes);
+              s.setAlarm('daily-reset', on);
+              setResetAlarm(on);
+            }}
+          />
+        </Row>
+        <Text style={[type.caption, { marginTop: space.sm }]}>Event alarms already set keep their old lead time until toggled again.</Text>
+      </Card>
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Language & display" icon={Languages} subtitle="Translation, hero portraits, app tour" initiallyOpen={false}>
+      <TranslateCard />
+            <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={type.body}>Show hero portraits</Text>
+            <Text style={type.caption}>Loaded from the Puzzles & Chaos community wiki and kept on your phone. Off = letter badges, no image downloads.</Text>
+          </View>
+          <Switch value={s.showPortraits} onValueChange={s.setShowPortraits} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
+        </Row>
+      </Card>
+      <Card style={{ marginTop: space.md }}>
+        <Text style={type.body}>App tour</Text>
+        <Text style={type.caption}>A quick look at what each tab does.</Text>
+        <View style={{ marginTop: space.sm }}><Button compact variant="secondary" label="Show the tour again" onPress={() => { s.setTourDone(false); router.navigate('/'); }} /></View>
+      </Card>
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Data & backup" icon={Database} subtitle="App and database updates, backup, feedback" initiallyOpen={false}>
       <SectionHeader title="App updates" icon={Smartphone} />
       <Card>
         <Row style={{ justifyContent: 'space-between' }}>
@@ -73,66 +134,33 @@ export default function SettingsScreen() {
       </Card>
       <WhatsNewSheet open={notesOpen} onClose={() => setNotesOpen(false)} />
 
-      <FeedbackCard />
-
-      <TranslateCard />
-
-      <Card style={{ marginTop: space.md }}>
-        <Text style={type.body}>App tour</Text>
-        <Text style={type.caption}>A quick look at what each tab does.</Text>
-        <View style={{ marginTop: space.sm }}><Button compact variant="secondary" label="Show the tour again" onPress={() => { s.setTourDone(false); router.navigate('/'); }} /></View>
-      </Card>
-
-      <SectionHeader title="Hero portraits" />
+      <SectionHeader title="Database updates" icon={Database} subtitle="Tap to get the latest heroes, events, Sophia answers, codes and shops without a new APK" />
       <Card>
         <Row style={{ justifyContent: 'space-between' }}>
-          <View style={{ flex: 1 }}>
-            <Text style={type.body}>Show hero portraits</Text>
-            <Text style={type.caption}>Loaded from the Puzzles & Chaos community wiki and kept on your phone. Off = letter badges, no image downloads.</Text>
-          </View>
-          <Switch value={s.showPortraits} onValueChange={s.setShowPortraits} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
+          <Stat label="Bundled seed" value={`v${SEED_VERSION}`} />
+          <Stat label="Data pack" value={otaVersion ? `v${otaVersion}` : 'none'} align="right" color={otaVersion ? palette.cyan : palette.textMuted} />
         </Row>
+        {stats ? (
+          <Text style={[type.numberSmall, { marginTop: space.sm }]}>{stats.heroes} heroes · {stats.events} events · {stats.sophia} answers · {stats.codes} codes</Text>
+        ) : null}
+        {syncedAt ? <Text style={[type.caption, { marginTop: 2 }]}>Last sync {syncedAt.slice(0, 16).replace('T', ' ')} UTC</Text> : null}
+        <View style={{ marginTop: space.md }}>
+          <Field label="Manifest URL" value={s.manifestUrl} onChangeText={s.setManifestUrl} placeholder={DEFAULT_MANIFEST_URL} autoCapitalize="none" autoCorrect={false} keyboardType="url" />
+        </View>
+        <Row style={{ marginTop: space.md }}>
+          <View style={{ flex: 1 }}><Button icon={RefreshCw} label="Check for updates" disabled={busy} onPress={() => { sync(false).catch(() => undefined); }} /></View>
+          <Button variant="secondary" label="Force" disabled={busy} onPress={() => { sync(true).catch(() => undefined); }} />
+        </Row>
+        {busy ? <ActivityIndicator color={palette.cyan} style={{ marginTop: space.md }} /> : null}
+        {result ? (
+          <View style={{ marginTop: space.md, gap: 4 }}>
+            <Badge label={result.status === 'updated' ? 'Updated' : result.status === 'up-to-date' ? 'Up to date' : 'Failed'} color={result.status === 'error' ? palette.danger : palette.success} />
+            <Text style={type.bodySecondary}>{result.message}</Text>
+            {result.status === 'updated' ? <Text style={type.numberSmall}>+{result.counts.heroes} heroes · +{result.counts.events} events · +{result.counts.giftCodes} codes · +{result.counts.sophia} answers</Text> : null}
+          </View>
+        ) : null}
       </Card>
 
-      <SectionHeader title="Realm profile" />
-      <Card>
-        <Row>
-          <Field label="Realm #" value={s.realm.number} onChangeText={(v) => s.setRealm({ number: v })} keyboardType="numeric" placeholder="412" />
-          <NumberField label="Realm age (weeks)" value={s.realm.ageWeeks} onChange={(n) => s.setRealm({ ageWeeks: n })} />
-        </Row>
-        <Row style={{ marginTop: space.sm }}>
-          <Field label="Server" value={s.realm.server} onChangeText={(v) => s.setRealm({ server: v })} />
-          <Field label="Lord name" value={s.realm.lordName} onChangeText={(v) => s.setRealm({ lordName: v })} autoCapitalize="none" />
-        </Row>
-        <Text style={[type.caption, { marginTop: space.sm }]}>Realm age decides which Radiant / Ace Hero Choice Card the Event Points Calculator shows.</Text>
-      </Card>
-      <View style={{ marginTop: space.sm }}>
-        <Button icon={Sparkles} variant="secondary" label="Run first-time setup again" onPress={() => { s.setOnboarded(false); router.replace('/onboarding'); }} />
-      </View>
-
-      <SectionHeader title="Alarms" />
-      <Text style={type.caption}>Lead time before event start</Text>
-      <ChipRow>{LEADS.map((m) => <Chip key={m} label={`${m} min`} active={s.alarmLeadMinutes === m} onPress={() => s.setAlarmLead(m)} />)}</ChipRow>
-      <Card>
-        <Row style={{ justifyContent: 'space-between' }}>
-          <View style={{ flex: 1 }}>
-            <Text style={type.body}>Daily reset reminder</Text>
-            <Text style={type.caption}>{s.alarmLeadMinutes} min before 00:00 UTC</Text>
-          </View>
-          <Switch
-            value={resetAlarm}
-            trackColor={{ true: palette.cyan, false: palette.border }}
-            thumbColor={palette.text}
-            onValueChange={async (on) => {
-              if (on && !(await ensurePermission())) return;
-              await scheduleDailyReset(on, s.alarmLeadMinutes);
-              s.setAlarm('daily-reset', on);
-              setResetAlarm(on);
-            }}
-          />
-        </Row>
-        <Text style={[type.caption, { marginTop: space.sm }]}>Event alarms already set keep their old lead time until toggled again.</Text>
-      </Card>
 
       <SectionHeader title="Backup" subtitle="Profile, castles, checklists, calculators" />
       <Card>
@@ -167,32 +195,9 @@ export default function SettingsScreen() {
         </Row>
       </Card>
 
-      <SectionHeader title="Database updates" icon={Database} subtitle="Tap to get the latest heroes, events, Sophia answers, codes and shops without a new APK" />
-      <Card>
-        <Row style={{ justifyContent: 'space-between' }}>
-          <Stat label="Bundled seed" value={`v${SEED_VERSION}`} />
-          <Stat label="Data pack" value={otaVersion ? `v${otaVersion}` : 'none'} align="right" color={otaVersion ? palette.cyan : palette.textMuted} />
-        </Row>
-        {stats ? (
-          <Text style={[type.numberSmall, { marginTop: space.sm }]}>{stats.heroes} heroes · {stats.events} events · {stats.sophia} answers · {stats.codes} codes</Text>
-        ) : null}
-        {syncedAt ? <Text style={[type.caption, { marginTop: 2 }]}>Last sync {syncedAt.slice(0, 16).replace('T', ' ')} UTC</Text> : null}
-        <View style={{ marginTop: space.md }}>
-          <Field label="Manifest URL" value={s.manifestUrl} onChangeText={s.setManifestUrl} placeholder={DEFAULT_MANIFEST_URL} autoCapitalize="none" autoCorrect={false} keyboardType="url" />
-        </View>
-        <Row style={{ marginTop: space.md }}>
-          <View style={{ flex: 1 }}><Button icon={RefreshCw} label="Check for updates" disabled={busy} onPress={() => { sync(false).catch(() => undefined); }} /></View>
-          <Button variant="secondary" label="Force" disabled={busy} onPress={() => { sync(true).catch(() => undefined); }} />
-        </Row>
-        {busy ? <ActivityIndicator color={palette.cyan} style={{ marginTop: space.md }} /> : null}
-        {result ? (
-          <View style={{ marginTop: space.md, gap: 4 }}>
-            <Badge label={result.status === 'updated' ? 'Updated' : result.status === 'up-to-date' ? 'Up to date' : 'Failed'} color={result.status === 'error' ? palette.danger : palette.success} />
-            <Text style={type.bodySecondary}>{result.message}</Text>
-            {result.status === 'updated' ? <Text style={type.numberSmall}>+{result.counts.heroes} heroes · +{result.counts.events} events · +{result.counts.giftCodes} codes · +{result.counts.sophia} answers</Text> : null}
-          </View>
-        ) : null}
-      </Card>
+
+      <FeedbackCard />
+      </CollapsibleSection>
 
       <Text style={[type.caption, { textAlign: 'center', marginTop: space.xl }]}>
         Frozen Codex {Constants.expoConfig?.version ?? ''} · Unofficial fan companion, not affiliated with 37GAMES.
