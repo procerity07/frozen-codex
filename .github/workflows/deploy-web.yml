@@ -29,7 +29,7 @@ jobs:
           CI: '1'
           EXPO_OFFLINE: '1'
           WEB_BASE_URL: /frozen-codex
-        run: npx expo export --platform web --output-dir web-dist
+        run: npx expo export --platform web --output-dir web-dist && node scripts/web-postbuild.js web-dist
       - name: Publish to the gh-pages branch
         run: |
           cp web-dist/index.html web-dist/404.html

@@ -13,7 +13,8 @@
     "pack": "tsx scripts/export-seed-json.ts",
     "assets": "node scripts/render-assets.cjs",
     "verify": "tsc --noEmit && tsx scripts/validate-seed.ts",
-    "build:apk:local": "expo prebuild --platform android --clean && cd android && ./gradlew assembleRelease"
+    "build:apk:local": "expo prebuild --platform android --clean && cd android && ./gradlew assembleRelease",
+    "build:web": "expo export --platform web --output-dir dist && node scripts/web-postbuild.js dist"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
