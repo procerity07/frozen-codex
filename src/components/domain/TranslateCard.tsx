@@ -1,5 +1,5 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Platform, Text, View } from 'react-native';
 import { Languages } from 'lucide-react-native';
 import { Button, Card, Chip, Row, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
@@ -15,6 +15,11 @@ const STATUS_TEXT = {
 } as const;
 
 export function TranslateCard() {
+  if (Platform.OS === 'web') return null; // browsers have their own "Translate page"
+  return <TranslateCardNative />;
+}
+
+function TranslateCardNative() {
   const mode = useAppStore((s) => s.translateMode);
   const setMode = useAppStore((s) => s.setTranslateMode);
   const status = useSyncExternalStore((l) => subscribe(l), getStatus);

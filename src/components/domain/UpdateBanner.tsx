@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Linking, Text, View } from 'react-native';
 import { Download, Sparkles } from 'lucide-react-native';
@@ -36,6 +37,11 @@ export function openDownload(release: ReleaseInfo) {
 
 /** Shows when GitHub has a newer release than this APK, until downloaded or dismissed for that version. */
 export function UpdateBanner() {
+  if (Platform.OS === 'web') return null; // the web version updates itself
+  return <UpdateBannerNative />;
+}
+
+function UpdateBannerNative() {
   const dismissed = useAppStore((s) => s.dismissedUpdate);
   const dismissUpdate = useAppStore((s) => s.dismissUpdate);
   const [release, setRelease] = useState<ReleaseInfo | null>(null);

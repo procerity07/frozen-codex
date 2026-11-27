@@ -21,19 +21,43 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#090E17"
       },
-      "permissions": ["POST_NOTIFICATIONS", "SCHEDULE_EXACT_ALARM", "USE_EXACT_ALARM", "VIBRATE", "RECEIVE_BOOT_COMPLETED"]
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "SCHEDULE_EXACT_ALARM",
+        "USE_EXACT_ALARM",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED"
+      ]
     },
     "plugins": [
       "expo-router",
       "expo-sqlite",
-      ["expo-notifications", { "color": "#38BDF8" }],
+      [
+        "expo-notifications",
+        {
+          "color": "#38BDF8"
+        }
+      ],
       "expo-web-browser",
-      ["expo-splash-screen", { "image": "./assets/splash.png", "backgroundColor": "#090E17", "imageWidth": 180 }]
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "backgroundColor": "#090E17",
+          "imageWidth": 180
+        }
+      ]
     ],
-    "experiments": { "typedRoutes": false },
+    "experiments": {
+      "typedRoutes": false,
+      "baseUrl": "/frozen-codex"
+    },
     "extra": {
       "dataManifestUrl": "https://raw.githubusercontent.com/procerity07/frozen-codex/main/data-pack/manifest.json",
       "releaseRepo": "procerity07/frozen-codex"
+    },
+    "web": {
+      "bundler": "metro"
     }
   }
 }

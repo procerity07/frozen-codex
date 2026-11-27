@@ -1,7 +1,9 @@
 import type { Element, GameEvent, GiftCode, Hero, Rarity, SophiaQuestion, UnitType } from '@/types/game';
 import { ftsQuery, fuzzyScore } from '@/lib/fuzzy';
 import { normalizeHero } from '@/lib/heroData';
-import { getDb } from './client';
+import { getDb, IS_WEB } from './client';
+
+const like = (q: string) => `%${q.trim().replace(/[%_]/g, '')}%`;
 
 export interface HeroFilter {
   query?: string;
@@ -20,7 +22,8 @@ export async function listHeroes(filter: HeroFilter = {}): Promise<Hero[]> {
   if (filter.rarities?.length) { where.push(`rarity IN (${filter.rarities.map(() => '?').join(',')})`); params.push(...filter.rarities); }
   if (filter.unitTypes?.length) { where.push(`unit_type IN (${filter.unitTypes.map(() => '?').join(',')})`); params.push(...filter.unitTypes); }
   const match = filter.query ? ftsQuery(filter.query) : null;
-  if (match) { where.push('id IN (SELECT id FROM heroes_fts WHERE heroes_fts MATCH ?)'); params.push(match); }
+  if (match && IS_WEB) { where.push("id IN (SELECT id FROM heroes_fts WHERE name || ' ' || body LIKE ?)"); params.push(like(filter.query!)); }
+  else if (match) { where.push('id IN (SELECT id FROM heroes_fts WHERE heroes_fts MATCH ?)'); params.push(match); }
   const sql = `SELECT data FROM heroes ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ORDER BY rarity DESC, name ASC`;
   const rows = parse<Hero>(await db.getAllAsync<{ data: string }>(sql, params)).map(normalizeHero);
   if (rows.length || !filter.query) return rows;
@@ -42,7 +45,9 @@ export async function getHero(id: string): Promise<Hero | null> {
 export async function listEvents(query?: string): Promise<GameEvent[]> {
   const db = await getDb();
   const match = query ? ftsQuery(query) : null;
-  const rows = match
+  const rows = match && IS_WEB
+    ? await db.getAllAsync<{ data: string }>("SELECT data FROM events WHERE id IN (SELECT id FROM events_fts WHERE name || ' ' || body LIKE ?) ORDER BY rowid", like(query!))
+    : match
     ? await db.getAllAsync<{ data: string }>('SELECT data FROM events WHERE id IN (SELECT id FROM events_fts WHERE events_fts MATCH ?) ORDER BY rowid', match)
     : await db.getAllAsync<{ data: string }>('SELECT data FROM events ORDER BY rowid');
   return parse<GameEvent>(rows);
@@ -66,7 +71,9 @@ export async function searchSophia(query: string, limit = 25): Promise<SophiaQue
   if (!match) {
     return (await db.getAllAsync<SophiaRow>('SELECT * FROM sophia ORDER BY category, id LIMIT ?', limit)).map(toSophia);
   }
-  const ranked = await db.getAllAsync<SophiaRow>(
+  const ranked = IS_WEB ? await db.getAllAsync<SophiaRow>(
+    "SELECT * FROM sophia WHERE question || ' ' || keywords || ' ' || answer LIKE ? LIMIT ?", like(query), limit,
+  ) : await db.getAllAsync<SophiaRow>(
     `SELECT s.* FROM sophia_fts f JOIN sophia s ON s.id = f.id WHERE sophia_fts MATCH ? ORDER BY bm25(sophia_fts, 0, 4, 1, 2) LIMIT ?`,
     match, limit,
   );
