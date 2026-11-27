@@ -113,7 +113,7 @@ export function Divider() {
 export function Field(props: TextInputProps & { label?: string }) {
   const { label, style, ...rest } = props;
   return (
-    <View style={{ gap: 4, flex: 1 }}>
+    <View style={{ gap: 4, flex: 1, minWidth: 0 }}>
       {label ? <Text style={type.caption}>{label}</Text> : null}
       <TextInput placeholderTextColor={palette.textMuted} style={[s.input, style]} selectionColor={palette.cyan} {...rest} />
     </View>
@@ -123,7 +123,7 @@ export function Field(props: TextInputProps & { label?: string }) {
 /** Numeric input that keeps tabular alignment and clamps to >= 0. */
 export function NumberField({ label, value, onChange, suffix, width }: { label?: string; value: number; onChange: (n: number) => void; suffix?: string; width?: number }) {
   return (
-    <View style={{ gap: 4, flex: width ? undefined : 1, width }}>
+    <View style={{ gap: 4, flex: width ? undefined : 1, width, minWidth: 0 }}>
       {label ? <Text style={type.caption} numberOfLines={1}>{label}</Text> : null}
       <View style={s.numberWrap}>
         <TextInput
@@ -207,9 +207,9 @@ export const s = StyleSheet.create({
   iconBtn: { width: 36, height: 36, borderRadius: radius.sm, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'transparent' },
   badge: { paddingHorizontal: 7, paddingVertical: 2, borderRadius: 5, borderWidth: 1, alignSelf: 'flex-start' },
   badgeText: { fontSize: 11, fontWeight: '700' },
-  input: { height: 42, backgroundColor: palette.bg, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, paddingHorizontal: space.md, color: palette.text, fontSize: 14 },
-  numberWrap: { flexDirection: 'row', alignItems: 'center' },
-  numberInput: { flex: 1, fontVariant: ['tabular-nums'], textAlign: 'right' },
+  input: { minWidth: 0, width: '100%', height: 42, backgroundColor: palette.bg, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, paddingHorizontal: space.md, color: palette.text, fontSize: 14 },
+  numberWrap: { flexDirection: 'row', alignItems: 'center', minWidth: 0 },
+  numberInput: { flex: 1, minWidth: 0, width: undefined, fontVariant: ['tabular-nums'], textAlign: 'right' },
   suffix: { ...type.numberSmall, marginLeft: 6, color: palette.textMuted },
   stepper: { flexDirection: 'row', alignItems: 'center', height: 42, borderWidth: 1, borderColor: palette.border, borderRadius: radius.sm, backgroundColor: palette.bg },
   stepBtn: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
