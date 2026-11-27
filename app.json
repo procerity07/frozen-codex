@@ -49,8 +49,7 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": false,
-      "baseUrl": "/frozen-codex"
+      "typedRoutes": false
     },
     "extra": {
       "dataManifestUrl": "https://raw.githubusercontent.com/procerity07/frozen-codex/main/data-pack/manifest.json",
