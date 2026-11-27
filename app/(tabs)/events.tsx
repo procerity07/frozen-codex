@@ -41,13 +41,20 @@ function CalendarView() {
   const days = useMemo(() => twoWeekCalendar(utcWeekStart(now), seedEvents, { aceLordAnchorWeek: a, rotationAnchorWeek: r }), [now, a, r]);
   const todayKey = now.toISOString().slice(0, 10);
   const [toggled, setToggled] = useState<Record<string, boolean>>({});
+  const [showPast, setShowPast] = useState(false);
   return (
     <Screen>
       <Text style={[type.caption, { marginBottom: space.sm }]}>Times in UTC · your device is {localOffsetLabel(now)}</Text>
+      {days.some((d) => d.date.toISOString().slice(0, 10) < todayKey) ? (
+        <Pressable onPress={() => setShowPast(!showPast)} style={{ paddingVertical: space.sm }}>
+          <Text style={[type.caption, { color: palette.cyan }]}>{showPast ? 'Hide past days' : `Show past days (${days.filter((d) => d.date.toISOString().slice(0, 10) < todayKey).length})`}</Text>
+        </Pressable>
+      ) : null}
       {days.map((d, i) => {
         const key = d.date.toISOString().slice(0, 10);
+        if (!showPast && key < todayKey) return null;
         const isToday = key === todayKey;
-        const firstOfWeek = i % 7 === 0;
+        const firstOfWeek = i % 7 === 0 || (!showPast && key === todayKey);
         return (
           <View key={key}>
             {firstOfWeek ? (

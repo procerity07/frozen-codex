@@ -16,7 +16,7 @@ import { civilBonuses, clampEntry, enhancementLabel, promotionStatus, requiredEn
 const ELEMENTS: Element[] = ['Fire', 'Ice', 'Nature', 'Light', 'Dark'];
 const RARITIES: Rarity[] = [6, 5, 4, 3, 2];
 const UNITS: UnitType[] = ['Infantry', 'Cavalry', 'Archer', 'All-round', 'Civil'];
-const VIEWS = ['Codex', 'Mine', 'Counters', 'Bonds', 'Curios'] as const;
+const VIEWS = ['Codex', 'Mine', 'Reference'] as const;
 
 const toggle = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
@@ -27,7 +27,7 @@ export default function HeroesScreen() {
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.xs }}>
         <Segmented options={VIEWS} value={view} onChange={setView} labels={{ Mine: 'Roster' }} />
       </View>
-      {view === 'Codex' ? <Codex /> : view === 'Mine' ? <MyHeroes onBrowse={() => setView('Codex')} /> : view === 'Counters' ? <Counters /> : view === 'Bonds' ? <Bonds /> : <Curios />}
+      {view === 'Codex' ? <Codex /> : view === 'Mine' ? <MyHeroes onBrowse={() => setView('Codex')} /> : <Reference />}
     </View>
   );
 }
@@ -161,9 +161,20 @@ function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
   );
 }
 
-function Counters() {
+/** Reference tables in one place, each folded. */
+function Reference() {
   return (
     <Screen>
+      <CollapsibleSection title="Matchups" subtitle="Element wheel, troop triangle, formations" initiallyOpen={false}><Counters /></CollapsibleSection>
+      <CollapsibleSection title="Bonds" subtitle="Bond EXP planner, gifts, bond groups" initiallyOpen={false}><Bonds /></CollapsibleSection>
+      <CollapsibleSection title="Curios" subtitle="Ascend calculator, star costs, encyclopedia" initiallyOpen={false}><Curios /></CollapsibleSection>
+    </Screen>
+  );
+}
+
+function Counters() {
+  return (
+    <>
       <SectionHeader title="Match-3 elemental wheel" subtitle="Tap an element to trace its matchups" />
       <Card><ElementWheel /></Card>
       <SectionHeader title="Kingdom troop triangle" subtitle="Infantry › Archer › Cavalry › Infantry" />
@@ -178,7 +189,7 @@ function Counters() {
           <Text style={[type.bodySecondary, { marginTop: 4 }]}>{f.effect}</Text>
         </Card>
       ))}
-    </Screen>
+    </>
   );
 }
 
@@ -198,7 +209,7 @@ function Bonds() {
   const ownedExp = bondGifts.reduce((s, g) => s + (owned[g.tier] ?? 0) * g.exp, 0);
   const nameOf = (id: string) => seedHeroes.find((h) => h.id === id)?.name ?? id;
   return (
-    <Screen>
+    <>
       <SectionHeader title="Bond EXP planner" subtitle="Lv. 1–95 · Lv. 1 and Lv. 95 EXP from the wiki, levels between estimated" />
       {ownedHeroes.length ? (
         <ChipRow>
@@ -260,7 +271,7 @@ function Bonds() {
           </View>
         </Card>
       ))}
-    </Screen>
+    </>
   );
 }
 
@@ -269,7 +280,7 @@ function Curios() {
   const [to, setTo] = useState(5);
   const c = curioCost(curioStarCosts, Math.min(from, 10), Math.min(Math.max(from, to), 10));
   return (
-    <Screen>
+    <>
       <SectionHeader title="Curio ascend calculator" subtitle="Unlocks at Weapon Forge Lv. 20" />
       <Card>
         <Row>
@@ -309,6 +320,6 @@ function Curios() {
           </Card>
         );
       })}
-    </Screen>
+    </>
   );
 }

@@ -23,7 +23,11 @@ export function TodayEvents({ now }: { now: Date }) {
   const anchors = { aceLordAnchorWeek: s.aceLordAnchorWeek, rotationAnchorWeek: s.rotationAnchorWeek };
   const rows = useMemo(() => todayEventRows(events, now, anchors, s.allianceTimes), [now, s.aceLordAnchorWeek, s.rotationAnchorWeek, s.allianceTimes]);
   const [all, setAll] = useState(false);
-  const shown = all ? rows : rows.slice(0, SHOW);
+  const [showEnded, setShowEnded] = useState(false);
+  const active = rows.filter((r) => r.status !== 'ended');
+  const ended = rows.filter((r) => r.status === 'ended');
+  const list = showEnded ? [...active, ...ended] : active;
+  const shown = all ? list : list.slice(0, SHOW);
   const label = (st: TodayStatus, start: Date, end: Date) =>
     st === 'live' ? `Live now · ends in ${formatDuration(end.getTime() - now.getTime())}` : st === 'upcoming' ? `Starts in ${formatDuration(start.getTime() - now.getTime())}` : 'Ended';
 
@@ -31,7 +35,7 @@ export function TodayEvents({ now }: { now: Date }) {
     <>
       <SectionHeader title="Today's events" subtitle={`${rows.length} today · times in your time`} right={<Button compact variant="secondary" label="Schedule" onPress={() => router.push('/events')} />} />
       <Card style={{ paddingVertical: space.xs }}>
-        {rows.length === 0 ? <Text style={[type.bodySecondary, { paddingVertical: space.sm }]}>No events today.</Text> : null}
+        {active.length === 0 && !showEnded ? <Text style={[type.bodySecondary, { paddingVertical: space.sm }]}>No more events today.</Text> : null}
         {shown.map((r, i) => (
           <Pressable key={r.ev.id} onPress={() => { haptic(); router.push(`/event/${r.ev.id}`); }}
             style={({ pressed }) => [{ flexDirection: 'row', alignItems: 'center', gap: space.sm, paddingVertical: space.sm, borderTopWidth: i ? 1 : 0, borderTopColor: palette.border, opacity: r.status === 'ended' ? 0.5 : 1 }, pressed && { opacity: 0.7 }]}>
@@ -47,9 +51,14 @@ export function TodayEvents({ now }: { now: Date }) {
             </Row>
           </Pressable>
         ))}
-        {rows.length > SHOW ? (
+        {list.length > SHOW ? (
           <Pressable onPress={() => setAll(!all)} style={{ paddingVertical: space.sm, borderTopWidth: 1, borderTopColor: palette.border }}>
-            <Text style={[type.caption, { color: palette.cyan, textAlign: 'center' }]}>{all ? 'Show less' : `Show all ${rows.length}`}</Text>
+            <Text style={[type.caption, { color: palette.cyan, textAlign: 'center' }]}>{all ? 'Show less' : `Show all ${list.length}`}</Text>
+          </Pressable>
+        ) : null}
+        {ended.length ? (
+          <Pressable onPress={() => setShowEnded(!showEnded)} style={{ paddingVertical: space.sm, borderTopWidth: 1, borderTopColor: palette.border }}>
+            <Text style={[type.caption, { textAlign: 'center' }]}>{showEnded ? 'Hide ended' : `Ended (${ended.length})`}</Text>
           </Pressable>
         ) : null}
       </Card>

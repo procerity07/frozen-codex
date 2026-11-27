@@ -5,7 +5,7 @@ import { Bell, Check, Gift, Hourglass, Plus, Timer, Trash } from 'lucide-react-n
 import type { LucideIcon } from 'lucide-react-native';
 import { checklistTemplate, events, royalArmsRace } from '@/data/seed';
 import { palette, radius, space, tint, type } from '@/theme';
-import { Badge, Button, Card, Chip, ChipRow, Field, IconButton, Row, Screen, SectionHeader, haptic } from '@/components/ui';
+import { Badge, Button, Card, Chip, ChipRow, CollapsibleSection, Field, IconButton, Row, Screen, SectionHeader, haptic } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { useNow } from '@/store/useNow';
 import { formatDuration, royalSlot, utcWeekday } from '@/lib/time';
@@ -70,8 +70,9 @@ export default function HomeScreen() {
       </View>
 
 
-      <SectionHeader title="At a glance" />
+      <CollapsibleSection title="At a glance" initiallyOpen={false}>
       <Dashboard now={now} />
+      </CollapsibleSection>
 
       <DailyChecklist now={now} />
     </Screen>
@@ -96,7 +97,7 @@ function DailyChecklist({ now }: { now: Date }) {
 
   return (
     <>
-      <SectionHeader title="Daily checklist" subtitle={`${completed}/${items.length} done on ${castle.name} · resets 00:00 UTC`} />
+      <CollapsibleSection title="Daily checklist" subtitle={`${castle.name} · resets 00:00 UTC`} right={<Badge label={`${completed}/${items.length}`} color={completed === items.length ? palette.success : palette.gold} />} initiallyOpen={false}>
       <ChipRow>
         {castles.map((c) => <Chip key={c.id} label={c.name} active={c.id === castle.id} onPress={() => setCastleId(c.id)} color={c.kind === 'main' ? palette.gold : palette.cyan} />)}
       </ChipRow>
@@ -135,6 +136,7 @@ function DailyChecklist({ now }: { now: Date }) {
         {castle.kind === 'farm' ? <IconButton icon={Trash} label="Remove castle" color={palette.danger} onPress={() => { removeCastle(castle.id); setCastleId('main'); }} /> : null}
       </Row>
       <Row style={{ marginTop: space.sm }}><Badge label="Tip" color={palette.gold} /><Text style={[type.caption, { flex: 1 }]}>Use one essence for the daily quest and bank the rest for Ace Lord Day 6.</Text></Row>
+      </CollapsibleSection>
     </>
   );
 }
