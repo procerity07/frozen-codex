@@ -17,7 +17,7 @@ export default function TabLayout() {
         header: () => <CommanderBar />,
         tabBarActiveTintColor: palette.cyan,
         tabBarInactiveTintColor: palette.textMuted,
-        tabBarStyle: { backgroundColor: palette.bg, borderTopColor: palette.border, height: 70 + insets.bottom, paddingTop: 6, paddingBottom: insets.bottom + 8 },
+        tabBarStyle: { backgroundColor: palette.surface, borderTopColor: palette.goldLine, borderTopWidth: 1, height: 70 + insets.bottom, paddingTop: 6, paddingBottom: insets.bottom + 8 },
         tabBarItemStyle: { paddingBottom: 4, height: 60 },
         tabBarLabelStyle: { fontSize: 11, lineHeight: 16, fontWeight: '600', marginTop: 2, overflow: 'visible' },
         sceneStyle: { backgroundColor: palette.bg },

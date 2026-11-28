@@ -64,7 +64,7 @@ export const CommanderBar = memo(CommanderBarImpl);
 
 const st = StyleSheet.create({
   searchBtn: { padding: 6, borderRadius: radius.md, borderWidth: 1, borderColor: palette.border },
-  wrap: { backgroundColor: palette.bg, paddingHorizontal: space.lg, paddingBottom: space.sm, borderBottomWidth: 1, borderBottomColor: palette.border },
+  wrap: { backgroundColor: palette.surface, paddingHorizontal: space.lg, paddingBottom: space.sm, borderBottomWidth: 1, borderBottomColor: palette.goldLine },
   topRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
   clockBlock: { flexDirection: 'row', alignItems: 'center', gap: 6, flex: 1 },
   clock: { ...type.number, fontSize: 17 },

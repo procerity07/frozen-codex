@@ -14,9 +14,12 @@ export function Card({ children, style, accent }: { children: ReactNode; style?:
 export function SectionHeader({ title, subtitle, icon: Icon, right }: { title: string; subtitle?: string; icon?: LucideIcon; right?: ReactNode }) {
   return (
     <View style={s.sectionHeader}>
-      {Icon ? <View style={s.sectionIcon}><Icon size={16} color={palette.cyan} strokeWidth={2} /></View> : null}
+      {Icon ? <View style={s.sectionIcon}><Icon size={16} color={palette.gold} strokeWidth={2} /></View> : <View style={s.sectionDiamond} />}
       <View style={{ flex: 1 }}>
-        <Text style={type.heading}>{title}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: space.sm }}>
+          <Text style={[type.heading, { letterSpacing: 0.3 }]}>{title}</Text>
+          <View style={s.sectionLine} />
+        </View>
         {subtitle ? <Text style={[type.caption, { marginTop: 2 }]}>{subtitle}</Text> : null}
       </View>
       {right}
@@ -191,17 +194,19 @@ export function EmptyState({ title, body }: { title: string; body?: string }) {
 }
 
 export const s = StyleSheet.create({
-  card: { backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderRadius: radius.lg, padding: space.lg },
+  card: { backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderTopColor: palette.borderStrong, borderRadius: radius.lg, padding: space.lg, shadowColor: '#000', shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: space.sm, marginTop: space.xl, marginBottom: space.md },
-  sectionIcon: { width: 28, height: 28, borderRadius: radius.sm, backgroundColor: palette.cyanDim, alignItems: 'center', justifyContent: 'center' },
-  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, height: 34, paddingHorizontal: 12, borderRadius: radius.sm, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.surface },
+  sectionIcon: { width: 28, height: 28, borderRadius: radius.sm, backgroundColor: palette.goldDim, borderWidth: 1, borderColor: palette.goldLine, alignItems: 'center', justifyContent: 'center' },
+  sectionDiamond: { width: 9, height: 9, marginHorizontal: 4, transform: [{ rotate: '45deg' }], borderWidth: 1.5, borderColor: palette.gold },
+  sectionLine: { flex: 1, height: 1, backgroundColor: palette.goldLine, opacity: 0.6 },
+  chip: { flexDirection: 'row', alignItems: 'center', gap: 6, height: 34, paddingHorizontal: 12, borderRadius: radius.sm, borderWidth: 1, borderColor: palette.borderStrong, backgroundColor: palette.modal },
   chipText: { fontSize: 13, fontWeight: '600', color: palette.textSecondary },
   chipRow: { gap: space.sm, paddingHorizontal: space.lg, paddingVertical: space.sm },
   segment: { flexDirection: 'row', backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, padding: 3 },
   segmentItem: { flex: 1, height: 34, alignItems: 'center', justifyContent: 'center', borderRadius: radius.sm, paddingHorizontal: 4 },
-  segmentActive: { backgroundColor: palette.modal, borderWidth: 1, borderColor: palette.borderStrong },
+  segmentActive: { backgroundColor: palette.modal, borderWidth: 1, borderColor: palette.cyanLine, borderBottomWidth: 2, borderBottomColor: palette.cyan },
   segmentText: { fontSize: 13, fontWeight: '600', color: palette.textMuted },
-  button: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, paddingHorizontal: space.lg, borderRadius: radius.md },
+  button: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, paddingHorizontal: space.lg, borderRadius: radius.md, borderBottomWidth: 2, borderBottomColor: 'rgba(0,0,0,0.35)' },
   buttonCompact: { height: 36, paddingHorizontal: space.md },
   buttonText: { fontSize: 14, fontWeight: '700' },
   iconBtn: { width: 36, height: 36, borderRadius: radius.sm, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'transparent' },
