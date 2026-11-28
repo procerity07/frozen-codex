@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Clock, RotateCcw } from 'lucide-react-native';
+import { Clock, RotateCcw, Search } from 'lucide-react-native';
+import { router } from 'expo-router';
 import { palette, radius, space, troopColors, type } from '@/theme';
 import type { TroopFocus } from '@/types/game';
 import { cycleForDate, formatDuration, msUntilUtcMidnight, utcClock } from '@/lib/time';
@@ -31,6 +32,9 @@ function CommanderBarImpl() {
           <RotateCcw size={13} color={palette.gold} />
           <Text style={st.reset}>{formatDuration(msUntilUtcMidnight(now))}</Text>
         </View>
+        <Pressable onPress={() => { haptic(); router.push('/tools/search'); }} accessibilityRole="button" accessibilityLabel="Search everything" hitSlop={8} style={st.searchBtn}>
+          <Search size={16} color={palette.cyan} />
+        </Pressable>
         <View style={[st.cycle, { borderColor: cycle === 'Ace Lord' ? palette.goldLine : palette.cyanLine }]}>
           <Text style={[st.cycleText, { color: cycle === 'Ace Lord' ? palette.gold : palette.cyan }]} numberOfLines={1}>{cycle}</Text>
         </View>
@@ -59,6 +63,7 @@ function CommanderBarImpl() {
 export const CommanderBar = memo(CommanderBarImpl);
 
 const st = StyleSheet.create({
+  searchBtn: { padding: 6, borderRadius: radius.md, borderWidth: 1, borderColor: palette.border },
   wrap: { backgroundColor: palette.bg, paddingHorizontal: space.lg, paddingBottom: space.sm, borderBottomWidth: 1, borderBottomColor: palette.border },
   topRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
   clockBlock: { flexDirection: 'row', alignItems: 'center', gap: 6, flex: 1 },

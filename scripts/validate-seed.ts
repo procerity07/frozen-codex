@@ -4,6 +4,7 @@ import { skillsCheckedInGame } from '../src/lib/heroData';
 import { normalizeLegend, outpostAreas } from '../src/lib/hive';
 import { recommendMarch } from '../src/lib/march';
 import { todayEventRows } from '../src/lib/todayEvents';
+import { searchEverything } from '../src/lib/globalSearch';
 import { currentTier, parseTierText } from '../src/lib/tiers';
 import { cleanSourceNotes } from '../src/lib/text';
 import { packContent } from './pack-content';
@@ -350,6 +351,9 @@ ok(!/\p{Extended_Pictographic}/u.test(allSeedText), 'seed data must not contain 
   ok(withNumbers.every((m) => parseTierText(m.description)), 'every skill with per-level numbers can be shown as a grid');
   ok(cleanSourceNotes('In-game. +4% at +2 (in-game). Values as shown in-game at +5.') === '+4% at +2.', 'source notes removed from display text');
 }
+
+// Global search
+ok(searchEverything('boyd')[0]?.title === 'Boyd' && searchEverything('oblivion')[0]?.kind === 'Event' && searchEverything('iron claw')[0]?.kind === 'Curio' && searchEverything('x').length === 0, 'global search finds heroes, events and curios');
 
 // Recommended march
 {

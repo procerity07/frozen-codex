@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, Text, TextInput, View, type TextInputInstance } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import { Search, X } from 'lucide-react-native';
 import type { SophiaQuestion } from '@/types/game';
@@ -10,7 +10,8 @@ import { Badge, EmptyState, IconButton, haptic } from '@/components/ui';
 import { SophiaBubbleToggle } from '@/components/domain/SophiaBubbleToggle';
 
 export default function SophiaLookup() {
-  const [q, setQ] = useState('');
+  const params = useLocalSearchParams<{ q?: string }>();
+  const [q, setQ] = useState(typeof params.q === 'string' ? params.q : '');
   const [rows, setRows] = useState<SophiaQuestion[]>([]);
   const [total, setTotal] = useState(0);
   const [ms, setMs] = useState(0);
