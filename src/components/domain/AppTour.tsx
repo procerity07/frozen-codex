@@ -9,7 +9,7 @@ import { palette, radius, space, type } from '@/theme';
 
 /** One step per tab, in tab-bar order. */
 export const TOUR_STEPS: { tab: string; href: Href; title: string; text: string }[] = [
-  { tab: 'Command', href: '/', title: 'Command', text: 'Today at a glance: events, countdowns, your daily checklist, gift codes and reminders.' },
+  { tab: 'Home', href: '/', title: 'Home', text: 'Your day step by step: today\'s theme, next event, gift codes and daily tasks. Search everything with the magnifier at the top.' },
   { tab: 'Heroes', href: '/heroes', title: 'Heroes', text: 'Look up any hero. Tap "I own this hero" to add them. This powers your march and bonuses.' },
   { tab: 'Events', href: '/events', title: 'Events', text: "The weekly schedule, every event's rules and rewards, plus Sophia, Event Points and Battle Guides. Set your alliance's event times here." },
   { tab: 'Progress', href: '/progression', title: 'Progress', text: 'Citadel, gear, runes, totems and dragon data, with the Citadel Planner and Troop Training at the top.' },
