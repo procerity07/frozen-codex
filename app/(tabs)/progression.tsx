@@ -72,7 +72,7 @@ function MyProgressCard() {
   const label = (k: string) => k.replace(/([A-Z])/g, ' $1').replace(/^./, (x) => x.toUpperCase());
   const haveOwned = Object.values(c.owned).some((v) => (v ?? 0) > 0);
   return (
-    <Card style={{ marginTop: space.sm }} accent={palette.success}>
+    <Card accent={palette.success}>
       <Row style={{ justifyContent: 'space-between' }}>
         <Stat label="Citadel" value={String(c.from)} color={palette.success} />
         <Stat label="Goal" value={String(c.to)} />
@@ -122,7 +122,7 @@ function CitadelView() {
       </CollapsibleSection>
       <CollapsibleSection title="Building directory" initiallyOpen={false}>
       {buildings.map((b) => (
-        <Card key={b.id} style={{ marginBottom: space.sm, padding: space.md }}>
+        <Card key={b.id} style={{ padding: space.md }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{b.name}</Text>
             <Text style={type.numberSmall}>Citadel {b.unlockCitadel}+</Text>
@@ -144,7 +144,7 @@ function GearView({ focus }: { focus: TroopFocus }) {
       {gearSlots.map((g) => {
         const hl = focus !== 'All' && (g.attack === focus || g.defense === focus);
         return (
-          <Card key={g.slot} style={{ marginBottom: space.sm, padding: space.md, opacity: focus === 'All' || hl ? 1 : 0.5 }} accent={hl ? troopColors[focus] : undefined}>
+          <Card key={g.slot} style={{ padding: space.md, opacity: focus === 'All' || hl ? 1 : 0.5 }} accent={hl ? troopColors[focus] : undefined}>
             <Row style={{ justifyContent: 'space-between' }}>
               <Text style={type.heading}>{g.slot}</Text>
               {g.attack === focus ? <Badge label="Your ATK slot" color={troopColors[focus]} /> : null}
@@ -160,7 +160,7 @@ function GearView({ focus }: { focus: TroopFocus }) {
       </CollapsibleSection>
       <CollapsibleSection title="Upgrade stages" initiallyOpen={false}>
       {gearStages.map((s) => (
-        <Card key={s.name} style={{ marginBottom: space.sm, padding: space.md }}>
+        <Card key={s.name} style={{ padding: space.md }}>
           <Row style={{ justifyContent: 'space-between' }}><Text style={type.heading}>{s.name}</Text><Badge label={s.material} color={palette.cyan} /></Row>
           <Text style={[type.bodySecondary, { marginTop: 4 }]}>{s.description}</Text>
         </Card>
@@ -179,7 +179,7 @@ function RunesView({ focus }: { focus: TroopFocus }) {
     <>
       <CollapsibleSection title="Rune types" subtitle="4 types · up to 6 sets of 4 runes · Weapon Forge Lv. 8" initiallyOpen={false}>
       {runeSets.map((r) => (
-        <Card key={r.name} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, r.focus) ? 1 : 0.5 }} accent={relevant(focus, r.focus) && focus !== 'All' ? troopColors[r.focus] : undefined}>
+        <Card key={r.name} style={{ padding: space.md, opacity: relevant(focus, r.focus) ? 1 : 0.5 }} accent={relevant(focus, r.focus) && focus !== 'All' ? troopColors[r.focus] : undefined}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{r.name}</Text>
             <Row gap={4}><TroopEmblem type={r.focus} size={16} /><Text style={type.caption}>{r.focus}</Text></Row>
@@ -188,7 +188,7 @@ function RunesView({ focus }: { focus: TroopFocus }) {
         </Card>
       ))}
       {runeExtras.map((x) => (
-        <Card key={x.name} style={{ marginBottom: space.sm, padding: space.md }}><Text style={type.heading}>{x.name}</Text><Text style={type.bodySecondary}>{x.detail}</Text></Card>
+        <Card key={x.name} style={{ padding: space.md }}><Text style={type.heading}>{x.name}</Text><Text style={type.bodySecondary}>{x.detail}</Text></Card>
       ))}
       </CollapsibleSection>
       <CollapsibleSection title="Rune upgrade cost" initiallyOpen={false}>
@@ -239,7 +239,7 @@ function HolystonesView() {
           { key: 't', title: 'Troop stat', render: (r) => r.troopStat },
         ]}
       />
-      <Card style={{ marginTop: space.sm }}>{holystoneNotes.map((n) => <Text key={n} style={[type.bodySecondary, { marginBottom: 4 }]}>{n}</Text>)}</Card>
+      <Card>{holystoneNotes.map((n) => <Text key={n} style={[type.bodySecondary, { marginBottom: 4 }]}>{n}</Text>)}</Card>
       </CollapsibleSection>
       <CollapsibleSection title="Holystone upgrade cost" initiallyOpen={false}>
       <CostTable rows={rows} />
@@ -255,7 +255,7 @@ function DragonView({ focus }: { focus: TroopFocus }) {
     <>
       <CollapsibleSection title="Draconic Stones" subtitle="Dragon Lv. 30 / 40 / 50 unlocks">
       {draconicStones.map((d) => (
-        <Card key={d.name} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, d.focus) ? 1 : 0.5 }}>
+        <Card key={d.name} style={{ padding: space.md, opacity: relevant(focus, d.focus) ? 1 : 0.5 }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{d.name}</Text>
             <Badge label={`Dragon Lv. ${d.dragonLevel}`} color={d.dragonLevel === 50 ? palette.gold : palette.cyan} />
@@ -294,7 +294,7 @@ function GloryView({ focus }: { focus: TroopFocus }) {
     <>
       <CollapsibleSection title="Building Glory levels" subtitle="Unlock at building Lv. 15 · Marks of Glory" initiallyOpen={false}>
       {rows.map((g) => (
-        <Card key={g.building} style={{ marginBottom: space.sm, padding: space.md, opacity: relevant(focus, g.focus) ? 1 : 0.5 }}>
+        <Card key={g.building} style={{ padding: space.md, opacity: relevant(focus, g.focus) ? 1 : 0.5 }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{g.building}</Text>
             {g.verified === false ? (

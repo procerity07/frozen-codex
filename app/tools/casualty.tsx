@@ -42,7 +42,7 @@ function SanctuaryCalc() {
   return (
     <>
       <Text style={[type.bodySecondary, { marginTop: space.sm }]}>Where wounded troops go: Medical Tent first, then the Sanctuary, then permanent death. Battles can also kill part of your troops outright, which this does not include.</Text>
-      <Card style={{ marginTop: space.md }}>
+      <Card>
         <NumberField label="Troops that will fall (wounded + dead)" value={v.incoming ?? 0} onChange={(n) => upd('incoming', n)} />
         <Row style={{ marginTop: space.sm }}><NumberField label="Medical Tent capacity" value={v.tentCap ?? 0} onChange={(n) => upd('tentCap', n)} /><NumberField label="Already wounded" value={v.tentUsed ?? 0} onChange={(n) => upd('tentUsed', n)} /></Row>
         <Row style={{ marginTop: space.sm }}><NumberField label={v.sancCap ? 'Sanctuary capacity' : 'Sanctuary capacity (= tent)'} value={v.sancCap ?? 0} onChange={(n) => upd('sancCap', n)} /><NumberField label="Already in Sanctuary" value={v.sancUsed ?? 0} onChange={(n) => upd('sancUsed', n)} /></Row>
@@ -51,7 +51,7 @@ function SanctuaryCalc() {
 
       <SectionHeader title="Where your troops end up" />
       {stages.map((s) => (
-        <Card key={s.label} style={{ marginBottom: space.sm, padding: space.md }} accent={s.color}>
+        <Card key={s.label} style={{ padding: space.md }} accent={s.color}>
           <Row style={{ justifyContent: 'space-between' }}>
             <View style={{ flex: 1 }}><Text style={type.heading}>{s.label}</Text><Text style={type.caption}>{s.sub}</Text></View>
             <Text style={[type.number, { color: s.color }]}>{fmtFull(s.n)}</Text>
@@ -59,7 +59,7 @@ function SanctuaryCalc() {
           <View style={{ marginTop: space.sm }}><ProgressBar ratio={s.n / total} color={s.color} /></View>
         </Card>
       ))}
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Stat label="Survival rate" value={hasInput ? `${(((total - r.dead) / total) * 100).toFixed(1)}%` : '—'} color={r.dead ? palette.gold : palette.success} />
         <Text style={[type.bodySecondary, { marginTop: space.sm }]}>
           {!hasInput ? 'Enter how many troops will fall to see the result.' : r.dead > 0 ? `${fmtFull(r.dead)} troops would die permanently. Heal the Medical Tent or revive the Sanctuary before fighting to protect more.` : 'Every fallen troop is protected.'}

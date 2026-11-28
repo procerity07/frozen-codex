@@ -76,7 +76,7 @@ export default function HeroDetail() {
   return (
     <Screen>
       <Stack.Screen options={{ title: hero.name }} />
-      <Card style={{ marginTop: space.sm, borderColor: tint(rc, 0.5) }}>
+      <Card style={{ borderColor: tint(rc, 0.5) }}>
         <Row gap={space.md}>
           <HeroPortrait hero={hero} size={72} />
           <View style={{ flex: 1, gap: 4 }}>
@@ -97,7 +97,7 @@ export default function HeroDetail() {
 
 
       {!skillsCheckedInGame(hero) ? (
-        <Card style={{ marginTop: space.md }} accent={palette.warning}>
+        <Card accent={palette.warning}>
           <Text style={[type.body, { fontWeight: '600' }]}>Skills not checked in-game yet</Text>
           <Text style={[type.caption, { marginTop: 2 }]}>This hero's troop and hero skills come from the wiki or older data and may be wrong. Screenshots of the Troop Skill and Hero Skill tabs will fix them.</Text>
         </Card>
@@ -107,7 +107,7 @@ export default function HeroDetail() {
         <>
           <CollapsibleSection title="March military skills" subtitle="Active when the hero leads or joins a march" icon={Swords} right={<Unverified hero={hero} field="marchSkills" />}>
           {hero.marchSkills.map((sk) => (
-            <Card key={sk.name} style={{ marginBottom: space.sm }}>
+            <Card key={sk.name}>
               <Text style={type.heading}>{sk.name}</Text>
               <SkillBody text={sk.description} entry={entry} />
             </Card>
@@ -120,7 +120,7 @@ export default function HeroDetail() {
         <>
           <CollapsibleSection title="Passive civil skills" subtitle="Own-only — active without marching" icon={Shield} right={<Unverified hero={hero} field="civilSkills" />}>
           {hero.civilSkills.map((sk) => (
-            <Card key={sk.name} style={{ marginBottom: space.sm }} accent={palette.gold}>
+            <Card key={sk.name} accent={palette.gold}>
               <Row style={{ justifyContent: 'space-between' }}>
                 <Text style={[type.heading, { flex: 1 }]}>{sk.name}</Text>
                 {sk.value ? <Text style={[type.number, { color: palette.gold }]}>{sk.value < 0 ? '' : '+'}{sk.value}%</Text> : null}
@@ -147,7 +147,7 @@ export default function HeroDetail() {
       {hero.rarity >= 5 ? (
       <CollapsibleSection title="Bonds & curio" icon={Users}>
       {groups.map((g) => (
-        <Card key={g.id} style={{ marginBottom: space.sm }}>
+        <Card key={g.id}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={[type.heading, { flex: 1 }]}>{g.name}</Text>
             {g.verified === false || g.bonusesVerified === false ? <Badge label={g.verified === false ? 'Not verified' : 'Bonuses not verified'} color={palette.textMuted} /> : null}

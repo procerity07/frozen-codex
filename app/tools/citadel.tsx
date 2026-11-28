@@ -48,7 +48,7 @@ export default function CitadelPlanner() {
   return (
     <Screen>
       <Stack.Screen options={{ title: 'Citadel Planner' }} />
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Row>
           <NumberField label="Current Citadel (1–40)" value={c.from} onChange={(n) => set({ from: Math.min(40, n) })} />
           <NumberField label="Target Citadel" value={c.to} onChange={(n) => set({ to: Math.min(40, n) })} />
@@ -120,7 +120,7 @@ export default function CitadelPlanner() {
 
       <SectionHeader title="Resource deficit" subtitle={`Citadel ${from} → ${to}`} />
       {RESOURCE_KEYS.filter((k) => plan.totals[k] > 0).map((k) => (
-        <Card key={k} style={{ marginBottom: space.sm, padding: space.md }} accent={plan.deficit[k] > 0 ? palette.danger : palette.success}>
+        <Card key={k} style={{ padding: space.md }} accent={plan.deficit[k] > 0 ? palette.danger : palette.success}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{LABEL[k]}</Text>
             <Text style={[type.number, { color: plan.deficit[k] > 0 ? palette.danger : palette.success }]}>{plan.deficit[k] > 0 ? `-${fmt(plan.deficit[k])}` : 'Covered'}</Text>

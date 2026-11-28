@@ -104,7 +104,7 @@ export default function SettingsScreen() {
           <Switch value={s.showPortraits} onValueChange={s.setShowPortraits} trackColor={{ true: palette.cyan, false: palette.border }} thumbColor={palette.text} />
         </Row>
       </Card>
-      <Card style={{ marginTop: space.md }}>
+      <Card>
         <Text style={type.body}>App tour</Text>
         <Text style={type.caption}>A quick look at what each tab does.</Text>
         <View style={{ marginTop: space.sm }}><Button compact variant="secondary" label="Show the tour again" onPress={() => { s.setTourDone(false); router.navigate('/'); }} /></View>
@@ -177,7 +177,7 @@ export default function SettingsScreen() {
           }} /></View>
         </Row>
       </Card>
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Text style={type.body}>Hero roster</Text>
         <Text style={type.caption}>{Object.keys(s.roster).length} heroes saved. Importing adds or updates heroes and keeps everything else.</Text>
         <Row style={{ marginTop: space.md }}>

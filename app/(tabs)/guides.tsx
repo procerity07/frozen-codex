@@ -34,7 +34,7 @@ function ShopAdvisor() {
       </View>
       <ChipRow>{shops.map((s) => <Chip key={s.id} label={s.name} active={s.id === shopId} onPress={() => setShopId(s.id)} />)}</ChipRow>
     </View>}>
-      <Card style={{ marginBottom: space.md, padding: space.md }}>
+      <Card style={{ padding: space.md }}>
         <Text style={type.heading}>{shop.name}</Text>
         <Text style={type.caption}>Currency: {shop.currency} · Refresh: {shop.refresh}</Text>
         <Text style={[type.caption, { marginTop: 4, color: shop.checkedOn ? palette.success : palette.textMuted }]}>
@@ -46,7 +46,7 @@ function ShopAdvisor() {
       {items.map((i) => {
         const v = i[profile];
         return (
-          <Card key={i.name} style={{ marginBottom: space.sm, padding: space.md }} accent={verdictColors[v]}>
+          <Card key={i.name} style={{ padding: space.md }} accent={verdictColors[v]}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <View style={{ flex: 1 }}>
                 <Text style={type.heading}>{i.name}</Text>

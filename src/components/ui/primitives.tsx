@@ -194,8 +194,8 @@ export function EmptyState({ title, body }: { title: string; body?: string }) {
 }
 
 export const s = StyleSheet.create({
-  card: { backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderTopColor: palette.borderStrong, borderRadius: radius.lg, padding: space.lg, shadowColor: '#000', shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
-  sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: space.sm, marginTop: space.xl, marginBottom: space.md },
+  card: { backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.border, borderTopColor: palette.borderStrong, borderRadius: radius.lg, padding: space.lg, marginBottom: space.md, shadowColor: '#000', shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 3 },
+  sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: space.sm, marginTop: space.lg, marginBottom: space.sm },
   sectionIcon: { width: 28, height: 28, borderRadius: radius.sm, backgroundColor: palette.goldDim, borderWidth: 1, borderColor: palette.goldLine, alignItems: 'center', justifyContent: 'center' },
   sectionDiamond: { width: 9, height: 9, marginHorizontal: 4, transform: [{ rotate: '45deg' }], borderWidth: 1.5, borderColor: palette.gold },
   sectionLine: { flex: 1, height: 1, backgroundColor: palette.goldLine, opacity: 0.6 },

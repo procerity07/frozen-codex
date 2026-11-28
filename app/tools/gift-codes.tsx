@@ -41,7 +41,7 @@ export default function GiftCodeVault() {
   return (
     <Screen>
       <Stack.Screen options={{ title: 'Gift Code Vault' }} />
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Text style={type.caption}>Saved locally for the redemption form</Text>
         <Row style={{ marginTop: space.sm }}>
           <Field label="Server" value={realm.server} onChangeText={(v) => setRealm({ server: v })} placeholder="e.g. 412" keyboardType="numeric" />

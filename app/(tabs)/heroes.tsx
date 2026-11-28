@@ -121,7 +121,7 @@ function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
   return (
     <Screen>
       <View style={{ marginTop: space.sm }}><Button variant="secondary" label="Add or update many heroes" onPress={() => router.push('/tools/roster-setup')} /></View>
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Row style={{ justifyContent: 'space-between' }}>
           <Stat label="Heroes owned" value={`${owned.length} / ${seedHeroes.length}`} color={palette.cyan} />
           <Stat label="6★ heroes" value={String(owned.filter((h) => clampEntry(h, roster[h.id]).stars === 6).length)} align="right" />
@@ -185,7 +185,7 @@ function Counters() {
       <Card><TroopTriangle /></Card>
       <SectionHeader title="Institute Lv. 28 formations" />
       {troopTriangle.formations.map((f) => (
-        <Card key={f.name} style={{ marginBottom: space.sm }}>
+        <Card key={f.name}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>{f.name}</Text>
             <Badge label={f.unlock} color={palette.cyan} />
@@ -262,7 +262,7 @@ function Bonds() {
       </Card>
       <SectionHeader title="Bond groups" />
       {bondGroups.map((g) => (
-        <Card key={g.id} style={{ marginBottom: space.sm }}>
+        <Card key={g.id}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={[type.heading, { flex: 1 }]}>{g.name}</Text>
             {g.verified === false || g.bonusesVerified === false ? <Badge label={g.verified === false ? 'Not verified' : 'Bonuses not verified'} color={palette.textMuted} /> : null}
@@ -313,7 +313,7 @@ function Curios() {
       {heroCurios.map((k) => {
         const owner = seedHeroes.find((h) => h.id === k.heroId);
         return (
-          <Card key={k.id} style={{ marginBottom: space.sm }}>
+          <Card key={k.id}>
             <Row style={{ justifyContent: 'space-between' }}>
               <Text style={[type.heading, { flex: 1 }]} noTranslate>{k.name}</Text>
               <Badge label={owner?.name ?? k.heroName} color={palette.gold} />

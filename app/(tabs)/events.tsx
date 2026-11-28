@@ -60,7 +60,7 @@ function CalendarView() {
             {firstOfWeek ? (
               <SectionHeader title={`${d.cycle} Week`} subtitle={`Rotation week ${d.rotation} of 4 · ${d.cycle === 'Ace Lord' ? 'Conquest of Lords Saturday' : 'Realm Expedition Saturday'}`} />
             ) : null}
-            <Card style={[{ marginBottom: space.sm, padding: space.md }, isToday && { borderColor: palette.cyan }]}>
+            <Card style={[{ padding: space.md }, isToday && { borderColor: palette.cyan }]}>
               <Pressable accessibilityRole="button" accessibilityState={{ expanded: toggled[key] ?? isToday }} onPress={() => setToggled({ ...toggled, [key]: !(toggled[key] ?? isToday) })}>
                 <Row style={{ justifyContent: 'space-between' }}>
                   <Text style={type.heading}>{WEEKDAYS[i % 7]} · {key.slice(5)}</Text>
@@ -163,7 +163,7 @@ function PlannerSections() {
     <>
       <SectionHeader title="Ace Lord week planner" subtitle="Daily theme, side events and Royal Arms Race" />
       {plan.map((d) => (
-        <Card key={d.weekday} style={{ marginBottom: space.sm, padding: space.md }} accent={d.shared.length ? palette.success : undefined}>
+        <Card key={d.weekday} style={{ padding: space.md }} accent={d.shared.length ? palette.success : undefined}>
           <Pressable accessibilityRole="button" onPress={() => setOpenDays({ ...openDays, [d.weekday]: !(openDays[d.weekday] ?? d.weekday.startsWith(todayWd)) })}>
             <Row style={{ justifyContent: 'space-between' }}>
               <Text style={type.heading}>{d.weekday}</Text>
@@ -185,7 +185,7 @@ function PlannerSections() {
       ))}
       <SectionHeader title="Royal Arms Race slots" subtitle={`Thu–Sat · local ${localOffsetLabel(now)}`} />
       {royalArmsRace.map((s) => (
-        <Card key={s.slot} style={{ marginBottom: space.sm, padding: space.md }}>
+        <Card key={s.slot} style={{ padding: space.md }}>
           <Row style={{ justifyContent: 'space-between' }}>
             <Text style={type.heading}>Slot {s.slot}</Text>
             <Text style={type.number}>{s.utc} UTC</Text>
@@ -210,7 +210,7 @@ function ExpiryMatrix() {
       </View>
       <View style={{ marginTop: space.md }}>
         {rows.map((c) => (
-          <Card key={c.id} style={{ marginBottom: space.sm, padding: space.md }} accent={c.expires ? palette.danger : palette.success}>
+          <Card key={c.id} style={{ padding: space.md }} accent={c.expires ? palette.danger : palette.success}>
             <Row style={{ justifyContent: 'space-between' }}>
               <Text style={[type.heading, { flex: 1 }]}>{c.name}</Text>
               <Badge label={c.expires ? 'Expires' : 'Keeps'} color={c.expires ? palette.danger : palette.success} />

@@ -53,7 +53,7 @@ export default function RemindersScreen() {
       <Text style={[type.caption, { marginTop: space.sm }]}>Not getting reminders? In Android Settings → Apps → Frozen Codex → Battery, choose Unrestricted. Some phones (e.g. Samsung, Xiaomi) block notifications from apps they put to sleep.</Text>
 
       {draft ? (
-        <Card style={{ marginTop: space.md }}>
+        <Card>
           <Field label="What to remind you about" value={draft.title} onChangeText={(title) => setDraft({ ...draft, title })} placeholder="e.g. Black Market refresh" />
           <Row style={{ marginTop: space.sm }}>
             <Field label="Time (24-hour)" value={draft.time} onChangeText={(time) => setDraft({ ...draft, time })} placeholder="21:00" keyboardType="numbers-and-punctuation" />
@@ -91,7 +91,7 @@ export default function RemindersScreen() {
       {sorted.length ? sorted.map((r) => {
         const next = r.enabled ? nextOccurrence(r, now) : null;
         return (
-          <Card key={r.id} style={{ marginBottom: space.sm }}>
+          <Card key={r.id}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <View style={{ flex: 1 }}>
                 <Text style={type.heading}>{r.title}</Text>

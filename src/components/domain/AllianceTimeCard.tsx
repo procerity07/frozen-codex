@@ -53,7 +53,7 @@ export function AllianceTimeCard({ ev }: { ev: GameEvent }) {
   const zoneLabel = (z: AllianceTime['zone']) => (z === 'utc' ? 'UTC' : 'your time');
 
   return (
-    <Card style={{ marginTop: space.md }}>
+    <Card>
       <Row gap={6}><Users size={15} color={palette.gold} /><Text style={type.heading}>Your alliance's time</Text></Row>
       <Text style={[type.caption, { marginTop: 2 }]}>Each alliance decides when to run this event. Set your alliance's time so alarms and the dashboard match it.</Text>
 

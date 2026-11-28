@@ -36,7 +36,7 @@ export function SophiaBubbleToggle() {
   };
 
   return (
-    <Card style={{ marginBottom: space.sm }}>
+    <Card>
       <Row style={{ justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
           <Text style={type.body}>Floating quick search</Text>

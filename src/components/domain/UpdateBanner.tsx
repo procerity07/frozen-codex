@@ -57,7 +57,7 @@ function UpdateBannerNative() {
 
   return (
     <>
-      <Card style={{ marginTop: space.xs, marginBottom: space.sm, borderColor: palette.goldLine }} accent={palette.gold}>
+      <Card style={{ marginBottom: space.sm, borderColor: palette.goldLine }} accent={palette.gold}>
         <Row>
           <Sparkles size={18} color={palette.gold} />
           <View style={{ flex: 1 }}>

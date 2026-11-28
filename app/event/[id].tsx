@@ -65,7 +65,7 @@ export default function EventDetail() {
   ];
   const tab = tabs.some((t) => t.key === tabState) ? tabState : tabs[0]!.key;
   const infoCard = (
-      <Card style={{ marginTop: space.sm }}>
+      <Card>
         <Row style={{ flexWrap: 'wrap' }}>
           <Badge label={ev.category} color={palette.cyan} />
           <Badge label={ev.cycleWeek === 'Both' ? 'Every week' : ev.cycleWeek === 'Random' ? 'Random' : `${ev.cycleWeek} Week`} color={palette.gold} />
@@ -147,7 +147,7 @@ export default function EventDetail() {
         <>
           <SectionHeader title="Daily themes" />
           {days.map((d) => (
-            <Card key={d.day} style={{ marginBottom: space.sm, padding: space.md }}>
+            <Card key={d.day} style={{ padding: space.md }}>
               <Row style={{ justifyContent: 'space-between' }}><Text style={type.heading}>Day {d.day} · {d.theme}</Text><Text style={type.caption}>{d.weekday}</Text></Row>
               <Text style={[type.caption, { marginTop: 2 }]}>{d.scoring.join(' · ')}</Text>
             </Card>
@@ -161,7 +161,7 @@ export default function EventDetail() {
         <>
           <CollapsibleSection title="Event currencies" icon={Coins} initiallyOpen={false}>
           {currencies.map((c) => (
-            <Card key={c.id} style={{ marginBottom: space.sm, padding: space.md }} accent={c.expires ? palette.danger : palette.success}>
+            <Card key={c.id} style={{ padding: space.md }} accent={c.expires ? palette.danger : palette.success}>
               <Row style={{ justifyContent: 'space-between' }}><Text style={type.heading}>{c.name}</Text><Badge label={c.expires ? 'Expires' : 'Keeps'} color={c.expires ? palette.danger : palette.success} /></Row>
               <Text style={type.bodySecondary}>{c.guidance}</Text>
             </Card>

@@ -38,7 +38,7 @@ export default function HomeScreen() {
       <AutoWhatsNew />
       <TodayPlan now={now} />
       <CollapsibleSection title="Realm cycle" subtitle="Week picker, day themes, Royal Arms Race" initiallyOpen={false}>
-      <Card style={{ marginTop: space.xs }}>
+      <Card>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>
           <CycleWeekPicker now={now} />

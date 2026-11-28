@@ -37,7 +37,7 @@ export default function WarRoom() {
   return (
     <Screen sticky={<View style={{ paddingHorizontal: space.lg, paddingTop: space.md, backgroundColor: palette.bg }}><Segmented options={VIEWS} value={view} onChange={setView} /></View>}>
       <Stack.Screen options={{ title: 'Battle Event Guides' }} />
-      <Card style={{ marginBottom: space.md }}>
+      <Card>
         <Text style={type.heading}>Alliance Hive Planner</Text>
         <Text style={[type.caption, { marginTop: 2 }]}>Plan where every member's castle goes around the fort, with teleport coordinates for each spot.</Text>
         <View style={{ marginTop: space.sm }}><Button icon={LayoutGrid} variant="secondary" label="Open Hive Planner" onPress={() => router.push('/tools/hive')} /></View>
@@ -54,7 +54,7 @@ function Compare() {
   return (
     <>
       {WARS.map((w) => (
-        <Card key={w.name} style={{ marginTop: space.md }} accent={w.color}>
+        <Card key={w.name} accent={w.color}>
           <Text style={[type.title, { color: w.color }]}>{w.name}</Text>
           {w.rows.map(([k, v]) => (
             <Row key={k} style={{ marginTop: space.sm, alignItems: 'flex-start' }}>
