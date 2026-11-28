@@ -61,9 +61,6 @@ export function AceLordView() {
         })}
       </View>
       </CollapsibleSection>
-      {(d?.scoring ?? []).filter((sc) => /^(Daily rank|Total rank)/i.test(sc)).map((sc, i) => (
-        <GamePanel key={`rank-${i}`} title={sc.split(':')[0]!}><Text style={type.body}>{sc.slice(sc.indexOf(':') + 1).trim()}</Text></GamePanel>
-      ))}
 
       <Text style={[type.heading, { marginTop: space.md }]}>Point Rewards</Text>
       {!exact ? <Text style={[type.caption, { color: palette.warning }]}>Rewards for this day not checked in-game yet; showing Day 1.</Text> : null}

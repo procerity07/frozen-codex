@@ -53,7 +53,9 @@ export default function EventDetail() {
   // Split the rules like the game's tabs: how to earn points, rewards, and the remaining rules.
   const isReward = (r: string) => /\b(rewards?|phase|rank|grade|trophy|trophies|tiers?|realm quests)\b/i.test(r) && /\d/.test(r);
   const isEarn = (r: string) => !isReward(r) && /\b(points?|pts|score)\b/i.test(r) && /\d/.test(r);
-  const rules = ev.rules.map(cleanSourceNotes);
+  // Rank rewards (top %, rank 1–3, daily/total/personal rank) are left out: only normal rewards are shown.
+  const isRankReward = (r: string) => /\b(personal|alliance|realm|daily|total|phase|global) rank(ing)?\s*(rewards?|needs|:)|#1\b|rank 1 gets|top \d+(\.\d+)?%/i.test(r);
+  const rules = ev.rules.map(cleanSourceNotes).filter((r) => !isRankReward(r));
   const earn = rules.filter(isEarn);
   const rewardRules = rules.filter(isReward);
   const plain = rules.filter((r) => !isEarn(r) && !isReward(r));
