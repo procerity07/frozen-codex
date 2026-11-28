@@ -5,7 +5,7 @@ import { cycleForDate, formatDuration, msUntilUtcMidnight, utcWeekday } from '@/
 import { useAppStore } from '@/store/useAppStore';
 import { useNow } from '@/store/useNow';
 import { palette, radius, space, type } from '@/theme';
-import { Chip, ChipRow } from '@/components/ui';
+import { Chip, ChipRow, CollapsibleSection } from '@/components/ui';
 import { GameBanner, GamePanel, ItemSlot, PointRows, toPointRows } from './GameUI';
 
 const WD = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -49,15 +49,19 @@ export function AceLordView() {
         ))}
       </View>
 
-      <Text style={[type.heading, { marginTop: space.md, marginBottom: space.xs }]}>How to Earn Points</Text>
+      <CollapsibleSection title="How to Earn Points" initiallyOpen={false}>
       <View style={{ gap: space.sm }}>
-        {(d?.scoring ?? []).filter((sc) => !/^Phases/i.test(sc)).map((sc, i) => {
+        {(d?.scoring ?? []).filter((sc) => !/^(Phases|Daily rank|Total rank)/i.test(sc)).map((sc, i) => {
           const clean = sc.replace(/\s*\(in-game\)/g, '');
           const head = clean.includes(':') ? clean.split(':')[0]! : '';
           const rows = toPointRows(head && head.length < 50 ? clean.slice(head.length + 1) : clean);
           return rows ? <View key={i}>{head && head.length < 50 ? <Text style={[type.caption, { marginBottom: 4 }]}>{head}</Text> : null}<PointRows rows={rows} /></View> : <PointRows key={i} rows={[{ label: clean }]} />;
         })}
       </View>
+      </CollapsibleSection>
+      {(d?.scoring ?? []).filter((sc) => /^(Daily rank|Total rank)/i.test(sc)).map((sc, i) => (
+        <GamePanel key={`rank-${i}`} title={sc.split(':')[0]!}><Text style={type.body}>{sc.slice(sc.indexOf(':') + 1).trim()}</Text></GamePanel>
+      ))}
 
       <Text style={[type.heading, { marginTop: space.md }]}>Point Reward</Text>
       {!exact ? <Text style={[type.caption, { color: palette.warning }]}>Rewards for this day not checked in-game yet; showing Day 1.</Text> : null}
