@@ -76,7 +76,7 @@ export const aceLordDayPhases: Record<number, PhaseReward[]> = {
     { phase: 3, points: 100000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
     { phase: 4, points: 200000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
     { phase: 5, points: 400000, reward: '500-Diamond chest, 1x Build Speed +30% (1 hour), 150,000 Food, 150,000 Wood' },
-    { phase: 6, points: 800000, reward: '2x Hero Choice Card, 1,000-Diamond chest, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
+    { phase: 6, points: 800000, reward: '2x Radiant Hero Choice Card I (Monica or Boyd shard), 1,000-Diamond chest, 1x Research Speed +30% (1 hour), 30,000 Stone, 10,000 Iron' },
   ],
   5: [
     { phase: 1, points: 20000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
