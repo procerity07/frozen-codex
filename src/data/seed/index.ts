@@ -17,4 +17,4 @@ export { checklistTemplate, guides } from './guides';
 // 7: in-game event pop-ups (Alliance Party, Undead Scourge, Elemental Seal).
 // 8: hero revision 2 (civil-skill value tables for My Heroes).
 // 9: hero revision 3 (in-game Saya table, five added heroes).
-export const SEED_VERSION = 99;
+export const SEED_VERSION = 100;

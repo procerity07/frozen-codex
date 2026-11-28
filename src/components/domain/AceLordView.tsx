@@ -58,6 +58,7 @@ export function AceLordView() {
 
       <Text style={[type.heading, { marginTop: space.md }]}>Point reward</Text>
       {!exact ? <Text style={[type.caption, { color: palette.warning }]}>Rewards for this day not checked in-game yet; showing Day 1.</Text> : null}
+      {exact && phases[0] && phases[0].phase > 1 ? <Text style={[type.caption, { color: palette.warning }]}>{`Phases 1–${phases[0].phase - 1} not recorded yet.`}</Text> : null}
       {phases.map((p) => (
         <View key={p.phase} style={{ marginTop: space.xs, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, overflow: 'hidden' }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: palette.surface, paddingHorizontal: space.md, paddingVertical: 6 }}>

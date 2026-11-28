@@ -9,7 +9,7 @@ export const cycleDays: CycleEventDays[] = [
       { day: 3, weekday: 'Wed', theme: 'Daily Activity (Stamina/AP & Gathering)', scoring: ['+600 per 1 Stamina used (in-game)', '+400 per 1 AP used', '+2 per 20 Food or 20 Wood, 4 Stone or 1 Iron gathered; +1 per 10 Sapphire', '+20,000 per Lucky Star Coin obtained'] },
       { day: 4, weekday: 'Thu', theme: 'Training Master (Training Speedup)', scoring: ['Training speedups (in-game)', 'Lucky Star Coins obtained (in-game)', 'Daily rank: 100,000+ points needed; top 3 / top 1% get 10× 20K-food items, 60 Dragon Military + 60 Dragon Civil 500-pt items, 10× 60m speedups, 10 chests; top 5% 8 / 30 / 30 / 8 / 8', 'Total rank (all 7 days): 500,000+ points needed; top 3 and top 0.5% get a hero puzzle piece, 80 Hero Choice Cards, a frame, 15,000-Diamond chest, 8× 25K Iron, 50× 60m; top 1% 60 cards; top 3% 40 cards + 8,000 Diamonds; top 5% 30 + 6,000; top 10% 15 + 5,000; top 20% 10 + 4,000; top 30% 8 + 3,500'] },
       { day: 5, weekday: 'Fri', theme: 'Draconic Stone & Precision Crafted', scoring: ['Draconic Stone: Common 20,000 · Uncommon 100,000 · Superb 400,000 · Epic 1,000,000 · Legendary 2,000,000 (in-game)', 'Draconic Stone Shard: Common 200 · Uncommon 1,000 · Superb 4,000 · Epic 10,000 · Legendary 20,000', 'Draconic Holy Water 100 · Dragon Language Energy Stone 2,000 · Refinement Crest 1,200 · Lucky Star Coin 20,000 · salvaging 0', 'Phases (lower than other days): 20,000 / 40,000 / 80,000 / 150,000 (6x 60m speedups, 150K Food, 150K Wood each) · 300,000 500-Diamond chest + 30% boost · 600,000 2 Hero Choice Cards, 1,000-Diamond chest, 30% boost, 30,000 Stone, 10,000 Iron'] },
-      { day: 6, weekday: 'Sat', theme: 'Supreme Power (Obtain Essences)', scoring: ['Gear/Rune/Totem/Holystone Essences', 'Spinels', 'Crystals'] },
+      { day: 6, weekday: 'Sat', theme: 'Supreme Power', scoring: ['Enhancement material: 1★ Gear, Rune, Troop Rune, Totem or Holystone Essence +100 each · salvaging +0', 'Ascension material: Energy Spinel +1,000 · Energy Crystal +5,000', 'Arcane Core: Totem, Gear, Runic, Troop Runic or Holy Stone Arcane Core +50,000 each', 'Spell / rune / holystone scrolls +7,500,000 each: Bear Totem Warlord, Eagle Totem Skydome, Wolf Totem Torrent; Wild Song (weapon), Barrier (shield), Sighing (chest), Mistwhisper (helmet), Thorn (ring), Tracing Gale (boots); Titan Curse (Strength), Star Scourge (Accuracy), Wind Breaker (Charge), Fortress Curse (Troop); Strength, Eternal and Life Holystone Scrolls'] },
       { day: 7, weekday: 'Sun', theme: 'Path of Eternity (Build / Research / Training Speedup)', scoring: ['All speedups'] },
     ],
   },
@@ -71,6 +71,12 @@ export const aceLordDayPhases: Record<number, PhaseReward[]> = {
     { phase: 4, points: 120000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
     { phase: 5, points: 300000, reward: '200-Diamond chest, 1x 30% boost, 150,000 Food, 150,000 Wood' },
     { phase: 6, points: 600000, reward: '2x Hero Choice Card, 500-Diamond chest, 1x 30% boost, 30,000 Stone, Iron' },
+  ],
+  6: [
+    { phase: 3, points: 100000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 4, points: 200000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 5, points: 400000, reward: '500-Diamond chest, 1x Build Speed +30% (1 hour), 150,000 Food, 150,000 Wood' },
+    { phase: 6, points: 800000, reward: '2x Hero Choice Card, 1,000-Diamond chest, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
   ],
   5: [
     { phase: 1, points: 20000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
