@@ -62,6 +62,28 @@ export const aceLordPhases: PhaseReward[] = [
   { phase: 6, points: 600000, reward: '2x Hero Choice Card, 3x 60m Speedup, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
 ];
 
+/** Day-specific Ace Lord phases where the in-game screen differs from Day 1 (confirmed in-game). */
+export const aceLordDayPhases: Record<number, PhaseReward[]> = {
+  4: [
+    { phase: 1, points: 15000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 2, points: 30000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 3, points: 60000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 4, points: 120000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 5, points: 300000, reward: '200-Diamond chest, 1x 30% boost, 150,000 Food, 150,000 Wood' },
+    { phase: 6, points: 600000, reward: '2x Hero Choice Card, 500-Diamond chest, 1x 30% boost, 30,000 Stone, Iron' },
+  ],
+  5: [
+    { phase: 1, points: 20000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 2, points: 40000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 3, points: 80000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 4, points: 150000, reward: '6x 60m Speedup, 150,000 Food, 150,000 Wood' },
+    { phase: 5, points: 300000, reward: '500-Diamond chest, 1x 30% boost, 150,000 Food, 150,000 Wood' },
+    { phase: 6, points: 600000, reward: '2x Hero Choice Card, 1,000-Diamond chest, 1x 30% boost, 30,000 Stone, 10,000 Iron' },
+  ],
+};
+/** Days whose phases match Day 1 in-game. */
+export const ACE_LORD_DAYS_LIKE_DAY1 = [1, 3];
+
 export const armsRacePhases: PhaseReward[] = [
   { phase: 1, points: 25000, reward: 'Speedup chest' },
   { phase: 2, points: 70000, reward: 'Hero EXP chest' },

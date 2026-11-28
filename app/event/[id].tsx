@@ -12,6 +12,7 @@ import { utcToLocalLabel } from '@/lib/time';
 import { cancelEventAlarm, ensurePermission, scheduleAllianceEventAlarm, scheduleEventAlarm } from '@/services/notifications';
 import { isAllianceTimed } from '@/lib/allianceTimes';
 import { AllianceTimeCard } from '@/components/domain/AllianceTimeCard';
+import { AceLordView } from '@/components/domain/AceLordView';
 
 /** Rules shown before "Show all". */
 const RULES_SHOWN = 4;
@@ -44,9 +45,8 @@ export default function EventDetail() {
     setAlarm(ev.id, !alarmOn);
   };
 
-  return (
-    <Screen>
-      <Stack.Screen options={{ title: ev.name }} />
+  const isAce = ev.id === 'ace-lord';
+  const infoCard = (
       <Card style={{ marginTop: space.sm }}>
         <Row style={{ flexWrap: 'wrap' }}>
           <Badge label={ev.category} color={palette.cyan} />
@@ -79,9 +79,15 @@ export default function EventDetail() {
         ) : null}
         <ConfidenceNote confidence={ev.confidence} />
       </Card>
+  );
+
+  return (
+    <Screen>
+      <Stack.Screen options={{ title: ev.name }} />
+      {isAce ? <AceLordView /> : infoCard}
       {isAllianceTimed(ev.id) ? <AllianceTimeCard ev={ev} /> : null}
 
-      {days ? (
+      {days && !isAce ? (
         <>
           <SectionHeader title="Daily themes" />
           {days.map((d) => (
@@ -123,6 +129,7 @@ export default function EventDetail() {
           <ChipRow>{featured.map((h) => <Chip key={h.id} label={h.name} onPress={() => router.push(`/hero/${h.id}`)} />)}</ChipRow>
         </>
       ) : null}
+      {isAce ? <CollapsibleSection title="Event info & alarm" subtitle="Schedule, times and alarm" initiallyOpen={false}>{infoCard}</CollapsibleSection> : null}
     </Screen>
   );
 }
