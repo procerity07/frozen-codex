@@ -15,6 +15,7 @@ import { UpdateBanner } from '@/components/domain/UpdateBanner';
 import { AutoWhatsNew, Dashboard } from '@/components/domain/Dashboard';
 import { CycleWeekPicker } from '@/components/domain/CycleWeekPicker';
 import { TodayEvents } from '@/components/domain/TodayEvents';
+import { TodayPlan } from '@/components/domain/TodayPlan';
 
 const TOOLS: { label: string; sub: string; icon: LucideIcon; href: Href; color: string }[] = [
   { label: 'Gift Code Vault', sub: 'Copy & redeem', icon: Gift, href: '/tools/gift-codes', color: palette.gold },
@@ -35,6 +36,8 @@ export default function HomeScreen() {
     <Screen>
       <UpdateBanner />
       <AutoWhatsNew />
+      <TodayPlan now={now} />
+      <CollapsibleSection title="Realm cycle" subtitle="Week picker, day themes, Royal Arms Race" initiallyOpen={false}>
       <Card style={{ marginTop: space.xs }}>
         <Text style={type.caption}>Current realm cycle</Text>
         <View style={{ marginTop: space.sm }}>
@@ -55,6 +58,7 @@ export default function HomeScreen() {
           ) : null}
         </View>
       </Card>
+      </CollapsibleSection>
 
       <TodayEvents now={now} />
 
