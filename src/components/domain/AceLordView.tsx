@@ -20,7 +20,9 @@ export function AceLordView() {
   const todayIdx = WD.indexOf(utcWeekday(now));
   const [day, setDay] = useState(isAceWeek ? todayIdx + 1 : 1);
   const d = days.find((x) => x.day === day);
-  const phases = aceLordDayPhases[day] ?? aceLordPhases;
+  const known = aceLordDayPhases[day] ?? aceLordPhases;
+  // Always show phases 1–6; ones not recorded yet show a placeholder.
+  const phases = [1, 2, 3, 4, 5, 6].map((n) => known.find((p) => p.phase === n) ?? { phase: n, points: 0, reward: '' });
   const exact = !!aceLordDayPhases[day] || ACE_LORD_DAYS_LIKE_DAY1.includes(day);
   const live = isAceWeek && day === todayIdx + 1;
 
@@ -44,7 +46,7 @@ export function AceLordView() {
             <View style={{ width: 24, height: 24, borderRadius: 4, transform: [{ rotate: '45deg' }], backgroundColor: palette.surface, borderWidth: 1, borderColor: palette.cyanLine, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={[type.caption, { transform: [{ rotate: '-45deg' }], color: palette.text }]}>{p.phase}</Text>
             </View>
-            <Text style={[type.caption, { marginTop: 6, fontSize: 10 }]} noTranslate>{p.points >= 1000 ? `${p.points / 1000}K` : p.points}</Text>
+            <Text style={[type.caption, { marginTop: 6, fontSize: 10 }]} noTranslate>{!p.points ? '?' : p.points >= 1000 ? `${p.points / 1000}K` : p.points}</Text>
           </View>
         ))}
       </View>
@@ -63,13 +65,14 @@ export function AceLordView() {
         <GamePanel key={`rank-${i}`} title={sc.split(':')[0]!}><Text style={type.body}>{sc.slice(sc.indexOf(':') + 1).trim()}</Text></GamePanel>
       ))}
 
-      <Text style={[type.heading, { marginTop: space.md }]}>Point Reward</Text>
+      <Text style={[type.heading, { marginTop: space.md }]}>Point Rewards</Text>
       {!exact ? <Text style={[type.caption, { color: palette.warning }]}>Rewards for this day not checked in-game yet; showing Day 1.</Text> : null}
-      {exact && phases[0] && phases[0].phase > 1 ? <Text style={[type.caption, { color: palette.warning }]}>{`Phases 1–${phases[0].phase - 1} not recorded yet.`}</Text> : null}
+      
       {phases.map((p) => (
-        <GamePanel key={p.phase} title={`Phase ${p.phase}`} highlight={`Points: ${fmt(p.points)}`}>
+        <GamePanel key={p.phase} title={`Phase ${p.phase}`} highlight={p.points ? `Points: ${fmt(p.points)}` : 'Not recorded yet'}>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
-            {p.reward.split(/,\s+(?![^()]*\))/).map((r, i) => <ItemSlot key={`${i}-${r}`} label={r.trim()} />)}
+            {!p.reward ? <Text style={type.caption}>Send a screenshot of this phase to fill it in.</Text> : null}
+            {(p.reward ? p.reward.split(/,\s+(?![^()]*\))/) : []).map((r, i) => <ItemSlot key={`${i}-${r}`} label={r.trim()} />)}
           </View>
         </GamePanel>
       ))}
