@@ -5,7 +5,8 @@ import { cycleForDate, formatDuration, msUntilUtcMidnight, utcWeekday } from '@/
 import { useAppStore } from '@/store/useAppStore';
 import { useNow } from '@/store/useNow';
 import { palette, radius, space, type } from '@/theme';
-import { Badge, Card, Chip, ChipRow } from '@/components/ui';
+import { Chip, ChipRow } from '@/components/ui';
+import { GameBanner, GamePanel, ItemSlot, PointRows, toPointRows } from './GameUI';
 
 const WD = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const fmt = (n: number) => n.toLocaleString('en-US');
@@ -25,15 +26,12 @@ export function AceLordView() {
 
   return (
     <>
-      <Card style={{ marginTop: space.sm, borderColor: palette.goldLine }}>
-        <Text style={[type.heading, { color: palette.gold }]}>{`Ace Lord (${day}/7) - ${d?.theme ?? ''}`}</Text>
-        {live ? (
-          <>
-            <Text style={[type.body, { marginTop: 4 }]}>{`Time left: ${formatDuration(msUntilUtcMidnight(now))}`}</Text>
-            <Text style={type.caption}>{`Event ends in ${formatDuration(msUntilUtcMidnight(now) + (6 - todayIdx) * 86_400_000)}`}</Text>
-          </>
-        ) : <Text style={[type.caption, { marginTop: 4 }]}>{isAceWeek ? (day < todayIdx + 1 ? 'Finished this week' : `Starts ${WD[day - 1]} 00:00 UTC`) : 'Next Ace Lord week'}</Text>}
-      </Card>
+      <GameBanner
+        title={`Ace Lord (${day}/7) - ${d?.theme ?? ''}`}
+        lines={live
+          ? [{ label: 'Time Left', value: formatDuration(msUntilUtcMidnight(now)), color: palette.success }, { label: 'Event ends in', value: formatDuration(msUntilUtcMidnight(now) + (6 - todayIdx) * 86_400_000), color: palette.text }]
+          : [{ label: 'Status', value: isAceWeek ? (day < todayIdx + 1 ? 'Finished this week' : `Starts ${WD[day - 1]} 00:00 UTC`) : 'Next Ace Lord week', color: palette.text }]}
+      />
 
       <ChipRow>
         {days.map((x) => <Chip key={x.day} label={`Day ${x.day}`} active={x.day === day} color={isAceWeek && x.day === todayIdx + 1 ? palette.success : palette.gold} onPress={() => setDay(x.day)} />)}
@@ -51,23 +49,25 @@ export function AceLordView() {
         ))}
       </View>
 
-      <Text style={[type.heading, { marginTop: space.md }]}>How to earn points</Text>
-      <Card style={{ marginTop: space.xs }}>
-        {(d?.scoring ?? []).filter((sc) => !/^Phases/i.test(sc)).map((sc, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{`• ${sc.replace(/\s*\(in-game\)/g, '')}`}</Text>)}
-      </Card>
+      <Text style={[type.heading, { marginTop: space.md, marginBottom: space.xs }]}>How to Earn Points</Text>
+      <View style={{ gap: space.sm }}>
+        {(d?.scoring ?? []).filter((sc) => !/^Phases/i.test(sc)).map((sc, i) => {
+          const clean = sc.replace(/\s*\(in-game\)/g, '');
+          const head = clean.includes(':') ? clean.split(':')[0]! : '';
+          const rows = toPointRows(head && head.length < 50 ? clean.slice(head.length + 1) : clean);
+          return rows ? <View key={i}>{head && head.length < 50 ? <Text style={[type.caption, { marginBottom: 4 }]}>{head}</Text> : null}<PointRows rows={rows} /></View> : <PointRows key={i} rows={[{ label: clean }]} />;
+        })}
+      </View>
 
-      <Text style={[type.heading, { marginTop: space.md }]}>Point reward</Text>
+      <Text style={[type.heading, { marginTop: space.md }]}>Point Reward</Text>
       {!exact ? <Text style={[type.caption, { color: palette.warning }]}>Rewards for this day not checked in-game yet; showing Day 1.</Text> : null}
       {exact && phases[0] && phases[0].phase > 1 ? <Text style={[type.caption, { color: palette.warning }]}>{`Phases 1–${phases[0].phase - 1} not recorded yet.`}</Text> : null}
       {phases.map((p) => (
-        <View key={p.phase} style={{ marginTop: space.xs, borderWidth: 1, borderColor: palette.border, borderRadius: radius.md, overflow: 'hidden' }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: palette.surface, paddingHorizontal: space.md, paddingVertical: 6 }}>
-            <Text style={type.body}>{`Phase ${p.phase} `}<Text style={{ color: palette.gold }} noTranslate>{`Points: ${fmt(p.points)}`}</Text></Text>
+        <GamePanel key={p.phase} title={`Phase ${p.phase}`} highlight={`Points: ${fmt(p.points)}`}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+            {p.reward.split(/,\s+(?![^()]*\))/).map((r, i) => <ItemSlot key={`${i}-${r}`} label={r.trim()} />)}
           </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, padding: space.sm }}>
-            {p.reward.split(/,\s+(?![^()]*\))/).map((r, i) => <Badge key={`${i}-${r}`} label={r.trim()} color={palette.text} />)}
-          </View>
-        </View>
+        </GamePanel>
       ))}
     </>
   );
