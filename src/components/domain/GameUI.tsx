@@ -79,7 +79,7 @@ export function GamePanel({ title, highlight, right, children }: { title: string
   );
 }
 
-/** Square item slot with a count in the corner, for reward items. */
+/** Compact reward tag: count in gold, then the item name. */
 export function ItemSlot({ label }: { label: string }) {
   const m = /^(\d[\d,.]*\s*[x×]\s*|\d[\d,.]*K?\s+)(.*)$/i.exec(label.trim());
   const count = m ? m[1]!.replace(/[x×]/i, '').trim() : '';
@@ -87,7 +87,7 @@ export function ItemSlot({ label }: { label: string }) {
   return (
     <View style={st.slot}>
       {count ? <Text style={st.slotCount} noTranslate>{count}</Text> : null}
-      <Text style={st.slotName} numberOfLines={3}>{name}</Text>
+      <Text style={st.slotName} numberOfLines={1}>{name}</Text>
     </View>
   );
 }
@@ -118,7 +118,7 @@ const st = StyleSheet.create({
   rowValue: { color: palette.text, fontWeight: '700', fontVariant: ['tabular-nums'] },
   panel: { marginTop: space.sm, borderWidth: 1, borderColor: '#2A3B66', borderRadius: radius.md, overflow: 'hidden', backgroundColor: '#111A2E' },
   panelBar: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1C2A4A', paddingHorizontal: space.md, paddingVertical: 8 },
-  slot: { width: 76, minHeight: 76, borderWidth: 1, borderColor: '#3A4E80', borderRadius: 6, backgroundColor: '#1A2744', padding: 6, justifyContent: 'flex-end' },
-  slotCount: { position: 'absolute', top: 3, right: 5, color: palette.text, fontWeight: '800', fontSize: 12, textShadowColor: '#000', textShadowRadius: 2 },
-  slotName: { color: palette.textSecondary, fontSize: 10, lineHeight: 12 },
+  slot: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 8, paddingVertical: 4, borderRadius: 12, backgroundColor: '#1A2744', borderWidth: 1, borderColor: '#2A3B66' },
+  slotCount: { color: GOLD, fontWeight: '800', fontSize: 12 },
+  slotName: { color: palette.text, fontSize: 12 },
 });
