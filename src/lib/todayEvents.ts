@@ -36,7 +36,7 @@ export function todayEventRows(events: GameEvent[], now: Date, anchors: Anchors,
     seen.add(ev.id);
   };
   for (const ev of events) {
-    if (ev.category === 'Core Cycle') continue;
+    if (ev.category === 'Core Cycle' && events.length > 1) continue;
     const at = isAllianceTimed(ev.id) ? allianceTimes[ev.id] : undefined;
     if (at) {
       // Alliance's own time (and days / planned date) decides whether it is on today.
@@ -50,4 +50,16 @@ export function todayEventRows(events: GameEvent[], now: Date, anchors: Anchors,
   }
   const rank: Record<TodayStatus, number> = { live: 0, upcoming: 1, ended: 2 };
   return rows.sort((a, b) => rank[a.status] - rank[b.status] || a.start.getTime() - b.start.getTime());
+}
+
+/** The event's current run, or its next one within two weeks (uses your alliance's time if set). */
+export function nextRun(ev: GameEvent, now: Date, anchors: Anchors, allianceTimes: Record<string, AllianceTime>): TodayRow | null {
+  const today = todayEventRows([ev], now, anchors, allianceTimes).find((r) => r.status !== 'ended');
+  if (today) return today;
+  const dayStart = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  for (let i = 1; i <= 14; i++) {
+    const r = todayEventRows([ev], new Date(dayStart + i * DAY), anchors, allianceTimes)[0];
+    if (r) return { ...r, status: 'upcoming' };
+  }
+  return null;
 }

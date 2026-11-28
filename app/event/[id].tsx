@@ -13,6 +13,8 @@ import { cancelEventAlarm, ensurePermission, scheduleAllianceEventAlarm, schedul
 import { isAllianceTimed } from '@/lib/allianceTimes';
 import { AllianceTimeCard } from '@/components/domain/AllianceTimeCard';
 import { AceLordView } from '@/components/domain/AceLordView';
+import { EventHeader } from '@/components/domain/EventHeader';
+import { cleanSourceNotes } from '@/lib/text';
 
 /** Rules shown before "Show all". */
 const RULES_SHOWN = 4;
@@ -46,6 +48,13 @@ export default function EventDetail() {
   };
 
   const isAce = ev.id === 'ace-lord';
+  // Split the rules like the game's tabs: how to earn points, rewards, and the remaining rules.
+  const isReward = (r: string) => /\b(rewards?|phase|rank|grade|trophy|trophies|tiers?|realm quests)\b/i.test(r) && /\d/.test(r);
+  const isEarn = (r: string) => !isReward(r) && /\b(points?|pts|score)\b/i.test(r) && /\d/.test(r);
+  const rules = ev.rules.map(cleanSourceNotes);
+  const earn = rules.filter(isEarn);
+  const rewardRules = rules.filter(isReward);
+  const plain = rules.filter((r) => !isEarn(r) && !isReward(r));
   const infoCard = (
       <Card style={{ marginTop: space.sm }}>
         <Row style={{ flexWrap: 'wrap' }}>
@@ -84,7 +93,11 @@ export default function EventDetail() {
   return (
     <Screen>
       <Stack.Screen options={{ title: ev.name }} />
-      {isAce ? <AceLordView /> : infoCard}
+      {isAce ? <AceLordView /> : (
+        <EventHeader ev={ev} alarmOn={alarmOn} onAlarm={() => { toggle().catch(() => undefined); }}
+          alarmLabel={alarmOn ? 'Alarm on, tap to cancel' : `Alarm ${lead} min before`}
+          canAlarm={ev.days.length > 0 && !(isAllianceTimed(ev.id) && !allianceTime)} />
+      )}
       {isAllianceTimed(ev.id) ? <AllianceTimeCard ev={ev} /> : null}
 
       {days && !isAce ? (
@@ -99,15 +112,31 @@ export default function EventDetail() {
         </>
       ) : null}
 
-      <SectionHeader title="Rules" icon={ScrollText} subtitle={ev.rules.length > RULES_SHOWN ? `${ev.rules.length} rules` : undefined} />
-      <Card>
-        {(allRules ? ev.rules : ev.rules.slice(0, RULES_SHOWN)).map((r, i) => <Text key={i} style={[type.body, { marginBottom: 6 }]}>{'•'} {r}</Text>)}
-        {ev.rules.length > RULES_SHOWN ? (
-          <Pressable onPress={() => setAllRules(!allRules)} accessibilityRole="button"><Text style={[type.caption, { color: palette.cyan }]}>{allRules ? 'Show fewer' : `Show all ${ev.rules.length} rules`}</Text></Pressable>
-        ) : null}
-      </Card>
+      {earn.length ? (
+        <>
+          <SectionHeader title="How to earn points" icon={Coins} />
+          <Card style={{ paddingVertical: space.xs }}>{earn.map((r, i) => <Text key={i} style={[type.body, { paddingVertical: 6, borderTopWidth: i ? 1 : 0, borderTopColor: palette.border }]}>{r}</Text>)}</Card>
+        </>
+      ) : null}
+      {rewardRules.length ? (
+        <>
+          <SectionHeader title="Rewards" icon={Gift} />
+          {rewardRules.map((r, i) => <Card key={i} style={{ marginBottom: space.xs, padding: space.md }} accent={palette.gold}><Text style={type.body}>{r}</Text></Card>)}
+        </>
+      ) : null}
+      {plain.length ? (
+        <>
+          <SectionHeader title="Rules" icon={ScrollText} subtitle={plain.length > RULES_SHOWN ? `${plain.length} rules` : undefined} />
+          <Card>
+            {(allRules ? plain : plain.slice(0, RULES_SHOWN)).map((r, i) => <Text key={i} style={[type.body, { marginBottom: 6 }]}>{'•'} {r}</Text>)}
+            {plain.length > RULES_SHOWN ? (
+              <Pressable onPress={() => setAllRules(!allRules)} accessibilityRole="button"><Text style={[type.caption, { color: palette.cyan }]}>{allRules ? 'Show fewer' : `Show all ${plain.length} rules`}</Text></Pressable>
+            ) : null}
+          </Card>
+        </>
+      ) : null}
 
-      {ev.rewards.length ? (<CollapsibleSection title="Key rewards" icon={Gift} initiallyOpen={false}><Card>{ev.rewards.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{'•'} {r}</Text>)}</Card></CollapsibleSection>) : null}
+      {ev.rewards.length && !rewardRules.length ? (<CollapsibleSection title="Key rewards" icon={Gift} initiallyOpen={false}><Card>{ev.rewards.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{'•'} {r}</Text>)}</Card></CollapsibleSection>) : null}
       {ev.tips.length ? (<CollapsibleSection title="Tips" icon={Lightbulb} initiallyOpen={false}><Card accent={palette.gold}>{ev.tips.map((r, i) => <Text key={i} style={[type.body, { marginBottom: 4 }]}>{r}</Text>)}</Card></CollapsibleSection>) : null}
 
       {currencies.length ? (
@@ -129,7 +158,7 @@ export default function EventDetail() {
           <ChipRow>{featured.map((h) => <Chip key={h.id} label={h.name} onPress={() => router.push(`/hero/${h.id}`)} />)}</ChipRow>
         </>
       ) : null}
-      {isAce ? <CollapsibleSection title="Event info & alarm" subtitle="Schedule, times and alarm" initiallyOpen={false}>{infoCard}</CollapsibleSection> : null}
+      <CollapsibleSection title={isAce ? 'Event info & alarm' : 'About & schedule'} subtitle="Description, days and times" initiallyOpen={false}>{infoCard}</CollapsibleSection>
     </Screen>
   );
 }
