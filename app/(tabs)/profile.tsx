@@ -97,7 +97,10 @@ export default function ProfileScreen() {
 
       <CollapsibleSection title="Heroes in My Roster" icon={Shield} subtitle={`${owned.length} heroes`} right={<Badge label={String(owned.length)} color={palette.gold} />} initiallyOpen={false}>
       {owned.length === 0 ? (
-        <Card><Text style={type.bodySecondary}>No heroes yet. Open a hero and tap "I own this hero" to add them with their stars and level.</Text></Card>
+        <Card>
+          <Text style={type.bodySecondary}>No heroes yet.</Text>
+          <View style={{ marginTop: space.sm }}><Button label="Add all my heroes at once" onPress={() => router.push('/tools/roster-setup')} /></View>
+        </Card>
       ) : (
         <Card>
           <Row style={{ flexWrap: 'wrap' }}>{byStars.map(([st, n]) => <Badge key={st} label={`${st}★ × ${n}`} color={palette.gold} />)}</Row>

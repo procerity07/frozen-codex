@@ -6,7 +6,7 @@ import type { Element, Hero, Rarity, UnitType } from '@/types/game';
 import { listHeroes } from '@/db/repo';
 import { bondGifts, bondGroups, bondLevels, curioStarCosts, heroCurios, heroes as seedHeroes, troopTriangle } from '@/data/seed';
 import { elementColors, palette, rarityColors, space, troopColors, type } from '@/theme';
-import { Badge, Card, Chip, ChipRow, CollapsibleSection, ElementEmblem, EmptyState, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table, TroopEmblem } from '@/components/ui';
+import { Badge, Button, Card, Chip, ChipRow, CollapsibleSection, ElementEmblem, EmptyState, Field, NumberField, Row, Screen, SectionHeader, Segmented, Stat, Table, TroopEmblem } from '@/components/ui';
 import { HeroCard } from '@/components/domain/HeroCard';
 import { ElementWheel, TroopTriangle } from '@/components/domain/CounterVisualizers';
 import { useAppStore } from '@/store/useAppStore';
@@ -110,13 +110,17 @@ function MyHeroes({ onBrowse }: { onBrowse: () => void }) {
     return (
       <Screen>
         <EmptyState title="No heroes added yet" body="Open any hero in the Codex and tap “I own this hero” to start your roster." />
-        <View style={{ alignItems: 'center' }}><Chip label="Browse the Codex" onPress={onBrowse} /></View>
+        <View style={{ alignItems: 'center', gap: space.sm }}>
+          <Button label="Add all my heroes at once" onPress={() => router.push('/tools/roster-setup')} />
+          <Chip label="Browse the Codex" onPress={onBrowse} />
+        </View>
       </Screen>
     );
   }
 
   return (
     <Screen>
+      <View style={{ marginTop: space.sm }}><Button variant="secondary" label="Add or update many heroes" onPress={() => router.push('/tools/roster-setup')} /></View>
       <Card style={{ marginTop: space.sm }}>
         <Row style={{ justifyContent: 'space-between' }}>
           <Stat label="Heroes owned" value={`${owned.length} / ${seedHeroes.length}`} color={palette.cyan} />
